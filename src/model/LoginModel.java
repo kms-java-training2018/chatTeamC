@@ -19,9 +19,9 @@ public class LoginModel {
 		String password = bean.getPassword();
 
 		Connection conn = null;
-		String url = "";
-		String user = "";
-		String dbPassword = "";
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
 		// JDBCドライバーのロード
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		// 接続作成
