@@ -49,7 +49,7 @@ public class LoginModel {
 			ResultSet rs = stmt.executeQuery(sb.toString());
 
 			if (!rs.next()) {
-				bean.setErrorMessage("パスワードが一致しませんでした。");
+				bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
 			} else {
 				bean.setUserNo(rs.getString("user_no"));
 				bean.setUserName(rs.getString("user_name"));
@@ -58,7 +58,7 @@ public class LoginModel {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-		// sqlの接続は絶対に切断
+			// sqlの接続は絶対に切断
 		} finally {
 			try {
 				conn.close();

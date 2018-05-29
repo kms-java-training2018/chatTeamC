@@ -16,6 +16,7 @@
 		<input type="text" name="password" value="${loginBean.password}">
 		<br>
 		<P>${loginBean.errorMessage}</P>
+
 		<input type="submit" value="ログイン">
 	</form>
 </body>
