@@ -9,8 +9,12 @@
 </head>
 <body>
 	<h1>チャット研修プログラム</h1>
-	<h2>プロフィール確認</h2>
-	<form action="" method="POST">
+	<h2>プロフィール</h2>
+	<p>${user_name }
+	<br>${my_page_text}
+	</p>
+	<!-- 個人メッセージだけではなく、グループの方にも戻れるように　要変更 -->
+	<form action="/chat/directMessage" method="POST">
 		<input type="submit" value="閉じる">
 	</form>
 </body>

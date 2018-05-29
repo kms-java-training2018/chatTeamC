@@ -48,6 +48,11 @@ public class LoginModel {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 
+			//入力値のチェック
+
+
+
+			//ID,パス不一致エラー
 			if (!rs.next()) {
 				bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
 			} else {
