@@ -19,7 +19,7 @@ page import="java.util.ArrayList"%>
 
 	<form action="/chat/makeGroup" method="POST">
 		<p>グループの名前</p>
-		<input type="text" name="userId" value=''>
+		<input type="text" name="groupName" value=''>
 		<p>
 			<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
 		<table border="1">

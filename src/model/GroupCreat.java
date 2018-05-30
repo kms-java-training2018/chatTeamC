@@ -31,8 +31,8 @@ public class GroupCreat {
 		this.groupName = name;
 	}
 
-	//指定されたグループネームの設定
-	public void setautherNo(String No) {
+	//指定されたAutherNoの設定
+	public void setAutherNo(String No) {
 		this.autherNo = No;
 	}
 
@@ -91,12 +91,13 @@ public class GroupCreat {
 
 		//受け取った作成者userNameをBeanに渡して処理
 		this.autherName = name;
-		System.out.println(autherName);
+		System.out.println("グループ作成者"+ autherName);
 		gb.setAuther(autherName);
+
 		//test表示
 		ArrayList<String> test = gb.getUserName();
 		for(String n1 : test) {
-			System.out.println(n1);
+			System.out.print("Autherを抜いたはず："+n1+",");
 		}
 
 		return gb;
@@ -111,15 +112,19 @@ public class GroupCreat {
 		//戻り値として渡す成否メッセージを定義
 		String CreatCheck;
 
-		//受け取ったStringを作成者Noに設定
+		//gbからautherNoを
 		String autherNo = gb.getAutherNo();
+
+
+		System.out.println("登録者のNo"+autherNo);
+		System.out.println("グループネーム"+groupName);
 
 		//DB接続
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
-		GroupBean gb = new GroupBean();
+
 		// JDBCドライバーのロード
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -157,10 +162,10 @@ public class GroupCreat {
 				gb.setUserName(rs.getString("user_name"));
 				gb.setErrorMessage("");
 			}
-			CreatCheck = "ok";
+			CreatCheck = "Creat ok";
 		} catch (SQLException e) {
 			e.printStackTrace();
-			CreatCheck = "no";
+			CreatCheck = "Creat no";
 
 			// sqlの接続は絶対に切断
 		} finally {
@@ -254,11 +259,11 @@ public class GroupCreat {
 //				gb.setUserNo(rs.getString("user_no"));
 //				gb.setUserName(rs.getString("user_name"));
 //				gb.setErrorMessage("");
-			message = "ok";
+			message = "Resist ok";
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			message = "no";
+			message = "Resist no";
 
 			// sqlの接続は絶対に切断
 		} finally {

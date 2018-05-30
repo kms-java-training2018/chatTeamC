@@ -17,37 +17,36 @@ public class GroupBean {
 	private String autherUserName;
 	private String autherUserNo;
 
-	/**	グループ作成者のリスト */
-	private String[] autherName;
-	private String[] autherNo;
+
 
 	//作成者のユーザー名を設定、ArrayListから検索し、そのindexからuserNameとuserNoを新しいListに追加
 	public void setAuther(String userName) {
 		this.autherUserName = userName;
-		int autherIndex = userNameList.indexOf("autherUserName");
+		int autherIndex = userNameList.indexOf(autherUserName);
 		//usernameが一応あるかでif
-		if (autherIndex > 0) {
+		if (autherIndex >= 0) {
 
-			//最初に作成者の名前を作成者名前リストに代入
-			autherName[0] = autherUserName;
 			//作成者の名前から出したindexから、作成者のNoを全会員Noの値を検索してautherNoリストに設定
 			autherUserNo = userNoList.get(autherIndex);
-			autherNo[0] = autherUserNo;
 
 			//作成者のデータを全会員一覧から削除
 			userNameList.remove(autherIndex);
 		}
 	}
 
+
+
+
 	//作成者Nameの取得
 	public String getAutherName() {
 		return autherUserName;
 	}
 
-	//作成者Nameの取得
+	//作成者Noの取得
 	public String getAutherNo() {
 		return autherUserNo;
 	}
+
 
 	//全ユーザー名の取得
 	public ArrayList<String> getUserName() {

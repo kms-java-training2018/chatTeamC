@@ -56,6 +56,15 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//指定されたグループ名をもらう
 				String name = req.getParameter("groupName");
+				
+				
+				
+				//チェック用
+				System.out.println("受け取ったグループ名"+ name);
+
+
+
+
 				//モデルにセット
 				groupCreat.setGroupName(name);
 
@@ -67,7 +76,15 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//選択されたユーザーをreqからもらう
 				String userNo[];
-				userNo = req.getParameterValues("creat");
+				userNo = req.getParameterValues("userNo");
+
+				//選択されたユーザーNoの表示
+				for(String n1 : userNo) {
+					System.out.print("送られてきたユーザーNo："+n1+",");
+				}
+
+
+
 				//抜き取った配列をGroupBeanへ送ってグループ作成
 				String message = groupCreat.ResistGroup(userNo);
 
