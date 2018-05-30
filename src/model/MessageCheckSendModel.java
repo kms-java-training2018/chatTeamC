@@ -24,7 +24,7 @@ public class MessageCheckSendModel {
 		String dbPassword = "C_DEV_TEAM";
 		String userNo = loginBean.getUserNo();
 		String toUserNo = bean.getToUserNo();
-		//int noDataFlag = 0;
+//		int noDataFlag = 0;
 		// JDBCドライバーのロード
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -51,8 +51,11 @@ public class MessageCheckSendModel {
 			sb.append("AND (to_send_user_no == ' " + toUserNo + "' )) ");
 			sb.append("OR ((send_user_no == ' " + toUserNo + "' ) ");
 			sb.append("AND (to_send_user_no == ' " + userNo + "' ))");
-			sb.append("EXCEPTION ");
-			sb.append("WHERE ");
+//			sb.append("EXCEPTION ");
+//			sb.append("WHEN ");
+//			sb.append("NO_DATA_FOUND THEN ");
+//			sb.append(noDataFlag + " := +1 ");
+
 
 			// SQL実行
 			Statement stmt = conn.createStatement();

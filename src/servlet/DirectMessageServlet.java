@@ -36,7 +36,7 @@ public class DirectMessageServlet extends HttpServlet {
 		//相手の会員番号を取得　※メインページにて、相手会員番号を送る"toUserNo"タグをつける必要有り
 		bean.setToUserNo(req.getParameter("toUserNo"));
 		String toUserNo = bean.getToUserNo();
-		// 認証処理
+		// 会話情報の取得
 		try {
 			bean = model.authentication(bean, loginBean);
 		} catch (Exception e) {
