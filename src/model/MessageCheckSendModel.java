@@ -6,23 +6,21 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import bean.LoginBean;
+import bean.SessionBean;
 
 /**
- * ログイン画面ビジネスロジック
- */
-public class LoginModel {
-
-	public LoginBean authentication(LoginBean bean) {
+ * 設計書03　メッセージ確認・送信機能
+ * 飯島
+ * */
+public class MessageCheckSendModel {
+	public SessionBean authentication(SessionBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
-		String userId = bean.getUserId();
-		String password = bean.getPassword();
-
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
+		//String userNo = ;
 		// JDBCドライバーのロード
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -35,35 +33,28 @@ public class LoginModel {
 			conn = DriverManager.getConnection(url, user, dbPassword);
 
 			// SQL作成
+			/*
+			 * 未完　userNo,toUserNo
+			 *会話情報テーブルから
+			 *自会員と送信先会員番号間の
+			 *やりとりの内容を取り出す。
+			 * */
 			sb.append("SELECT ");
-			sb.append(" user_no ");
-			sb.append(" ,user_name ");
+			sb.append(" message");
 			sb.append("FROM ");
-			sb.append(" m_user ");
+			sb.append(" t_message_info ");
 			sb.append("WHERE ");
-			sb.append(" user_id = '" + userId + "' ");
-			sb.append(" AND password = '" + password + "'");
+			sb.append("((send_user_no == ' userNo ' ) ");
+			sb.append("AND (to_send_user_no == ' toUserNo ' )) ");
+			sb.append("OR ((send_user_no == ' toUserNo ' ) ");
+			sb.append("AND (to_send_user_no == ' userNo ' ))");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
-
-			//入力値のチェック
-
-
-
-			//ID,パス不一致エラー
-			if (!rs.next()) {
-				bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
-			} else {
-				bean.setUserNo(rs.getString("user_no"));
-				bean.setUserName(rs.getString("user_name"));
-				bean.setErrorMessage("");
-			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
-			// sqlの接続は絶対に切断
+		// sqlの接続は絶対に切断
 		} finally {
 			try {
 				conn.close();
@@ -71,7 +62,6 @@ public class LoginModel {
 				e.printStackTrace();
 			}
 		}
-
 		return bean;
 	}
 }
