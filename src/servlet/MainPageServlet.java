@@ -21,40 +21,30 @@ public class MainPageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		// セッション情報取得
 		HttpSession session = req.getSession();
+		
+		LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
+		// 初期化
+		MainPageModel model = new MainPageModel();
+		MainPageBean bean = new MainPageBean();
 
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
-			LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
-			// 初期化
-			MainPageModel model = new MainPageModel();
-			MainPageBean bean = new MainPageBean();
-
 			// 認証処理
 			try {
 				bean = model.authentication(bean,loginBean);
 			} catch (Exception e) {
-				e.printStackTrace();
+				// 情報が無かったためエラー画面に移行
+				// とりあえず今はログイン画面に戻るように設定
+				session.setAttribute("session", null);
 			}
-
-			// 残りのグループ
-			System.out.println("表示するメンバー" + bean.getMember());
-			System.out.println("メンバーと最新メッセージ" + bean.getMemberTalk());
-			System.out.println("チームと最新メッセージ" + bean.getGrowp());
-
-			// 取得
-			// 失敗したらエラー
-			// メンバー表示
-			// 最新コメント表示
-			// チーム表示
-			// 最新コメント表示
-			// 失敗したらエラー
-
 		} else {
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
+		// 表示画面に表示する用のBean
+	    req.setAttribute("MainPageBean", bean);
 		req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 	}
 }
