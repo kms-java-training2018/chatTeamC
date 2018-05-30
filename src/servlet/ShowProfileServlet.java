@@ -83,8 +83,10 @@ public class ShowProfileServlet extends HttpServlet {
 
 				//DBの行すべての値を取得するjava文
 					 Statement stmt = (Statement) conn.createStatement();
-					 //String sql = "SELECT * FROM kabukatable";
-					 ResultSet rs = ((java.sql.Statement) stmt).executeQuery(sql);
+					 ResultSet rs = ((java.sql.Statement) stmt).executeQuery(userId);
+					 while(rs.next()){
+						   /* 行からデータを取得 */
+						 }
 			}
 
 
