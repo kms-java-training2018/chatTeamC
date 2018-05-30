@@ -18,12 +18,15 @@ page import="java.util.ArrayList"%>
 
 
 	<form action="/chat/makeGroup" method="POST">
-
-		<input type="submit" value="グループを作成する"> <br> <br>
+		<p>グループの名前</p>
+		<input type="text" name="userId" value=''>
+		<p>
+			<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
 		<table border="1">
 			<tr>
 				<th>全ユーザーリスト</th>
 			</tr>
+
 			<c:forEach var="obj" items="${groupBean.userName}" varStatus="status">
 				<tr>
 					<td><input type="checkbox" name="userNo"
