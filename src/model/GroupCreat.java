@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import bean.GroupBean;
 
@@ -75,9 +76,7 @@ public class GroupCreat {
 				gb.setErrorMessage("");
 			}
 
-			//受け取った作成者userNameをBeanに渡して処理
-			this.autherName = name;
-			gb.setAuther(autherName);
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -89,6 +88,17 @@ public class GroupCreat {
 				e.printStackTrace();
 			}
 		}
+
+		//受け取った作成者userNameをBeanに渡して処理
+		this.autherName = name;
+		System.out.println(autherName);
+		gb.setAuther(autherName);
+		//test表示
+		ArrayList<String> test = gb.getUserName();
+		for(String n1 : test) {
+			System.out.println(n1);
+		}
+
 		return gb;
 
 	}
