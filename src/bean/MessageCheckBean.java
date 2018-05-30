@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 /**
  * DirectMessage,MessageCheck用
- * 相手会員番号を取得するためのBean
+ * 相手会員番号、会話情報を取得するためのBean
  * */
 public class MessageCheckBean {
 	// 相手会員番号
