@@ -15,11 +15,11 @@ import model.MessageCheckSendModel;
 public class DirectMessageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
 		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
 		// 初期化
 		MessageCheckBean bean = new MessageCheckBean();
 		MessageCheckSendModel model = new MessageCheckSendModel();

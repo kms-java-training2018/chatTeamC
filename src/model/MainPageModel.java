@@ -116,6 +116,7 @@ public class MainPageModel {
 				// Listに追加
 				setList.add(menber.get(1));
 				setList.add(text);
+				setList.add(menber.get(0));
 				// Beanに追加
 				bean.setMemberTalk(setList);
 			}

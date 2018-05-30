@@ -21,7 +21,7 @@ public class MainPageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		// セッション情報取得
 		HttpSession session = req.getSession();
-		
+
 		LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
 		// 初期化
 		MainPageModel model = new MainPageModel();

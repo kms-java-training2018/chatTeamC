@@ -21,7 +21,7 @@
 			varStatus="status">
 			<tr align="center">
 				<td><br>
-				<a href="/chat/directMessage">${list.get(0)}</a>
+    				<a href="/chat/directMessage?toUserNo=${list.get(2)}">${list.get(0)}</a>
 					<p>${list.get(1)}</p></td>
 			</tr>
 		</c:forEach>
