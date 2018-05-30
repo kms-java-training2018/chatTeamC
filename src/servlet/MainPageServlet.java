@@ -22,11 +22,9 @@ public class MainPageServlet extends HttpServlet {
 		// セッション情報取得
 		HttpSession session = req.getSession();
 
-		// ログインデータ取得
-		LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
-		
 		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) {
+		if (session.getAttribute("session") != null) {// ログインデータ取得
+			LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
 			// 初期化
 			MainPageModel model = new MainPageModel();
 			MainPageBean bean = new MainPageBean();
@@ -41,6 +39,7 @@ public class MainPageServlet extends HttpServlet {
 			// 残りのグループ
 			System.out.println("表示するメンバー" + bean.getMember());
 			System.out.println("メンバーと最新メッセージ" + bean.getMemberTalk());
+			System.out.println("チームと最新メッセージ" + bean.getGrowp());
 
 			// 取得
 			// 失敗したらエラー
@@ -56,7 +55,6 @@ public class MainPageServlet extends HttpServlet {
 			session.setAttribute("session", null);
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
-		req.setAttribute("loginBean", loginBean);
 		req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 	}
 }
