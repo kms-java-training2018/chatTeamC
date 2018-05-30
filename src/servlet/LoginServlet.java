@@ -57,10 +57,10 @@ public class LoginServlet extends HttpServlet {
 			sessionBean.setUserNo(bean.getUserNo());
 			HttpSession session = req.getSession();
 			session.setAttribute("session", sessionBean);
-
 			// 行き先を次の画面に
 			direction = "/main";
 		}
+		req.setAttribute("loginBean", bean);
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }
