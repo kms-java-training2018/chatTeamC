@@ -22,14 +22,14 @@ public class MainPageServlet extends HttpServlet {
 		// セッション情報取得
 		HttpSession session = req.getSession();
 
+		// ログインデータ取得
+		LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
+		
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {
 			// 初期化
 			MainPageModel model = new MainPageModel();
 			MainPageBean bean = new MainPageBean();
-
-			// ログインデータ取得
-			LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
 
 			// 認証処理
 			try {
@@ -56,7 +56,7 @@ public class MainPageServlet extends HttpServlet {
 			session.setAttribute("session", null);
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
-
+		req.setAttribute("loginBean", loginBean);
 		req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 	}
 }
