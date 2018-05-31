@@ -10,10 +10,10 @@
 <body>
 	<h1>チャット研修プログラム</h1>
 	<h2>メインメニュー</h2>
-	<br>■会員一覧
+	<br><div align="right">■会員一覧</div>
 	<c:forEach var="list" items="${MainPageBean.getMember()}"
 		varStatus="status">
-		<p>${list.get(1)}</p>
+		<div align="right">${list.get(1)}</div>
 	</c:forEach>
 	<br>■会話一覧
 	<table border="1">
@@ -31,7 +31,7 @@
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
 			<tr align="center">
-				<td><br> <a href="/chat/groupMessage">${list.get(0)}</a>
+				<td><br> <a href="/chat/groupMessage?toGroupNo=${list.get(2)}">${list.get(0)}</a>
 					<p>${list.get(1)}</p></td>
 			</tr>
 		</c:forEach>
