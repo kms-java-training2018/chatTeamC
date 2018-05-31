@@ -28,6 +28,15 @@ public class MainPageServlet extends HttpServlet {
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
 			LoginBean loginBean = (LoginBean)session.getAttribute("loginBean");
+
+			if ((String) req.getParameter("newProfile") != null) {
+
+				String myName = new String (req.getParameter("myName").getBytes("ISO-8859-1"));
+				String myProfile = new String (req.getParameter("myProfile").getBytes("ISO-8859-1"));
+
+				model.newProfile(myName,myProfile,loginBean);
+			}
+
 			// 認証処理
 			try {
 				bean = model.authentication(bean,loginBean);
