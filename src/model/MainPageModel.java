@@ -89,10 +89,12 @@ public class MainPageModel {
 				sb.append(" ( F.SEND_USER_NO = " + loginBean.getUserNo());
 				sb.append(" AND F.TO_SEND_USER IS NOT NULL ");
 				sb.append(" AND F.TO_SEND_USER = E.USER_NO ");
+				sb.append(" AND F.DELETE_FLAG = 0 ");
 				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
 				sb.append(" OR ");
 				sb.append(" ( F.TO_SEND_USER =" + loginBean.getUserNo());
 				sb.append(" AND F.SEND_USER_NO = E.USER_NO ");
+				sb.append(" AND F.DELETE_FLAG = 0 ");
 				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
 				sb.append(" GROUP BY ");
 				sb.append(" E.USER_NAME ");
@@ -197,11 +199,6 @@ public class MainPageModel {
 		// 接続作成
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
-
-			System.out.println(name);
-			System.out.println(profile);
-			System.out.println(bean.getUserNo());
-
 			// SQL作成
 			sb.append(" UPDATE ");
 			sb.append(" M_USER ");
@@ -212,7 +209,7 @@ public class MainPageModel {
 			sb.append(" USER_NO = " + bean.getUserNo());
 
 			// SQL実行
-			Statement stmt = conn.createStatement();
+			conn.createStatement();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
