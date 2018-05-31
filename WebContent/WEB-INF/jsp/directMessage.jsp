@@ -10,12 +10,22 @@
 <body>
 	<h1>チャット研修プログラム</h1>
 	<h2>メッセージ</h2>
-	あなた：メッセージのサンプルだよー（｀・ω・´）
+	あなた：削除ボタンはまだ実装してないよ～（´・ω・`）
 	<br>
-	<a href="/chat/showProfile">あいて</a>：いえーい（｀・ω・´）
-	<br>
-	<br>
-
+	<a href="/chat/showProfile">あいて</a>：poppo!（｀・ω・´）
+	<br> ■会話一覧
+	<table border="1">
+		<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
+			varStatus="status">
+			<tr align="center">
+				<td><br>
+					<p>${list.get(0)} ：${list.get(1)}</p>
+					<form action="/chat/directMessage" method="POST">
+						<input type="submit" value="削除">
+					</form>
+			</tr>
+		</c:forEach>
+	</table>
 	<form action="/chat/directMessage" method="POST">
 		<input type="submit" value="メッセージの送信">
 	</form>
