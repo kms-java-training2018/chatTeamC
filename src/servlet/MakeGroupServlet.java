@@ -55,10 +55,21 @@ public class MakeGroupServlet extends HttpServlet {
 
 
 				//指定されたグループ名をもらう
-				String name = req.getParameter("groupName");
-				
-				
-				
+				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
+				//入力チェックの返答
+				int bytecheck = 0;
+				bytecheck = groupBean.stringLengthCheck(name);
+				if(bytecheck == 1) {
+					String message = "文字数オーバーです";
+
+					req.setAttribute("error", message);
+					direction = "/WEB-INF/jsp/makeGroup.jsp";
+
+					req.getRequestDispatcher(direction).forward(req, res);
+				}
+
+
+
 				//チェック用
 				System.out.println("受け取ったグループ名"+ name);
 
@@ -75,25 +86,26 @@ public class MakeGroupServlet extends HttpServlet {
 				System.out.println(sucsess);
 
 				//選択されたユーザーをreqからもらう
-				String userNo[];
-				userNo = req.getParameterValues("userNo");
+
+				String SelectNo[];
+
+				SelectNo = req.getParameterValues("userNo");
 
 				//選択されたユーザーNoの表示
-				for(String n1 : userNo) {
-					System.out.print("送られてきたユーザーNo："+n1+",");
+				for(String n1 : SelectNo) {
+					System.out.print("送られてきたユーザーName："+n1+",");
 				}
 
 
 
 				//抜き取った配列をGroupBeanへ送ってグループ作成
-				String message = groupCreat.ResistGroup(userNo);
+				String message = groupCreat.ResistGroup(SelectNo);
 
 				System.out.println(message);
 
 				direction = "/WEB-INF/jsp/mainPage.jsp";
 
-			}
-
+			}else {
 
 
 			// ログインデータ取得
@@ -120,10 +132,16 @@ public class MakeGroupServlet extends HttpServlet {
 				System.out.println(name);
 			}
 
+			ArrayList<String> test2 = groupBean.getUserNo();
+			for(String name : test2) {
+				System.out.println(name);
+			}
+
 			//セッションにセットしてjspに送る
 			session.setAttribute("groupBean", groupBean);
 
 			direction = "/WEB-INF/jsp/makeGroup.jsp";
+			}
 
 
 		}

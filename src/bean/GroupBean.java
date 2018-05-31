@@ -31,9 +31,26 @@ public class GroupBean {
 
 			//作成者のデータを全会員一覧から削除
 			userNameList.remove(autherIndex);
+			userNoList.remove(autherIndex);
 		}
 	}
 
+	//グループ名入力チェック
+		public int stringLengthCheck(String input) {
+	        //返すメッセージを設定
+			int judgeByte =0;
+
+			// 何バイト分の長さであるかを取得
+	        int length = input.getBytes().length;
+	        // 最大バイト数の設定
+	        int max = 30;
+
+	        if ((int) length > max) { // 最大文字数よりも多かった場合
+	        	judgeByte = 1;
+	            return judgeByte;
+	        }
+	        return judgeByte; // 許容内であった場合
+	    }
 
 
 

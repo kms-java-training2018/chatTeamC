@@ -19,8 +19,8 @@ page import="java.util.ArrayList"%>
 
 	<form action="/chat/makeGroup" method="POST">
 		<p>グループの名前</p>
-		<input type="text" name="groupName" value=''>
-		<p>
+		<input type="text" name="groupName"value=''>
+		<p><font size="5" color="red">${error }</font></p>
 			<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
 		<table border="1">
 			<tr>
@@ -30,7 +30,7 @@ page import="java.util.ArrayList"%>
 			<c:forEach var="obj" items="${groupBean.userName}" varStatus="status">
 				<tr>
 					<td><input type="checkbox" name="userNo"
-						value="${groupBean.userNo}"> <c:out value="${obj}" /></td>
+						value="${status.index}"> <c:out value="${obj}" /></td>
 				</tr>
 			</c:forEach>
 		</table>

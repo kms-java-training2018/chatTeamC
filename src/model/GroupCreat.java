@@ -36,6 +36,10 @@ public class GroupCreat {
 		this.autherNo = No;
 	}
 
+	public void checkinName(String name) {
+
+	}
+
 	//ユーザー一覧を出すメソッド
 	public GroupBean authentication(String name) {
 		// 初期化
@@ -76,8 +80,6 @@ public class GroupCreat {
 				gb.setErrorMessage("");
 			}
 
-
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
@@ -91,18 +93,22 @@ public class GroupCreat {
 
 		//受け取った作成者userNameをBeanに渡して処理
 		this.autherName = name;
-		System.out.println("グループ作成者"+ autherName);
+
+		//チェック用
+		System.out.println("グループ作成者" + autherName);
 		gb.setAuther(autherName);
 
 		//test表示
-		ArrayList<String> test = gb.getUserName();
-		for(String n1 : test) {
-			System.out.print("Autherを抜いたはず："+n1+",");
-		}
+		//		ArrayList<String> test = gb.getUserName();
+		//		for(String n1 : test) {
+		//			System.out.print("Autherを抜いたはず："+n1+",");
+		//	}
 
 		return gb;
 
 	}
+
+	//既存のグループnameか確認するメソッド
 
 	//グループ登録を行うメソッド
 	public String CreatGroup() {
@@ -115,9 +121,8 @@ public class GroupCreat {
 		//gbからautherNoを
 		String autherNo = gb.getAutherNo();
 
-
-		System.out.println("登録者のNo"+autherNo);
-		System.out.println("グループネーム"+groupName);
+		System.out.println("登録者のNo" + autherNo);
+		System.out.println("グループネーム" + groupName);
 
 		//DB接続
 		Connection conn = null;
@@ -148,21 +153,18 @@ public class GroupCreat {
 			sb.append("values");
 			sb.append("(GROUP_SEQ.NEXTVAL");
 			sb.append(",'" + groupName + "'");
-			sb.append(",'" + autherNo + "'");
+			sb.append("," + autherNo);
 			sb.append(", sysdate)");
 
 			// SQL実行してrsにセット
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sb.toString());
+			int rs = stmt.executeUpdate(sb.toString());
 
-			while (rs.next()) {
-
-				/* 行からデータを取得 */
-				gb.setUserNo(rs.getString("user_no"));
-				gb.setUserName(rs.getString("user_name"));
-				gb.setErrorMessage("");
+			if (rs == 1) {
+				CreatCheck = "Creat ok";
+			} else {
+				CreatCheck = "Creat no";
 			}
-			CreatCheck = "Creat ok";
 		} catch (SQLException e) {
 			e.printStackTrace();
 			CreatCheck = "Creat no";
@@ -184,10 +186,16 @@ public class GroupCreat {
 		StringBuilder sb = new StringBuilder();
 
 		//戻り値として渡す成否メッセージを定義
-		String message;
+		String message = "0";
 
 		//受け取ったStringリストからを登録者Listに設定
-		String[] member = list;
+		String[] memberName = list;
+		ArrayList<String> memberNo = new ArrayList<String>();
+		for(String name : memberName) {
+			int i = Integer.parseInt(name);
+			memberNo.add(gb.getUserNo().get(i));
+		}
+
 
 		//作成者番号を入手
 		this.autherNo = gb.getAutherNo();
@@ -211,55 +219,66 @@ public class GroupCreat {
 
 			// 作成者idとグループ名から、グループ番号を入手
 			sb.append("select ");
-			sb.append(" group_no ");
+			sb.append(" MAX(group_no) ");
 			sb.append(" from ");
 			sb.append("m_group ");
-			sb.append("where ");
-			sb.append("regist_user_no");
-			sb.append("in");
+			sb.append(" where ");
+			sb.append(" regist_user_no ");
+			sb.append(" in ");
 			sb.append(autherNo);
-			sb.append("and");
-			sb.append("group_name");
-			sb.append("=");
-			sb.append(groupName);
+			sb.append(" and");
+			sb.append(" group_name ");
+			sb.append(" = ");
+			sb.append("'" + groupName + "'");
 
 			// SQL実行してrsにセット
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 
 			//結果をグループナンバーにセット
-			String groupNo = rs.getString("group_no");
-			System.out.println(groupNo);
+
+			String groupNo = "0";
+			while (rs.next()) {
+				groupNo = rs.getString("MAX(group_no)");
+				System.out.println(groupNo);
+			}
 
 			// 会員登録を行うfor文
 
-			for(int i = 0; i < member.length;i++) {
+			for (int i = 0;i < memberNo.size(); i++) {
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append("insert ");
+				sb2.append(" into ");
+				sb2.append(" T_GROUP_INFO( ");
+				sb2.append("GROUP_NO");
+				sb2.append(", USER_NO ");
+				sb2.append(", OUT_FLAG");
+				sb2.append(", REGIST_DATE");
+				sb2.append(")");
+				sb2.append(" values ");
+				sb2.append("(" + groupNo);
+				sb2.append("," + memberNo.get(i));
+				sb2.append(",0");
+				sb2.append(", sysdate)");
 
+				Statement stmt2 = conn.createStatement();
+				int memberResistRs = stmt2.executeUpdate(sb2.toString());
 
-			sb.append("insert ");
-			sb.append(" into ");
-			sb.append(" T_GROUP_INFO( ");
-			sb.append(",GROUP_NO");
-			sb.append(", USER_NO ");
-			sb.append(", OUT_FLAG");
-			sb.append(", REGIST_DATE");
-			sb.append(")");
-			sb.append("values");
-			sb.append(groupNo);
-			sb.append(",'" + member[i] + "'");
-			sb.append(",'0'");
-			sb.append(", sysdate)");
+				if (memberResistRs == 1) {
+					message = i + "回目Resist OK";
 
-			System.out.println(member[i]);
+				} else {
+
+				}
 			}
 
-//			while (rs.next()) {
-//
-//				/* 行からデータを取得 */
-//				gb.setUserNo(rs.getString("user_no"));
-//				gb.setUserName(rs.getString("user_name"));
-//				gb.setErrorMessage("");
-			message = "Resist ok";
+			//			while (rs.next()) {
+			//
+			//				/* 行からデータを取得 */
+			//				gb.setUserNo(rs.getString("user_no"));
+			//				gb.setUserName(rs.getString("user_name"));
+			//				gb.setErrorMessage("");
+
 
 		} catch (SQLException e) {
 			e.printStackTrace();
