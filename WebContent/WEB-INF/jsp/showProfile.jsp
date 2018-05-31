@@ -14,9 +14,10 @@
 	<p>${Name}
 	<br>${Profile}
 	</p>
-	<!-- 個人メッセージだけではなく、グループの方にも戻れるように　要変更 -->
+
 	<form action="/chat/directMessage" method="POST">
-		<input type="submit" value="閉じる">
+
+		<a href="#" onClick="window.close();"><input type="submit" value="閉じる"></a>
 	</form>
 </body>
 </html>
