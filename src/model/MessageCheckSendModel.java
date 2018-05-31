@@ -47,8 +47,8 @@ public class MessageCheckSendModel {
 			System.out.println(toUserNo);
 
 			/*
-			 * SQL文内容（受け取るもの）
-			 * メッセージ内容、送信者の名前、送信者の番号のリストを作成
+			 * SQL文内容（受け取るものをまとめたリスト作成）
+			 * 送信者の番号、送信者の名前、メッセージ内容、デリートフラグのリストを作成
 			 * */
 			sb.append(" SELECT ");
 			sb.append(" MU.USER_NO, ");
@@ -69,16 +69,13 @@ public class MessageCheckSendModel {
 			 * （自分と相手会員間の会話情報のみ受け取る）
 			 * かつ『会員Noと送信者が一致している』
 			 * （会話情報の重複排除）
+			 * かつ『デリートフラグが0（論理削除されていない）』
 			 * */
 			sb.append(" WHERE ");
 			sb.append(" ((TM.SEND_USER_NO = "+ loginBean.getUserNo() +" AND TM.TO_SEND_USER = "+ toUserNo + ") ");
 			sb.append(" OR (TM.SEND_USER_NO = " + toUserNo +" AND TM.TO_SEND_USER = " + loginBean.getUserNo() + ")) ");
 			sb.append(" AND (MU.USER_NO = SEND_USER_NO) ");
 			sb.append(" AND (TM.DELETE_FLAG = 0) ");
-//			sb.append("EXCEPTION ");
-//			sb.append("WHEN ");
-//			sb.append("NO_DATA_FOUND THEN ");
-//			sb.append(noDataFlag + " := +1 ");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
