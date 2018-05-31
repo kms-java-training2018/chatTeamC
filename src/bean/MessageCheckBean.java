@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * */
 public class MessageCheckBean {
 	// 相手会員番号
-	private String toUserNo;
+	private int toUserNo;
 
 	// 相手表示名
 	private String toUserName;
@@ -16,11 +16,11 @@ public class MessageCheckBean {
 	// 会話情報取得
 	private ArrayList<ArrayList<String>> talkContent =new ArrayList<ArrayList<String>>();
 
-	public String getToUserNo() {
+	public int getToUserNo() {
 		return toUserNo;
 	}
 
-	public void setToUserNo(String toUserNo) {
+	public void setToUserNo(int toUserNo) {
 		this.toUserNo = toUserNo;
 	}
 

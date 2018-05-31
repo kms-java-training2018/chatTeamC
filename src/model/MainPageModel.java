@@ -89,10 +89,12 @@ public class MainPageModel {
 				sb.append(" ( F.SEND_USER_NO = " + loginBean.getUserNo());
 				sb.append(" AND F.TO_SEND_USER IS NOT NULL ");
 				sb.append(" AND F.TO_SEND_USER = E.USER_NO ");
+				sb.append(" AND F.DELETE_FLAG = 0 ");
 				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
 				sb.append(" OR ");
 				sb.append(" ( F.TO_SEND_USER =" + loginBean.getUserNo());
 				sb.append(" AND F.SEND_USER_NO = E.USER_NO ");
+				sb.append(" AND F.DELETE_FLAG = 0 ");
 				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
 				sb.append(" GROUP BY ");
 				sb.append(" E.USER_NAME ");
@@ -116,6 +118,7 @@ public class MainPageModel {
 				// Listに追加
 				setList.add(menber.get(1));
 				setList.add(text);
+				setList.add(menber.get(0));
 				// Beanに追加
 				bean.setMemberTalk(setList);
 			}
@@ -126,7 +129,8 @@ public class MainPageModel {
 			sb.append("SELECT");
 			sb.append(" DISTINCT ");
 			sb.append(" MGS.GROUP_NAME, ");
-			sb.append(" TMS.MESSAGE ");
+			sb.append(" TMS.MESSAGE, ");
+			sb.append(" TMS.TO_SEND_GROUP_NO ");
 			sb.append("FROM ");
 			sb.append(" T_GROUP_INFO TGS, ");
 			sb.append(" M_GROUP MGS, ");
@@ -160,6 +164,7 @@ public class MainPageModel {
 				// Listに追加
 				setList.add(rs.getString("GROUP_NAME"));
 				setList.add(rs.getString("MESSAGE"));
+				setList.add(rs.getString("TO_SEND_GROUP_NO"));
 				// Beanに追加
 				bean.setGrowp(setList);
 			}
@@ -174,5 +179,47 @@ public class MainPageModel {
 			}
 		}
 		return bean;
+	}
+
+	public void newProfile(String name, String profile, LoginBean bean) {
+		// 初期化
+		StringBuilder sb = new StringBuilder();
+
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
+		// JDBCドライバーのロード
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// 入れなかった場合
+			e.printStackTrace();
+		}
+		// 接続作成
+		try {
+			conn = DriverManager.getConnection(url, user, dbPassword);
+			// SQL作成
+			sb.append(" UPDATE ");
+			sb.append(" M_USER ");
+			sb.append(" SET ");
+			sb.append(" USER_NAME = '" + name + "'");
+			sb.append(" ,MY_PAGE_TEXT = '" + profile + "'");
+			sb.append(" WHERE ");
+			sb.append(" USER_NO = " + bean.getUserNo());
+
+			// SQL実行
+			conn.createStatement();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// sqlの接続は絶対に切断
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }
