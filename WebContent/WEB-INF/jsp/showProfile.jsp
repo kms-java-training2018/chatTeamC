@@ -10,8 +10,9 @@
 <body>
 	<h1>チャット研修プログラム</h1>
 	<h2>プロフィール</h2>
-	<p>${user_name }
-	<br>${my_page_text}
+	<p>ここから</p>
+	<p>${Name}
+	<br>${Profile}
 	</p>
 	<!-- 個人メッセージだけではなく、グループの方にも戻れるように　要変更 -->
 	<form action="/chat/directMessage" method="POST">
