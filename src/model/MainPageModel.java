@@ -116,6 +116,7 @@ public class MainPageModel {
 				// Listに追加
 				setList.add(menber.get(1));
 				setList.add(text);
+				setList.add(menber.get(0));
 				// Beanに追加
 				bean.setMemberTalk(setList);
 			}
@@ -126,7 +127,8 @@ public class MainPageModel {
 			sb.append("SELECT");
 			sb.append(" DISTINCT ");
 			sb.append(" MGS.GROUP_NAME, ");
-			sb.append(" TMS.MESSAGE ");
+			sb.append(" TMS.MESSAGE, ");
+			sb.append(" TMS.TO_SEND_GROUP_NO ");
 			sb.append("FROM ");
 			sb.append(" T_GROUP_INFO TGS, ");
 			sb.append(" M_GROUP MGS, ");
@@ -160,6 +162,7 @@ public class MainPageModel {
 				// Listに追加
 				setList.add(rs.getString("GROUP_NAME"));
 				setList.add(rs.getString("MESSAGE"));
+				setList.add(rs.getString("TO_SEND_GROUP_NO"));
 				// Beanに追加
 				bean.setGrowp(setList);
 			}

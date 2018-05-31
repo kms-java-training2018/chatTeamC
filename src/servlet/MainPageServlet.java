@@ -21,14 +21,13 @@ public class MainPageServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		// セッション情報取得
 		HttpSession session = req.getSession();
-		
-		LoginBean loginBean = (LoginBean)req.getAttribute("loginBean");
 		// 初期化
 		MainPageModel model = new MainPageModel();
 		MainPageBean bean = new MainPageBean();
 
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
+			LoginBean loginBean = (LoginBean)session.getAttribute("loginBean");
 			// 認証処理
 			try {
 				bean = model.authentication(bean,loginBean);
