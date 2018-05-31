@@ -85,6 +85,7 @@ public class MessageCheckSendModel {
 				// Listに追加
 				setList.add(rs.getString("USER_NAME"));
 				setList.add(rs.getString("MESSAGE"));
+				setList.add(rs.getString("USER_NO"));
 				// Beanに追加
 				bean.setTalkContent(setList);
 			}
