@@ -43,9 +43,6 @@ public class MessageCheckSendModel {
 			 *やりとりの内容を取り出す。
 			 * */
 
-			System.out.println(loginBean.getUserNo());
-			System.out.println(toUserNo);
-
 			/*
 			 * SQL文内容（受け取るものをまとめたリスト作成）
 			 * 送信者の番号、送信者の名前、メッセージ内容、デリートフラグのリストを作成
