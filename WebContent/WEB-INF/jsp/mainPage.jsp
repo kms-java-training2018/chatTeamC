@@ -31,8 +31,8 @@
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
 			<tr align="center">
-				<td><br> <a href="/chat/groupMessage?toGroupNo=${list.get(2)}">${list.get(0)}</a>
-					<p>${list.get(1)}</p></td>
+				<td><br> <a href="/chat/groupMessage?toGroupNo=${list.get(0)}">${list.get(1)}</a>
+					<p>${list.get(2)}</p></td>
 			</tr>
 		</c:forEach>
 	</table>

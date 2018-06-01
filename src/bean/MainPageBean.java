@@ -34,7 +34,7 @@ public class MainPageBean {
 	}
 
 	public void setGrowp(ArrayList<String> growp) {
-		Growp.add(growp);
+		this.Growp.add(growp);
 	}
 
 }

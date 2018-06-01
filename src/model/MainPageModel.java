@@ -122,52 +122,95 @@ public class MainPageModel {
 				// Beanに追加
 				bean.setMemberTalk(setList);
 			}
+			// text
+			ArrayList<String> setListText = new ArrayList<String>();
+			// 名前
+			ArrayList<String> name = new ArrayList<String>();
+			// ナンバー
+			ArrayList<String> number = new ArrayList<String>();
 
-			// グループデータ/
+			// 挿入用テキストの初期化
+			String text = "会話を始めましょう！";
+
+			// どのグループメンバーがいるかの設定
 			sb = new StringBuilder();
 			// SQL作成
-			sb.append("SELECT");
-			sb.append(" DISTINCT ");
-			sb.append(" MGS.GROUP_NAME, ");
-			sb.append(" TMS.MESSAGE, ");
-			sb.append(" TMS.TO_SEND_GROUP_NO ");
-			sb.append("FROM ");
-			sb.append(" T_GROUP_INFO TGS, ");
-			sb.append(" M_GROUP MGS, ");
-			sb.append(" T_MESSAGE_INFO TMS ");
-			sb.append(" INNER JOIN( ");
-			sb.append(" SELECT ");
-			sb.append(" MG.GROUP_NAME, ");
-			sb.append(" TG.GROUP_NO, ");
-			sb.append(" MAX(TM.MESSAGE_NO) MAXTM ");
+			sb.append(" SELECT DISTINCT ");
+			sb.append(" MG.GROUP_NAME ");
+			sb.append(" , MG.GROUP_NO  ");
 			sb.append(" FROM ");
-			sb.append(" T_GROUP_INFO TG, ");
-			sb.append(" M_GROUP MG, ");
-			sb.append(" T_MESSAGE_INFO TM ");
-			sb.append(" WHERE TG.GROUP_NO = MG.GROUP_NO ");
-			sb.append(" AND TG.GROUP_NO = TM.TO_SEND_GROUP_NO ");
-			sb.append(" GROUP BY MG.GROUP_NAME ,TG.GROUP_NO ");
-			sb.append(" ) INN ");
-			sb.append(" ON TMS.MESSAGE_NO = INN.MAXTM ");
-			sb.append(" WHERE TGS.GROUP_NO = INN.GROUP_NO ");
-			sb.append(" AND MGS.GROUP_NAME = INN.GROUP_NAME ");
-			sb.append(" AND TGS.USER_NO = " + loginBean.getUserNo());
+			sb.append(" T_GROUP_INFO TG ");
+			sb.append(" , M_GROUP MG ");
+			sb.append(" , T_MESSAGE_INFO TM ");
+			sb.append(" WHERE ");
+			sb.append(" TG.GROUP_NO = MG.GROUP_NO ");
+			sb.append(" AND TG.USER_NO = " + loginBean.getUserNo());
+			sb.append(" ORDER BY MG.GROUP_NO ");
 
 			// SQL実行
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sb.toString());
 
+			// 項目の追加
 			while (rs.next()) {
 				// Listの初期化
-				// bean に送るようのリスト
-				ArrayList<String> setList = new ArrayList<String>();
+
 				// Listに追加
-				setList.add(rs.getString("GROUP_NAME"));
-				setList.add(rs.getString("MESSAGE"));
-				setList.add(rs.getString("TO_SEND_GROUP_NO"));
-				// Beanに追加
+				name.add(rs.getString("GROUP_NAME"));
+				number.add(rs.getString("GROUP_NO"));
+			}
+
+			for (int i = 0; i < number.size(); i++) {
+
+				// コメントがあるかどうかのSQL？
+				sb = new StringBuilder();
+				// SQL作成
+				sb.append(" SELECT  ");
+				sb.append(" MU.GROUP_NAME ");
+				sb.append(" ,TM.MESSAGE ");
+				sb.append(" ,TM.DELETE_FLAG ");
+				sb.append(" FROM ");
+				sb.append(" M_GROUP MU ");
+				sb.append(" ,T_MESSAGE_INFO TM ");
+				sb.append(" INNER JOIN ( ");
+				sb.append(" SELECT ");
+				sb.append(" E.GROUP_NAME NN ");
+				sb.append(" , MAX(F.MESSAGE_NO) G ");
+				sb.append(" FROM ");
+				sb.append(" T_MESSAGE_INFO F ");
+				sb.append(" , M_GROUP E ");
+				sb.append(" WHERE  F.TO_SEND_GROUP_NO IS NOT NULL ");
+				sb.append(" AND F.TO_SEND_GROUP_NO = E.GROUP_NO  ");
+				sb.append(" AND F.DELETE_FLAG = 0 ");
+				sb.append(" AND E.GROUP_NO = " + number.get(i));
+				sb.append(" GROUP BY ");
+				sb.append(" E.GROUP_NAME  ");
+				sb.append(" ) INN  ");
+				sb.append(" ON TM.MESSAGE_NO = INN.G  ");
+				sb.append(" WHERE NN = MU.GROUP_NAME  ");
+				// SQL実行
+				stmt = conn.createStatement();
+				rs = stmt.executeQuery(sb.toString());
+
+				// 項目の追加
+				while (rs.next()) {
+					if (rs.getString("MESSAGE") != null) {
+					text = rs.getString("MESSAGE");
+					}
+				}
+
+				setListText.add(text);
+			}
+
+			for (int i = 0; i < number.size(); i++) {
+				// 最終的に送る用のリスト
+				ArrayList<String> setList = new ArrayList<String>();
+				setList.add(number.get(i));
+				setList.add(name.get(i));
+				setList.add(setListText.get(i));
 				bean.setGrowp(setList);
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
