@@ -162,6 +162,11 @@ public class MainPageModel {
 
 			for (int i = 0; i < number.size(); i++) {
 
+				// 初期化
+				 text = "会話を始めましょう！";
+
+				System.out.println(number.get(i));
+
 				// コメントがあるかどうかのSQL？
 				sb = new StringBuilder();
 				// SQL作成
@@ -198,7 +203,6 @@ public class MainPageModel {
 					text = rs.getString("MESSAGE");
 					}
 				}
-
 				setListText.add(text);
 			}
 
