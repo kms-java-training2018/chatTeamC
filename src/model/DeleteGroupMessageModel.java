@@ -8,11 +8,7 @@ import java.sql.Statement;
 
 import bean.LoginBean;
 
-/**
- * ログイン画面ビジネスロジック
- */
-public class LoginModel {
-
+public class DeleteGroupMessageModel {
 	public LoginBean authentication(LoginBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
@@ -33,29 +29,25 @@ public class LoginModel {
 		// 接続作成
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
-
 			// SQL作成
-			sb.append("SELECT ");
-			sb.append(" user_no ");
-			sb.append(" ,user_name ");
-			sb.append("FROM ");
-			sb.append(" m_user ");
-			sb.append("WHERE ");
-			sb.append(" user_id = '" + userId + "' ");
-			sb.append(" AND password = '" + password + "'");
+			sb.append(" UPDATE ");
+			sb.append(" T_MESSAGE_INFO ");
+			sb.append(" SET ");
+			sb.append(" DELETE_FLAG = 1 ");
+			sb.append(" WHERE ");
+			sb.append(" MESSAGE_NO = 持ってきた会話情報番号を入れた変数 ");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 
 			if (!rs.next()) {
-				bean.setErrorMessage("パスワードが一致しませんでした。");
+				bean.setErrorMessage("メッセージを削除できませんでした。");
 			} else {
 				bean.setUserNo(rs.getString("user_no"));
 				bean.setUserName(rs.getString("user_name"));
 				bean.setErrorMessage("");
 			}
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
@@ -68,5 +60,6 @@ public class LoginModel {
 		}
 
 		return bean;
+
 	}
 }
