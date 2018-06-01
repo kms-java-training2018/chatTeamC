@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a href="/chat/logOut"><input type="submit" value="ログアウト"></a>
 	<h1>チャット研修プログラム</h1>
 	<h2>プロフィール</h2>
 	<p>${Name}
