@@ -61,6 +61,7 @@ public class LoginServlet extends HttpServlet {
 			// 行き先を次の画面に
 			direction = "/main";
 		}
+		req.setAttribute("loginError", bean);
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }
