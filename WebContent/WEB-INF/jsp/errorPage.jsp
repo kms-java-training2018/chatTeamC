@@ -7,6 +7,6 @@
 <title>エラーページ</title>
 </head>
 <body>
-<p>エラーページ</p>
+		エラーページ
 </body>
 </html>
