@@ -89,11 +89,9 @@ public class LoginModel {
 
 	// 半角チェック
 	public boolean halfSizeCheck(String input) {
-		//半角英数字
-		int num;
 		try {
 			// 半角数字かをチェック
-			num = Integer.parseInt(input);
+			Integer.parseInt(input);
 		} catch (NumberFormatException e) {
 			// 半角数字以外があればエラー
 			return false;
