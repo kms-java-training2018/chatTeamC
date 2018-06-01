@@ -16,14 +16,17 @@ p.toptext {
 	font: italic normal bold 14pt/120% "ＭＳ Ｐゴシック";
 }
 
-p.txt1 {}
-table[
-border-collapse: collapse;
+p.txt1 {
 
-]
-table th,table td { /*table内のthに対して*/
-	padding:3px 10px; /*上下3px 左右10pxずつ*/
+}
+
+table[border-collapse : collapse; ]
+table th, table td, table tr { /*table内のthに対して*/
+	padding: 3px 10px; /*上下3px 左右10pxずつ*/
 	text-align: center;
 	border: solid 2px black;
 }
 
+input.hoge {
+	font-size: 400%;
+}
