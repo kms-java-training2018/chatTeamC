@@ -29,8 +29,9 @@ public class ShowProfileServlet extends HttpServlet {
 				bean = model.authentication(bean, loginBean, req.getParameter("toUserNo"));
 			} catch (Exception e) {
 				e.printStackTrace();
-				req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
-				//TODO エラーページ作成後、エラーページにとぶよう変更する
+				// エラーページに移動
+				session.setAttribute("session", null);
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
 			System.out.println(bean.getName());
