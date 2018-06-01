@@ -52,7 +52,7 @@ public class LoginModel {
 			if (!rs.next()) {
 				if (!stringLengthCheck(password, 20)) {
 					bean.setErrorMessage("20文字以上は受け付けません");
-				}else if (!halfSizeCheck(password)) {
+				} else if (!halfSizeCheck(password)) {
 					bean.setErrorMessage("半角で入力してください");
 				} else {
 					bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
@@ -89,13 +89,12 @@ public class LoginModel {
 
 	// 半角チェック
 	public boolean halfSizeCheck(String input) {
-		try {
-			// 半角数字かをチェック
-			Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			// 半角数字以外があればエラー
-			return false;
-		}
-		return true;
+	    if ( input == null || input.length() == 0 )
+	        return true;
+	    int len = input.length();
+	    byte[] bytes = input.getBytes();
+	    if ( len != bytes.length )
+	        return false;
+	    return true;
 	}
 }
