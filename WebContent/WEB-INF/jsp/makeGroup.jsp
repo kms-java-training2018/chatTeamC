@@ -25,9 +25,9 @@ page import="java.util.ArrayList"%>
 				<p>グループ作成</p>
 			</th>
 			<th>
-				<form action="/chat/makeGroup" method="GET">
-					<button type='submit' name='action' value="creat">ログアウトする</button>
-				</form>
+
+					<a href="/chat/logOut">ログアウト</a>
+
 			</th>
 		</tr>
 		<!-- 2段目 -->
@@ -46,36 +46,27 @@ page import="java.util.ArrayList"%>
 		<!-- 3段目 -->
 		<tr>
 			<td colspan="2" rowspan="2">
-				<form action="/chat/makeGroup" method="POST">
 
-<<<<<<< HEAD
-					<table border="1">
-						<tr>
-							<th>全ユーザーリスト</th>
-						</tr>
-=======
-	<form action="/chat/makeGroup" method="POST">
-		<p>グループの名前</p>
-		<input type="text" name="groupName" value=''>
-		<p>
-			<font size="5" color="red">${error }</font>
-		</p>
-		<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
-		<table border="1">
-			<tr>
-				<th>全ユーザーリスト</th>
-			</tr>
->>>>>>> branch 'feature-chat-teamC' of http://github.com/kms-java-training2018/chatTeamC
+				<table border="1">
+					<tr>
+						<th>全ユーザーリスト</th>
+					</tr>
+					<tr>
 
 						<c:forEach var="obj" items="${groupBean.userName}"
 							varStatus="status">
 							<tr>
-								<td><input type="checkbox" name="userNo"
-									value="${status.index}"> <c:out value="${obj}" /></td>
+								<td>
+									<form action="/chat/makeGroup" method="POST">
+										<input type="checkbox" name="userNo" value="${status.index}">
+										<c:out value="${obj}" />
+									</form>
+								</td>
 							</tr>
 						</c:forEach>
-					</table>
-				</form>
+
+					</tr>
+				</table>
 			<td>
 				<form action="/chat/makeGroup" method="POST">
 					<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
