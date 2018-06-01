@@ -10,10 +10,15 @@ import bean.LoginBean;
 import bean.ShowProfileBean;
 
 public class ShowProfileModel {
+
+
 	public ShowProfileBean authentication(ShowProfileBean bean, LoginBean loginBean, String UserNo) {
 		//TODO メッセージ、グループメッセージからbeanを受け取る。後に編集し、代入
 		String userId = UserNo; // bean.getUserId();
 		//String myPageText = "0001"; // bean.get();
+
+		//
+		int sql;
 
 		// 初期化
 		StringBuilder sb = new StringBuilder();
@@ -46,6 +51,9 @@ public class ShowProfileModel {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 			while (rs.next()) {
+//				if(rs.getString == null) {
+//
+//				}
 				// Beanに追加
 				bean.setName(rs.getString("user_name"));
 				bean.setProfile(rs.getString("my_page_text"));
@@ -53,8 +61,11 @@ public class ShowProfileModel {
 				System.out.println(bean.getName());
 				System.out.println(bean.getProfile());
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+			sql = 0;
+			bean.setSql(sql);
 
 			// sqlの接続は絶対に切断
 		} finally {

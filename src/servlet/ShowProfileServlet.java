@@ -37,14 +37,26 @@ public class ShowProfileServlet extends HttpServlet {
 			System.out.println(bean.getProfile());
 
 			// 表示画面に表示する用のBean
+
 			req.setAttribute("Name", bean.getName());
 			req.setAttribute("Profile", bean.getProfile());
+			req.setAttribute("sql", bean);
+
+			if (bean.getSql() == 0) {
+				req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
+			} else {
+				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
+			}
+
+			req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
+		} else {
+			req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 		}
 
-		req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 	}
+
 }

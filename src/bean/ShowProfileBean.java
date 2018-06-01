@@ -6,6 +6,9 @@ public class ShowProfileBean {
 	private String name;
 	private String profile;
 
+	//SQLが取得できたか
+	private int sql;
+
 	public String getName() {
 		return name;
 	}
@@ -17,6 +20,13 @@ public class ShowProfileBean {
 	}
 	public void setProfile(String profile) {
 		this.profile = profile;
+
+	}
+	public int getSql() {
+		return sql;
+	}
+	public void setSql(int sql) {
+		this.sql = sql;
 	}
 
 }
