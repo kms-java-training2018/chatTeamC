@@ -8,6 +8,6 @@
 </head>
 <body>
 		<p>エラーページ</p>
-		<a href="/WEB-INF/jsp/login.jsp">トップに戻る</a>
+		<a href="/login.jsp">トップに戻る</a>
 </body>
 </html>

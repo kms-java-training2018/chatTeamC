@@ -18,22 +18,29 @@
 	</c:forEach>
 	<br>■会話一覧
 	<table border="1">
+			<tr align="center">
+				<td>名前</td>
+    			<td>最新メッセージ</td>
+			</tr>
 		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
 			varStatus="status">
 			<tr align="center">
-				<td><br>
-    				<a href="/chat/directMessage?toUserNo=${list.get(2)}">${list.get(0)}</a>
-					<p>${list.get(1)}</p></td>
+				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}">${list.get(0)}</a></td>
+    			<td>${list.get(1)}</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br>■グループ一覧
 	<table border="1">
+			<tr align="center">
+				<td>名前</td>
+    			<td>最新メッセージ</td>
+			</tr>
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
 			<tr align="center">
-				<td><br> <a href="/chat/groupMessage?toGroupNo=${list.get(0)}">${list.get(1)}</a>
-					<p>${list.get(2)}</p></td>
+				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}">${list.get(1)}</a></td>
+    			<td>${list.get(2)}</td>
 			</tr>
 		</c:forEach>
 	</table>
