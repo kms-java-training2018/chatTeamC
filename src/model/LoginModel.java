@@ -50,13 +50,8 @@ public class LoginModel {
 
 			//ID,パス不一致エラー
 			if (!rs.next()) {
-				if (!stringLengthCheck(password, 20)) {
-					bean.setErrorMessage("20文字以上は受け付けません");
-				} else if (!halfSizeCheck(password)) {
-					bean.setErrorMessage("半角で入力してください");
-				} else {
-					bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
-				}
+				bean.setErrorMessage("IDまたはパスワードが一致しませんでした。");
+
 			} else {
 				bean.setUserNo(rs.getString("user_no"));
 				bean.setUserName(rs.getString("user_name"));
@@ -77,24 +72,27 @@ public class LoginModel {
 		return bean;
 	}
 
-	// 入力値のチェック
-	public boolean stringLengthCheck(String input, int max) {
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		if ((int) length > max) { // 最大文字数よりも多かった場合
-			return false;
-		}
-		return true; // 許容内であった場合
-	}
-
-	// 半角チェック
-	public boolean halfSizeCheck(String input) {
-	    if ( input == null || input.length() == 0 )
-	        return true;
-	    int len = input.length();
-	    byte[] bytes = input.getBytes();
-	    if ( len != bytes.length )
-	        return false;
-	    return true;
-	}
+	//	// 入力値のチェック
+	//	public boolean stringLengthCheck(String input, int max) {
+	//		// 何バイト分の長さであるかを取得
+	//		int length = input.getBytes().length;
+	//		if ((int) length > max) { // 最大文字数よりも多かった場合
+	//			return false;
+	//		}
+	//		return true; // 許容内であった場合
+	//	}
+	//
+	//	// 半角チェック
+	//	public boolean halfSizeCheck(String input) {
+	//		boolean result =  true;
+	//
+	//	    if ( !(input == null) || !(input.length() == 0) ) {
+	//		    int len = input.length();
+	//		    byte[] bytes = input.getBytes();
+	//		    if ( len == bytes.length ) {
+	//		    	result = false;
+	//		    }
+	//	    }
+	//	    return result;
+	//	}
 }
