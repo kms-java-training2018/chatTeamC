@@ -14,23 +14,29 @@
 	<br>
 	<a href="/chat/showProfile" target=”_blank”>あいて</a>：poppo!（｀・ω・´）
 	<br> ■会話一覧
-	<table border="1">
-		<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
-			varStatus="status">
-			<tr align="center">
-				<td><br>
-				<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
+
+	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
+		varStatus="status">
+		<tr align="center">
+			<td><br> <!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
-					<p><a href="/chat/showProfile?toUserNo=${list.get(2)}"target=”_blank”>${list.get(0)}</a> ：${list.get(1)}</p>
-					<form action="/chat/directMessage" method="POST">
-						<input type="submit" value="削除">
-					</form>
-			</tr>
-		</c:forEach>
-	</table>
+				<p>
+					<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank”>${list.get(0)}</a>
+					：${list.get(1)}
+
+				<form action="/chat/directMessage" method="POST">
+					<input type="submit" value="削除">
+				</form>
+		</tr>
+	</c:forEach>
+
 	<form action="/chat/directMessage" method="POST">
-		<input type="submit" value="メッセージの送信">
+		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
+		<input type="text" name="sendMessage" value="">
+	</form>
+	<form action="/chat/directMessage" method="POST">
+		<input type="submit" name="" value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューへ戻る">
