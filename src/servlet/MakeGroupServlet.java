@@ -56,6 +56,8 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
+
+
 				//入力チェックの返答
 				int bytecheck = 0;
 				bytecheck = groupBean.stringLengthCheck(name);
@@ -66,7 +68,7 @@ public class MakeGroupServlet extends HttpServlet {
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 
 					req.getRequestDispatcher(direction).forward(req, res);
-				}
+				}else {
 
 
 
@@ -104,6 +106,8 @@ public class MakeGroupServlet extends HttpServlet {
 				System.out.println(message);
 
 				direction = "/WEB-INF/jsp/mainPage.jsp";
+
+				}
 
 			}else {
 
