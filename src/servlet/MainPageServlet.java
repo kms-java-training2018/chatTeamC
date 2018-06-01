@@ -41,15 +41,15 @@ public class MainPageServlet extends HttpServlet {
 			try {
 				bean = model.authentication(bean,loginBean);
 			} catch (Exception e) {
-				// 情報が無かったためエラー画面に移行
-				// とりあえず今はログイン画面に戻るように設定
 				session.setAttribute("session", null);
+				// 情報が無かったためエラー画面に移行
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 		} else {
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 		// 表示画面に表示する用のBean
 	    req.setAttribute("MainPageBean", bean);

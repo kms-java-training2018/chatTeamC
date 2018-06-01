@@ -48,10 +48,24 @@ page import="java.util.ArrayList"%>
 			<td colspan="2" rowspan="2">
 				<form action="/chat/makeGroup" method="POST">
 
+<<<<<<< HEAD
 					<table border="1">
 						<tr>
 							<th>全ユーザーリスト</th>
 						</tr>
+=======
+	<form action="/chat/makeGroup" method="POST">
+		<p>グループの名前</p>
+		<input type="text" name="groupName" value=''>
+		<p>
+			<font size="5" color="red">${error }</font>
+		</p>
+		<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
+		<table border="1">
+			<tr>
+				<th>全ユーザーリスト</th>
+			</tr>
+>>>>>>> branch 'feature-chat-teamC' of http://github.com/kms-java-training2018/chatTeamC
 
 						<c:forEach var="obj" items="${groupBean.userName}"
 							varStatus="status">

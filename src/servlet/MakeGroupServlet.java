@@ -30,10 +30,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-
-
 		String direction = "/WEB-INF/jsp/login.jsp";
-
 
 		//セッション設定
 		HttpSession session = req.getSession();
@@ -44,113 +41,97 @@ public class MakeGroupServlet extends HttpServlet {
 		//今から処理させるモデル
 		GroupCreat groupCreat = new GroupCreat();
 
-//		セッションに値があるかどうかでif
+		//		セッションに値があるかどうかでif
 		if (session.getAttribute("session") != null) {
 
 			//グループ作成画面から来たかどうかの判断if
-			if(req.getParameter("userNo") != null) {
+			if (req.getParameter("userNo") != null) {
 
 				//groupCreateにsessionのbean引き継がせる
-				groupCreat.setGroupBean((GroupBean)session.getAttribute("groupBean"));
-
+				groupCreat.setGroupBean((GroupBean) session.getAttribute("groupBean"));
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
 
-
 				//入力チェックの返答
 				int bytecheck = 0;
 				bytecheck = groupBean.stringLengthCheck(name);
-				if(bytecheck == 1) {
+				if (bytecheck == 1) {
 					String message = "文字数オーバーです";
 
 					req.setAttribute("error", message);
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 
 					req.getRequestDispatcher(direction).forward(req, res);
-				}else {
+				} else {
 
+					//チェック用
+					System.out.println("受け取ったグループ名" + name);
 
+					//モデルにセット
+					groupCreat.setGroupName(name);
 
-				//チェック用
-				System.out.println("受け取ったグループ名"+ name);
+					//グループへ登録
+					String sucsess = groupCreat.CreatGroup();
 
+					System.out.println(sucsess);
 
+					//選択されたユーザーをreqからもらう
 
+					String SelectNo[];
 
-				//モデルにセット
-				groupCreat.setGroupName(name);
+					SelectNo = req.getParameterValues("userNo");
 
+					//選択されたユーザーNoの表示
+					for (String n1 : SelectNo) {
+						System.out.print("送られてきたユーザーName：" + n1 + ",");
+					}
 
-				//グループへ登録
-				String sucsess =groupCreat.CreatGroup();
+					//抜き取った配列をGroupBeanへ送ってグループ作成
+					String message = groupCreat.ResistGroup(SelectNo);
 
-				System.out.println(sucsess);
+					System.out.println(message);
 
-				//選択されたユーザーをreqからもらう
-
-				String SelectNo[];
-
-				SelectNo = req.getParameterValues("userNo");
-
-				//選択されたユーザーNoの表示
-				for(String n1 : SelectNo) {
-					System.out.print("送られてきたユーザーName："+n1+",");
-				}
-
-
-
-				//抜き取った配列をGroupBeanへ送ってグループ作成
-				String message = groupCreat.ResistGroup(SelectNo);
-
-				System.out.println(message);
-
-				direction = "/WEB-INF/jsp/mainPage.jsp";
+					direction = "/WEB-INF/jsp/mainPage.jsp";
 
 				}
 
-			}else {
+			} else {
 
+				// ログインデータ取得
+				sessionBean = (SessionBean) session.getAttribute("session");
+				System.out.println(sessionBean.getUserName());
+				String autherName = sessionBean.getUserName();
 
-			// ログインデータ取得
-            sessionBean = (SessionBean)session.getAttribute("session");
-            System.out.println(sessionBean.getUserName());
-			String autherName = sessionBean.getUserName();
+				//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
+				System.out.println("kok");
+				//空のビーンに、
+				//モデルの中のメソッド(帰ってくるのがビーン)
+				//処理させるための情報をモデルに引数として渡して、
 
+				//ビーンで帰ってくるから
+				//それを空のビーンにつめる
+				groupBean = groupCreat.authentication(autherName);
 
+				//test表示
+				ArrayList<String> test = groupBean.getUserName();
+				for (String name : test) {
+					System.out.println(name);
+				}
 
-			//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-			System.out.println("kok");
-			//空のビーンに、
-			//モデルの中のメソッド(帰ってくるのがビーン)
-			//処理させるための情報をモデルに引数として渡して、
+				ArrayList<String> test2 = groupBean.getUserNo();
+				for (String name : test2) {
+					System.out.println(name);
+				}
 
+				//セッションにセットしてjspに送る
+				session.setAttribute("groupBean", groupBean);
 
-			//ビーンで帰ってくるから
-			//それを空のビーンにつめる
-			groupBean = groupCreat.authentication(autherName);
-
-			//test表示
-			ArrayList<String> test = groupBean.getUserName();
-			for(String name : test) {
-				System.out.println(name);
+				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}
-
-			ArrayList<String> test2 = groupBean.getUserNo();
-			for(String name : test2) {
-				System.out.println(name);
-			}
-
-			//セッションにセットしてjspに送る
-			session.setAttribute("groupBean", groupBean);
-
-			direction = "/WEB-INF/jsp/makeGroup.jsp";
-			}
-
 
 		}
 		req.getRequestDispatcher(direction).forward(req, res);
-
 
 	}
 

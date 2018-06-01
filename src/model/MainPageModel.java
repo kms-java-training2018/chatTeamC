@@ -241,6 +241,9 @@ public class MainPageModel {
 		}
 		// 接続作成
 		try {
+			System.out.println(name);
+			System.out.println(profile);
+
 			conn = DriverManager.getConnection(url, user, dbPassword);
 			// SQL作成
 			sb.append(" UPDATE ");
@@ -252,7 +255,8 @@ public class MainPageModel {
 			sb.append(" USER_NO = " + bean.getUserNo());
 
 			// SQL実行
-			conn.createStatement();
+			Statement stmt = conn.createStatement();
+			stmt.executeQuery(sb.toString());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
