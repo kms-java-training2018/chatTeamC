@@ -10,10 +10,10 @@ import bean.LoginBean;
 import bean.ShowProfileBean;
 
 public class ShowProfileModel {
-	public ShowProfileBean authentication(ShowProfileBean bean, LoginBean loginBean) {
+	public ShowProfileBean authentication(ShowProfileBean bean, LoginBean loginBean, String UserNo) {
 		//TODO メッセージ、グループメッセージからbeanを受け取る。後に編集し、代入
-		int userId = 1; // bean.getUserId();
-		String myPageText = "0001"; // bean.get();
+		String userId = UserNo; // bean.getUserId();
+		//String myPageText = "0001"; // bean.get();
 
 		// 初期化
 		StringBuilder sb = new StringBuilder();

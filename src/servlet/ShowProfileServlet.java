@@ -26,7 +26,7 @@ public class ShowProfileServlet extends HttpServlet {
 			LoginBean loginBean = (LoginBean) req.getAttribute("loginBean");
 			// 認証処理
 			try {
-				bean = model.authentication(bean, loginBean);
+				bean = model.authentication(bean, loginBean, req.getParameter("toUserNo"));
 			} catch (Exception e) {
 				e.printStackTrace();
 				req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
@@ -39,8 +39,6 @@ public class ShowProfileServlet extends HttpServlet {
 			// 表示画面に表示する用のBean
 			req.setAttribute("Name", bean.getName());
 			req.setAttribute("Profile", bean.getProfile());
-			// 移動しマース
-			req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 		}
 
 		req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
