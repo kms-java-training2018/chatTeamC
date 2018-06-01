@@ -49,7 +49,7 @@ public class ShowProfileServlet extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 			}
 
-			req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
+			//req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 		} else {
 			req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 		}

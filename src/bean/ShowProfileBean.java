@@ -7,7 +7,7 @@ public class ShowProfileBean {
 	private String profile;
 
 	//SQLが取得できたか
-	private int sql;
+	private int sql =1;
 
 	public String getName() {
 		return name;
