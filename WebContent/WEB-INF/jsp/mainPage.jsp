@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <a href="/chat/logOut">ログアウト</a>
 	<h1>チャット研修プログラム</h1>
 	<h2>メインメニュー</h2>
 	<br><div align="right">■会員一覧</div>

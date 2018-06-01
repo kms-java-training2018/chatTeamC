@@ -7,6 +7,7 @@
 <title>エラーページ</title>
 </head>
 <body>
-<p>エラーページ</p>
+		<p>エラーページ</p>
+		<a href="/WEB-INF/jsp/login.jsp">トップに戻る</a>
 </body>
 </html>
