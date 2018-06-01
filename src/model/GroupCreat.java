@@ -243,6 +243,35 @@ public class GroupCreat {
 				System.out.println(groupNo);
 			}
 
+			//作成者のメンバー登録を行う文
+			StringBuilder sb1 = new StringBuilder();
+			sb1.append("insert ");
+			sb1.append(" into ");
+			sb1.append(" T_GROUP_INFO( ");
+			sb1.append("GROUP_NO");
+			sb1.append(", USER_NO ");
+			sb1.append(", OUT_FLAG");
+			sb1.append(", REGIST_DATE");
+			sb1.append(")");
+			sb1.append(" values ");
+			sb1.append("(" + groupNo);
+			sb1.append("," + autherNo);
+			sb1.append(",0");
+			sb1.append(", sysdate)");
+
+			Statement stmt1 = conn.createStatement();
+			int AutherResistRs = stmt1.executeUpdate(sb1.toString());
+
+			if(AutherResistRs == 1) {
+				message = "autherResist OK";
+				System.out.println(message);
+			}else {
+				message = "autherResist NO";
+				System.out.println(message);
+
+			}
+
+
 			// 会員登録を行うfor文
 
 			for (int i = 0;i < memberNo.size(); i++) {
@@ -266,6 +295,7 @@ public class GroupCreat {
 
 				if (memberResistRs == 1) {
 					message = i + "回目Resist OK";
+					System.out.println(message);
 
 				} else {
 
