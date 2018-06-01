@@ -8,42 +8,79 @@ page import="java.util.ArrayList"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/chat/WebContent/css/全体.css"
+	type="text/css">
+<link rel="stylesheet" href="/chat/WebContent/css/font.css"
+	type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>チャット研修プログラム</h1>
-	<h2>グループ作成</h2>
+	<table border="1" align="center" width="80%" height="60vh"
+		cellspacing="0" cellpadding="3">
 
 
+		<!-- 1段目 -->
+		<tr>
+			<th colspan="2">
+				<p>グループ作成</p>
+			</th>
+			<th>
 
+					<a href="/chat/logOut">ログアウト</a>
 
-	<form action="/chat/makeGroup" method="POST">
-		<p>グループの名前</p>
-		<input type="text" name="groupName" value=''>
-		<p>
-			<font size="5" color="red">${error }</font>
-		</p>
-		<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
-		<table border="1">
-			<tr>
-				<th>全ユーザーリスト</th>
-			</tr>
+			</th>
+		</tr>
+		<!-- 2段目 -->
+		<tr>
+			<td colspan="3">
 
-			<c:forEach var="obj" items="${groupBean.userName}" varStatus="status">
-				<tr>
-					<td><input type="checkbox" name="userNo"
-						value="${status.index}"> <c:out value="${obj}" /></td>
-				</tr>
-			</c:forEach>
-		</table>
-	</form>
+				<form action="/chat/makeGroup" method="POST">
+					<p>グループの名前</p>
+					<input type="text" name="groupName" value=''>
+					<p>
+						<font size="5" color="red">${error }</font>
+					</p>
+				</form>
+			</td>
+		</tr>
+		<!-- 3段目 -->
+		<tr>
+			<td colspan="2" rowspan="2">
 
+				<table border="1">
+					<tr>
+						<th>全ユーザーリスト</th>
+					</tr>
+					<tr>
 
+						<c:forEach var="obj" items="${groupBean.userName}"
+							varStatus="status">
+							<tr>
+								<td>
+									<form action="/chat/makeGroup" method="POST">
+										<input type="checkbox" name="userNo" value="${status.index}">
+										<c:out value="${obj}" />
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
 
+					</tr>
+				</table>
+			<td>
+				<form action="/chat/makeGroup" method="POST">
+					<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
+				</form>
+			</td>
 
-
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="メインメニューに戻る">
-	</form>
+		</tr>
+		<tr>
+			<td>
+				<form action="/chat/main" method="POST">
+					<input type="submit" value="メインメニューに戻る">
+				</form>
+			</td>
+		</tr>
+	</table>
 </body>
 </html>
