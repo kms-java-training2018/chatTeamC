@@ -4,14 +4,13 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@
 page import="java.util.ArrayList"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" href="/css/font.css">
+<link rel="stylesheet" href="/css/全体.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/chat/WebContent/css/全体.css"
-	type="text/css">
-<link rel="stylesheet" href="/chat/WebContent/css/font.css"
-	type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -36,7 +35,7 @@ page import="java.util.ArrayList"%>
 
 				<form action="/chat/makeGroup" method="POST">
 					<p>グループの名前</p>
-					<input type="text" name="groupName" value=''>
+					<input type="text" name="groupName" class = "hoge"value=''>
 					<p>
 						<font size="5" color="red">${error }</font>
 					</p>
