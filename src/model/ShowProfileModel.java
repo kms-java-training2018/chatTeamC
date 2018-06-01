@@ -51,9 +51,7 @@ public class ShowProfileModel {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 			while (rs.next()) {
-//				if(rs.getString == null) {
-//
-//				}
+
 				// Beanに追加
 				bean.setName(rs.getString("user_name"));
 				bean.setProfile(rs.getString("my_page_text"));
@@ -65,7 +63,7 @@ public class ShowProfileModel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			sql = 0;
-			bean.setSql(sql);
+			bean.setSql(sql); //SQL取得失敗であればbeanに入れてServletに飛ばす
 
 			// sqlの接続は絶対に切断
 		} finally {

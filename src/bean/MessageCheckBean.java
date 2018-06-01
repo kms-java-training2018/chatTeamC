@@ -14,7 +14,27 @@ public class MessageCheckBean {
 	private String toUserName;
 
 	// 会話情報取得
-	private ArrayList<ArrayList<String>> talkContent =new ArrayList<ArrayList<String>>();
+	private ArrayList<ArrayList<String>> talkContent = new ArrayList<ArrayList<String>>();
+
+	// 送信メッセージ情報
+	private String sendMessage;
+
+	//入力チェック
+	public int stringLengthCheck(String input) {
+		//返すメッセージを設定
+		int judgeByte = 0;
+
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		// 最大バイト数の設定
+		int max = 200;
+
+		if ((int) length > max) { // 最大文字数よりも多かった場合
+			judgeByte = 1;
+			return judgeByte;
+		}
+		return judgeByte; // 許容内であった場合
+	}
 
 	public int getToUserNo() {
 		return toUserNo;
@@ -38,6 +58,14 @@ public class MessageCheckBean {
 
 	public void setTalkContent(ArrayList<String> TalkContent) {
 		talkContent.add(TalkContent);
+	}
+
+	public String getSendMessage() {
+		return sendMessage;
+	}
+
+	public void setSendMessage(String sendMessage) {
+		this.sendMessage = sendMessage;
 	}
 
 }
