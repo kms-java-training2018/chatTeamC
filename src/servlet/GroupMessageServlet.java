@@ -34,7 +34,7 @@ public class GroupMessageServlet extends HttpServlet {
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		// 会話情報の取得
 		try {
-			bean = model.authentication(bean, loginBean, req.getParameter("toUserNo"));
+			bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
