@@ -43,13 +43,13 @@ public class ShowProfileServlet extends HttpServlet {
 			req.setAttribute("Profile", bean.getProfile());
 			req.setAttribute("sql", bean);
 
+
 			if (bean.getSql() == 0) {
 				req.getRequestDispatcher("/WEB-INF/jsp/eerorPage.jsp").forward(req, res);
 			} else {
 				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 			}
 
-			//req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 		} else {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
