@@ -19,6 +19,9 @@ public class MessageCheckBean {
 	// 送信メッセージ情報
 	private String sendMessage;
 
+	// 消したい会話情報番号
+	private int deleteMessageNo;
+
 	//入力チェック
 	public int stringLengthCheck(String input) {
 		//返すメッセージを設定
@@ -66,6 +69,14 @@ public class MessageCheckBean {
 
 	public void setSendMessage(String sendMessage) {
 		this.sendMessage = sendMessage;
+	}
+
+	public int getDeleteMessageNo() {
+		return deleteMessageNo;
+	}
+
+	public void setDeleteMessageNo(int deleteMessageNo) {
+		this.deleteMessageNo = deleteMessageNo;
 	}
 
 }

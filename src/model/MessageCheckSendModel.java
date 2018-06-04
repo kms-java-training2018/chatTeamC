@@ -54,6 +54,7 @@ public class MessageCheckSendModel {
 			sb.append(" SELECT ");
 			sb.append(" MU.USER_NO, ");
 			sb.append(" MU.USER_NAME, ");
+			sb.append(" TM.MESSAGE_NO, ");
 			sb.append(" TM.MESSAGE, ");
 			sb.append(" TM.DELETE_FLAG ");
 			/*
@@ -96,6 +97,7 @@ public class MessageCheckSendModel {
 				setList.add(rs.getString("USER_NAME"));
 				setList.add(rs.getString("MESSAGE"));
 				setList.add(rs.getString("USER_NO"));
+				setList.add(rs.getString("MESSAGE_NO"));
 				// Beanに追加
 				bean.setTalkContent(setList);
 			}
@@ -113,9 +115,9 @@ public class MessageCheckSendModel {
 		return bean;
 	}
 
-/**
- * sendMessage（メッセージの送信処理）
- * */
+	/**
+	 * sendMessage（メッセージの送信処理）
+	 * */
 	public MessageCheckBean sendMessage(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
@@ -190,13 +192,58 @@ public class MessageCheckSendModel {
 		return bean;
 	}
 
-	// 入力値のチェック
-	public boolean stringLengthCheck(String input, int max) {
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		if ((int) length > max) { // 最大文字数よりも多かった場合
-			return false;
+	/**
+	 * deleteMessage（メッセージの削除処理）
+	 * */
+	public MessageCheckBean deleteMessage(MessageCheckBean bean, LoginBean loginBean) {
+		// 初期化
+		StringBuilder sb = new StringBuilder();
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
+		int deleteMessageNo = bean.getDeleteMessageNo();
+		// JDBCドライバーのロード
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// 入れなかった場合
+			e.printStackTrace();
 		}
-		return true; // 許容内であった場合
+		// 接続作成
+		try {
+			conn = DriverManager.getConnection(url, user, dbPassword);
+			// SQL作成
+			sb.append(" UPDATE ");
+			sb.append(" T_MESSAGE_INFO ");
+			sb.append(" SET ");
+			sb.append(" DELETE_FLAG = 1 ");
+			sb.append(" WHERE ");
+			sb.append(" MESSAGE_NO = " + deleteMessageNo);
+
+			// SQL実行
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sb.toString());
+
+			if (!rs.next()) {
+				loginBean.setErrorMessage("メッセージを削除できませんでした。");
+			} else {
+				loginBean.setUserNo(rs.getString("user_no"));
+				loginBean.setUserName(rs.getString("user_name"));
+				loginBean.setErrorMessage("");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// sqlの接続は絶対に切断
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return bean;
+
 	}
 }
