@@ -11,7 +11,12 @@
 	<h1>チャット研修プログラム</h1>
 	<h2>マイページ</h2>
 	<form action="/chat/main" method="POST">
-		<input type="submit" value="プロフィールを更新">
+		<p>名前</p>
+		<input type="text" name = "myName" value="${name}">
+		<p>プロフィール</p>
+		<input type="text" name = "myProfile" value="${profile}">
+		<p></p>
+		<input type="submit" value="プロフィールを更新" name = "newProfile">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューに戻る">

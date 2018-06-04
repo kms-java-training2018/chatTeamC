@@ -1,47 +1,43 @@
 package bean;
 
+import java.util.ArrayList;
+
 public class GroupMessageBean {
-	/** 自分のグループ番号 */
-	private String my_group_no;
+	private String GroupName;
 
-	/** 移動先グループ番号 */
-	private String de_group_no;
+	private ArrayList<String> name = new ArrayList<String>();
+	private ArrayList<String> text = new ArrayList<String>();
+	private ArrayList<String> number = new ArrayList<String>();
 
-	public String getMy_group_no() {
-		return my_group_no;
+	public ArrayList<String> getNumber() {
+		return number;
 	}
 
-	public void setMy_group_no(String my_group_no) {
-		this.my_group_no = my_group_no;
+	public void setNumber(String number) {
+		this.number.add(number);
 	}
 
-	public String getDe_group_no() {
-		return de_group_no;
+	public String getGroupName() {
+		return GroupName;
 	}
 
-	public void setDe_group_no(String de_group_no) {
-		this.de_group_no = de_group_no;
+	public void setGroupName(String groupNo) {
+		GroupName = groupNo;
 	}
 
-	/** 自分の会員番号 */
-	private String my_user_no;
-
-	/** 移動先会員番号 */
-	private String de_user_no;
-
-	public String getMy_user_no() {
-		return my_user_no;
+	public ArrayList<String> getName() {
+		return name;
 	}
 
-	public void setMy_user_no(String my_user_no) {
-		this.my_user_no = my_user_no;
+	public void setName(String name) {
+		this.name.add(name);
 	}
 
-	public String getDe_user_no() {
-		return de_user_no;
+	public ArrayList<String> getText() {
+		return text;
 	}
 
-	public void setDe_user_no(String de_user_no) {
-		this.de_user_no = de_user_no;
+	public void setText(String text) {
+		this.text.add(text);
 	}
 }

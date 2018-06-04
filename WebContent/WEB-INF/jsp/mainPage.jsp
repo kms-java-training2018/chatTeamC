@@ -8,15 +8,35 @@
 <title>Insert title here</title>
 </head>
 <body>
+    <a href="/chat/logOut">ログアウト</a>
 	<h1>チャット研修プログラム</h1>
 	<h2>メインメニュー</h2>
-	<br>■会員一覧
-	<br>
-	<a href="/chat/directMessage">他会員名（メッセージへ）</a>
+	<br><div align="right">■会員一覧</div>
+	<c:forEach var="list" items="${MainPageBean.getMember()}"
+		varStatus="status">
+		<div align="right">${list.get(1)}</div>
+	</c:forEach>
+	<br>■会話一覧
+	<table border="1">
+		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
+			varStatus="status">
+			<tr align="center">
+				<td><br>
+    				<a href="/chat/directMessage?toUserNo=${list.get(2)}">${list.get(0)}</a>
+					<p>${list.get(1)}</p></td>
+			</tr>
+		</c:forEach>
+	</table>
 	<br>■グループ一覧
-	<br>
-	<a href="/chat/groupMessage">グループ名（グループメッセージへ）</a>
-	<br>
+	<table border="1">
+		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
+			varStatus="status">
+			<tr align="center">
+				<td><br> <a href="/chat/groupMessage?toGroupNo=${list.get(0)}">${list.get(1)}</a>
+					<p>${list.get(2)}</p></td>
+			</tr>
+		</c:forEach>
+	</table>
 	<br>
 	<form action="/chat/makeGroup" method="POST">
 		<input type="submit" value="グループの作成">

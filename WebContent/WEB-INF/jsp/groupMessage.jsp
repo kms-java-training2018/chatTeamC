@@ -12,6 +12,7 @@
 	<h2>グループメッセージ</h2>
 	<a href="/chat/showProfile">あいて</a>：グループメッセージのサンプルだよー（´・ω・｀）
 	<br> あなた：がっくし（´・ω・｀）
+	<p>${groupBean.getGroupName()}</p>
 	<br>
 	<br>
 	<form action="/chat/groupMessage" method="POST">
