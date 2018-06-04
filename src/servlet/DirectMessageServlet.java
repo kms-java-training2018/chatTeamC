@@ -86,7 +86,7 @@ public class DirectMessageServlet extends HttpServlet {
 		} else {
 			// 会話情報の取得
 			try {
-				bean = model.sendMessage(bean, loginBean);
+				model.sendMessage(bean, loginBean);
 				//				bean = model.authentication(bean, loginBean);
 				//最新情報が表示されていないため、情報更新用処理。
 				//前回情報と合わせて表示されてしまっているためコメントアウト中
