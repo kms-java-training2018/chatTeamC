@@ -4,10 +4,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="JavaScript/logout.js"
+	charset="UTF-8">
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
+    <input type="button"value="ログアウト" onClick="logout()" />
 	<h1>個人チャットページ</h1>
 	<h2>メッセージ</h2>
 	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
