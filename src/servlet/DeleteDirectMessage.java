@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -15,7 +14,7 @@ import model.DeleteMessageModel;
 /**
  * 個別メッセージの削除処理用サーブレット
  * */
-public class DeleteDirectMessage extends HttpServlet{
+public class DeleteDirectMessage{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
