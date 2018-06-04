@@ -22,6 +22,7 @@
 					<form action="/chat/groupMessage" method="POST">
 					<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}" >
 					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
+					<input type="hidden" name="deleteMessageNo" value="${GroupBean.messageNo().get(status.index)}">
 					<input type="submit" value="削除">
 					</c:if>
 					<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
