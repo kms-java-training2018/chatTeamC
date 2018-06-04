@@ -14,6 +14,10 @@ import bean.MessageCheckBean;
  * 設計書03　メッセージ確認・送信機能
  * 飯島
  * */
+
+/**
+ * authentication（会話情報取得・表示処理）
+ * */
 public class MessageCheckSendModel {
 	public MessageCheckBean authentication(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
@@ -73,6 +77,12 @@ public class MessageCheckSendModel {
 			sb.append(" OR (TM.SEND_USER_NO = " + toUserNo + " AND TM.TO_SEND_USER = " + loginBean.getUserNo() + ")) ");
 			sb.append(" AND (MU.USER_NO = SEND_USER_NO) ");
 			sb.append(" AND (TM.DELETE_FLAG = 0) ");
+			/*
+			 * SQL文内容（並び替え）
+			 * 登録日の昇順に並び替える
+			 * */
+			sb.append(" ORDER BY ");
+			sb.append(" TM.REGIST_DATE ASC ");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
@@ -103,9 +113,9 @@ public class MessageCheckSendModel {
 		return bean;
 	}
 
-	/**
-	 * メッセージの送信（仮）
-	 * */
+/**
+ * sendMessage（メッセージの送信処理）
+ * */
 	public MessageCheckBean sendMessage(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
@@ -166,17 +176,6 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sb.toString());
-
-			//
-//			if (!rs.next()) {
-//				if (!stringLengthCheck(sendMessage, 100)) {
-//					loginBean.setErrorMessage("100文字以上は受け付けません");
-//				}
-//			} else {
-//				loginBean.setUserNo(rs.getString("user_no"));
-//				loginBean.setUserName(rs.getString("user_name"));
-//				loginBean.setErrorMessage("");
-//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
