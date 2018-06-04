@@ -31,6 +31,7 @@ page import="java.util.ArrayList"%>
 					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
 					<input type="hidden" name="deleteMessageNo"
 					value="${GroupBean.messageNo().get(status.index)}">
+				<input type="hidden" name="sendMessage" value="">
 				<input type="button" value="削除">
 			</c:if>
 			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
