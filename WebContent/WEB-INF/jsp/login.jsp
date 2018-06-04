@@ -4,11 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<script type="chat/JavaScript" src="JavaScript/logout.js"
+	charset="UTF-8">
+</script>
+
+<link href="css/title.css" rel="stylesheet" type="text/css" media="all">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>チャット研修プログラム</h1>
-	<h2>ログイン</h2>
+
+<h1 class="ribbon">
+   <span class="ribbon-content">Login page</span>
+</h1>
+
+
 	<form action="/chat/login" method="POST">
 		<p>会員ID</p>
 		<input type="text" name="userId" value="${loginBean.userId}">

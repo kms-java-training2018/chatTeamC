@@ -34,9 +34,6 @@ public class ShowProfileServlet extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
-			System.out.println(bean.getName());
-			System.out.println(bean.getProfile());
-
 			// 表示画面に表示する用のBean
 
 			req.setAttribute("Name", bean.getName());

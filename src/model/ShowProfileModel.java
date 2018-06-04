@@ -56,8 +56,7 @@ public class ShowProfileModel {
 				bean.setName(rs.getString("user_name"));
 				bean.setProfile(rs.getString("my_page_text"));
 
-				System.out.println(bean.getName());
-				System.out.println(bean.getProfile());
+
 			}
 
 		} catch (SQLException e) {
