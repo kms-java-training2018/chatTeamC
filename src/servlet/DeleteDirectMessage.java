@@ -17,13 +17,6 @@ import model.DeleteMessageModel;
 public class DeleteDirectMessage {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
-	}
-
-	/**
-	 * メッセージ削除の部分
-	 * */
-	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
@@ -46,6 +39,13 @@ public class DeleteDirectMessage {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+	}
+
+	/**
+	 * メッセージ削除の部分
+	 * */
+	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 	}
 }
