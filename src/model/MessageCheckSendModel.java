@@ -158,7 +158,7 @@ public class MessageCheckSendModel {
 			sb.append(" VALUES ( ");
 			sb.append(" MESSAGE_SEQ.NEXTVAL ");
 			sb.append(" ," + userNo);
-			sb.append(" ," + sendMessage + "' ");
+			sb.append(" ,'" + sendMessage + "' ");
 			sb.append(" ," + toUserNo);
 			sb.append(" ,0 ");
 			sb.append(" , sysdate)  ");

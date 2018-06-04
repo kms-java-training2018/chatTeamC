@@ -42,12 +42,13 @@ public class DirectMessageServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// もしも相手の番号が無い場合はエラーを表示　※仮入力＜modelにて、DB内に相手の番号が存在するかの判断が必要＞
+		// もしも相手の番号が無い場合はエラーを表示
 		if (toUserNo == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		} else {
 			req.setAttribute("messageCheckBean", bean);
 			req.setAttribute("myLoginNo", myLogin);
+			session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
 			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 		//		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
@@ -66,18 +67,14 @@ public class DirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
-		// 現在のセッションに入っているmessageCheckBean情報を受け取る※情報を受け取れていない
-		MessageCheckBean bean =(MessageCheckBean)session.getAttribute("bean");
+		// 現在のセッションに入っているmessageCheckBean情報を受け取る
+		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");
 		MessageCheckSendModel model = new MessageCheckSendModel();
 		//現在のセッションに入っているloginBean情報を受け取る
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-		System.out.println(loginBean.getUserNo());	//loginBean確認１
-		System.out.println(bean.getToUserNo());	//MessageCheckBean確認１※エラー発生中
 		//メッセージ内容を取得
 		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
-		System.out.println(sendMessage);	//sendMessage確認１
 		bean.setSendMessage(sendMessage);
-		System.out.println(sendMessage + "aaaa");	//デバッグ2
 		//String sendMessage = bean.getSendMessage();
 
 		//入力チェックの返答
@@ -93,7 +90,6 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-
 			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
