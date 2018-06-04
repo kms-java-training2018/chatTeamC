@@ -3,6 +3,7 @@ package servlet;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -11,7 +12,7 @@ import bean.DeleteMessageBean;
 import bean.LoginBean;
 import model.DeleteMessageModel;
 
-public class DeleteGroupMessage {
+public class DeleteGroupMessage extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// セッション情報取得（ログインしているかどうか
