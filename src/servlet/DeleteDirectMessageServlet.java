@@ -14,7 +14,7 @@ import model.DeleteMessageModel;
 /**
  * 個別メッセージの削除処理用サーブレット
  * */
-public class DeleteDirectMessage{
+public class DeleteDirectMessageServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*

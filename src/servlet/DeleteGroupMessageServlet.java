@@ -12,7 +12,7 @@ import bean.DeleteMessageBean;
 import bean.LoginBean;
 import model.DeleteMessageModel;
 
-public class DeleteGroupMessage extends HttpServlet{
+public class DeleteGroupMessageServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// セッション情報取得（ログインしているかどうか
