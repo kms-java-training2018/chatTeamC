@@ -105,8 +105,9 @@ public class MakeGroupServlet extends HttpServlet {
 				System.out.println(sessionBean.getUserName());
 				String autherName = sessionBean.getUserName();
 
+				System.out.println(autherName);
 				//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-				System.out.println("kok");
+
 				//空のビーンに、
 				//モデルの中のメソッド(帰ってくるのがビーン)
 				//処理させるための情報をモデルに引数として渡して、
@@ -128,11 +129,14 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//セッションにセットしてjspに送る
 				session.setAttribute("groupBean", groupBean);
+				session.setAttribute("userName", autherName);
+				req.setAttribute("autherName", autherName);
 
 				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}
 
 		}
+
 		req.getRequestDispatcher(direction).forward(req, res);
 
 	}
