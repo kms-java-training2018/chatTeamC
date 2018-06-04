@@ -4,14 +4,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@
 page import="java.util.ArrayList"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="chat/JavaScript" src="JavaScript/logout.js" charset="UTF-8">
+</script>
+<link rel="stylesheet" href="css/base.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="/chat/WebContent/css/全体.css"
-	type="text/css">
-<link rel="stylesheet" href="/chat/WebContent/css/font.css"
-	type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -25,8 +26,8 @@ page import="java.util.ArrayList"%>
 				<p>グループ作成</p>
 			</th>
 			<th>
-
-					<a href="/chat/logOut">ログアウト</a>
+			<p>ようこそ$[userName]</p>
+			<a href="/chat/logOut">ログアウト</a>
 
 			</th>
 		</tr>
@@ -36,7 +37,7 @@ page import="java.util.ArrayList"%>
 
 				<form action="/chat/makeGroup" method="POST">
 					<p>グループの名前</p>
-					<input type="text" name="groupName" value=''>
+					<input type="text" name="groupName" class = "hoge"value=''>
 					<p>
 						<font size="5" color="red">${error }</font>
 					</p>

@@ -8,15 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<h1>チャット研修プログラム</h1>
 	<h2>プロフィール</h2>
 	<p>${Name}
 	<br>${Profile}
 	</p>
 
-	<form action="/chat/directMessage" method="POST">
+
 
 		<a href="#" onClick="window.close();"><input type="submit" value="閉じる"></a>
-	</form>
+
 </body>
 </html>

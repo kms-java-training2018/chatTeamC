@@ -20,7 +20,7 @@
 					<input type="submit" value="削除">
 					</c:if>
 					<c:if test="${list.get(2) != myLoginNo}">
-					<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank”>${list.get(0)}</a>
+					<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank” >${list.get(0)}</a>
 					：${list.get(1)}
 					</c:if>
 				</form>
@@ -29,9 +29,7 @@
 	<form action="/chat/directMessage" method="POST">
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
 		<input type="text" name="sendMessage" value="">
-	</form>
-	<form action="/chat/directMessage" method="POST">
-		<input type="submit" name="" value="メッセージの送信">
+		<input type="submit" value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューへ戻る">

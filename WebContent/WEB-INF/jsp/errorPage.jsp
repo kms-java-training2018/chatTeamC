@@ -8,6 +8,10 @@
 </head>
 <body>
 		<p>エラーページ</p>
-		<a href="/WEB-INF/jsp/login.jsp">トップに戻る</a>
+<<<<<<< HEAD
+		<a href="/login.jsp">トップに戻る</a>
+=======
+		<a href="./login">トップに戻る</a>
+>>>>>>> branch 'feature-chat-teamC' of https://github.com/kms-java-training2018/chatTeamC
 </body>
 </html>

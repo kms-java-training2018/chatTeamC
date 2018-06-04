@@ -22,9 +22,9 @@ public class MessageCheckSendModel {
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
-//		Integer userNo = Integer.parseInt(loginBean.getUserNo());
+		//		Integer userNo = Integer.parseInt(loginBean.getUserNo());
 		Integer toUserNo = bean.getToUserNo();
-//		int noDataFlag = 0;
+		//		int noDataFlag = 0;
 		// JDBCドライバーのロード
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -69,8 +69,8 @@ public class MessageCheckSendModel {
 			 * かつ『デリートフラグが0（論理削除されていない）』
 			 * */
 			sb.append(" WHERE ");
-			sb.append(" ((TM.SEND_USER_NO = "+ loginBean.getUserNo() +" AND TM.TO_SEND_USER = "+ toUserNo + ") ");
-			sb.append(" OR (TM.SEND_USER_NO = " + toUserNo +" AND TM.TO_SEND_USER = " + loginBean.getUserNo() + ")) ");
+			sb.append(" ((TM.SEND_USER_NO = " + loginBean.getUserNo() + " AND TM.TO_SEND_USER = " + toUserNo + ") ");
+			sb.append(" OR (TM.SEND_USER_NO = " + toUserNo + " AND TM.TO_SEND_USER = " + loginBean.getUserNo() + ")) ");
 			sb.append(" AND (MU.USER_NO = SEND_USER_NO) ");
 			sb.append(" AND (TM.DELETE_FLAG = 0) ");
 
@@ -101,5 +101,103 @@ public class MessageCheckSendModel {
 			}
 		}
 		return bean;
+	}
+
+	/**
+	 * メッセージの送信（仮）
+	 * */
+	public MessageCheckBean sendMessage(MessageCheckBean bean, LoginBean loginBean) {
+		// 初期化
+		StringBuilder sb = new StringBuilder();
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
+		Integer userNo = Integer.parseInt(loginBean.getUserNo());
+		Integer toUserNo = bean.getToUserNo();
+		String sendMessage = bean.getSendMessage();
+		// JDBCドライバーのロード
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// 入れなかった場合
+			e.printStackTrace();
+		}
+		// 接続作成
+		try {
+			conn = DriverManager.getConnection(url, user, dbPassword);
+
+			// SQL作成
+			/**
+			 *会話情報テーブルから
+			 *自会員と送信先会員番号間の
+			 *やりとりの内容を取り出す。
+			 * */
+
+			/*
+			 * SQL文内容（データベースに登録する内容）
+			 * 会話情報番号、送信者の会員番号、メッセージ内容、
+			 * 送信先の会員番号、デリートフラグ、記入日
+			 * */
+			sb.append(" INSERT INTO T_MESSAGE_INFO( ");
+			sb.append(" MESSAGE_NO, ");
+			sb.append(" SEND_USER_NO, ");
+			sb.append(" MESSAGE, ");
+			sb.append(" TO_SEND_USER, ");
+			sb.append(" DELETE_FLAG, ");
+			sb.append(" REGIST_DATE ) ");
+			/*
+			 * SQL文内容（データベースに登録する値）
+			 * 会話情報番号（自動採番）
+			 * 、送信者の会員番号（userNo変数内）
+			 * 、メッセージ内容（sendMessage変数内）
+			 * 、送信先の会員番号（toUserNo変数内）
+			 * 、デリートフラグ（初期値0）
+			 * 、記入日（sysdateにて自動入力）
+			 * */
+			sb.append(" VALUES ( ");
+			sb.append(" MESSAGE_SEQ.NEXTVAL ");
+			sb.append(" ," + userNo);
+			sb.append(" ," + sendMessage + "' ");
+			sb.append(" ," + toUserNo);
+			sb.append(" ,0 ");
+			sb.append(" , sysdate)  ");
+
+			// SQL実行
+			Statement stmt = conn.createStatement();
+			int rs = stmt.executeUpdate(sb.toString());
+
+			//
+//			if (!rs.next()) {
+//				if (!stringLengthCheck(sendMessage, 100)) {
+//					loginBean.setErrorMessage("100文字以上は受け付けません");
+//				}
+//			} else {
+//				loginBean.setUserNo(rs.getString("user_no"));
+//				loginBean.setUserName(rs.getString("user_name"));
+//				loginBean.setErrorMessage("");
+//			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// sqlの接続は絶対に切断
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return bean;
+	}
+
+	// 入力値のチェック
+	public boolean stringLengthCheck(String input, int max) {
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		if ((int) length > max) { // 最大文字数よりも多かった場合
+			return false;
+		}
+		return true; // 許容内であった場合
 	}
 }
