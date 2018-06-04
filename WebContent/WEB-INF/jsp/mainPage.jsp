@@ -11,11 +11,6 @@
     <a href="/chat/logOut">ログアウト</a>
 	<h1>チャット研修プログラム</h1>
 	<h2>メインメニュー</h2>
-	<br><div align="right">■会員一覧</div>
-	<c:forEach var="list" items="${MainPageBean.getMember()}"
-		varStatus="status">
-		<div align="right">${list.get(1)}</div>
-	</c:forEach>
 	<br>■会話一覧
 	<table border="1">
 			<tr align="center">
@@ -25,7 +20,7 @@
 		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}">${list.get(0)}</a></td>
+				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}" style="color:#0000ff;text-decoration:none">${list.get(0)}</a></td>
     			<td>${list.get(1)}</td>
 			</tr>
 		</c:forEach>
@@ -39,7 +34,7 @@
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}">${list.get(1)}</a></td>
+				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}" style="color:#0000ff;text-decoration:none">${list.get(1)}</a></td>
     			<td>${list.get(2)}</td>
 			</tr>
 		</c:forEach>
@@ -51,7 +46,5 @@
 	<form action="/chat/myPage" method="POST">
 		<input type="submit" value="プロフィール画面へ">
 	</form>
-
-
 </body>
 </html>
