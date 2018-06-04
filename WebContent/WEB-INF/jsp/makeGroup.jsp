@@ -6,7 +6,7 @@
 page import="java.util.ArrayList"%>
 
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html PUBLIC dh"-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
@@ -75,8 +75,8 @@ page import="java.util.ArrayList"%>
 
 			</tr>
 			<tr>
-				<td><input type="button"
-					value="メインページに戻る" onClick="mainpage()" /></td>
+
+				</td>
 			</tr>
 		</table>
 	</form>

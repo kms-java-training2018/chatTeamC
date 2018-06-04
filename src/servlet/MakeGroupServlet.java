@@ -18,14 +18,21 @@ public class MakeGroupServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
+		String direction = "/WEB-INF/jsp/login.jsp";
+
 		req.getRequestDispatcher("/WEB-INF/jsp/makeGroup.jsp").forward(req, res);
 		LoginBean bean = new LoginBean();
 		bean.setErrorMessage("");
 		bean.setUserId("");
 		bean.setPassword("");
 
+		//mainページに戻るからのGETかどうか
+		if(req.getParameter("main") != null) {
+			direction = "/WEB-INF/jsp/mainPage.jsp";
+
+		}
 		req.setAttribute("loginBean", bean);
-		req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+		req.getRequestDispatcher(direction).forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
