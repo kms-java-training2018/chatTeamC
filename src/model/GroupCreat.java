@@ -94,6 +94,7 @@ public class GroupCreat {
 		//受け取った作成者userNameをBeanに渡して処理
 		this.autherName = name;
 
+
 		//チェック用
 		System.out.println("グループ作成者" + autherName);
 		gb.setAuther(autherName);
