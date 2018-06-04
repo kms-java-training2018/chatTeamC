@@ -165,8 +165,6 @@ public class MainPageModel {
 				// 初期化
 				 text = "会話を始めましょう！";
 
-				System.out.println(number.get(i));
-
 				// コメントがあるかどうかのSQL？
 				sb = new StringBuilder();
 				// SQL作成
