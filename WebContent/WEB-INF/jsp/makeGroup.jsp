@@ -19,6 +19,7 @@ page import="java.util.ArrayList"%>
 <title>Insert title here</title>
 </head>
 <body>
+<body id="bgcolor"></body>
 	<form action="/chat/makeGroup" method="POST">
 		<table border="1" align="center" width="80%" height="60vh"
 			cellspacing="0" cellpadding="3">
@@ -50,7 +51,7 @@ page import="java.util.ArrayList"%>
 			<tr>
 				<td colspan="2" rowspan="2">
 
-					<table border="1">
+					<table border="1" align="center" bgcolor="yellow" width="80%">
 						<tr>
 							<th>全ユーザーリスト</th>
 						</tr>
