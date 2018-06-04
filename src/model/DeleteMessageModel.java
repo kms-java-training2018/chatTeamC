@@ -42,13 +42,13 @@ public class DeleteMessageModel {
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
 
-			if (!rs.next()) {
-				bean.setErrorMessage("メッセージを削除できませんでした。");
-			} else {
-				bean.setUserNo(rs.getString("user_no"));
-				bean.setUserName(rs.getString("user_name"));
-				bean.setErrorMessage("");
-			}
+			//if (!rs.next()) {
+			//	bean.setErrorMessage("メッセージを削除できませんでした。");
+			//} else {
+			//	bean.setUserNo(rs.getString("user_no"));
+			//	bean.setUserName(rs.getString("user_name"));
+			//	bean.setErrorMessage("");
+			//}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
