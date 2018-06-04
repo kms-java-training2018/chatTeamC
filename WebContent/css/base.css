@@ -1,22 +1,25 @@
 @charset "UTF-8";
 
 #bgcolor {
-	background:#ADD8E6;
+	background: #ADD8E6;
 }
 
+table {
+	border-collapse: collapse;
+}
 
-
-table[border-collapse : collapse; ]
-table th{ /*table内のthに対して*/
+table th { /*table内のthに対して*/
 	padding: 3px 3px; /*上下3px 左右10pxずつ*/
 	text-align: center;
 	border: solid 2px black;
 }
-table td{ /*table内のthに対して*/
+
+table td { /*table内のthに対して*/
 	padding: 3px 3px; /*上下3px 左右10pxずつ*/
 	text-align: center;
 	border: solid 2px black;
 }
+
 table tr { /*table内のthに対して*/
 	padding: 3px 3px; /*上下3px 左右10pxずつ*/
 	text-align: center;
@@ -26,4 +29,3 @@ table tr { /*table内のthに対して*/
 input.hoge {
 	font-size: 400%;
 }
-

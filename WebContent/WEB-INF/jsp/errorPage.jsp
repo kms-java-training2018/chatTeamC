@@ -8,6 +8,6 @@
 </head>
 <body>
 		<p>エラーページ</p>
-		<a href="/login.jsp">トップに戻る</a>
+		<a href="/chat/login">トップに戻る</a>
 </body>
 </html>

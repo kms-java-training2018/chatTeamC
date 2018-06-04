@@ -15,6 +15,7 @@ page import="java.util.ArrayList"%>
 </script>
 
 <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/MakeGroup.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -51,7 +52,7 @@ page import="java.util.ArrayList"%>
 			<tr>
 				<td colspan="2" rowspan="2">
 
-					<table border="1" align="center" bgcolor="yellow" width="80%">
+					<table class="typeA">
 						<tr>
 							<th>全ユーザーリスト</th>
 						</tr>
