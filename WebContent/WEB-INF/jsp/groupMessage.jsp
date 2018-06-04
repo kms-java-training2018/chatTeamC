@@ -9,11 +9,9 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
-
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -33,7 +31,7 @@ page import="java.util.ArrayList"%>
 					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
 					<input type="hidden" name="deleteMessageNo"
 					value="${GroupBean.messageNo().get(status.index)}">
-				<input type="button" value="削除" onClick="deleteMessage()" />
+				<input type="button" value="削除">
 			</c:if>
 			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
 				<a

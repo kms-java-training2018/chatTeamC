@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@
+page import="java.util.ArrayList"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="JavaScript/deleteMessage.js"
+	charset="UTF-8">
+</script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
 </script>
@@ -22,7 +28,7 @@
 					<c:if test="${list.get(2) == myLoginNo}" >
 					${list.get(0)}：${list.get(1)}
 					<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
-					<input type="submit" value="削除">
+					<input type="submit" value="削除" onClick="deleteMessage()" />
 					</c:if>
 					<c:if test="${list.get(2) != myLoginNo}">
 					<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank” >${list.get(0)}</a>

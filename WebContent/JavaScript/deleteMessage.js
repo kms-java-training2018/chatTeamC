@@ -3,7 +3,7 @@ function deleteMessage(){
     // 「OK」時の処理開始 ＋ 確認ダイアログの表示
     if(window.confirm('本当に削除していいですか？')){
 
-        location.href = "/chat/directMessage";
+        location.href = "/chat/deleteDirectMessage";
 
         return true;
     }
