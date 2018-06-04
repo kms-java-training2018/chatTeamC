@@ -137,7 +137,7 @@ public class MakeGroupServlet extends HttpServlet {
 				//セッションにセットしてjspに送る
 				session.setAttribute("groupBean", groupBean);
 				session.setAttribute("userName", autherName);
-				req.setAttribute("autherName", autherName);
+
 
 				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}

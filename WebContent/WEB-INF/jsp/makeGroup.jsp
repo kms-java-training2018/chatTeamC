@@ -11,6 +11,7 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
+
 </script>
 
 <link rel="stylesheet" href="css/base.css">
@@ -29,8 +30,8 @@ page import="java.util.ArrayList"%>
 					<p>グループ作成</p>
 				</th>
 				<th>
-					<p>ようこそ $[session.userName ]</p> <input type="button"
-					value="ログアウト" onClick="logout()" />
+					<p>ようこそ ${session.userName } さん</p> <input type="button" value="ログアウト"
+					onClick="logout()" />
 
 				</th>
 			</tr>
@@ -57,7 +58,7 @@ page import="java.util.ArrayList"%>
 
 							<c:forEach var="obj" items="${groupBean.userName}"
 								varStatus="status">
-								<tr>
+								<tr class="typeA" align="center">
 
 									<td><input type="checkbox" name="userNo"
 										value="${status.index}"> <c:out value="${obj}" /></td>
@@ -75,6 +76,8 @@ page import="java.util.ArrayList"%>
 
 			</tr>
 			<tr>
+			<td>
+			<a href="/chat/main">メインメニューに戻る</a>
 
 				</td>
 			</tr>
