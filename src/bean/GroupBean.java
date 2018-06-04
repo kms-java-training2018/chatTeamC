@@ -17,8 +17,6 @@ public class GroupBean {
 	private String autherUserName;
 	private String autherUserNo;
 
-
-
 	//作成者のユーザー名を設定、ArrayListから検索し、そのindexからuserNameとuserNoを新しいListに追加
 	public void setAuther(String userName) {
 		this.autherUserName = userName;
@@ -36,23 +34,21 @@ public class GroupBean {
 	}
 
 	//グループ名入力チェック
-		public int stringLengthCheck(String input) {
-	        //返すメッセージを設定
-			int judgeByte =0;
+	public int stringLengthCheck(String input) {
+		//返すメッセージを設定
+		int judgeByte = 0;
 
-			// 何バイト分の長さであるかを取得
-	        int length = input.getBytes().length;
-	        // 最大バイト数の設定
-	        int max = 30;
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		// 最大バイト数の設定
+		int max = 30;
 
-	        if ((int) length > max) { // 最大文字数よりも多かった場合
-	        	judgeByte = 1;
-	            return judgeByte;
-	        }
-	        return judgeByte; // 許容内であった場合
-	    }
-
-
+		if ((int) length > max) { // 最大文字数よりも多かった場合
+			judgeByte = 1;
+			return judgeByte;
+		}
+		return judgeByte; // 許容内であった場合
+	}
 
 	//作成者Nameの取得
 	public String getAutherName() {
@@ -63,7 +59,6 @@ public class GroupBean {
 	public String getAutherNo() {
 		return autherUserNo;
 	}
-
 
 	//全ユーザー名の取得
 	public ArrayList<String> getUserName() {
@@ -92,5 +87,4 @@ public class GroupBean {
 	public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-
 }

@@ -22,7 +22,7 @@ public class GroupMessageServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		//		// Beanの初期化
+		// Beanの初期化
 		GroupMessageBean bean = new GroupMessageBean();
 		GroupMessageModel model = new GroupMessageModel();
 		// セッション情報取得（ログインしているかどうか

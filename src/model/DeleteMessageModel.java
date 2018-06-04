@@ -6,11 +6,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import bean.GroupMessageBean;
+import bean.DeleteMessageBean;
 import bean.LoginBean;
 
-public class DeleteGroupMessageModel {
-	public LoginBean authentication(LoginBean bean, GroupMessageBean GMBean) {
+public class DeleteMessageModel {
+	public LoginBean authentication(LoginBean bean, DeleteMessageBean DelMBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -18,7 +18,7 @@ public class DeleteGroupMessageModel {
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
-		int deleteMessageNo = GMBean.getDeleteMessageNo();
+		int deleteMessageNo = DelMBean.getDeleteMessageNo();
 
 		// JDBCドライバーのロード
 		try {

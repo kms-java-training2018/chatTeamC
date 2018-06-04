@@ -9,6 +9,9 @@ public class GroupMessageBean {
 	private ArrayList<String> text = new ArrayList<String>();
 	private ArrayList<String> number = new ArrayList<String>();
 
+	// 消したい会話情報番号
+	private int deleteMessageNo;
+
 	public ArrayList<String> getNumber() {
 		return number;
 	}
@@ -39,5 +42,13 @@ public class GroupMessageBean {
 
 	public void setText(String text) {
 		this.text.add(text);
+	}
+
+	public int getDeleteMessageNo() {
+		return deleteMessageNo;
+	}
+
+	public void setDeleteMessageNo(int deleteMessageNo) {
+		this.deleteMessageNo = deleteMessageNo;
 	}
 }
