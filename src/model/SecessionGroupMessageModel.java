@@ -33,7 +33,7 @@ public class SecessionGroupMessageModel {
 			sb.append(" UPDATE ");
 			sb.append(" T_MESSAGE_INFO ");
 			sb.append(" SET ");
-			sb.append(" DELETE_FLAG = 1 ");
+			sb.append(" OUT_FLAG = 1 ");
 			sb.append(" WHERE ");
 			sb.append(" MESSAGE_NO = 持ってきた会話情報番号を入れた変数 ");
 			// SQL実行

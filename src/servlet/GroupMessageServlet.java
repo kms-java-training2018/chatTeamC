@@ -39,7 +39,7 @@ public class GroupMessageServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		req.setAttribute("GroupBean", bean);
-		req.getRequestDispatcher("/WEB-INF/jsp/GroupMessage.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
