@@ -41,6 +41,8 @@ public class MainPageModel {
 			sb.append(" m_user ");
 			sb.append("WHERE");
 			sb.append(" user_name != '" + loginBean.getUserName() + "' ");
+			sb.append(" ORDER BY USER_NO DESC");
+
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
@@ -145,7 +147,7 @@ public class MainPageModel {
 			sb.append(" WHERE ");
 			sb.append(" TG.GROUP_NO = MG.GROUP_NO ");
 			sb.append(" AND TG.USER_NO = " + loginBean.getUserNo());
-			sb.append(" ORDER BY MG.GROUP_NO ");
+			sb.append(" ORDER BY MG.GROUP_NO DESC");
 
 			// SQL実行
 			stmt = conn.createStatement();

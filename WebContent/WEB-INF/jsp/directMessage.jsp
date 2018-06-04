@@ -21,6 +21,7 @@
 					<form action="/chat/directMessage" method="POST">
 					<c:if test="${list.get(2) == myLoginNo}" >
 					${list.get(0)}：${list.get(1)}
+					<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
 					<input type="submit" value="削除">
 					</c:if>
 					<c:if test="${list.get(2) != myLoginNo}">

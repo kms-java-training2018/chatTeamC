@@ -6,50 +6,74 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
+
 </script>
 
 <link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/mainPage.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-    <input type="button"value="ログアウト" onClick="logout()" />
-	<h1>チャット研修プログラム</h1>
-	<h2>メインメニュー</h2>
-	<br>■会話一覧
-	<table border="1">
-			<tr align="center">
-				<td>名前</td>
-    			<td>最新メッセージ</td>
-			</tr>
+	<table border="1" align="center" width="80%" height="60vh"
+		cellspacing="0" cellpadding="3">
+
+
+		<!-- 1段目 -->
+		<tr>
+			<th colspan="3">
+				<p>メインメニュー</p>
+			</th>
+			<th>
+				<p>ようこそ ${session.userName}</p> <input type="button" value="ログアウト"
+				onClick="logout()" />
+
+			</th>
+		</tr>
+		<!-- 2段目 -->
+		<tr align="center">
+			<th colspan="4" id="Direct">個人チャット</th>
+		</tr>
+		<tr align="center">
+			<td>名前</td>
+			<td colspan="3">最新メッセージ</td>
+		</tr>
 		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}" style="color:#0000ff;text-decoration:none">${list.get(0)}</a></td>
-    			<td>${list.get(1)}</td>
+				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}"
+					class="Link" >${list.get(0)}</a></td>
+				<td colspan="3">${list.get(1)}</td>
 			</tr>
 		</c:forEach>
-	</table>
-	<br>■グループ一覧
-	<table border="1">
-			<tr align="center">
-				<td>名前</td>
-    			<td>最新メッセージ</td>
-			</tr>
+		<tr align="center">
+			<th colspan="4" id="Group">グループチャット</th>
+		</tr>
+		<tr align="center">
+			<td>名前</td>
+			<td colspan="3">最新メッセージ</td>
+		</tr>
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}" style="color:#0000ff;text-decoration:none">${list.get(1)}</a></td>
-    			<td>${list.get(2)}</td>
+				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}"
+					class="Link">${list.get(1)}</a></td>
+				<td colspan="3">${list.get(2)}</td>
 			</tr>
 		</c:forEach>
+		<!-- 4段目 -->
+		<tr align="center">
+			<td colspan="2">
+				<form action="/chat/makeGroup" method="POST">
+					<input type="submit" value="グループの作成">
+				</form>
+			</td>
+			<td colspan="2">
+				<form action="/chat/myPage" method="POST">
+					<input type="submit" value="プロフィール画面へ">
+				</form>
+			</td>
+		</tr>
 	</table>
-	<br>
-	<form action="/chat/makeGroup" method="POST">
-		<input type="submit" value="グループの作成">
-	</form>
-	<form action="/chat/myPage" method="POST">
-		<input type="submit" value="プロフィール画面へ">
-	</form>
 </body>
 </html>
