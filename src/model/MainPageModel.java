@@ -243,9 +243,6 @@ public class MainPageModel {
 		}
 		// 接続作成
 		try {
-			System.out.println(name);
-			System.out.println(profile);
-
 			conn = DriverManager.getConnection(url, user, dbPassword);
 			// SQL作成
 			sb.append(" UPDATE ");
