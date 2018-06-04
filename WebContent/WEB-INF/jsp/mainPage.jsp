@@ -7,6 +7,8 @@
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
 </script>
+
+<link rel="stylesheet" href="css/base.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
