@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import bean.DeleteMessageBean;
 import bean.LoginBean;
 
 public class SecessionGroupMessageModel {
-	public LoginBean authentication(LoginBean bean) {
+	public LoginBean authentication(LoginBean bean, DeleteMessageBean SecMBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
-		String userId = bean.getUserId();
-		String password = bean.getPassword();
 
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
+		int secessionMessageNo = SecMBean.getSecessionMessageNo();
 		// JDBCドライバーのロード
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
@@ -35,7 +35,7 @@ public class SecessionGroupMessageModel {
 			sb.append(" SET ");
 			sb.append(" OUT_FLAG = 1 ");
 			sb.append(" WHERE ");
-			sb.append(" MESSAGE_NO = 持ってきた会話情報番号を入れた変数 ");
+			sb.append(" MESSAGE_NO = " + secessionMessageNo);
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
