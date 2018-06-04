@@ -7,27 +7,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.GroupMessageBean;
+import bean.DeleteMessageBean;
 import bean.LoginBean;
-import model.GroupMessageModel;
+import model.DeleteMessageModel;
 
 public class DeleteGroupMessage {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
-		// Beanの初期化
-		GroupMessageBean bean = new GroupMessageBean();
-		GroupMessageModel model = new GroupMessageModel();
 		// セッション情報取得（ログインしているかどうか
 		HttpSession session = req.getSession();
 		// ログインできているか確認
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
+
+		// DeleteMessageBeanの初期化
+		DeleteMessageBean bean = new DeleteMessageBean();
+		DeleteMessageModel model = new DeleteMessageModel();
+
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		// 会話情報の取得
 		try {
-			bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
+			model.authentication(loginBean, bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
