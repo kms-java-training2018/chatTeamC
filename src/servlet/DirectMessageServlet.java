@@ -73,10 +73,10 @@ public class DirectMessageServlet extends HttpServlet {
 		//現在のセッションに入っているloginBean情報を受け取る
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		//メッセージ内容を取得
-		if (req.getParameter("sendMessage") == null) {
+		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+		if (req.getParameter(sendMessage) == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
-		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
 		bean.setSendMessage(sendMessage);
 		//String sendMessage = bean.getSendMessage();
 
