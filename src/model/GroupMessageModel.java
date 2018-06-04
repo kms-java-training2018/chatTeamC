@@ -45,12 +45,17 @@ public class GroupMessageModel {
 				// Beanに追加
 				bean.setGroupName(rs.getString("GROUP_NAME"));
 			}
+
 			// 初期化
 			sb = new StringBuilder();
 			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO ");
 			sb.append(" FROM  M_USER MU, T_MESSAGE_INFO TM ");
 			sb.append(" WHERE TM.TO_SEND_GROUP_NO = " + GroupNo);
 			sb.append(" AND TM.SEND_USER_NO = MU.USER_NO ");
+
+			// SQL実行
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sb.toString());
 
 			while (rs.next()) {
 				// Beanに追加
