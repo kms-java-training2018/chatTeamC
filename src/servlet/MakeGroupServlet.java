@@ -49,6 +49,8 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//groupCreateにsessionのbean引き継がせる
 				groupCreat.setGroupBean((GroupBean) session.getAttribute("groupBean"));
+				//ログイン中のユーザー名表示のためのLoginBeanを抜き出してまたreqにのっける
+				req.setAttribute("LoginBean", session.getAttribute("LoginBean"));
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
