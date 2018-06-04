@@ -12,8 +12,6 @@ public class DeleteGroupMessageModel {
 	public LoginBean authentication(LoginBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
-		String userId = bean.getUserId();
-		String password = bean.getPassword();
 
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";

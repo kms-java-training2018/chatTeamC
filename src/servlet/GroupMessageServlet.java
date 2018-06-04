@@ -40,6 +40,7 @@ public class GroupMessageServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		req.setAttribute("GroupBean", bean);
+		req.setAttribute("myLoginNo", loginBean.getUserNo());
 		req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 	}
 
