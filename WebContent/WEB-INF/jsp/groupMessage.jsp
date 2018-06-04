@@ -12,22 +12,23 @@
 	<h2>グループメッセージ</h2>
 	<a href="/chat/showProfile">あいて</a>：グループメッセージのサンプルだよー（´・ω・｀）
 	<br> あなた：がっくし（´・ω・｀）
-	<p>${groupBean.getGroupName()}</p>
+	<p>${GroupBean.getGroupName()}</p>
 	<br>
 	<br>
 
-	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
+	<c:forEach var="list" items="${messageCheckBean.GroupMessageBean()}"
 		varStatus="status"><!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
 					<form action="/chat/groupMessage" method="POST">
-					<c:if test="${GroupMessageBean.get(2) == myLoginNo}" >
-					${list.get(0)}：${list.get(1)}
+					<c:if test="${GroupBean.getNumber().get(0) == myLoginNo}" >
+					${GroupBean.getName().get(0)}：${GroupBean.getText().get(0)}
 					<input type="submit" value="削除">
 					</c:if>
-					<c:if test="${list.get(2) != myLoginNo}">
-					<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank” >${list.get(0)}</a>
-					：${list.get(1)}
+					<c:if test="${GroupBean.getNumber().get(0) != myLoginNo}">
+					<a href="/chat/showProfile?toUserNo=${GroupBean.getNumber().get(0)}" target=”_blank” >
+					${GroupBean.getName().get(0)}</a>
+					：${GroupBean.getText().get(0)}
 					</c:if>
 				</form>
 	</c:forEach>
