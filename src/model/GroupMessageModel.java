@@ -48,7 +48,7 @@ public class GroupMessageModel {
 
 			// 初期化
 			sb = new StringBuilder();
-			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO ");
+			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO, TM.MESSAGE_NO ");
 			sb.append(" FROM  M_USER MU, T_MESSAGE_INFO TM ");
 			sb.append(" WHERE TM.TO_SEND_GROUP_NO = " + GroupNo);
 			sb.append(" AND TM.SEND_USER_NO = MU.USER_NO ");
@@ -62,6 +62,7 @@ public class GroupMessageModel {
 				bean.setName(rs.getString("USER_NAME"));
 				bean.setText(rs.getString("MESSAGE"));
 				bean.setNumber(rs.getString("USER_NO"));
+				bean.setDeleteMessageNo(rs.getString("MESSAGE_NO"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

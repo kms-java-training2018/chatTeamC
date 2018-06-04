@@ -49,7 +49,7 @@ public class MessageCheckSendModel {
 
 			/*
 			 * SQL文内容（受け取るものをまとめたリスト作成）
-			 * 送信者の番号、送信者の名前、メッセージ内容、デリートフラグのリストを作成
+			 * 送信者の番号、送信者の名前、会話情報番号、会話内容、デリートフラグのリストを作成
 			 * */
 			sb.append(" SELECT ");
 			sb.append(" MU.USER_NO, ");
@@ -91,9 +91,9 @@ public class MessageCheckSendModel {
 
 			while (rs.next()) {
 				// Listの初期化
-				// bean に送るようのリスト
+				// bean に送る用のリスト
 				ArrayList<String> setList = new ArrayList<String>();
-				// Listに追加
+				// Listに追加（発言者名<0>、会話内容<1>、発言者の会員番号<2>、会話情報番号<3>）
 				setList.add(rs.getString("USER_NAME"));
 				setList.add(rs.getString("MESSAGE"));
 				setList.add(rs.getString("USER_NO"));
@@ -177,7 +177,7 @@ public class MessageCheckSendModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			int rs = stmt.executeUpdate(sb.toString());
+			stmt.executeUpdate(sb.toString());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,60 +190,5 @@ public class MessageCheckSendModel {
 			}
 		}
 		return bean;
-	}
-
-	/**
-	 * deleteMessage（メッセージの削除処理）
-	 * */
-	public MessageCheckBean deleteMessage(MessageCheckBean bean, LoginBean loginBean) {
-		// 初期化
-		StringBuilder sb = new StringBuilder();
-		Connection conn = null;
-		String url = "jdbc:oracle:thin:@192.168.51.67";
-		String user = "DEV_TEAM_C";
-		String dbPassword = "C_DEV_TEAM";
-		int deleteMessageNo = bean.getDeleteMessageNo();
-		// JDBCドライバーのロード
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-		} catch (ClassNotFoundException e) {
-			// 入れなかった場合
-			e.printStackTrace();
-		}
-		// 接続作成
-		try {
-			conn = DriverManager.getConnection(url, user, dbPassword);
-			// SQL作成
-			sb.append(" UPDATE ");
-			sb.append(" T_MESSAGE_INFO ");
-			sb.append(" SET ");
-			sb.append(" DELETE_FLAG = 1 ");
-			sb.append(" WHERE ");
-			sb.append(" MESSAGE_NO = " + deleteMessageNo);
-
-			// SQL実行
-			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sb.toString());
-
-			if (!rs.next()) {
-				loginBean.setErrorMessage("メッセージを削除できませんでした。");
-			} else {
-				loginBean.setUserNo(rs.getString("user_no"));
-				loginBean.setUserName(rs.getString("user_name"));
-				loginBean.setErrorMessage("");
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			// sqlの接続は絶対に切断
-		} finally {
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		}
-
-		return bean;
-
 	}
 }

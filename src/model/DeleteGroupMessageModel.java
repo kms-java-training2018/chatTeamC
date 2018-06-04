@@ -18,7 +18,7 @@ public class DeleteGroupMessageModel {
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
-		int deleteMessageNo = GMBean.getDeleteMessageNo();
+		String deleteMessageNo = GMBean.getDeleteMessageNo();
 
 		// JDBCドライバーのロード
 		try {
