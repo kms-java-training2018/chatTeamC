@@ -21,6 +21,7 @@ public class GroupMessageServlet extends HttpServlet {
 	 * 初期表示
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+
 		//		// Beanの初期化
 		GroupMessageBean bean = new GroupMessageBean();
 		GroupMessageModel model = new GroupMessageModel();
@@ -43,7 +44,7 @@ public class GroupMessageServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		String direction = "/WEB-INF/jsp/GroupMessage.jsp";
+		String direction = "/WEB-INF/jsp/groupMessage.jsp";
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }
