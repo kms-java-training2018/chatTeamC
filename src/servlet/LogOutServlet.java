@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 public class LogOutServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
 		// セッション情報取得
 		HttpSession session = req.getSession();
 
