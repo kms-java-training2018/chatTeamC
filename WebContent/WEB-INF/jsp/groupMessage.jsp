@@ -9,26 +9,21 @@
 </head>
 <body>
 	<h1>チャット研修プログラム</h1>
-	<h2>グループメッセージ</h2>
-	<a href="/chat/showProfile">あいて</a>：グループメッセージのサンプルだよー（´・ω・｀）
-	<br> あなた：がっくし（´・ω・｀）
-	<p>${GroupBean.getGroupName()}</p>
-	<br>
-	<br>
+	<h2>${GroupBean.getGroupName()}</h2>
 
-	<c:forEach var="list" items="${messageCheckBean.GroupMessageBean()}"
+	<c:forEach var="list" items="${GroupBean.getNumber()}"
 		varStatus="status"><!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
 					<form action="/chat/groupMessage" method="POST">
-					<c:if test="${GroupBean.getNumber().get(0) == myLoginNo}" >
-					${GroupBean.getName().get(0)}：${GroupBean.getText().get(0)}
+					<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}" >
+					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
 					<input type="submit" value="削除">
 					</c:if>
-					<c:if test="${GroupBean.getNumber().get(0) != myLoginNo}">
-					<a href="/chat/showProfile?toUserNo=${GroupBean.getNumber().get(0)}" target=”_blank” >
-					${GroupBean.getName().get(0)}</a>
-					：${GroupBean.getText().get(0)}
+					<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
+					<a href="/chat/showProfile?toUserNo=${GroupBean.getNumber().get(status.index)}" target=”_blank” >
+					${GroupBean.getName().get(status.index)}</a>
+					：${GroupBean.getText().get(status.index)}
 					</c:if>
 				</form>
 	</c:forEach>
