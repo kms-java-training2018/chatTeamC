@@ -55,7 +55,7 @@
   <servlet-mapping>
     <servlet-name>ShowProfileServlet</servlet-name>
     <url-pattern>/showProfile</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
   <servlet>
     <servlet-name>LogOutServlet</servlet-name>
     <servlet-class>servlet.LogOutServlet</servlet-class>
@@ -63,5 +63,21 @@
   <servlet-mapping>
     <servlet-name>LogOutServlet</servlet-name>
     <url-pattern>/logOut</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteDirectMessageServlet</servlet-name>
+    <servlet-class>servlet.DeleteDirectMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteDirectMessageServlet</servlet-name>
+    <url-pattern>/deleteDirectMessage</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DeleteGroupMessageServlet</servlet-name>
+    <servlet-class>servlet.DeleteGroupMessageServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteGroupMessageServlet</servlet-name>
+    <url-pattern>/deleteGroupMessage</url-pattern>
   </servlet-mapping>
 </web-app>
