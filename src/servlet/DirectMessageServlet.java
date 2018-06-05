@@ -93,9 +93,7 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-			directMessageServlet.doGet(req, res);
-//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
 }

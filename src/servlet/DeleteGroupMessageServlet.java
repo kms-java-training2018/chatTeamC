@@ -28,15 +28,20 @@ public class DeleteGroupMessageServlet extends HttpServlet{
 
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+		//消したいメッセージの会話情報番号を取得
+		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
+		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
+		System.out.println(bean.getDeleteMessageNo());  //DeleteNoが受け取れているかの確認
 		// 会話情報の取得
 		try {
 			model.authentication(loginBean, bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		req.setAttribute("GroupBean", bean);
-		req.setAttribute("myLoginNo", loginBean.getUserNo());
-		req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
+
+		//req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
+		directMessageServlet.doGet(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
