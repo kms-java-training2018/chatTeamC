@@ -28,7 +28,8 @@ page import="java.util.ArrayList"%>
 			<c:if test="${list.get(2) == myLoginNo}">
 					${list.get(0)}：${list.get(1)}
 				<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
-				<input type="button" value="削除" onClick="deleteMessage('${list.get(3)}')" />
+				<!-- ここの２は相手の番号  -->
+				<input type="button" value="削除" onClick="deleteMessage('${list.get(3)}','${messageCheckBean.getToUserNo()}')" />
 			</c:if>
 			<c:if test="${list.get(2) != myLoginNo}">
 				<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank”>${list.get(0)}</a>
