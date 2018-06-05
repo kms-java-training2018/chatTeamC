@@ -48,10 +48,15 @@ public class GroupMessageModel {
 
 			// 初期化
 			sb = new StringBuilder();
-			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO, TM.MESSAGE_NO, OUT_FLAG ");
-			sb.append(" FROM  M_USER MU, T_MESSAGE_INFO TM, T_GROUP_INFO ");
-			sb.append(" WHERE TM.TO_SEND_GROUP_NO = " + GroupNo);
-			sb.append(" AND TM.SEND_USER_NO = MU.USER_NO  ");
+			sb.append(" select mu.USER_NAME,mu.USER_NO,migi.message_no,migi.message,migi.out_flag  ");
+			sb.append(" from (select mi.message_no,mi.message,mi.send_user_no,gi.out_flag  ");
+			sb.append(" from t_message_info mi inner join t_group_info gi  ");
+			sb.append(" on mi.TO_SEND_GROUP_NO = gi.group_no  ");
+			sb.append(" and mi.SEND_USER_NO = gi.USER_NO  ");
+			sb.append(" where mi.TO_SEND_GROUP_NO = " + GroupNo + " ) migi ");
+			sb.append(" inner join m_user mu   ");
+			sb.append(" on migi.send_user_no = mu.USER_NO  ");
+			sb.append(" order by migi.message_no ");
 
 			// SQL実行
 			stmt = conn.createStatement();
@@ -59,10 +64,15 @@ public class GroupMessageModel {
 
 			while (rs.next()) {
 				// Beanに追加
-				bean.setName(rs.getString("USER_NAME"));
-				bean.setText(rs.getString("MESSAGE"));
-				bean.setNumber(rs.getString("USER_NO"));
-				bean.setMessageNo(rs.getString("MESSAGE_NO"));
+				if (rs.getString("OUT_FLAG").equals(1)) {
+					bean.setName("送信者不明");
+				} else {
+					bean.setName(rs.getString("USER_NAME"));
+					bean.setText(rs.getString("MESSAGE"));
+					bean.setNumber(rs.getString("USER_NO"));
+					bean.setDeleteMessageNo(rs.getString("MESSAGE_NO"));
+				}
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

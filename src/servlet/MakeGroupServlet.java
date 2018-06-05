@@ -62,17 +62,28 @@ public class MakeGroupServlet extends HttpServlet {
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
 
+				//入力チェックメッセージの設定
+				String message;
 				//入力チェックの返答
 				int bytecheck = 0;
 				bytecheck = groupBean.stringLengthCheck(name);
 				if (bytecheck == 1) {
-					String message = "文字数オーバーです";
+					message = "文字数オーバーです";
 
 					req.setAttribute("error", message);
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 
 					req.getRequestDispatcher(direction).forward(req, res);
-				} else {
+				}else if (bytecheck == 2) {
+					message = "グループ名を入力してください";
+
+					req.setAttribute("error", message);
+					direction = "/WEB-INF/jsp/makeGroup.jsp";
+
+					req.getRequestDispatcher(direction).forward(req, res);
+
+				}
+				else {
 
 					//testチェック用
 //					System.out.println("受け取ったグループ名" + name);
@@ -97,7 +108,7 @@ public class MakeGroupServlet extends HttpServlet {
 //					}
 
 					//抜き取った配列をGroupBeanへ送ってグループ作成
-					String message = groupCreat.ResistGroup(SelectNo);
+					message = groupCreat.ResistGroup(SelectNo);
 
 					System.out.println(message);
 

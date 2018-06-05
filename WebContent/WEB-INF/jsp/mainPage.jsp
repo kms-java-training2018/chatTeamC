@@ -25,7 +25,7 @@
 				<p>Main menu</p>
 			</th>
 			<th>
-				<p>ようこそ ${session.userName}さん</p> <input type="button" value="ログアウト"
+				<p>ようこそ ${session.userName}さん</p> <input type="button" value="Logout"
 				onClick="logout()" />
 
 			</th>
@@ -34,12 +34,12 @@
 		<tr align="center">
 			<td colspan="2">
 				<form action="/chat/makeGroup" method="POST">
-					<input type="submit" value="グループの作成">
+					<input type="submit" value="Group creation">
 				</form>
 			</td>
 			<td colspan="2">
 				<form action="/chat/myPage" method="POST">
-					<input type="submit" value="プロフィール画面へ">
+					<input type="submit" value="Profile">
 				</form>
 			</td>
 		</tr>

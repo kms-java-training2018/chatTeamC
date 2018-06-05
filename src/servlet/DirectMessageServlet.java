@@ -27,12 +27,12 @@ public class DirectMessageServlet extends HttpServlet {
 		 * */
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		String myLogin = loginBean.getUserNo();
-		//相手の会員番号を取得　※メインページにて、相手会員番号を送る"toUserNo"タグをつける必要有り
+		//相手の会員番号を取得
 		bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 		Integer toUserNo = (bean.getToUserNo());
 		// 会話情報の取得
@@ -41,10 +41,10 @@ public class DirectMessageServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(bean.getToUserName());  //名前取得用デバッグ
 		// もしも相手の番号が無い場合はエラーを表示
 		if (toUserNo == 0) {
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			req.setAttribute("messageCheckBean", bean);
 			req.setAttribute("myLoginNo", myLogin);
@@ -64,7 +64,7 @@ public class DirectMessageServlet extends HttpServlet {
 		 * */
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 		// 現在のセッションに入っているmessageCheckBean情報を受け取る
 		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");

@@ -102,6 +102,21 @@ public class MessageCheckSendModel {
 				bean.setTalkContent(setList);
 			}
 
+			//名前取得用
+			sb = new StringBuilder();
+			sb.append(" SELECT ");
+			sb.append(" MU.USER_NAME ");
+			sb.append(" FROM ");
+			sb.append(" M_USER MU ");
+			sb.append(" WHERE ");
+			sb.append(" MU.USER_NO = 1");
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sb.toString());
+			while (rs.next()) {
+			bean.setToUserName(rs.getString("MU.USER_NAME"));
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
@@ -191,7 +206,7 @@ public class MessageCheckSendModel {
 		}
 		return bean;
 	}
-	
+
 	/**
 	 * sendMessage（メッセージの送信処理）
 	 * */
