@@ -9,7 +9,7 @@
 <script type="chat/JavaScript" src="JavaScript/logout.js"
 	charset="UTF-8">
 </script>
-<link href="css/base.css" rel="stylesheet" type="texr/css">
+<link href="css/base.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Insert title here</title>

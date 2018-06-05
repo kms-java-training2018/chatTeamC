@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.DeleteMessageBean;
 import bean.LoginBean;
+import bean.MessageCheckBean;
 import model.DeleteMessageModel;
 
 /**
@@ -31,6 +32,8 @@ public class DeleteDirectMessageServlet extends HttpServlet{
 		DeleteMessageModel model = new DeleteMessageModel();
 		//現在のセッションに入っているloginBean情報を受け取る
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+		MessageCheckBean messageCheckBean = (MessageCheckBean) session.getAttribute("messageCheckBean");
+		messageCheckBean.getToUserNo();
 		//消したいメッセージの会話情報番号を取得
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
 		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
@@ -40,7 +43,9 @@ public class DeleteDirectMessageServlet extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+		//req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
+		directMessageServlet.doGet(req, res);
 	}
 
 	/**

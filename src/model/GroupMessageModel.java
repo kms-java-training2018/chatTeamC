@@ -48,10 +48,10 @@ public class GroupMessageModel {
 
 			// 初期化
 			sb = new StringBuilder();
-			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO, TM.MESSAGE_NO ");
-			sb.append(" FROM  M_USER MU, T_MESSAGE_INFO TM ");
+			sb.append(" SELECT MU.USER_NAME, TM.MESSAGE, MU.USER_NO, TM.MESSAGE_NO, OUT_FLAG ");
+			sb.append(" FROM  M_USER MU, T_MESSAGE_INFO TM, T_GROUP_INFO ");
 			sb.append(" WHERE TM.TO_SEND_GROUP_NO = " + GroupNo);
-			sb.append(" AND TM.SEND_USER_NO = MU.USER_NO ");
+			sb.append(" AND TM.SEND_USER_NO = MU.USER_NO  ");
 
 			// SQL実行
 			stmt = conn.createStatement();
