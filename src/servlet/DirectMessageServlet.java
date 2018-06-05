@@ -49,9 +49,7 @@ public class DirectMessageServlet extends HttpServlet {
 			req.setAttribute("messageCheckBean", bean);
 			req.setAttribute("myLoginNo", myLogin);
 			session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
-			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-			directMessageServlet.doGet(req, res);
-//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 		//		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 	}
@@ -95,7 +93,9 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
+			directMessageServlet.doGet(req, res);
+//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
 }
