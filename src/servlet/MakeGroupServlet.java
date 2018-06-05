@@ -74,13 +74,13 @@ public class MakeGroupServlet extends HttpServlet {
 					req.getRequestDispatcher(direction).forward(req, res);
 				} else {
 
-					//チェック用
-					System.out.println("受け取ったグループ名" + name);
+					//testチェック用
+//					System.out.println("受け取ったグループ名" + name);
 
 					//モデルにセット
 					groupCreat.setGroupName(name);
 
-					//グループへ登録
+					//testグループへ登録
 					String sucsess = groupCreat.CreatGroup();
 
 					System.out.println(sucsess);
@@ -91,10 +91,10 @@ public class MakeGroupServlet extends HttpServlet {
 
 					SelectNo = req.getParameterValues("userNo");
 
-					//選択されたユーザーNoの表示
-					for (String n1 : SelectNo) {
-						System.out.print("送られてきたユーザーName：" + n1 + ",");
-					}
+					//test選択されたユーザーNoの表示
+//					for (String n1 : SelectNo) {
+//						System.out.print("送られてきたユーザーName：" + n1 + ",");
+//					}
 
 					//抜き取った配列をGroupBeanへ送ってグループ作成
 					String message = groupCreat.ResistGroup(SelectNo);
@@ -123,7 +123,7 @@ public class MakeGroupServlet extends HttpServlet {
 				//それを空のビーンにつめる
 				groupBean = groupCreat.authentication(autherName);
 
-				//test表示
+//				test表示
 				ArrayList<String> test = groupBean.getUserName();
 				for (String name : test) {
 					System.out.println(name);

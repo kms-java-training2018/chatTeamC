@@ -94,9 +94,8 @@ public class GroupCreat {
 		//受け取った作成者userNameをBeanに渡して処理
 		this.autherName = name;
 
-
-		//チェック用
-		System.out.println("グループ作成者" + autherName);
+		//		//チェック用
+		//		System.out.println("グループ作成者" + autherName);
 		gb.setAuther(autherName);
 
 		//test表示
@@ -122,8 +121,9 @@ public class GroupCreat {
 		//gbからautherNoを
 		String autherNo = gb.getAutherNo();
 
-		System.out.println("登録者のNo" + autherNo);
-		System.out.println("グループネーム" + groupName);
+		//		//test
+		//		System.out.println("登録者のNo" + autherNo);
+		//		System.out.println("グループネーム" + groupName);
 
 		//DB接続
 		Connection conn = null;
@@ -168,6 +168,7 @@ public class GroupCreat {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+			//test
 			CreatCheck = "Creat no";
 
 			// sqlの接続は絶対に切断
@@ -294,22 +295,23 @@ public class GroupCreat {
 				Statement stmt2 = conn.createStatement();
 				int memberResistRs = stmt2.executeUpdate(sb2.toString());
 
-				if (memberResistRs == 1) {
-					message = i + "回目Resist OK";
-					System.out.println(message);
+//				if (memberResistRs == 1) {
+//					message = i + "回目Resist OK";
+////					System.out.println(message);
+//
+//				} else {
+//
+//				}
+//
 
-				} else {
+						while (rs.next()) {
 
-				}
+							/* 行からデータを取得 */
+							gb.setUserNo(rs.getString("user_no"));
+							gb.setUserName(rs.getString("user_name"));
+							gb.setErrorMessage("");
+						}
 			}
-
-			//			while (rs.next()) {
-			//
-			//				/* 行からデータを取得 */
-			//				gb.setUserNo(rs.getString("user_no"));
-			//				gb.setUserName(rs.getString("user_name"));
-			//				gb.setErrorMessage("");
-
 
 		} catch (SQLException e) {
 			e.printStackTrace();
