@@ -32,6 +32,7 @@ public class DirectMessageServlet extends HttpServlet {
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		String myLogin = loginBean.getUserNo();
+		String error = "";
 		//相手の会員番号を取得
 		bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 		Integer toUserNo = (bean.getToUserNo());
@@ -48,6 +49,7 @@ public class DirectMessageServlet extends HttpServlet {
 		} else {
 			req.setAttribute("messageCheckBean", bean);
 			req.setAttribute("myLoginNo", myLogin);
+			req.setAttribute("error", error);
 			session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
 			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
@@ -66,6 +68,7 @@ public class DirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
+		String error = "";
 		// 現在のセッションに入っているmessageCheckBean情報を受け取る
 		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");
 		MessageCheckSendModel model = new MessageCheckSendModel();
@@ -80,8 +83,9 @@ public class DirectMessageServlet extends HttpServlet {
 		int bytecheck = 0;
 		bytecheck = bean.stringLengthCheck(sendMessage);
 		if (bytecheck == 1) {
-			loginBean.setErrorMessage("文字数オーバーです");
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			error ="文字数オーバーです";
+			req.setAttribute("error", error);
+			doGet(req, res);
 		} else {
 			// 会話情報の取得
 			try {

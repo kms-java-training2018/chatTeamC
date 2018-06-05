@@ -9,20 +9,23 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
+
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>個人チャットページ</title>
 </head>
 <body>
 
-    <input type="button"value="ログアウト" onClick="logout()" />
+	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
 	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
-		varStatus="status"><!-- 名前にその人のプロフィールに飛ぶリンクを付ける
+		varStatus="status">
+		<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
 		<form action="/chat/deleteDirectMessage" method="GET">
@@ -41,10 +44,14 @@ page import="java.util.ArrayList"%>
 	<form action="/chat/directMessage" method="POST">
 
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
+		<p>
+			<font size="5" color="red">${error}</font>
+		</p>
 		<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
-		<input type="hidden" name="toUserNo" value="${messageCheckBean.getToUserNo()}">
-		<input type="text" name="sendMessage" value="">
-		<input type="submit" value="メッセージの送信">
+		<input type="hidden" name="toUserNo"
+			value="${messageCheckBean.getToUserNo()}"> <input type="text"
+			name="sendMessage" value=""> <input type="submit"
+			value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューへ戻る">
