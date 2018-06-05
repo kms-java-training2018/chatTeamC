@@ -5,10 +5,6 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script type="text/javascript" src="JavaScript/logout.js"
-	charset="UTF-8">
-
-</script>
 
 <title>My Page</title>
 
@@ -19,7 +15,7 @@
 	<input type="button" value="Logout" onClick="logout()" style="width: 79px; height: 27px"><br><br><br>
 	<div align="center">
 		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1">
+			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1" style="width: 493px; height: 96px">
 			<th><br>
 				<p>My Page</p> <br></th>
 		</table>

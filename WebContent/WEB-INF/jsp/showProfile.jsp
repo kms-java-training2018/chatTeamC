@@ -20,11 +20,11 @@
 	<br>
 	<form action="/chat/showProfile" method="POST">
 		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" bgcolor="#dceaf8">
+			cellspacing="0" cellpadding="3" bgcolor="#dceaf8" style="width: 494px; height: 102px">
 
 			<!-- 1段目 -->
 			<tr>
-				<th>
+				<th style="width: 384px; ">
 					<p>Profile</p>
 				</th>
 			</tr>
@@ -33,7 +33,7 @@
 
 		<!-- 2段目 -->
 		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3">
+			cellspacing="0" cellpadding="3" style="width: 498px; height: 172px">
 			<tr>
 				<td  bgcolor="#f7fafd"><br>
 					<p>${Name}</p> <br></td>
