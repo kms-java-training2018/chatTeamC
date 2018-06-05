@@ -32,7 +32,7 @@ public class DirectMessageServlet extends HttpServlet {
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		String myLogin = loginBean.getUserNo();
-		//相手の会員番号を取得　※メインページにて、相手会員番号を送る"toUserNo"タグをつける必要有り
+		//相手の会員番号を取得
 		bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 		Integer toUserNo = (bean.getToUserNo());
 		// 会話情報の取得
@@ -41,7 +41,7 @@ public class DirectMessageServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		System.out.println(bean.getToUserName());
 		// もしも相手の番号が無い場合はエラーを表示
 		if (toUserNo == 0) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);

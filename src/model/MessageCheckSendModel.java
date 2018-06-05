@@ -191,4 +191,81 @@ public class MessageCheckSendModel {
 		}
 		return bean;
 	}
+	
+	/**
+	 * sendMessage（メッセージの送信処理）
+	 * */
+	public MessageCheckBean sendGroupMessage(MessageCheckBean bean, LoginBean loginBean) {
+		// 初期化
+		StringBuilder sb = new StringBuilder();
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
+		Integer userNo = Integer.parseInt(loginBean.getUserNo());
+		Integer toUserNo = bean.getToUserNo();
+		String sendMessage = bean.getSendMessage();
+		// JDBCドライバーのロード
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// 入れなかった場合
+			e.printStackTrace();
+		}
+		// 接続作成
+		try {
+			conn = DriverManager.getConnection(url, user, dbPassword);
+
+			// SQL作成
+			/**
+			 *会話情報テーブルから
+			 *自会員と送信先会員番号間の
+			 *やりとりの内容を取り出す。
+			 * */
+
+			/*
+			 * SQL文内容（データベースに登録する内容）
+			 * 会話情報番号、送信者の会員番号、メッセージ内容、
+			 * 送信先の会員番号、デリートフラグ、記入日
+			 * */
+			sb.append(" INSERT INTO T_MESSAGE_INFO( ");
+			sb.append(" MESSAGE_NO, ");
+			sb.append(" SEND_USER_NO, ");
+			sb.append(" MESSAGE, ");
+			sb.append(" TO_SEND_GROUP_NO, ");
+			sb.append(" DELETE_FLAG, ");
+			sb.append(" REGIST_DATE ) ");
+			/*
+			 * SQL文内容（データベースに登録する値）
+			 * 会話情報番号（自動採番）
+			 * 、送信者の会員番号（userNo変数内）
+			 * 、メッセージ内容（sendMessage変数内）
+			 * 、送信先の会員番号（toUserNo変数内）
+			 * 、デリートフラグ（初期値0）
+			 * 、記入日（sysdateにて自動入力）
+			 * */
+			sb.append(" VALUES ( ");
+			sb.append(" MESSAGE_SEQ.NEXTVAL ");
+			sb.append(" ," + userNo);
+			sb.append(" ,'" + sendMessage + "' ");
+			sb.append(" ," + toUserNo);
+			sb.append(" ,0 ");
+			sb.append(" , sysdate)  ");
+
+			// SQL実行
+			Statement stmt = conn.createStatement();
+			stmt.executeUpdate(sb.toString());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			// sqlの接続は絶対に切断
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return bean;
+	}
 }
