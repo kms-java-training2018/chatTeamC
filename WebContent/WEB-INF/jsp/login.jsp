@@ -11,7 +11,6 @@
 </script>
 
 <link rel="stylesheet" href="css/login.css" type="text/css" media="all">
-<link rel="stylesheet" href="css/base.css">
 
 
 <title>Login Page</title>
@@ -22,9 +21,9 @@
 		<h1>Login Page</h1>
 
 		<form action="/chat/login" method="POST">
-			<p>会員ID</p>
+			<h2>Member ID</h2>
 			<input type="text" name="userId" value="${loginBean.userId}">
-			<p>パスワード</p>
+			<h2>Password</h2>
 			<input type="text" name="password" value="${loginBean.password}">
 			<br>
 			<p>${loginError.errorMessage}</p>
