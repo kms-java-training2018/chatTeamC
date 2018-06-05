@@ -37,7 +37,6 @@ public class DeleteDirectMessageServlet extends HttpServlet{
 		//消したいメッセージの会話情報番号を取得
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
 		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
-		System.out.println(bean.getDeleteMessageNo());  //DeleteNoが受け取れているかの確認
 		try {
 			model.authentication(loginBean, bean);
 		} catch (Exception e) {
