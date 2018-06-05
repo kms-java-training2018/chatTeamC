@@ -23,6 +23,7 @@ page import="java.util.ArrayList"%>
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
+	<h2>ようこそ ${session.userName}さん</h2>
 	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
 		varStatus="status">
 		<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
