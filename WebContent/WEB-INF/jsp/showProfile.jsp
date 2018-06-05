@@ -38,7 +38,7 @@
 				<td  bgcolor="#f7fafd"><br>
 					<p>${Name}</p> <br></td>
 
-				<td colspan="2" style="width: 156px; "><br>
+				<td colspan="2" style="width: 158px; "><br>
 					<p>${Profile}</p> <br></td>
 
 			</tr>
