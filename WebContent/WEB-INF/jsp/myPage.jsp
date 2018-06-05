@@ -11,7 +11,9 @@
 	<br>
 	<br>
 	<div align="center">
-		<table><tr>My Page</tr></table>
+	<table border="1" align="center" width="80%" height="60vh"
+			cellspacing="0" cellpadding="3">
+		<tr>My Page</tr></table>
 
 
 		<form action="/chat/main" method="POST">
