@@ -32,7 +32,7 @@ public class DirectMessageServlet extends HttpServlet {
 		//自会員番号を取得
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		String myLogin = loginBean.getUserNo();
-		//相手の会員番号を取得
+		//相手の会員番号を取得　※メインページにて、相手会員番号を送る"toUserNo"タグをつける必要有り
 		bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 		Integer toUserNo = (bean.getToUserNo());
 		// 会話情報の取得
@@ -43,7 +43,7 @@ public class DirectMessageServlet extends HttpServlet {
 		}
 
 		// もしも相手の番号が無い場合はエラーを表示
-		if (toUserNo == 0) {
+		if (toUserNo == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		} else {
 			req.setAttribute("messageCheckBean", bean);
@@ -55,7 +55,8 @@ public class DirectMessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * メッセージ送信処理
+	 * メッセージ送信、メッセージ削除の部分
+	 * MessageCheckBeanの取り込みに失敗中
 	 * */
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
@@ -92,10 +93,7 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			//送信後、doGetに移して即更新させる。
-			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-			directMessageServlet.doGet(req, res);
-//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
 }
