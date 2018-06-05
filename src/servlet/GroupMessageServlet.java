@@ -23,8 +23,9 @@ public class GroupMessageServlet extends HttpServlet {
 	 * 初期表示
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-
 		// 初期化
+		MessageCheckBean Mbean = new MessageCheckBean();
+		MessageCheckSendModel Mmodel = new MessageCheckSendModel();
 		GroupMessageBean bean = new GroupMessageBean();
 		GroupMessageModel model = new GroupMessageModel();
 		// セッション情報取得（ログインしているかどうか
@@ -37,10 +38,12 @@ public class GroupMessageServlet extends HttpServlet {
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		// 相手の会員番号の取得
 		bean.setGroupNo((req.getParameter("toGroupNo")));
+		Mbean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
 		//String toGroupNo = (bean.getGroupNo());
 		// 会話情報の取得
 		try {
 			bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
+			Mbean = Mmodel.authentication(Mbean, loginBean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -48,7 +51,7 @@ public class GroupMessageServlet extends HttpServlet {
 		// もしも相手の番号が無い場合はエラーを表示
 		req.setAttribute("GroupBean", bean);
 		req.setAttribute("myLoginNo", loginBean.getUserNo());
-		session.setAttribute("GroupBean", bean); //セッション内へ自分と相手の情報を保存
+		session.setAttribute("GroupBean", Mbean); //セッション内へ自分と相手の情報を保存
 		req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 	}
 
@@ -64,7 +67,7 @@ public class GroupMessageServlet extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
 		// 現在のセッションに入っているmessageCheckBean情報を受け取る
-		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");
+		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("GroupBean");
 		MessageCheckSendModel model = new MessageCheckSendModel();
 		//現在のセッションに入っているloginBean情報を受け取る
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
@@ -82,7 +85,7 @@ public class GroupMessageServlet extends HttpServlet {
 		} else {
 			// 会話情報の取得
 			try {
-				model.sendMessage(bean, loginBean);
+				model.sendGroupMessage(bean, loginBean);
 				//				bean = model.authentication(bean, loginBean);
 				//最新情報が表示されていないため、情報更新用処理。
 				//前回情報と合わせて表示されてしまっているためコメントアウト中
@@ -93,47 +96,4 @@ public class GroupMessageServlet extends HttpServlet {
 //			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
-
-
-// 以降入力チェック
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

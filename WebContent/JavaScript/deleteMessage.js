@@ -1,10 +1,10 @@
 
-function deleteMessage(href,userno){
+function deleteMessage(href,userno,url){
 
     // 「OK」時の処理開始 ＋ 確認ダイアログの表示
     if(window.confirm('本当に削除していいですか？')){
 
-        location.href = "/chat/deleteDirectMessage?deleteMessageNo=" + href + "&toUserNo=" + userno;
+        location.href = "/chat/" + url + "?deleteMessageNo=" + href + "&" + userno;
 
         return true;
     }
