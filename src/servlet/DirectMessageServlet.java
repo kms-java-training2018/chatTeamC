@@ -82,7 +82,7 @@ public class DirectMessageServlet extends HttpServlet {
 		bytecheck = bean.stringLengthCheck(sendMessage);
 		if (bytecheck == 1) {
 			loginBean.setErrorMessage("文字数オーバーです");
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 		} else {
 			// 会話情報の取得
 			try {
@@ -93,8 +93,7 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-			directMessageServlet.doGet(req, res);
+			doGet(req, res);
 //			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
