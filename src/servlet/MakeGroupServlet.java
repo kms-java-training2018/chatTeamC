@@ -26,7 +26,7 @@ public class MakeGroupServlet extends HttpServlet {
 		bean.setPassword("");
 
 		//mainページに戻るからのGETかどうか
-		if(req.getParameter("main") != null) {
+		if (req.getParameter("main") != null) {
 			direction = "/WEB-INF/jsp/mainPage.jsp";
 
 		}
@@ -62,57 +62,57 @@ public class MakeGroupServlet extends HttpServlet {
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
 				//入力チェックメッセージの設定
 				String message;
-				if(req.getParameter("groupName") == "") {
+				if (req.getParameter("groupName") == "") {
 					message = "グループ名を入力してください";
 
 					req.setAttribute("error", message);
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 
-				}else {
+				} else {
 
+					//入力チェックの返答
+					int bytecheck = 0;
+					bytecheck = groupBean.stringLengthCheck(name);
+					if (bytecheck == 1) {
+						message = "文字数オーバーです";
 
-				//入力チェックの返答
-				int bytecheck = 0;
-				bytecheck = groupBean.stringLengthCheck(name);
-				if (bytecheck == 1) {
-					message = "文字数オーバーです";
+						req.setAttribute("error", message);
+						direction = "/WEB-INF/jsp/makeGroup.jsp";
 
-					req.setAttribute("error", message);
-					direction = "/WEB-INF/jsp/makeGroup.jsp";
+					} else {
 
-				}
-				else {
+						//testチェック用
+						//					System.out.println("受け取ったグループ名" + name);
 
-					//testチェック用
-//					System.out.println("受け取ったグループ名" + name);
+						//モデルにセット
+						groupCreat.setGroupName(name);
 
-					//モデルにセット
-					groupCreat.setGroupName(name);
+						//testグループへ登録
+						String sucsess = groupCreat.CreatGroup();
 
-					//testグループへ登録
-					String sucsess = groupCreat.CreatGroup();
+						System.out.println(sucsess);
 
-					System.out.println(sucsess);
+						//選択されたユーザーをreqからもらう
 
-					//選択されたユーザーをreqからもらう
+						String SelectNo[];
 
-					String SelectNo[];
+						SelectNo = req.getParameterValues("userNo");
 
-					SelectNo = req.getParameterValues("userNo");
-		
-//					test選択されたユーザーNoの表示
-//					for (String n1 : SelectNo) {
-//						System.out.print("送られてきたユーザーName：" + n1 + ",");
-//					}
+						//					test選択されたユーザーNoの表示
+						//					for (String n1 : SelectNo) {
+						//						System.out.print("送られてきたユーザーName：" + n1 + ",");
+						//					}
 
-					//抜き取った配列をGroupBeanへ送ってグループ作成
-					message = groupCreat.ResistGroup(SelectNo);
+						//抜き取った配列をGroupBeanへ送ってグループ作成
+						message = groupCreat.ResistGroup(SelectNo);
 
-					System.out.println(message);
+						System.out.println(message);
 
-					direction = "/WEB-INF/jsp/mainPage.jsp";
+//						direction = "/WEB-INF/jsp/mainPage.jsp";
+						MainPageServlet main = new MainPageServlet();
+						main.doPost(req, res);
 
-				}
+					}
 				}
 
 			} else {
@@ -133,28 +133,30 @@ public class MakeGroupServlet extends HttpServlet {
 				//それを空のビーンにつめる
 				groupBean = groupCreat.authentication(autherName);
 
-//				test表示
-//				ArrayList<String> test = groupBean.getUserName();
-//				for (String name : test) {
-//					System.out.println(name);
-//				}
-//
-//				ArrayList<String> test2 = groupBean.getUserNo();
-//				for (String name : test2) {
-//					System.out.println(name);
-//				}
+				//				test表示
+				//				ArrayList<String> test = groupBean.getUserName();
+				//				for (String name : test) {
+				//					System.out.println(name);
+				//				}
+				//
+				//				ArrayList<String> test2 = groupBean.getUserNo();
+				//				for (String name : test2) {
+				//					System.out.println(name);
+				//				}
 
 				//セッションにセットしてjspに送る
 				session.setAttribute("groupBean", groupBean);
 				session.setAttribute("userName", autherName);
 
-
 				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}
 
 		}
-
+		try {
 		req.getRequestDispatcher(direction).forward(req, res);
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
 
 	}
 
