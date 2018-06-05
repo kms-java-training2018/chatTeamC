@@ -28,7 +28,7 @@
 			<br>
 			<p>${loginError.errorMessage}</p>
 
-			<input type="submit" value="ログイン">
+			<input type="submit" value="Login">
 		</form>
 	</div>
 </body>
