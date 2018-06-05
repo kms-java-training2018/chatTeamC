@@ -8,19 +8,24 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>チャット研修プログラム</h1>
-	<h2>マイページ</h2>
-	<form action="/chat/main" method="POST">
-		<p>名前</p>
-		<input type="text" name = "myName" value="${name}">
-		<p>プロフィール</p>
-		<input type="text" name = "myProfile" value="${profile}">
-		<p></p>
-		<input type="submit" value="プロフィールを更新" name = "newProfile">
-	</form>
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="メインメニューに戻る">
-	</form>
+	<br>
+	<br>
+	<div align="center">
+		<table><tr>My Page</tr></table>
+
+
+		<form action="/chat/main" method="POST">
+			<p>Name</p>
+			<input type="text" name="myName" value="${name}">
+			<p>Profile</p>
+			<input type="text" name="myProfile" value="${profile}">
+			<p></p>
+			<br> <input type="submit" value="Update" name="newProfile">
+		</form>
+		<form action="/chat/main" method="POST">
+			<input type="submit" value="Back">
+		</form>
+	</div>
 
 </body>
 </html>
