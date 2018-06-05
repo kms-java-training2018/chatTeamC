@@ -34,7 +34,7 @@ public class GroupMessageModel {
 			// 初期化
 			StringBuilder sb = new StringBuilder();
 			//SQL作成
-			sb.append(" SELECT GROUP_NAME ");
+			sb.append(" SELECT GROUP_NAME , REGIST_USER_NO");
 			sb.append(" FROM  M_GROUP ");
 			sb.append(" WHERE GROUP_NO = " + GroupNo);
 
@@ -44,6 +44,7 @@ public class GroupMessageModel {
 			while (rs.next()) {
 				// Beanに追加
 				bean.setGroupName(rs.getString("GROUP_NAME"));
+				bean.setRegistUserNo(rs.getString("REGIST_USER_NO"));
 			}
 
 			// 初期化

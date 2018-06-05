@@ -93,7 +93,7 @@ public class GroupMessageServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 			doGet(req, res);
-//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
 	}
 }
