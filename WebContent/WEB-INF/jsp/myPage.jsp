@@ -11,21 +11,24 @@
 	<br>
 	<br>
 	<div align="center">
-	<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3">
-		<tr>My Page</tr></table>
+		<table border="1" align="center" width="80%" height="60vh"
+			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1">
+			<th><br>
+				<p>My Page</p> <br></th>
+		</table>
 
+		<br> <br>
 
 		<form action="/chat/main" method="POST">
 			<p>Name</p>
-			<input type="text" name="myName" value="${name}">
-			<p>Profile</p>
-			<input type="text" name="myProfile" value="${profile}">
+			<input type="text" name="myName" value="${name}" style="height: 37px; width: 210px">
+			<p><br>Profile</p>
+			<input type="text" name="myProfile" value="${profile}" style="width: 210px; height: 37px">
 			<p></p>
-			<br> <input type="submit" value="Update" name="newProfile">
+			<br> <input type="submit" value="Update" name="newProfile"><input type="submit" value="Back">
 		</form>
 		<form action="/chat/main" method="POST">
-			<input type="submit" value="Back">
+
 		</form>
 	</div>
 
