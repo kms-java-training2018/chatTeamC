@@ -29,6 +29,7 @@ public class MessageCheckBean {
 
 		// 何バイト分の長さであるかを取得
 		int length = input.getBytes().length;
+		System.out.println(length);
 		// 最大バイト数の設定
 		int max = 200;
 

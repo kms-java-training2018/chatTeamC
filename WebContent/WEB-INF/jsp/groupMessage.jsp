@@ -26,6 +26,7 @@ page import="java.util.ArrayList"%>
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>チャット研修プログラム</h1>
 	<h2>${GroupBean.getGroupName()}</h2>
+	<h2>ようこそ ${session.userName}さん</h2>
 
 	<c:forEach var="list" items="${GroupBean.getNumber()}"
 		varStatus="status">
@@ -45,6 +46,7 @@ page import="java.util.ArrayList"%>
 					</c:if>
 		</form>
 	</c:forEach>
+	<p>${error}</p>
 	<form action="/chat/groupMessage" method="POST">
 		<input type="hidden" name="deleteMessageNo" value="${GroupBean.getMessageNo()}">
 		<input type="hidden" name="toGroupNo" value="${GroupBean.getGroupNo()}">

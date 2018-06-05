@@ -21,6 +21,7 @@ page import="java.util.ArrayList"%>
     <input type="button"value="ログアウト" onClick="logout()" />
 	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
+	<h2>ようこそ ${session.userName}さん</h2>
 	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
 		varStatus="status"><!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
@@ -41,6 +42,7 @@ page import="java.util.ArrayList"%>
 	<form action="/chat/directMessage" method="POST">
 
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
+		<p>${error}</p>
 		<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
 		<input type="hidden" name="toUserNo" value="${messageCheckBean.getToUserNo()}">
 		<input type="text" name="sendMessage" value="">

@@ -80,8 +80,8 @@ public class GroupMessageServlet extends HttpServlet {
 		int bytecheck = 0;
 		bytecheck = bean.stringLengthCheck(sendMessage);
 		if (bytecheck == 1) {
-			loginBean.setErrorMessage("文字数オーバーです");
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			req.setAttribute("error","文字数オーバーです");
+			doGet(req, res);
 		} else {
 			// 会話情報の取得
 			try {
