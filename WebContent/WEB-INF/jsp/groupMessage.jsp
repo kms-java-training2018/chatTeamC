@@ -9,15 +9,15 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
-	
+
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-	
+
 </script>
 <script type="text/javascript" src="JavaScript/deleteUserMenber.js"
 	charset="UTF-8">
-	
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -48,7 +48,7 @@ page import="java.util.ArrayList"%>
 				<c:if test="${GroupBean.getName().get(status.index) == '送信者不明'}">
 					${GroupBean.getName().get(status.index)}
 				</c:if>
-			
+
 					：${GroupBean.getText().get(status.index)}
 			</c:if>
 		</form>

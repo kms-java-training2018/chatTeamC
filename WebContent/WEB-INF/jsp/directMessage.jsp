@@ -15,11 +15,14 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/logout.js"
+	charset="UTF-8">
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>個人チャットページ</title>
 </head>
 <body>
-
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
@@ -41,7 +44,6 @@ page import="java.util.ArrayList"%>
 					</c:if>
 		</form>
 	</c:forEach>
-
 	<form action="/chat/directMessage" method="POST">
 
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
