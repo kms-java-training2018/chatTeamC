@@ -6,13 +6,13 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-	
+
 </script>
 
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Main menu</title>
 </head>
 <body>
 	<table border="1" align="center" width="80%" height="60vh"
@@ -22,7 +22,7 @@
 		<!-- 1段目 -->
 		<tr>
 			<th colspan="3">
-				<p>メインメニュー</p>
+				<p>Main menu</p>
 			</th>
 			<th>
 				<p>ようこそ ${session.userName}さん</p> <input type="button" value="ログアウト"
@@ -43,13 +43,19 @@
 				</form>
 			</td>
 		</tr>
+	</table>
+	<br>
+	<br>
+
+	<table border="1" align="center" width="80%" height="60vh"
+		cellspacing="0" cellpadding="3">
 		<!-- 3段目 -->
 		<tr align="center">
-			<th colspan="4" id="Direct">個人チャット</th>
+			<th colspan="4" id="Direct">Personal chat</th>
 		</tr>
 		<tr align="center">
-			<td class="name">名前</td>
-			<td colspan="3" class="message">最新メッセージ</td>
+			<td class="name">Name</td>
+			<td colspan="3" class="message">Massage</td>
 		</tr>
 		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
 			varStatus="status">
@@ -59,13 +65,19 @@
 				<td colspan="3">${list.get(1)}</td>
 			</tr>
 		</c:forEach>
+	</table>
+	<br>
+	<br>
+
+	<table border="1" align="center" width="80%" height="60vh"
+		cellspacing="0" cellpadding="3">
 		<!-- 4段目 -->
 		<tr align="center">
-			<th colspan="4" id="Group">グループチャット</th>
+			<th colspan="4" id="Group">Group chat</th>
 		</tr>
 		<tr align="center">
-			<td class="name">名前</td>
-			<td colspan="3" class="message">最新メッセージ</td>
+			<td class="name">Name</td>
+			<td colspan="3" class="message">Massage</td>
 		</tr>
 		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
 			varStatus="status">
@@ -75,17 +87,7 @@
 				<td colspan="3">${list.get(2)}</td>
 			</tr>
 		</c:forEach>
-		<!-- 5段目  練習用-->
-		<tr>
-			<c:forEach var="list" items="${MainPageBean.getGrowp()}"
-				varStatus="status">
-				<tr align="center">
-					<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}"
-						class="Link">${list.get(1)}</a></td>
-					<td colspan="3">${list.get(2)}</td>
-				</tr>
-			</c:forEach>
-		</tr>
+
 	</table>
 </body>
 </html>

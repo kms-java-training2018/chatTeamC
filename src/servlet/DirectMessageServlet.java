@@ -43,7 +43,7 @@ public class DirectMessageServlet extends HttpServlet {
 		}
 
 		// もしも相手の番号が無い場合はエラーを表示
-		if (toUserNo == null) {
+		if (toUserNo == 0) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		} else {
 			req.setAttribute("messageCheckBean", bean);
@@ -55,8 +55,7 @@ public class DirectMessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * メッセージ送信、メッセージ削除の部分
-	 * MessageCheckBeanの取り込みに失敗中
+	 * メッセージ送信
 	 * */
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
@@ -87,13 +86,11 @@ public class DirectMessageServlet extends HttpServlet {
 			// 会話情報の取得
 			try {
 				model.sendMessage(bean, loginBean);
-				//				bean = model.authentication(bean, loginBean);
-				//最新情報が表示されていないため、情報更新用処理。
-				//前回情報と合わせて表示されてしまっているためコメントアウト中
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			//メッセージ送信処理終了後、doGetに移し、更新させる。
+			doGet(req, res);
 		}
 	}
 }
