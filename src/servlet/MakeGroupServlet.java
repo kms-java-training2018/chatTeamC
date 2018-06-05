@@ -1,7 +1,6 @@
 package servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -52,7 +51,7 @@ public class MakeGroupServlet extends HttpServlet {
 		if (session.getAttribute("session") != null) {
 
 			//グループ作成画面から来たかどうかの判断if
-			if (req.getParameter("userNo") != null) {
+			if (req.getParameter("groupName") != null) {
 
 				//groupCreateにsessionのbean引き継がせる
 				groupCreat.setGroupBean((GroupBean) session.getAttribute("groupBean"));
@@ -61,9 +60,17 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
-
 				//入力チェックメッセージの設定
 				String message;
+				if(req.getParameter("groupName") == "") {
+					message = "グループ名を入力してください";
+
+					req.setAttribute("error", message);
+					direction = "/WEB-INF/jsp/makeGroup.jsp";
+
+				}else {
+
+
 				//入力チェックの返答
 				int bytecheck = 0;
 				bytecheck = groupBean.stringLengthCheck(name);
@@ -72,15 +79,6 @@ public class MakeGroupServlet extends HttpServlet {
 
 					req.setAttribute("error", message);
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
-
-					req.getRequestDispatcher(direction).forward(req, res);
-				}else if (bytecheck == 2) {
-					message = "グループ名を入力してください";
-
-					req.setAttribute("error", message);
-					direction = "/WEB-INF/jsp/makeGroup.jsp";
-
-					req.getRequestDispatcher(direction).forward(req, res);
 
 				}
 				else {
@@ -101,8 +99,8 @@ public class MakeGroupServlet extends HttpServlet {
 					String SelectNo[];
 
 					SelectNo = req.getParameterValues("userNo");
-
-					//test選択されたユーザーNoの表示
+		
+//					test選択されたユーザーNoの表示
 //					for (String n1 : SelectNo) {
 //						System.out.print("送られてきたユーザーName：" + n1 + ",");
 //					}
@@ -114,6 +112,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 					direction = "/WEB-INF/jsp/mainPage.jsp";
 
+				}
 				}
 
 			} else {
@@ -135,15 +134,15 @@ public class MakeGroupServlet extends HttpServlet {
 				groupBean = groupCreat.authentication(autherName);
 
 //				test表示
-				ArrayList<String> test = groupBean.getUserName();
-				for (String name : test) {
-					System.out.println(name);
-				}
-
-				ArrayList<String> test2 = groupBean.getUserNo();
-				for (String name : test2) {
-					System.out.println(name);
-				}
+//				ArrayList<String> test = groupBean.getUserName();
+//				for (String name : test) {
+//					System.out.println(name);
+//				}
+//
+//				ArrayList<String> test2 = groupBean.getUserNo();
+//				for (String name : test2) {
+//					System.out.println(name);
+//				}
 
 				//セッションにセットしてjspに送る
 				session.setAttribute("groupBean", groupBean);
