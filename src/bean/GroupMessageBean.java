@@ -91,8 +91,8 @@ public class GroupMessageBean {
 		return messageNo;
 	}
 
-	public void setMessageNo(ArrayList<String> messageNo) {
-		this.messageNo = messageNo;
+	public void setMessageNo(String messageNo) {
+		this.messageNo.add(messageNo);
 	}
 
 	public String getGroupNo() {
