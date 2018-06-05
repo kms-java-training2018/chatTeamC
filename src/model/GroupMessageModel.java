@@ -62,7 +62,7 @@ public class GroupMessageModel {
 				bean.setName(rs.getString("USER_NAME"));
 				bean.setText(rs.getString("MESSAGE"));
 				bean.setNumber(rs.getString("USER_NO"));
-				bean.setDeleteMessageNo(rs.getString("MESSAGE_NO"));
+				bean.setMessageNo(rs.getString("MESSAGE_NO"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
