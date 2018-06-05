@@ -5,11 +5,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>My Page</title>
+
 </head>
 <body>
-	<br>
-	<br>
+
+ようこそ ${session.userName}さん<br>
+	<input type="button" value="Logout" onClick="logout()" style="width: 79px; height: 27px"><br><br><br>
 	<div align="center">
 		<table border="1" align="center" width="80%" height="60vh"
 			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1">
@@ -25,7 +27,7 @@
 			<p><br>Profile</p>
 			<input type="text" name="myProfile" value="${profile}" style="width: 210px; height: 37px">
 			<p></p>
-			<br> <input type="submit" value="Update" name="newProfile"><input type="submit" value="Back">
+			<br> <input type="submit" value="Update" name="newProfile" style="width: 90px; "><input type="submit" value="Back" style="width: 90px; ">
 		</form>
 		<form action="/chat/main" method="POST">
 
