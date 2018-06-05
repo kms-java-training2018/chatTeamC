@@ -53,7 +53,8 @@ public class GroupMessageModel {
 			sb.append(" from t_message_info mi inner join t_group_info gi  ");
 			sb.append(" on mi.TO_SEND_GROUP_NO = gi.group_no  ");
 			sb.append(" and mi.SEND_USER_NO = gi.USER_NO  ");
-			sb.append(" where mi.TO_SEND_GROUP_NO = " + GroupNo + " ) migi ");
+			sb.append(" where mi.TO_SEND_GROUP_NO = " + GroupNo );
+			sb.append(" AND mi.delete_flag = 0 ) migi ");
 			sb.append(" inner join m_user mu   ");
 			sb.append(" on migi.send_user_no = mu.USER_NO  ");
 			sb.append(" order by migi.message_no ");
@@ -64,15 +65,14 @@ public class GroupMessageModel {
 
 			while (rs.next()) {
 				// Beanに追加
-				if (rs.getString("OUT_FLAG").equals(1)) {
+				if (rs.getString("OUT_FLAG").equals("1")) {
 					bean.setName("送信者不明");
 				} else {
 					bean.setName(rs.getString("USER_NAME"));
-					bean.setText(rs.getString("MESSAGE"));
-					bean.setNumber(rs.getString("USER_NO"));
-					bean.setDeleteMessageNo(rs.getString("MESSAGE_NO"));
 				}
-
+				bean.setText(rs.getString("message"));
+				bean.setNumber(rs.getString("USER_NO"));
+				bean.setMessageNo(rs.getString("message_no"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

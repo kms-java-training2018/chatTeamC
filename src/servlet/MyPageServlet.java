@@ -16,7 +16,7 @@ public class MyPageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
+		doPost(req,res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

@@ -30,13 +30,15 @@ public class DeleteMessageModel {
 		// 接続作成
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
+			
+			
 			// SQL作成
 			sb.append(" UPDATE ");
 			sb.append(" T_MESSAGE_INFO ");
 			sb.append(" SET ");
 			sb.append(" DELETE_FLAG = 1 ");
 			sb.append(" WHERE ");
-			sb.append(" MESSAGE_NO =  " + deleteMessageNo);
+			sb.append(" MESSAGE_NO = " + deleteMessageNo);
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
