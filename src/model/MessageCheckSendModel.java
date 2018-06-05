@@ -109,12 +109,12 @@ public class MessageCheckSendModel {
 			sb.append(" FROM ");
 			sb.append(" M_USER MU ");
 			sb.append(" WHERE ");
-			sb.append(" MU.USER_NO = 1");
+			sb.append(" MU.USER_NO = " + toUserNo);
 
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sb.toString());
 			while (rs.next()) {
-			bean.setToUserName(rs.getString("MU.USER_NAME"));
+				bean.setToUserName(rs.getString("USER_NAME"));
 			}
 
 		} catch (SQLException e) {

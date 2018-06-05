@@ -15,6 +15,9 @@ public class GroupMessageBean {
 	private ArrayList<String> messageNo = new ArrayList<String>();
 	// グループの番号
 	private String groupNo;
+	// グループの作成者番号
+	private String registUserNo;
+
 
 	// 消したい会話情報番号
 	private String deleteMessageNo;
@@ -37,6 +40,14 @@ public class GroupMessageBean {
 			return judgeByte;
 		}
 		return judgeByte; // 許容内であった場合
+	}
+
+	public String getRegistUserNo() {
+		return registUserNo;
+	}
+
+	public void setRegistUserNo(String registUserNo) {
+		this.registUserNo = registUserNo;
 	}
 
 	public String getSendMessage() {
