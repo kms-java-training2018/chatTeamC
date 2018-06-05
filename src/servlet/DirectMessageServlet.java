@@ -89,7 +89,8 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+			//メッセージ送信処理終了後、doGetに移し、更新させる。
+			doGet(req, res);
 		}
 	}
 }
