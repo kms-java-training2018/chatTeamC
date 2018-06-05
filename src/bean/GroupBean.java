@@ -47,6 +47,10 @@ public class GroupBean {
 			judgeByte = 1;
 			return judgeByte;
 		}
+		else if((int) length < 1 ) {
+			judgeByte = 2;
+
+		}
 		return judgeByte; // 許容内であった場合
 	}
 
