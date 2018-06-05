@@ -14,11 +14,12 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>個人チャットページ</title>
 </head>
 <body>
+
     <input type="button"value="ログアウト" onClick="logout()" />
-	<h1>個人チャットページ</h1>
+	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
 	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
 		varStatus="status"><!-- 名前にその人のプロフィールに飛ぶリンクを付ける
@@ -37,7 +38,7 @@ page import="java.util.ArrayList"%>
 	</c:forEach>
 
 	<form action="/chat/directMessage" method="POST">
-		
+
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
 		<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
 		<input type="hidden" name="toUserNo" value="${messageCheckBean.getToUserNo()}">
