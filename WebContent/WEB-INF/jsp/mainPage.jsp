@@ -24,7 +24,7 @@
 			<th colspan="3">
 				<p>Main menu</p>
 			</th>
-			<th>
+			<th class="back" >
 				<p>ようこそ ${session.userName}さん</p> <input type="button" value="Logout"
 				onClick="logout()" />
 
@@ -32,7 +32,7 @@
 		</tr>
 		<!-- 2段目 -->
 		<tr align="center">
-			<td colspan="2">
+			<td colspan="2" class="back">
 				<form action="/chat/makeGroup" method="POST">
 					<input type="submit" value="Group creation">
 				</form>
