@@ -55,8 +55,7 @@ public class DirectMessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * メッセージ送信、メッセージ削除の部分
-	 * MessageCheckBeanの取り込みに失敗中
+	 * メッセージ送信処理
 	 * */
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
@@ -93,6 +92,7 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+			//送信後、doGetに移して即更新させる。
 			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
 			directMessageServlet.doGet(req, res);
 //			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);

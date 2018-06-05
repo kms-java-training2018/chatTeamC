@@ -43,14 +43,11 @@ public class DeleteDirectMessageServlet extends HttpServlet{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+		//削除処理終了後、directMessageServletに移し、更新させる。
 		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
 		directMessageServlet.doGet(req, res);
 	}
 
-	/**
-	 * メッセージ削除の部分
-	 * */
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 	}
