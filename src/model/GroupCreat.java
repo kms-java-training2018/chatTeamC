@@ -190,15 +190,6 @@ public class GroupCreat {
 		//戻り値として渡す成否メッセージを定義
 		String message = "0";
 
-		//受け取ったStringリストからを登録者Listに設定
-		String[] memberName = list;
-		ArrayList<String> memberNo = new ArrayList<String>();
-		for(String name : memberName) {
-			int i = Integer.parseInt(name);
-			memberNo.add(gb.getUserNo().get(i));
-		}
-
-
 		//作成者番号を入手
 		this.autherNo = gb.getAutherNo();
 
@@ -264,53 +255,63 @@ public class GroupCreat {
 			Statement stmt1 = conn.createStatement();
 			int AutherResistRs = stmt1.executeUpdate(sb1.toString());
 
-			if(AutherResistRs == 1) {
+			if (AutherResistRs == 1) {
 				message = "autherResist OK";
 				System.out.println(message);
-			}else {
+			} else {
 				message = "autherResist NO";
 				System.out.println(message);
 
 			}
 
-
 			// 会員登録を行うfor文
 
-			for (int i = 0;i < memberNo.size(); i++) {
-				StringBuilder sb2 = new StringBuilder();
-				sb2.append("insert ");
-				sb2.append(" into ");
-				sb2.append(" T_GROUP_INFO( ");
-				sb2.append("GROUP_NO");
-				sb2.append(", USER_NO ");
-				sb2.append(", OUT_FLAG");
-				sb2.append(", REGIST_DATE");
-				sb2.append(")");
-				sb2.append(" values ");
-				sb2.append("(" + groupNo);
-				sb2.append("," + memberNo.get(i));
-				sb2.append(",0");
-				sb2.append(", sysdate)");
+			//受け取ったStringリストからを登録者Listに設定
+			String[] memberName = list;
+			if (memberName != null) {
+				ArrayList<String> memberNo = new ArrayList<String>();
+				for (String name : memberName) {
+					int i = Integer.parseInt(name);
+					memberNo.add(gb.getUserNo().get(i));
+				}
 
-				Statement stmt2 = conn.createStatement();
-				int memberResistRs = stmt2.executeUpdate(sb2.toString());
+				for (int i = 0; i < memberNo.size(); i++) {
+					StringBuilder sb2 = new StringBuilder();
+					sb2.append("insert ");
+					sb2.append(" into ");
+					sb2.append(" T_GROUP_INFO( ");
+					sb2.append("GROUP_NO");
+					sb2.append(", USER_NO ");
+					sb2.append(", OUT_FLAG");
+					sb2.append(", REGIST_DATE");
+					sb2.append(")");
+					sb2.append(" values ");
+					sb2.append("(" + groupNo);
+					sb2.append("," + memberNo.get(i));
+					sb2.append(",0");
+					sb2.append(", sysdate)");
 
-//				if (memberResistRs == 1) {
-//					message = i + "回目Resist OK";
-////					System.out.println(message);
-//
-//				} else {
-//
-//				}
-//
+					Statement stmt2 = conn.createStatement();
+					int memberResistRs = stmt2.executeUpdate(sb2.toString());
+					System.out.println(memberResistRs);
 
-						while (rs.next()) {
+					//				if (memberResistRs == 1) {
+					//					message = i + "回目Resist OK";
+					////					System.out.println(message);
+					//
+					//				} else {
+					//
+					//				}
+					//
 
-							/* 行からデータを取得 */
-							gb.setUserNo(rs.getString("user_no"));
-							gb.setUserName(rs.getString("user_name"));
-							gb.setErrorMessage("");
-						}
+					while (rs.next()) {
+
+						/* 行からデータを取得 */
+						gb.setUserNo(rs.getString("user_no"));
+						gb.setUserName(rs.getString("user_name"));
+						gb.setErrorMessage("");
+					}
+				}
 			}
 
 		} catch (SQLException e) {

@@ -45,13 +45,10 @@ public class GroupBean {
 
 		if ((int) length > max) { // 最大文字数よりも多かった場合
 			judgeByte = 1;
-			return judgeByte;
-		}
-		else if((int) length < 1 ) {
-			judgeByte = 2;
 
 		}
-		return judgeByte; // 許容内であった場合
+		return judgeByte;
+
 	}
 
 	//作成者Nameの取得
