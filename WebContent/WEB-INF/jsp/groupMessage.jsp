@@ -15,6 +15,10 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/deleteUserMenber.js"
+	charset="UTF-8">
+
+</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -46,6 +50,10 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="toGroupNo" value="${GroupBean.getGroupNo()}">
 		<input type="text" name="sendMessage" value="">
 		<input type="submit" value="メッセージの送信">
+	</form>
+	<form action="/chat/secessionGroupMessgeModel" method="GET">
+		<input type="hidden" name="toGroupNo" value="${GroupBean.getGroupNo()}">
+		<input type="button" value="グループの脱退" onclick="deleteUserMenber('${GroupBean.getGroupNo()}')">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューに戻る">

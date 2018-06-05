@@ -147,6 +147,7 @@ public class MainPageModel {
 			sb.append(" WHERE ");
 			sb.append(" TG.GROUP_NO = MG.GROUP_NO ");
 			sb.append(" AND TG.USER_NO = " + loginBean.getUserNo());
+			sb.append(" AND TG.OUT_FLAG = 0");
 			sb.append(" ORDER BY MG.GROUP_NO DESC");
 
 			// SQL実行

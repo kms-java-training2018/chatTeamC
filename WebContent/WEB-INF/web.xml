@@ -80,4 +80,12 @@
     <servlet-name>DeleteGroupMessageServlet</servlet-name>
     <url-pattern>/deleteGroupMessage</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>SecessionGroupMessgeModel</servlet-name>
+    <servlet-class>servlet.SecessionGroupMessgeModel</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SecessionGroupMessgeModel</servlet-name>
+    <url-pattern>/secessionGroupMessgeModel</url-pattern>
+  </servlet-mapping>
 </web-app>
