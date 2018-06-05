@@ -9,9 +9,11 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
+
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -26,13 +28,10 @@ page import="java.util.ArrayList"%>
 		<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
-		<form action="/chat/groupMessage" method="POST">
+		<form action="/chat/groupMessage" method="GET">
 			<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}">
 					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
-					<input type="hidden" name="deleteMessageNo"
-					value="${GroupBean.messageNo().get(status.index)}">
-				<input type="hidden" name="sendMessage" value="">
-				<input type="button" value="削除">
+				<input type="button" value="削除" onClick="deleteMessage('${GroupBean.getMessageNo()}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')" >
 			</c:if>
 			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
 				<a
@@ -43,8 +42,10 @@ page import="java.util.ArrayList"%>
 		</form>
 	</c:forEach>
 	<form action="/chat/groupMessage" method="POST">
-		<input type="text" name="sendMessage" value=""> <input
-			type="submit" value="メッセージの送信">
+		<input type="hidden" name="deleteMessageNo" value="${GroupBean.getMessageNo()}">
+		<input type="hidden" name="toGroupNo" value="${GroupBean.getGroupNo()}">
+		<input type="text" name="sendMessage" value="">
+		<input type="submit" value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューに戻る">

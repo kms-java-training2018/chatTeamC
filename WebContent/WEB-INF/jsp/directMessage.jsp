@@ -27,7 +27,8 @@ page import="java.util.ArrayList"%>
 		<form action="/chat/deleteDirectMessage" method="GET">
 			<c:if test="${list.get(2) == myLoginNo}">
 					${list.get(0)}：${list.get(1)}
-				<input type="button" value="削除" onClick="deleteMessage('${list.get(3)}','${messageCheckBean.getToUserNo()}')" />
+				<input type="button" value="削除"
+					onClick="deleteMessage('${list.get(3)}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
 			</c:if>
 			<c:if test="${list.get(2) != myLoginNo}">
 				<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank”>${list.get(0)}</a>
@@ -37,7 +38,7 @@ page import="java.util.ArrayList"%>
 	</c:forEach>
 
 	<form action="/chat/directMessage" method="POST">
-		
+
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
 		<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
 		<input type="hidden" name="toUserNo" value="${messageCheckBean.getToUserNo()}">
