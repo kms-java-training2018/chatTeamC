@@ -40,8 +40,8 @@ public class DeleteGroupMessageServlet extends HttpServlet{
 		}
 
 		//req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
-		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-		directMessageServlet.doGet(req, res);
+		GroupMessageServlet groupMessageServlet = new GroupMessageServlet();
+		groupMessageServlet.doGet(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {

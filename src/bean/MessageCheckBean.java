@@ -68,7 +68,9 @@ public class MessageCheckBean {
 	}
 
 	public void setSendMessage(String sendMessage) {
+		System.out.println(sendMessage);
 		this.sendMessage = sendMessage;
+		System.out.println(this.sendMessage);
 	}
 
 	public int getDeleteMessageNo() {
