@@ -9,15 +9,15 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
-
+	
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
+	
 </script>
 <script type="text/javascript" src="JavaScript/deleteUserMenber.js"
 	charset="UTF-8">
-
+	
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -35,25 +35,27 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET">
 			<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}">
-					${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
-				<input type="button" value="削除"
-					onClick="deleteMessage('${GroupBean.getMessageNo().get(status.index)}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')">
+				<div  align="right">${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
+							<input type="button" value="削除"
+					onClick="deleteMessage('${GroupBean.getMessageNo().get(status.index)}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')"></div>
+
 			</c:if>
 			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
+
 				<c:if test="${GroupBean.getName().get(status.index) != '送信者不明'}">
 					<a
 						href="/chat/showProfile?toUserNo=${GroupBean.getNumber().get(status.index)}"
 						target=”_blank”> ${GroupBean.getName().get(status.index)}</a>
 				</c:if>
 				<c:if test="${GroupBean.getName().get(status.index) == '送信者不明'}">
-					${GroupBean.getName().get(status.index)}
-				</c:if>
-
-					：${GroupBean.getText().get(status.index)}
+							${GroupBean.getName().get(status.index)}
+						</c:if> ：${GroupBean.getText().get(status.index)}
 			</c:if>
 		</form>
 	</c:forEach>
-	<p>${error}</p>
+	<p>
+		<font size="5" color="red">${error}</font>
+	</p>
 	<form action="/chat/groupMessage" method="POST">
 		<input type="hidden" name="deleteMessageNo"
 			value="${GroupBean.getMessageNo()}"> <input type="hidden"
