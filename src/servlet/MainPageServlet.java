@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import bean.MainPageBean;
+import bean.SessionBean;
 import model.MainPageModel;
 
 public class MainPageServlet extends HttpServlet {
@@ -28,11 +29,27 @@ public class MainPageServlet extends HttpServlet {
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
 			LoginBean loginBean = (LoginBean)session.getAttribute("loginBean");
-
 			if ((String) req.getParameter("newProfile") != null) {
 
 				String myName = new String (req.getParameter("myName").getBytes("ISO-8859-1"));
 				String myProfile = new String (req.getParameter("myProfile").getBytes("ISO-8859-1"));
+
+				System.out.println("子のした");
+				System.out.println(myName);
+				System.out.println("この上");
+
+				if (myName.equals("")) {
+					System.out.println("いったよー");
+					req.setAttribute("erorr", "無効な名前です");
+					//マイページに戻る
+					MyPageServlet myPageServlet = new MyPageServlet();
+					myPageServlet.doPost(req, res);
+				}
+
+				loginBean.setUserName(myName);
+				SessionBean sessionBean = new SessionBean();
+				sessionBean.setUserName(myName);
+				session.setAttribute("session", sessionBean);
 
 				model.newProfile(myName,myProfile,loginBean);
 			}

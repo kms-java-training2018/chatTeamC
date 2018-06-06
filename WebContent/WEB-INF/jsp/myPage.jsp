@@ -29,6 +29,7 @@
 		<form action="/chat/main" method="POST">
 			<p>Name</p>
 			<input type="text" name="myName" value="${name}" style="height: 37px; width: 210px">
+			<p>${erorr}</p>
 			<p><br>Profile</p>
 			<input type="text" name="myProfile" value="${profile}" style="width: 210px; height: 37px">
 			<p></p>
