@@ -151,6 +151,8 @@ public class MakeGroupServlet extends HttpServlet {
 				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}
 
+		}else {
+			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}
 		try {
 		req.getRequestDispatcher(direction).forward(req, res);
