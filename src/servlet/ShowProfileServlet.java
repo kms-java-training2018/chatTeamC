@@ -44,6 +44,7 @@ public class ShowProfileServlet extends HttpServlet {
 			if (bean.getSql() == 0) {
 				req.getRequestDispatcher("/WEB-INF/jsp/eerorPage.jsp").forward(req, res);
 			} else {
+				System.err.println("ここに着てるよー");
 				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 			}
 
