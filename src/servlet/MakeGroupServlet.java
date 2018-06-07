@@ -19,19 +19,33 @@ public class MakeGroupServlet extends HttpServlet {
 
 		String direction = "/WEB-INF/jsp/login.jsp";
 
-		req.getRequestDispatcher("/WEB-INF/jsp/makeGroup.jsp").forward(req, res);
-		LoginBean bean = new LoginBean();
-		bean.setErrorMessage("");
-		bean.setUserId("");
-		bean.setPassword("");
+		//セッション設定
+		HttpSession session = req.getSession();
 
-		//mainページに戻るからのGETかどうか
-		if (req.getParameter("main") != null) {
-			direction = "/WEB-INF/jsp/mainPage.jsp";
+		if (session.getAttribute("session") != null) {
+			req.getRequestDispatcher("/WEB-INF/jsp/makeGroup.jsp").forward(req, res);
+			LoginBean bean = new LoginBean();
+			bean.setErrorMessage("");
+			bean.setUserId("");
+			bean.setPassword("");
 
+			//mainページに戻るからのGETかどうか
+			if (req.getParameter("main") != null) {
+				direction = "/WEB-INF/jsp/mainPage.jsp";
+
+			}
+			req.setAttribute("loginBean", bean);
+			req.getRequestDispatcher(direction).forward(req, res);
+
+		} else {
+			session.setAttribute("session", null);
+			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}
-		req.setAttribute("loginBean", bean);
-		req.getRequestDispatcher(direction).forward(req, res);
+		try {
+			req.getRequestDispatcher(direction).forward(req, res);
+		} catch (Exception e) {
+		}
+
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -108,7 +122,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 						System.out.println(message);
 
-//						direction = "/WEB-INF/jsp/mainPage.jsp";
+						//						direction = "/WEB-INF/jsp/mainPage.jsp";
 						MainPageServlet main = new MainPageServlet();
 						main.doPost(req, res);
 
@@ -151,13 +165,13 @@ public class MakeGroupServlet extends HttpServlet {
 				direction = "/WEB-INF/jsp/makeGroup.jsp";
 			}
 
-		}else {
+		} else {
+			session.setAttribute("session", null);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}
 		try {
-		req.getRequestDispatcher(direction).forward(req, res);
-		}catch (Exception e) {
-			// TODO: handle exception
+			req.getRequestDispatcher(direction).forward(req, res);
+		} catch (Exception e) {
 		}
 
 	}
