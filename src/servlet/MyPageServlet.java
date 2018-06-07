@@ -16,7 +16,7 @@ public class MyPageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
-		doPost(req,res);
+		doPost(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
@@ -36,18 +36,19 @@ public class MyPageServlet extends HttpServlet {
 				// 情報が無かったためエラー画面に移行
 				// とりあえず今はログイン画面に戻るように設定
 				session.setAttribute("session", null);
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
 			req.setAttribute("name", bean.getName());
 			req.setAttribute("profile", bean.getMyProfile());
+			req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
 		} else {
 			// 情報が無かったためエラー画面に移行
-			// TODO とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 
-		req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
+		//req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
 
 	}
 }
