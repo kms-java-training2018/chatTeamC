@@ -6,7 +6,7 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-	
+
 </script>
 
 <link rel="stylesheet" href="css/base.css">
