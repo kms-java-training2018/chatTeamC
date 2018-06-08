@@ -27,25 +27,6 @@ public class MessageCheckBean {
 	// 消したい会話情報番号
 	private int deleteMessageNo;
 
-	// モデルに新しいメソッドとして作成
-	//入力チェック
-	public int stringLengthCheck(String input) {
-		//返すメッセージを設定
-		int judgeByte = 0;
-
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		System.out.println(length);
-		// 最大バイト数の設定
-		int max = 200;
-
-		if ((int) length > max) { // 最大文字数よりも多かった場合
-			judgeByte = 1;
-			return judgeByte;
-		}
-		return judgeByte; // 許容内であった場合
-	}
-
 	public int getToUserNo() {
 		return toUserNo;
 	}
