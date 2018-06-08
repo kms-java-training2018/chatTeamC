@@ -59,7 +59,6 @@ public class MainPageModel {
 				// Listに追加
 				setList.setUserNo(rs.getString("user_no"));
 				setList.setUserName(rs.getString("user_name"));
-				System.out.println(rs.getString("user_no"));
 				// Beanに追加
 				bean.setLatestMenberMessageBeanList(setList);
 			}
@@ -120,9 +119,6 @@ public class MainPageModel {
 						text = rs.getString("message");
 					}
 				}
-
-				System.out.println("テキスト");
-				System.out.println(text);
 				// Beanに追加
 				menber.setLatestMessage(text);
 			}
@@ -233,7 +229,7 @@ public class MainPageModel {
 		return bean;
 	}
 
-	public void newProfile(String name, String profile, LoginBean bean) {
+	public boolean newProfile(String name, String profile, LoginBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -262,7 +258,13 @@ public class MainPageModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			stmt.executeQuery(sb.toString());
+			int num = stmt.executeUpdate(sb.toString());
+
+			if (num == 0) {
+				// データの更新が失敗しました
+				System.out.println("更新失敗なのでエラーに遷移します");
+				return false;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -274,5 +276,6 @@ public class MainPageModel {
 				e.printStackTrace();
 			}
 		}
+		return true;
 	}
 }

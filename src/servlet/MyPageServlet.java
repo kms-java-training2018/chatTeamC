@@ -14,11 +14,6 @@ import model.MyPageModel;
 
 public class MyPageServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-
-		doPost(req, res);
-	}
-
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		// セッション情報取得
 		HttpSession session = req.getSession();
@@ -45,7 +40,7 @@ public class MyPageServlet extends HttpServlet {
 				//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				direction = "/WEB-INF/jsp/errorPage.jsp";
 			}
-
+			// 名前とプロフィールを設定しておく
 			req.setAttribute("name", bean.getName());
 			req.setAttribute("profile", bean.getMyProfile());
 		}
