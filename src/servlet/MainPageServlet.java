@@ -16,6 +16,7 @@ import model.MainPageModel;
 public class MainPageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		System.out.println("ここに来たやつ、doPostのほうに移動できるよう変更してくださいお願いします");
 		doPost(req, res);
 	}
 
@@ -57,7 +58,10 @@ public class MainPageServlet extends HttpServlet {
 					sessionBean.setUserName(myName);
 					session.setAttribute("session", sessionBean);
 					// データベースにプロフィールを設定する。
-					model.newProfile(myName, myProfile, loginBean);
+					// 設定してこれなかった場合エラーページに飛ぶ
+					if (!(model.newProfile(myName, myProfile, loginBean))) {
+						direction = "/WEB-INF/jsp/errorPage.jsp";
+					}
 
 					// 認証処理
 					try {
