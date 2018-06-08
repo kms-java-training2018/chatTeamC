@@ -43,9 +43,9 @@ public class MakeGroupServlet extends HttpServlet {
 		if (session.getAttribute("session") != null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/makeGroup.jsp").forward(req, res);
 			LoginBean bean = new LoginBean();
-			bean.setErrorMessage(null);
-			bean.setUserId(null);
-			bean.setPassword(null);
+			bean.setErrorMessage("");
+			bean.setUserId("");
+			bean.setPassword("");
 
 			//mainページに戻るからのGETかどうか
 			if (req.getParameter("main") != null) {
