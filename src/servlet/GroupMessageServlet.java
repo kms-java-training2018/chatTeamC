@@ -79,7 +79,7 @@ public class GroupMessageServlet extends HttpServlet {
 
 			//入力チェックの返答
 			int bytecheck = 0;
-			bytecheck = bean.stringLengthCheck(sendMessage);
+			bytecheck = model.stringLengthCheck(sendMessage);
 			if (bytecheck == 1) {
 				req.setAttribute("error", "文字数オーバーです");
 				doGet(req, res);
