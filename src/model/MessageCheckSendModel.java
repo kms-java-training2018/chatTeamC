@@ -5,10 +5,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import bean.LoginBean;
 import bean.MessageCheckBean;
+import bean.TalkContentBean;
 
 /**
  * 設計書03　メッセージ確認・送信機能
@@ -92,14 +92,15 @@ public class MessageCheckSendModel {
 			while (rs.next()) {
 				// Listの初期化
 				// bean に送る用のリスト
-				ArrayList<String> setList = new ArrayList<String>();
+				//ArrayList<String> setList = new ArrayList<String>();
+				TalkContentBean talkContentBean = new TalkContentBean();
 				// Listに追加（発言者名<0>、会話内容<1>、発言者の会員番号<2>、会話情報番号<3>）
-				setList.add(rs.getString("USER_NAME"));
-				setList.add(rs.getString("MESSAGE"));
-				setList.add(rs.getString("USER_NO"));
-				setList.add(rs.getString("MESSAGE_NO"));
+				talkContentBean.setUserName(rs.getString("USER_NAME"));
+				talkContentBean.setMessage(rs.getString("MESSAGE"));
+				talkContentBean.setUserNo(rs.getString("USER_NO"));
+				talkContentBean.setMessageNo(rs.getString("MESSAGE_NO"));
 				// Beanに追加
-				bean.setTalkContent(setList);
+				bean.setTalkContentBeanList(talkContentBean);
 			}
 
 			//名前取得用

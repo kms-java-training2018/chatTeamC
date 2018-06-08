@@ -6,6 +6,10 @@ import java.util.ArrayList;
  * DirectMessage,MessageCheck用
  * 相手会員番号、会話情報を取得するためのBean
  * */
+/**
+ * @author iijima-naoyuki
+ *
+ */
 public class MessageCheckBean {
 	// 相手会員番号
 	private int toUserNo;
@@ -14,7 +18,8 @@ public class MessageCheckBean {
 	private String toUserName;
 
 	// 会話情報取得
-	private ArrayList<ArrayList<String>> talkContent = new ArrayList<ArrayList<String>>();
+//	private ArrayList<ArrayList<String>> talkContent = new ArrayList<ArrayList<String>>();
+	private ArrayList<TalkContentBean> talkContentBeanList = new ArrayList<TalkContentBean>();
 
 	// 送信メッセージ情報
 	private String sendMessage;
@@ -22,6 +27,7 @@ public class MessageCheckBean {
 	// 消したい会話情報番号
 	private int deleteMessageNo;
 
+	// モデルに新しいメソッドとして作成
 	//入力チェック
 	public int stringLengthCheck(String input) {
 		//返すメッセージを設定
@@ -56,13 +62,37 @@ public class MessageCheckBean {
 		this.toUserName = toUserName;
 	}
 
-	public ArrayList<ArrayList<String>> getTalkContent() {
-		return talkContent;
+
+//	/**
+//	 * @return
+//	 */
+//	public ArrayList<ArrayList<String>> getTalkContent() {
+//		return talkContent;
+//	}
+//
+//
+//	/**
+//	 * @param TalkContent
+//	 */
+//	public void setTalkContent(ArrayList<String> TalkContent) {
+//		talkContent.add(TalkContent);
+//	}
+
+	/**
+	 * トークの内容を返す
+	 */
+	public ArrayList<TalkContentBean> getTalkContentBeanList() {
+		return talkContentBeanList;
 	}
 
-	public void setTalkContent(ArrayList<String> TalkContent) {
-		talkContent.add(TalkContent);
+	/**
+	 * トークの内容を入れる
+	 */
+	public void setTalkContentBeanList(TalkContentBean talkContentList) {
+		this.talkContentBeanList.add(talkContentList);
 	}
+
+
 
 	public String getSendMessage() {
 		return sendMessage;

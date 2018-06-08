@@ -18,8 +18,8 @@ public class DirectMessageServlet extends HttpServlet {
 	 * 会話情報の表示の部分
 	 * */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		// 初期化
 		MessageCheckBean bean = new MessageCheckBean();
+		// 初期化
 		MessageCheckSendModel model = new MessageCheckSendModel();
 		/*
 		 * セッション情報取得
