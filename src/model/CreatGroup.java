@@ -9,10 +9,16 @@ import java.util.ArrayList;
 
 import bean.GroupBean;
 
-public class GroupCreat {
+/**
+ * グループ作成機能model<br>
+ *
+ * @author onishi-yasumasa
+ * @version 1.0
+ */
+public class CreatGroup {
 
 	//groupBeanの設定
-	GroupBean gb = new GroupBean();
+	GroupBean gb;
 
 	//作成者の名前
 	private String autherName;
@@ -21,29 +27,65 @@ public class GroupCreat {
 	//グループの名前
 	private String groupName;
 
-	//グループビーンの引継ぎ
+	/**
+	 * グループbeanをセットする<br>
+	 * @param groupBean 受け取ったgroupBean
+	 */
 	public void setGroupBean(GroupBean groupBean) {
 		this.gb = groupBean;
 	}
 
-	//指定されたグループネームの設定
+	/**
+	 * グループ名をセットする<br>
+	 * @param name 受け取ったグループ名
+	 */
 	public void setGroupName(String name) {
 		this.groupName = name;
 	}
 
-	//指定されたAutherNoの設定
+	/**
+	 * グループ作成者の会員番号をセットする<br>
+	 * @param No 受け取った番号
+	 */
 	public void setAutherNo(String No) {
 		this.autherNo = No;
 	}
 
-	public void checkinName(String name) {
+	/**
+	 * 受け取った入力文字のバイト数をチェックし、true/falseで返す<br>
+	 * 30バイト以内 true<br>
+	 * 30バイト異常 false<br>
+	 *
+	 * @param input 受け取った入力文字
+	 * @return judgeByte trueはバイト数OK、falseはバイト数NG
+	 */
+	public boolean stringLengthCheck(String input) {
+		//成否判定
+		boolean judgeByte;
+
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		// 最大バイト数の設定
+		int max = 30;
+
+		judgeByte = (length <= max);
+
+		return judgeByte;
 
 	}
 
-	//ユーザー一覧を出すメソッド
-	public GroupBean authentication(String name) {
+	/**
+	 * 全ユーザー一覧を出すメソッド<br>
+	 *
+	 * @param name 受け取ったグループ作成者名
+	 * @return gb 処理したデータを詰めたGroupBean
+	 */
+	public GroupBean getAllUserListAcquisition(String name) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
+
+		//DBから取得できたかの成否変数
+		boolean getDataJudge;
 
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
@@ -56,6 +98,7 @@ public class GroupCreat {
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
 			e.printStackTrace();
+			getDataJudge = false;
 		}
 		// 接続作成
 		try {
@@ -82,41 +125,41 @@ public class GroupCreat {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+			getDataJudge = false;
 			// sqlの接続は絶対に切断
 		} finally {
 			try {
 				conn.close();
+				getDataJudge = true;
+				gb.setGetAllUserListJudge(getDataJudge);
 			} catch (SQLException e) {
 				e.printStackTrace();
+				getDataJudge = false;
 			}
 		}
 
 		//受け取った作成者userNameをBeanに渡して処理
 		this.autherName = name;
-
-		//		//チェック用
-		//		System.out.println("グループ作成者" + autherName);
 		gb.setAuther(autherName);
 
-		//test表示
-		//		ArrayList<String> test = gb.getUserName();
-		//		for(String n1 : test) {
-		//			System.out.print("Autherを抜いたはず："+n1+",");
-		//	}
+		//成否判定をBeanに設定
+		gb.setGetAllUserListJudge(getDataJudge);
+
 
 		return gb;
 
 	}
 
-	//既存のグループnameか確認するメソッド
-
-	//グループ登録を行うメソッド
-	public String CreatGroup() {
+	/**
+	 * グループ登録を行うメソッド<br>
+	 * @return creatJudge メンバー登録成否
+	 */
+	public boolean resistGroup() {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
-		//戻り値として渡す成否メッセージを定義
-		String CreatCheck;
+		//成功判定用変数
+		boolean creatJudge;
 
 		//gbからautherNoを
 		String autherNo = gb.getAutherNo();
@@ -137,6 +180,7 @@ public class GroupCreat {
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
 			e.printStackTrace();
+			creatJudge = false;
 		}
 		// 接続作成
 		try {
@@ -161,15 +205,12 @@ public class GroupCreat {
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sb.toString());
 
-			if (rs == 1) {
-				CreatCheck = "Creat ok";
-			} else {
-				CreatCheck = "Creat no";
-			}
+			creatJudge = (rs == 1);
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			//test
-			CreatCheck = "Creat no";
+			creatJudge = false;
 
 			// sqlの接続は絶対に切断
 		} finally {
@@ -177,18 +218,24 @@ public class GroupCreat {
 				conn.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
+				creatJudge = false;
 			}
 		}
-		return CreatCheck;
+		return creatJudge;
 	}
 
-	//グループにメンバー登録を行うメソッド
-	public String ResistGroup(String[] list) {
+	/**
+	 * グループにメンバー登録を行うメソッド<br>
+	 *
+	 * @param list 選択したユーザー
+	 * @return resistJudge メンバー登録成否
+	 */
+	public boolean resistGroupMember(String[] list) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
-		//戻り値として渡す成否メッセージを定義
-		String message = "0";
+		//成功判定用変数
+		boolean resistJudge;
 
 		//作成者番号を入手
 		this.autherNo = gb.getAutherNo();
@@ -205,6 +252,7 @@ public class GroupCreat {
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
 			e.printStackTrace();
+			resistJudge = false;
 		}
 		// 接続作成
 		try {
@@ -255,20 +303,16 @@ public class GroupCreat {
 			Statement stmt1 = conn.createStatement();
 			int AutherResistRs = stmt1.executeUpdate(sb1.toString());
 
-			if (AutherResistRs == 1) {
-				message = "autherResist OK";
-				System.out.println(message);
-			} else {
-				message = "autherResist NO";
-				System.out.println(message);
-
-			}
+			resistJudge = (AutherResistRs == 1);
 
 			// 会員登録を行うfor文
 
 			//受け取ったStringリストからを登録者Listに設定
 			String[] memberName = list;
-			if (memberName != null) {
+			if (memberName == null) {
+
+			} else {
+
 				ArrayList<String> memberNo = new ArrayList<String>();
 				for (String name : memberName) {
 					int i = Integer.parseInt(name);
@@ -316,7 +360,7 @@ public class GroupCreat {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			message = "Resist no";
+			resistJudge = false;
 
 			// sqlの接続は絶対に切断
 		} finally {
@@ -326,7 +370,7 @@ public class GroupCreat {
 				e.printStackTrace();
 			}
 		}
-		return message;
+		return resistJudge;
 	}
 
 }

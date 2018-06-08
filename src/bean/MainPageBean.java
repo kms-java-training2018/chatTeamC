@@ -3,38 +3,37 @@ package bean;
 import java.util.ArrayList;
 
 public class MainPageBean {
-
-	/** メンバー一覧 */
-	private ArrayList<ArrayList<String>> member = new ArrayList<ArrayList<String>>();
-
 	/** メンバー一覧 + 会話 */
-	private ArrayList<ArrayList<String>> memberTalk = new ArrayList<ArrayList<String>>();
+	private ArrayList<LatestMenberMessageBean> latestMenberMessageBeanList = new ArrayList<LatestMenberMessageBean>();
 
 	/** グループ一覧 */
-	private ArrayList<ArrayList<String>> Growp = new ArrayList<ArrayList<String>>();
+	private ArrayList<LatestGroupMessageBean> latestGroupMessageBeanList = new ArrayList<LatestGroupMessageBean>();
 
-	public ArrayList<ArrayList<String>> getMember() {
-		return member;
+	/**
+	 * ダイレクトメッセージの最新メッセージ一覧を返す
+	 */
+	public ArrayList<LatestMenberMessageBean> getLatestMenberMessageBeanList() {
+		return latestMenberMessageBeanList;
 	}
 
-	public void setMember(ArrayList<String> member) {
-		this.member.add(member);
+	/**
+	 * ダイレクトメッセージの最新メッセージ一覧を設定
+	 */
+	public void setLatestMenberMessageBeanList(LatestMenberMessageBean latestMenberMessageBeanList) {
+		this.latestMenberMessageBeanList.add(latestMenberMessageBeanList);
 	}
 
-	public ArrayList<ArrayList<String>> getMemberTalk() {
-		return memberTalk;
+	/**
+	 * グループメッセージの最新メッセージ一覧を返す
+	 */
+	public ArrayList<LatestGroupMessageBean> getLatestGroupMessageBeanList() {
+		return latestGroupMessageBeanList;
 	}
 
-	public void setMemberTalk(ArrayList<String> memberTalk) {
-		this.memberTalk.add(memberTalk);
+	/**
+	 * グループメッセージの最新メッセージ一覧を設定
+	 */
+	public void setLatestGroupMessageBeanList(LatestGroupMessageBean latestGroupMessageBeanList) {
+		this.latestGroupMessageBeanList.add(latestGroupMessageBeanList);
 	}
-
-	public ArrayList<ArrayList<String>> getGrowp() {
-		return Growp;
-	}
-
-	public void setGrowp(ArrayList<String> growp) {
-		this.Growp.add(growp);
-	}
-
 }

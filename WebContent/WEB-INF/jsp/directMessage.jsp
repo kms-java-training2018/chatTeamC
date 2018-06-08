@@ -15,10 +15,6 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
-<script type="text/javascript" src="JavaScript/logout.js"
-	charset="UTF-8">
-
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>個人チャットページ</title>
 </head>
@@ -27,20 +23,22 @@ page import="java.util.ArrayList"%>
 	<h1>～${messageCheckBean.getToUserName()}さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
 	<h2>ようこそ ${session.userName}さん</h2>
-	<c:forEach var="list" items="${messageCheckBean.getTalkContent()}"
+	<c:forEach var="list"
+		items="${messageCheckBean.getTalkContentBeanList()}"
 		varStatus="status">
 		<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
 		<form action="/chat/deleteDirectMessage" method="GET">
-			<c:if test="${list.get(2) == myLoginNo}">
-					${list.get(0)}：${list.get(1)}
+			<c:if test="${list.getUserNo() == myLoginNo}">
+					${list.getUserName()}：${list.getMessage()}
 				<input type="button" value="削除"
-					onClick="deleteMessage('${list.get(3)}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
+					onClick="deleteMessage('${list.getMessageNo()}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
 			</c:if>
-			<c:if test="${list.get(2) != myLoginNo}">
-				<a href="/chat/showProfile?toUserNo=${list.get(2)}" target=”_blank”>${list.get(0)}</a>
-					：${list.get(1)}
+			<c:if test="${list.getUserNo() != myLoginNo}">
+				<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+					target=”_blank”>${list.getUserName()}</a>
+					：${list.getMessage()}
 					</c:if>
 		</form>
 	</c:forEach>
@@ -50,7 +48,7 @@ page import="java.util.ArrayList"%>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
-		<input type="hidden" name="deleteMessageNo" value="${list.get(3)}">
+		<input type="hidden" name="deleteMessageNo" value="${list.getMessageNo()}">
 		<input type="hidden" name="toUserNo"
 			value="${messageCheckBean.getToUserNo()}"> <input type="text"
 			name="sendMessage" value=""> <input type="submit"

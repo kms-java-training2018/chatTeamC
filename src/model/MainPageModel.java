@@ -7,12 +7,17 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import bean.LatestGroupMessageBean;
+import bean.LatestMenberMessageBean;
 import bean.LoginBean;
 import bean.MainPageBean;
 
 public class MainPageModel {
+
 	/**
-	 * メイン画面ビジネスロジック
+	 * 引数 メインページビーン ログインビーン
+	 * 送り値 メインページビーン
+	 * メインページビーンの内容を設定しサーブレットに返す。
 	 */
 	public MainPageBean authentication(MainPageBean bean, LoginBean loginBean) {
 		// 初期化
@@ -43,7 +48,6 @@ public class MainPageModel {
 			sb.append(" user_name != '" + loginBean.getUserName() + "' ");
 			sb.append(" ORDER BY USER_NO DESC");
 
-
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			ResultSet rs = stmt.executeQuery(sb.toString());
@@ -51,19 +55,17 @@ public class MainPageModel {
 			while (rs.next()) {
 				// Listの初期化
 				// bean に送るようのリスト
-				ArrayList<String> setList = new ArrayList<String>();
+				LatestMenberMessageBean setList = new LatestMenberMessageBean();
 				// Listに追加
-				setList.add(rs.getString("user_no"));
-				setList.add(rs.getString("user_name"));
+				setList.setUserNo(rs.getString("user_no"));
+				setList.setUserName(rs.getString("user_name"));
 				// Beanに追加
-				bean.setMember(setList);
+				bean.setLatestMenberMessageBeanList(setList);
 			}
 
 			// 個人チャットの表示用リスト作成
-			for (ArrayList<String> menber : bean.getMember()) {
+			for (LatestMenberMessageBean menber : bean.getLatestMenberMessageBeanList()) {
 
-				// bean に送るようのリスト
-				ArrayList<String> setList = new ArrayList<String>();
 				// テキストの最新番号を初期化
 				int maxtext = 0;
 				// 挿入するテキストを初期化
@@ -92,12 +94,12 @@ public class MainPageModel {
 				sb.append(" AND F.TO_SEND_USER IS NOT NULL ");
 				sb.append(" AND F.TO_SEND_USER = E.USER_NO ");
 				sb.append(" AND F.DELETE_FLAG = 0 ");
-				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
+				sb.append(" AND E.USER_NO = " + menber.getUserNo() + " ) ");
 				sb.append(" OR ");
 				sb.append(" ( F.TO_SEND_USER =" + loginBean.getUserNo());
 				sb.append(" AND F.SEND_USER_NO = E.USER_NO ");
 				sb.append(" AND F.DELETE_FLAG = 0 ");
-				sb.append(" AND E.USER_NO = " + menber.get(0) + " ) ");
+				sb.append(" AND E.USER_NO = " + menber.getUserNo() + " ) ");
 				sb.append(" GROUP BY ");
 				sb.append(" E.USER_NAME ");
 				sb.append(" ) INN ");
@@ -117,13 +119,11 @@ public class MainPageModel {
 						text = rs.getString("message");
 					}
 				}
-				// Listに追加
-				setList.add(menber.get(1));
-				setList.add(text);
-				setList.add(menber.get(0));
 				// Beanに追加
-				bean.setMemberTalk(setList);
+				menber.setLatestMessage(text);
 			}
+
+
 			// text
 			ArrayList<String> setListText = new ArrayList<String>();
 			// 名前
@@ -166,7 +166,7 @@ public class MainPageModel {
 			for (int i = 0; i < number.size(); i++) {
 
 				// 初期化
-				 text = "会話を始めましょう！";
+				text = "会話を始めましょう！";
 
 				// コメントがあるかどうかのSQL？
 				sb = new StringBuilder();
@@ -201,7 +201,7 @@ public class MainPageModel {
 				// 項目の追加
 				while (rs.next()) {
 					if (rs.getString("MESSAGE") != null) {
-					text = rs.getString("MESSAGE");
+						text = rs.getString("MESSAGE");
 					}
 				}
 				setListText.add(text);
@@ -209,11 +209,11 @@ public class MainPageModel {
 
 			for (int i = 0; i < number.size(); i++) {
 				// 最終的に送る用のリスト
-				ArrayList<String> setList = new ArrayList<String>();
-				setList.add(number.get(i));
-				setList.add(name.get(i));
-				setList.add(setListText.get(i));
-				bean.setGrowp(setList);
+				LatestGroupMessageBean setList = new LatestGroupMessageBean();
+				setList.setGroupNo(number.get(i));
+				setList.setGroupName(name.get(i));
+				setList.setLatestMessage(setListText.get(i));
+				bean.setLatestGroupMessageBeanList(setList);
 			}
 
 		} catch (SQLException e) {
@@ -229,7 +229,7 @@ public class MainPageModel {
 		return bean;
 	}
 
-	public void newProfile(String name, String profile, LoginBean bean) {
+	public boolean newProfile(String name, String profile, LoginBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -258,7 +258,13 @@ public class MainPageModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			stmt.executeQuery(sb.toString());
+			int num = stmt.executeUpdate(sb.toString());
+
+			if (num == 0) {
+				// データの更新が失敗しました
+				System.out.println("更新失敗なのでエラーに遷移します");
+				return false;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -270,5 +276,6 @@ public class MainPageModel {
 				e.printStackTrace();
 			}
 		}
+		return true;
 	}
 }

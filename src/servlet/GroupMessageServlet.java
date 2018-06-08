@@ -43,7 +43,7 @@ public class GroupMessageServlet extends HttpServlet {
 			// 会話情報の取得
 			try {
 				bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
-				Mbean = Mmodel.authentication(Mbean, loginBean);
+				Mbean = Mmodel.getTalkContent(Mbean, loginBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -79,7 +79,7 @@ public class GroupMessageServlet extends HttpServlet {
 
 			//入力チェックの返答
 			int bytecheck = 0;
-			bytecheck = bean.stringLengthCheck(sendMessage);
+			bytecheck = model.stringLengthCheck(sendMessage);
 			if (bytecheck == 1) {
 				req.setAttribute("error", "文字数オーバーです");
 				doGet(req, res);

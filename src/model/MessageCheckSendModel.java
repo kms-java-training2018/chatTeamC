@@ -5,21 +5,31 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import bean.LoginBean;
 import bean.MessageCheckBean;
+import bean.TalkContentBean;
 
 /**
- * 設計書03　メッセージ確認・送信機能
- * 飯島
+ * メッセージ確認・送信機能
+ * ○getTalkContent
+ * 　自分と相手の会員番号から、会話情報を取得。
+ * また、ページ先頭に表示させるために、相手の名前の
+ * 情報を取得する。
+ *
+ * ○sendMessage
+ * 　入力した内容をデータベースに追加する。
+ *
+ * ○stringLengthCheck
+ * メッセージを受け取り、そのサイズが200バイトを
+ * 超えるかどうかを判断する。
  * */
 
 /**
- * authentication（会話情報取得・表示処理）
+ * getTalkContent（会話情報取得・表示処理）
  * */
 public class MessageCheckSendModel {
-	public MessageCheckBean authentication(MessageCheckBean bean, LoginBean loginBean) {
+	public MessageCheckBean getTalkContent(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 		Connection conn = null;
@@ -92,14 +102,14 @@ public class MessageCheckSendModel {
 			while (rs.next()) {
 				// Listの初期化
 				// bean に送る用のリスト
-				ArrayList<String> setList = new ArrayList<String>();
+				TalkContentBean talkContentBean = new TalkContentBean();
 				// Listに追加（発言者名<0>、会話内容<1>、発言者の会員番号<2>、会話情報番号<3>）
-				setList.add(rs.getString("USER_NAME"));
-				setList.add(rs.getString("MESSAGE"));
-				setList.add(rs.getString("USER_NO"));
-				setList.add(rs.getString("MESSAGE_NO"));
+				talkContentBean.setUserName(rs.getString("USER_NAME"));
+				talkContentBean.setMessage(rs.getString("MESSAGE"));
+				talkContentBean.setUserNo(rs.getString("USER_NO"));
+				talkContentBean.setMessageNo(rs.getString("MESSAGE_NO"));
 				// Beanに追加
-				bean.setTalkContent(setList);
+				bean.setTalkContentBeanList(talkContentBean);
 			}
 
 			//名前取得用
@@ -155,11 +165,6 @@ public class MessageCheckSendModel {
 			conn = DriverManager.getConnection(url, user, dbPassword);
 
 			// SQL作成
-			/**
-			 *会話情報テーブルから
-			 *自会員と送信先会員番号間の
-			 *やりとりの内容を取り出す。
-			 * */
 
 			/*
 			 * SQL文内容（データベースに登録する内容）
@@ -282,5 +287,30 @@ public class MessageCheckSendModel {
 			}
 		}
 		return bean;
+	}
+
+	/**
+	 * ○stringLengthCheck
+	 * メッセージを受け取り、そのサイズが200バイトを
+	 * 超えるかどうかを判断する。
+	 * @param input　メッセージを取得
+	 * @return　指定バイト数以内の場合0、
+	 * 指定バイト数を超えたら1を返す。
+	 */
+	public int stringLengthCheck(String input) {
+		//返すメッセージを設定
+		int judgeByte = 0;
+
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		System.out.println(length);
+		// 最大バイト数の設定
+		int max = 200;
+
+		if ((int) length > max) { // 最大文字数よりも多かった場合
+			judgeByte = 1;
+			return judgeByte;
+		}
+		return judgeByte; // 許容内であった場合
 	}
 }

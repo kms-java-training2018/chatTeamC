@@ -13,7 +13,7 @@ public class MyPageModel {
 	/**
 	 * 自己紹介画面編集画面ビジネスロジック
 	 */
-	public MyPageBean authentication(LoginBean loginBean,MyPageBean bean) {
+	public MyPageBean authentication(LoginBean loginBean, MyPageBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -49,6 +49,7 @@ public class MyPageModel {
 				bean.setName(rs.getString("USER_NAME"));
 				bean.setMyProfile(rs.getString("MY_PAGE_TEXT"));
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
@@ -61,8 +62,5 @@ public class MyPageModel {
 		}
 
 		return bean;
-	}
-
-	public void plofileSet(String name,String plofile) {
 	}
 }

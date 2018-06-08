@@ -18,8 +18,8 @@ public class DirectMessageServlet extends HttpServlet {
 	 * 会話情報の表示の部分
 	 * */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		// 初期化
 		MessageCheckBean bean = new MessageCheckBean();
+		// 初期化
 		MessageCheckSendModel model = new MessageCheckSendModel();
 		/*
 		 * セッション情報取得
@@ -37,7 +37,7 @@ public class DirectMessageServlet extends HttpServlet {
 			Integer toUserNo = (bean.getToUserNo());
 			// 会話情報の取得
 			try {
-				bean = model.authentication(bean, loginBean);
+				bean = model.getTalkContent(bean, loginBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -76,7 +76,7 @@ public class DirectMessageServlet extends HttpServlet {
 
 		//入力チェックの返答
 		int bytecheck = 0;
-		bytecheck = bean.stringLengthCheck(sendMessage);
+		bytecheck = model.stringLengthCheck(sendMessage);
 		if (bytecheck == 1) {
 			req.setAttribute("error", "文字数オーバーです");
 			doGet(req, res);
