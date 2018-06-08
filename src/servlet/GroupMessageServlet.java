@@ -43,7 +43,7 @@ public class GroupMessageServlet extends HttpServlet {
 			// 会話情報の取得
 			try {
 				bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
-				Mbean = Mmodel.authentication(Mbean, loginBean);
+				Mbean = Mmodel.getTalkContent(Mbean, loginBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

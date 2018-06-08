@@ -19,7 +19,7 @@ import bean.MessageCheckBean;
  * authentication（会話情報取得・表示処理）
  * */
 public class MessageCheckSendModel {
-	public MessageCheckBean authentication(MessageCheckBean bean, LoginBean loginBean) {
+	public MessageCheckBean getTalkContent(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 		Connection conn = null;

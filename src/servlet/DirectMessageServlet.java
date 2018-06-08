@@ -37,7 +37,7 @@ public class DirectMessageServlet extends HttpServlet {
 			Integer toUserNo = (bean.getToUserNo());
 			// 会話情報の取得
 			try {
-				bean = model.authentication(bean, loginBean);
+				bean = model.getTalkContent(bean, loginBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

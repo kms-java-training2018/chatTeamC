@@ -15,10 +15,6 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
-<script type="text/javascript" src="JavaScript/logout.js"
-	charset="UTF-8">
-
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>個人チャットページ</title>
 </head>
