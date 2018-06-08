@@ -4,20 +4,32 @@
 	color: #0000ff;
 	text-decoration: none;
 }
-#Direct
-{
+
+#Direct {
 	color: #0033ee;
 }
-#Group
-{
+
+#Group {
 	color: #ff80c0;
 }
+
 .name {
 	background-color: #e9eafe;
 }
+
 .message {
 	background-color: #fff4fc;
 }
+
 .back {
 	background-color: #f4ffff;
+}
+
+.menu {
+	border: "1";
+	align: "center";
+	width: "80%";
+	height: "60vh";
+	cellspacing: "0";
+	cellpadding: "3";
 }

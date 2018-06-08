@@ -6,7 +6,7 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
+	
 </script>
 
 <link rel="stylesheet" href="css/base.css">
@@ -15,18 +15,15 @@
 <title>Main menu</title>
 </head>
 <body>
-	<table border="1" align="center" width="80%" height="60vh"
-		cellspacing="0" cellpadding="3">
-
-
+	<table class="menu">
 		<!-- 1段目 -->
 		<tr>
 			<th colspan="3">
 				<p>Main menu</p>
 			</th>
-			<th class="back" >
-				<p>ようこそ ${session.userName}さん</p> <input type="button" value="Logout"
-				onClick="logout()" />
+			<th class="back">
+				<p>ようこそ ${session.userName}さん</p> <input type="button"
+				value="Logout" onClick="logout()" />
 
 			</th>
 		</tr>
@@ -47,8 +44,7 @@
 	<br>
 	<br>
 
-	<table border="1" align="center" width="80%" height="60vh"
-		cellspacing="0" cellpadding="3">
+	<table class="menu">
 		<!-- 3段目 -->
 		<tr align="center">
 			<th colspan="4" id="Direct">Personal chat</th>
@@ -57,20 +53,20 @@
 			<td class="name">Name</td>
 			<td colspan="3" class="message">Massage</td>
 		</tr>
-		<c:forEach var="list" items="${MainPageBean.getMemberTalk()}"
+		<c:forEach var="list"
+			items="${MainPageBean.getLatestMenberMessageBeanList()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/directMessage?toUserNo=${list.get(2)}"
-					class="Link">${list.get(0)}</a></td>
-				<td colspan="3">${list.get(1)}</td>
+				<td><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
+					class="Link">${list.getUserName()}</a></td>
+				<td colspan="3">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
 	</table>
 	<br>
 	<br>
 
-	<table border="1" align="center" width="80%" height="60vh"
-		cellspacing="0" cellpadding="3">
+	<table class="menu">
 		<!-- 4段目 -->
 		<tr align="center">
 			<th colspan="4" id="Group">Group chat</th>
@@ -79,12 +75,13 @@
 			<td class="name">Name</td>
 			<td colspan="3" class="message">Massage</td>
 		</tr>
-		<c:forEach var="list" items="${MainPageBean.getGrowp()}"
+		<c:forEach var="list"
+			items="${MainPageBean.getLatestGroupMessageBeanList()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/groupMessage?toGroupNo=${list.get(0)}"
-					class="Link">${list.get(1)}</a></td>
-				<td colspan="3">${list.get(2)}</td>
+				<td><a href="/chat/groupMessage?toGroupNo=${list.getGroupNo()}"
+					class="Link">${list.getGroupName()}</a></td>
+				<td colspan="3">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
 

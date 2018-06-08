@@ -20,50 +20,55 @@ public class MainPageServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+
 		// セッション情報取得
 		HttpSession session = req.getSession();
-		// 移動先のアドレス
-		//String direction = "/WEB-INF/jsp/login.jsp";
+		// 移動先のアドレス(メインページ)
+		String direction = "/WEB-INF/jsp/mainPage.jsp";
 		// 初期化
 		MainPageModel model = new MainPageModel();
 		MainPageBean bean = new MainPageBean();
-		String myName = "";
-		String myProfile = "";
+		//String myName = "";
+		//String myProfile = "";
 
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
+
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 			if ((String) req.getParameter("newProfile") != null) {
 
-				myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
-				myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
+				// 名前の設定
+				String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
+				String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
 
+				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
 				if (myName.equals("")) {
 					req.setAttribute("erorr", "無効な名前です");
 					//マイページに戻る
 					req.setAttribute("name", myName);
 					req.setAttribute("profile", myProfile);
-					req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
+					//req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
+					direction = "/WEB-INF/jsp/myPage.jsp";
 				} else {
-
+					// 名前をログインビーンに設定する
 					loginBean.setUserName(myName);
+					// セッションのほうにも名前を設定しておく
 					SessionBean sessionBean = new SessionBean();
 					sessionBean.setUserName(myName);
 					session.setAttribute("session", sessionBean);
-
+					// データベースにプロフィールを設定する。
 					model.newProfile(myName, myProfile, loginBean);
 
 					// 認証処理
 					try {
 						bean = model.authentication(bean, loginBean);
 						req.setAttribute("MainPageBean", bean);
-						//direction = "/WEB-INF/jsp/mainPage.jsp";
-						req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
+						//req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 					} catch (Exception e) {
 						session.setAttribute("session", null);
 						// 情報が無かったためエラー画面に移行
-						//direction = "/WEB-INF/jsp/errorPage.jsp";
-						req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+						direction = "/WEB-INF/jsp/errorPage.jsp";
+						//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					}
 				}
 			} else {
@@ -72,13 +77,12 @@ public class MainPageServlet extends HttpServlet {
 				try {
 					bean = model.authentication(bean, loginBean);
 					req.setAttribute("MainPageBean", bean);
-					//direction = "/WEB-INF/jsp/mainPage.jsp";
-					req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
+					//req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 				} catch (Exception e) {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
-					//direction = "/WEB-INF/jsp/errorPage.jsp";
-					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+					direction = "/WEB-INF/jsp/errorPage.jsp";
+					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
 			}
 
@@ -86,11 +90,11 @@ public class MainPageServlet extends HttpServlet {
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			//direction = "/WEB-INF/jsp/errorPage.jsp";
-			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+			direction = "/WEB-INF/jsp/errorPage.jsp";
+			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 
-		//req.getRequestDispatcher(direction).forward(req, res);
+		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }
 

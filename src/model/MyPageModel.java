@@ -62,7 +62,4 @@ public class MyPageModel {
 
 		return bean;
 	}
-
-	public void plofileSet(String name,String plofile) {
-	}
 }
