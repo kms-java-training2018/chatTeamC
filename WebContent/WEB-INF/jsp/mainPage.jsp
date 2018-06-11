@@ -13,11 +13,12 @@
 </script>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
+<link rel="stylesheet" href="css/Title.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Main menu</title>
 </head>
 <body>
-	<div>
+	<div id="Lock">
 		<table class="menu">
 			<!-- 1段目 -->
 			<tr>
@@ -45,6 +46,12 @@
 			</tr>
 		</table>
 	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
 	<br>
 	<br>
 

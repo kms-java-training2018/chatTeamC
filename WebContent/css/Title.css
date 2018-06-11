@@ -4,4 +4,6 @@
 	padding: .5em .75em;
 	position: fixed;
 	background-color: #f6f6f6;
+	left: 50%;
+	transform: translate(-50%, 0%);
 }
