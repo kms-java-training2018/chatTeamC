@@ -87,6 +87,7 @@ public class GroupMessageServlet extends HttpServlet {
 				// 会話情報の取得
 				try {
 					model.sendGroupMessage(bean, loginBean);
+					req.setAttribute("error", loginBean.getErrorMessage());
 					//				bean = model.authentication(bean, loginBean);
 					//最新情報が表示されていないため、情報更新用処理。
 					//前回情報と合わせて表示されてしまっているためコメントアウト中
