@@ -12,7 +12,7 @@ import bean.DeleteMessageBean;
 import bean.LoginBean;
 import model.DeleteMessageModel;
 
-public class DeleteGroupMessageServlet extends HttpServlet{
+public class DeleteGroupMessageServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 
 		// セッション情報取得（ログインしているかどうか
@@ -31,10 +31,10 @@ public class DeleteGroupMessageServlet extends HttpServlet{
 		//消したいメッセージの会話情報番号を取得
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
 		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
-		System.out.println(bean.getDeleteMessageNo());  //DeleteNoが受け取れているかの確認
+		System.out.println(bean.getDeleteMessageNo()); //DeleteNoが受け取れているかの確認
 		// 会話情報の取得
 		try {
-			model.authentication(loginBean, bean);
+			model.deleteMessage(loginBean, bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

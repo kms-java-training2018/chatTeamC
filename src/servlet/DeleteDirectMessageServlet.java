@@ -16,7 +16,7 @@ import model.DeleteMessageModel;
 /**
  * 個別メッセージの削除処理用サーブレット
  * */
-public class DeleteDirectMessageServlet extends HttpServlet{
+public class DeleteDirectMessageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
@@ -38,7 +38,7 @@ public class DeleteDirectMessageServlet extends HttpServlet{
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
 		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
 		try {
-			model.authentication(loginBean, bean);
+			model.deleteMessage(loginBean, bean);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

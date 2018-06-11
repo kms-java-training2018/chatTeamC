@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -10,7 +9,7 @@ import bean.DeleteMessageBean;
 import bean.LoginBean;
 
 public class DeleteMessageModel {
-	public LoginBean authentication(LoginBean bean, DeleteMessageBean DelMBean) {
+	public LoginBean deleteMessage(LoginBean bean, DeleteMessageBean DelMBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -30,8 +29,7 @@ public class DeleteMessageModel {
 		// 接続作成
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
-			
-			
+
 			// SQL作成
 			sb.append(" UPDATE ");
 			sb.append(" T_MESSAGE_INFO ");
@@ -42,15 +40,11 @@ public class DeleteMessageModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sb.toString());
+			int rs = stmt.executeUpdate(sb.toString());
 
-			//if (!rs.next()) {
-			//	bean.setErrorMessage("メッセージを削除できませんでした。");
-			//} else {
-			//	bean.setUserNo(rs.getString("user_no"));
-			//	bean.setUserName(rs.getString("user_name"));
-			//	bean.setErrorMessage("");
-			//}
+//			if (rs == 0) {
+//				System.out.println("");
+//			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
