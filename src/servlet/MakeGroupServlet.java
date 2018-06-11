@@ -192,7 +192,7 @@ public class MakeGroupServlet extends HttpServlet {
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 				}
 
-				if(req.getAttribute("backMain") == null) {
+				if(req.getParameter("backMain") == null) {
 
 				}else {
 				MainPageServlet main = new MainPageServlet();
