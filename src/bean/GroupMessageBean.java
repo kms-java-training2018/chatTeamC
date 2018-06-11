@@ -18,7 +18,6 @@ public class GroupMessageBean {
 	// グループの作成者番号
 	private String registUserNo;
 
-
 	// 消したい会話情報番号
 	private String deleteMessageNo;
 

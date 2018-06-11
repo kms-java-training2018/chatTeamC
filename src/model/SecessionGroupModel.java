@@ -2,14 +2,13 @@ package model;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import bean.LoginBean;
 
-public class SecessionGroupMessageModel {
-	public void authentication(LoginBean bean,String groupNo) {
+public class SecessionGroupModel {
+	public void SecessionGroup(LoginBean bean, String groupNo) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -28,7 +27,6 @@ public class SecessionGroupMessageModel {
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
 
-
 			System.out.println(bean.getUserNo());
 			System.out.println(groupNo);
 
@@ -42,9 +40,11 @@ public class SecessionGroupMessageModel {
 			sb.append(" AND GROUP_NO = " + groupNo);
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			ResultSet rs = stmt.executeQuery(sb.toString());
-
-
+			stmt.executeUpdate(sb.toString());
+			// 脱退の成否を確認
+//			if (rs == 0) {
+//				bean.setErrorMessage("グループを脱退出来ませんでした");
+//			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
