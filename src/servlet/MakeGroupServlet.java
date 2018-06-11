@@ -197,10 +197,9 @@ public class MakeGroupServlet extends HttpServlet {
 			session.setAttribute("session", null);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}
-		try {
+
 			req.getRequestDispatcher(direction).forward(req, res);
-		} catch (Exception e) {
-		}
+
 
 	}
 
