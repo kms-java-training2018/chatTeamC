@@ -23,6 +23,7 @@ public class GroupBean {
 	private String autherUserName;
 	private String autherUserNo;
 
+	/** ユーザー一覧	 */
 	private boolean getAllUserListJudge;
 
 

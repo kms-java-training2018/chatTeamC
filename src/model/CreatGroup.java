@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import bean.GroupBean;
+import bean.MemberBean;
 
 /**
  * グループ作成機能model<br>
@@ -18,7 +19,10 @@ import bean.GroupBean;
 public class CreatGroup {
 
 	//groupBeanの設定
-	GroupBean gb;
+	GroupBean gb = new GroupBean();
+
+	//MemberBeanの設定
+	MemberBean mb = new MemberBean();;
 
 	//作成者の名前
 	private String autherName;
@@ -27,12 +31,23 @@ public class CreatGroup {
 	//グループの名前
 	private String groupName;
 
+	//MemberBeanのリスト
+	ArrayList<MemberBean> memberList;
+
 	/**
 	 * グループbeanをセットする<br>
 	 * @param groupBean 受け取ったgroupBean
 	 */
 	public void setGroupBean(GroupBean groupBean) {
 		this.gb = groupBean;
+	}
+
+	/**
+	 * MemberBeanをセットする<br>
+	 * @param MemberBean　受け取ったMemberBean
+	 */
+	public void setMemberBean(MemberBean MemberBean) {
+		this.mb = MemberBean;
 	}
 
 	/**
@@ -117,6 +132,10 @@ public class CreatGroup {
 
 			while (rs.next()) {
 
+				//				mb.setMembername(rs.getString("user_name"));
+				//				mb.setMemberNo(rs.getString("user_name"));
+				//				memberList.add(mb);
+
 				/* 行からデータを取得 */
 				gb.setUserNo(rs.getString("user_no"));
 				gb.setUserName(rs.getString("user_name"));
@@ -144,7 +163,6 @@ public class CreatGroup {
 
 		//成否判定をBeanに設定
 		gb.setGetAllUserListJudge(getDataJudge);
-
 
 		return gb;
 
