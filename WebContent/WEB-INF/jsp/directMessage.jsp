@@ -19,12 +19,12 @@ page import="java.util.ArrayList"%>
 <title>個人チャットページ</title>
 </head>
 <body>
+	ようこそ ${session.userName}さん
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～
 	<a href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
 					target=”_blank”>${messageCheckBean.getToUserName()}</a>さんとの会話部屋～</h1>
 	<h2>メッセージ</h2>
-	<h2>ようこそ ${session.userName}さん</h2>
 	<c:forEach var="list"
 		items="${messageCheckBean.getTalkContentBeanList()}"
 		varStatus="status">

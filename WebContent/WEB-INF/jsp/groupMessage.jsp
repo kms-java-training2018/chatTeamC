@@ -23,10 +23,10 @@ page import="java.util.ArrayList"%>
 <title>Insert title here</title>
 </head>
 <body>
-	<input type="button" value="ログアウト" onClick="logout()" />
+	ようこそ ${session.userName}さん<br><input type="button" value="ログアウト" onClick="logout()" />
 	<h1>チャット研修プログラム</h1>
 	<h2>${GroupBean.getGroupName()}</h2>
-	<h2>ようこそ ${session.userName}さん</h2>
+	
 
 	<c:forEach var="list" items="${GroupBean.getNumber()}"
 		varStatus="status">
