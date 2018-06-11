@@ -6,8 +6,10 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
+
 </script>
 <script type="text/javascript" src="JavaScript/Scrool.js">
+
 </script>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
@@ -15,32 +17,34 @@
 <title>Main menu</title>
 </head>
 <body>
-	<table class="menu">
-		<!-- 1段目 -->
-		<tr>
-			<th colspan="3">
-				<p>Main menu</p>
-			</th>
-			<th class="back">
-				<p>ようこそ ${session.userName}さん</p> <input type="button"
-				value="Logout" onClick="logout()" />
+	<div>
+		<table class="menu">
+			<!-- 1段目 -->
+			<tr>
+				<th colspan="3">
+					<p>Main menu</p>
+				</th>
+				<th class="backcolor">
+					<p>ようこそ ${session.userName}さん</p> <input type="button"
+					value="Logout" onClick="logout()" />
 
-			</th>
-		</tr>
-		<!-- 2段目 -->
-		<tr align="center">
-			<td colspan="2" class="back">
-				<form action="/chat/makeGroup" method="POST">
-					<input type="submit" value="Group creation">
-				</form>
-			</td>
-			<td colspan="2">
-				<form action="/chat/myPage" method="POST">
-					<input type="submit" value="Profile">
-				</form>
-			</td>
-		</tr>
-	</table>
+				</th>
+			</tr>
+			<!-- 2段目 -->
+			<tr align="center">
+				<td colspan="2" class="backcolor">
+					<form action="/chat/makeGroup" method="POST">
+						<input type="submit" value="Group creation">
+					</form>
+				</td>
+				<td colspan="2">
+					<form action="/chat/myPage" method="POST">
+						<input type="submit" value="Profile">
+					</form>
+				</td>
+			</tr>
+		</table>
+	</div>
 	<br>
 	<br>
 
