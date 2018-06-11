@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.DeleteMessageBean;
 import bean.LoginBean;
 import bean.MessageCheckBean;
 import model.DeleteMessageModel;
@@ -27,8 +26,6 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
 		}
-		//DeleteMessageBeanの初期化
-		DeleteMessageBean bean = new DeleteMessageBean();
 		DeleteMessageModel model = new DeleteMessageModel();
 		//現在のセッションに入っているloginBean情報を受け取る
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
@@ -36,12 +33,15 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		messageCheckBean.getToUserNo();
 		//消したいメッセージの会話情報番号を取得
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
-		bean.setDeleteMessageNo(Integer.parseInt(req.getParameter("deleteMessageNo")));
+		int deleteMessageNo = (Integer.parseInt(req.getParameter("deleteMessageNo")));
 		try {
-			model.deleteMessage(loginBean, bean);
+			model.deleteMessage(loginBean, deleteMessageNo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		//削除できたかどうかを表示。
+		//メッセージ内容はmodel内でセット
+		req.setAttribute("error", loginBean.getErrorMessage());
 		//削除処理終了後、directMessageServletに移し、更新させる。
 		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
 		directMessageServlet.doGet(req, res);

@@ -5,11 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import bean.DeleteMessageBean;
 import bean.LoginBean;
 
 public class DeleteMessageModel {
-	public LoginBean deleteMessage(LoginBean bean, DeleteMessageBean DelMBean) {
+	public LoginBean deleteMessage(LoginBean bean, int deleteMessageNo) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -17,7 +16,6 @@ public class DeleteMessageModel {
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
-		int deleteMessageNo = DelMBean.getDeleteMessageNo();
 
 		// JDBCドライバーのロード
 		try {
@@ -41,10 +39,12 @@ public class DeleteMessageModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			int rs = stmt.executeUpdate(sb.toString());
-
-//			if (rs == 0) {
-//				System.out.println("");
-//			}
+			//メッセージ削除の結果の出力内容を設定。
+			if (rs == 0) {
+				bean.setErrorMessage("メッセージを削除できませんでした…");
+			} else {
+				bean.setErrorMessage("メッセージを削除しました");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
