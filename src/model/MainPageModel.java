@@ -206,7 +206,7 @@ public class MainPageModel {
 						text = rs.getString("MESSAGE");
 					}
 				}
-				// テキストデータに追加
+				// 最新メッセージをセット
 				setListText.add(text);
 			}
 
@@ -222,17 +222,28 @@ public class MainPageModel {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
+			// 想定外のことがおきたときはbeanをnullに
+			bean = null;
 		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
+				bean = null;
 				e.printStackTrace();
 			}
 		}
+		// 設定したビーンを返す
 		return bean;
 	}
 
+	/**
+	 * プロフィールの更新を行なう、
+	 * 返り値で行なえたかの判断を返す。
+	 */
 	public boolean newProfile(String name, String profile, LoginBean bean) {
+		// プロフィールを変更を出来たかどうかの確認用
+		boolean changeProfile = true;
+
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -244,8 +255,11 @@ public class MainPageModel {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
+			// エラー文
 			// 入れなかった場合
 			e.printStackTrace();
+			// プロフィールを更新させない
+			changeProfile = false;
 		}
 		// 接続作成
 		try {
@@ -266,19 +280,29 @@ public class MainPageModel {
 			if (num == 0) {
 				// データの更新が失敗しました
 				System.out.println("更新失敗なのでエラーに遷移します");
-				return false;
+				// プロフィールを更新させない
+				changeProfile = false;
 			}
 
 		} catch (SQLException e) {
+			// エラー文
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
+			System.out.println("想定外のデータが送られました。");
+			// プロフィールを更新させない
+			changeProfile = false;
 		} finally {
 			try {
 				conn.close();
 			} catch (SQLException e) {
+				// エラー文
 				e.printStackTrace();
+				System.out.println("想定外のエラーが発生しました");
+				// プロフィールを更新させない
+				changeProfile = false;
 			}
 		}
-		return true;
+		// プロフィールが変更できるかどうかを返す
+		return changeProfile;
 	}
 }

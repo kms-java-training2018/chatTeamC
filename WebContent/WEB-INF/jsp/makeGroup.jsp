@@ -10,7 +10,7 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-	
+
 </script>
 
 <link rel="stylesheet" href="css/base.css">
@@ -43,7 +43,7 @@
 				<p>グループの名前</p>
 				<input type="text" name="groupName" class="hoge" value=''>
 				<p>
-					<font size="5" color="red">${error }</font>
+					<font size="5" color="red">${error}</font>
 				</p>
 			</form>
 		</td>
