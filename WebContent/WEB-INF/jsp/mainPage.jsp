@@ -28,7 +28,6 @@
 				<th class="backcolor">
 					<p>ようこそ ${session.userName}さん</p> <input type="button"
 					value="Logout" onClick="logout()" />
-
 				</th>
 			</tr>
 			<!-- 2段目 -->

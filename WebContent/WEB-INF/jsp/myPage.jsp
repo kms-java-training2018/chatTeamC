@@ -10,24 +10,26 @@
 
 </script>
 
+<link rel="stylesheet" href="css/Title.css">
+
 <title>My Page</title>
 
 </head>
 <body>
-
-	ようこそ ${session.userName}さん
-	<br>
-	<input type="button" value="Logout" onClick="logout()"
-		style="width: 79px; height: 27px">
-	<br>
-	<br>
-	<br>
-	<div align="center">
+	<div align="center" id="Lock">
+		<h2>ようこそ ${session.userName}さん</h2>
+		<input type="button"
+			value="Logout" onClick="logout()" style="width: 79px; height: 27px">
+		<br>
+		<br>
 		<table border="1" align="center" width="80%" height="60vh"
 			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1"
 			style="width: 493px; height: 96px">
-			<tr><td>
-				<p>My Page</p> </td></tr>
+			<tr>
+				<td>
+					<p align="center">My Page</p>
+				</td>
+			</tr>
 		</table>
 
 		<br> <br>
