@@ -27,7 +27,7 @@ public class ShowProfileServlet extends HttpServlet {
 
 			// 認証処理
 			try {
-				bean = model.authentication(bean, loginBean, req.getParameter("toUserNo"));
+				bean = model.showProfileSearch(bean, loginBean, req.getParameter("toUserNo"));
 			} catch (Exception e) {
 				e.printStackTrace();
 				// エラーページに移動
@@ -39,10 +39,10 @@ public class ShowProfileServlet extends HttpServlet {
 
 			req.setAttribute("Name", bean.getName());
 			req.setAttribute("Profile", bean.getProfile());
-			req.setAttribute("sql", bean);
+			req.setAttribute("Unacquired", bean);
 
 
-			if (bean.getSql() == 0) {
+			if (bean.getUnacquired() == 0) {
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
 				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);

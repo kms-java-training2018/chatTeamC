@@ -11,14 +11,12 @@ import bean.ShowProfileBean;
 
 public class ShowProfileModel {
 
-
-	public ShowProfileBean authentication(ShowProfileBean bean, LoginBean loginBean, String UserNo) {
-		//TODO メッセージ、グループメッセージからbeanを受け取る。後に編集し、代入
+	public ShowProfileBean showProfileSearch(ShowProfileBean bean, LoginBean loginBean, String UserNo) {
 		String userId = UserNo; // bean.getUserId();
 		//String myPageText = "0001"; // bean.get();
 
 		//
-		int sql;
+		int Unacquired;
 
 		// 初期化
 		StringBuilder sb = new StringBuilder();
@@ -56,13 +54,12 @@ public class ShowProfileModel {
 				bean.setName(rs.getString("user_name"));
 				bean.setProfile(rs.getString("my_page_text"));
 
-
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			sql = 0;
-			bean.setSql(sql); //SQL取得失敗であればbeanに入れてServletに飛ばす
+			Unacquired = 0;
+			bean.setUnacquired(Unacquired); //SQL取得失敗であればbeanに入れてServletに飛ばす
 
 			// sqlの接続は絶対に切断
 		} finally {
