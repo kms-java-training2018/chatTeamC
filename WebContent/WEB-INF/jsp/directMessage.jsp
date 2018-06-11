@@ -9,17 +9,15 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
-
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>個人チャットページ</title>
 </head>
 <body>
-	ようこそ ${session.userName}さん
+	<p>ようこそ ${session.userName}さん</p>
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～
 	<a href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
