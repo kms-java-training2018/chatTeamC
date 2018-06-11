@@ -199,8 +199,12 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
-			}catch(SQLIntegrityConstraintViolationException e){
-				loginBean.setErrorMessage("メッセージを入力してください。");
+			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
+		} catch (SQLIntegrityConstraintViolationException e) {
+			loginBean.setErrorMessage("メッセージを入力してください。");
+			e.printStackTrace();
+			//現在、サイズ101～299バイトのときこのExceptionに投げられる。
+			//DB内のMESSAGEが100バイトまでの制限となっているらしい……
 		} catch (SQLException e) {
 			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
@@ -278,7 +282,12 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
-
+			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
+		} catch (SQLIntegrityConstraintViolationException e) {
+			loginBean.setErrorMessage("メッセージを入力してください。");
+			e.printStackTrace();
+			//現在、サイズ101～299バイトのときこのExceptionに投げられる。
+			//DB内のMESSAGEが100バイトまでの制限となっているらしい……
 		} catch (SQLException e) {
 			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
