@@ -3,16 +3,16 @@ package bean;
 public class MemberBean {
 
 
-	private String Membername;
+	private String MemberName;
 	private String MemberNo;
 
 
 
-	public String getMembername() {
-		return Membername;
+	public String getMemberName() {
+		return MemberName;
 	}
-	public void setMembername(String membername) {
-		Membername = membername;
+	public void setMemberName(String memberName) {
+		MemberName = memberName;
 	}
 	public String getMemberNo() {
 		return MemberNo;

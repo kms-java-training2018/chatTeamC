@@ -20,77 +20,69 @@
 </head>
 <body>
 <body id="bgcolor"></body>
-<table border="1" align="center" width="80%" height="60vh"
-	cellspacing="0" cellpadding="3">
+<form action="/chat/makeGroup" method="POST">
+	<table border="1" align="center" width="80%" height="60vh"
+		cellspacing="0" cellpadding="3">
 
-	<!-- 1段目 -->
-	<tr>
-		<th colspan="2">
-			<p>グループ作成</p>
-		</th>
-		<th>
-			<form action="/chat/makeGroup" method="POST">
-				<p>ようこそ ${session.userName } さん</p>
-				<input type="button" value="ログアウト" onClick="logout()" />
-			</form>
-		</th>
-	</tr>
+		<!-- 1段目 -->
+		<tr>
+			<th colspan="2">
+				<p>グループ作成</p>
+			</th>
+			<th>
 
-	<!-- 2段目 -->
-	<tr>
-		<td colspan="3">
-			<form action="/chat/makeGroup" method="POST">
-				<p>グループの名前</p>
-				<input type="text" name="groupName" class="hoge" value=''>
+				<p>ようこそ ${session.userName } さん</p> <input type="button"
+				value="ログアウト" onClick="logout()" />
+
+			</th>
+		</tr>
+
+		<!-- 2段目 -->
+		<tr>
+			<td colspan="3">
+
+				<p>グループの名前</p> <input type="text" name="groupName" class="fsize"
+				value=''>
 				<p>
 					<font size="5" color="red">${error}</font>
 				</p>
-			</form>
-		</td>
-	</tr>
-	<!-- 3段目 -->
-	<tr>
-		<td colspan="2" rowspan="2">
-			<table class="typeA">
 
-				<tr>
-					<th>全ユーザーリスト</th>
-				</tr>
+			</td>
+		</tr>
+		<!-- 3段目 -->
+		<tr>
+			<td colspan="2" rowspan="2">
+				<table class="typeA">
 
-				<tr>
+					<tr>
+						<th>全ユーザーリスト</th>
+					</tr>
 
-					<c:forEach var="obj" items="${groupBean.getUserNameList()}"
-						varStatus="status">
-						<tr class="typeA" align="center">
+					<tr>
 
-							<td>
-								<form action="/chat/makeGroup" method="POST">
-									<input type="checkbox" name="userNo" value="${status.index}">
-									<c:out value="${obj}" />
-								</form>
-							</td>
+						<c:forEach var="obj" items="${groupBean.getMemberList()}"
+							varStatus="status">
+							<tr class="typeA" align="center">
 
-						</tr>
-					</c:forEach>
-				</tr>
-			</table>
-		<td>
+								<td><input type="checkbox" name="userNo"
+									value="${obj.getMemberNo()}"> <c:out
+										value="${obj.getMemberName()}" /></td>
 
-			<form action="/chat/makeGroup" method="POST">
-				<button type='submit' name='action' value="creat">選択したユーザーでグループを作成する</button>
-			</form>
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<!--<td><a href="/chat/main">メインメニューに戻る</a></td>-->
+							</tr>
+						</c:forEach>
+					</tr>
+				</table>
+			<td>
 
-			<form action="/chat/main" method="POST">
-				<input type="submit" value="メインメニューに戻る" />
-			</form>
 
-		</td>
-	</tr>
-</table>
+				<button type='submit' name="action" value="creat">選択したユーザーでグループを作成する</button>
+
+			</td>
+		</tr>
+		<tr>
+			<td><button type='submit' name="backMain" value="main">メインメニューに戻る</button></td>
+		</tr>
+	</table>
+</form>
 </body>
 </html>

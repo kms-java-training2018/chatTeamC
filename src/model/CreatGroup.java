@@ -8,7 +8,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import bean.GroupBean;
-//import bean.MemberBean;
+import bean.LoginBean;
+import bean.MemberBean;
 
 /**
  * グループ作成機能model<br>
@@ -22,7 +23,7 @@ public class CreatGroup {
 	GroupBean gb = new GroupBean();
 
 	//MemberBeanの設定
-	//MemberBean mb = new MemberBean();
+	MemberBean mb = new MemberBean();
 
 	//作成者の名前
 	private String autherName;
@@ -32,7 +33,7 @@ public class CreatGroup {
 	private String groupName;
 
 	//MemberBeanのリスト
-	//ArrayList<MemberBean> memberList;
+	ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
 
 	/**
 	 * グループbeanをセットする<br>
@@ -42,13 +43,7 @@ public class CreatGroup {
 		this.gb = groupBean;
 	}
 
-	/**
-	 * MemberBeanをセットする<br>
-	 * @param MemberBean　受け取ったMemberBean
-	 */
-	//public void setMemberBean(MemberBean MemberBean) {
-	//	this.mb = MemberBean;
-	//}
+
 
 	/**
 	 * グループ名をセットする<br>
@@ -95,7 +90,7 @@ public class CreatGroup {
 	 * @param name 受け取ったグループ作成者名
 	 * @return gb 処理したデータを詰めたGroupBean
 	 */
-	public GroupBean getAllUserListAcquisition(String name) {
+	public GroupBean getAllUserListAcquisition(LoginBean lb) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -125,6 +120,9 @@ public class CreatGroup {
 			sb.append(" ,user_name ");
 			sb.append("FROM ");
 			sb.append(" m_user ");
+			sb.append(" WHERE ");
+			sb.append(" user_name != '" + lb.getUserName() + "' ");
+			sb.append(" ORDER BY USER_NO");
 
 			// SQL実行してrsにセット
 			Statement stmt = conn.createStatement();
@@ -132,14 +130,15 @@ public class CreatGroup {
 
 			while (rs.next()) {
 
-				//				mb.setMembername(rs.getString("user_name"));
-				//				mb.setMemberNo(rs.getString("user_name"));
-				//				memberList.add(mb);
+				mb = new MemberBean();
+				mb.setMemberName(rs.getString("user_name"));
+				mb.setMemberNo(rs.getString("user_no"));
+				memberList.add(mb);
 
 				/* 行からデータを取得 */
-				gb.setUserNo(rs.getString("user_no"));
-				gb.setUserName(rs.getString("user_name"));
-				gb.setErrorMessage("");
+				//				gb.setUserNo(rs.getString("user_no"));
+				//				gb.setUserName(rs.getString("user_name"));
+				//				gb.setErrorMessage("");
 			}
 
 		} catch (SQLException e) {
@@ -157,12 +156,19 @@ public class CreatGroup {
 			}
 		}
 
+		//MemberBeanListをセット
+		gb.setMemberList(memberList);
+
 		//受け取った作成者userNameをBeanに渡して処理
-		this.autherName = name;
-		gb.setAuther(autherName);
+		mb = new MemberBean();
+		mb.setMemberName(lb.getUserName());
+		mb.setMemberNo(lb.getUserNo());
+		gb.setAuther(mb);
 
 		//成否判定をBeanに設定
 		gb.setGetAllUserListJudge(getDataJudge);
+
+
 
 		return gb;
 
@@ -180,7 +186,7 @@ public class CreatGroup {
 		boolean creatJudge;
 
 		//gbからautherNoを
-		String autherNo = gb.getAutherNo();
+		String autherNo = gb.getAutherBean().getMemberNo();
 
 		//		//test
 		//		System.out.println("登録者のNo" + autherNo);
@@ -256,7 +262,7 @@ public class CreatGroup {
 		boolean resistJudge;
 
 		//作成者番号を入手
-		this.autherNo = gb.getAutherNo();
+		this.autherNo = gb.getAutherBean().getMemberNo();
 
 		//DB接続
 		Connection conn = null;
@@ -326,18 +332,18 @@ public class CreatGroup {
 			// 会員登録を行うfor文
 
 			//受け取ったStringリストからを登録者Listに設定
-			String[] memberName = list;
-			if (memberName == null) {
-
+			String[] memberNo = list;
+			if (memberNo == null) {
+				resistJudge = false;
 			} else {
 
-				ArrayList<String> memberNo = new ArrayList<String>();
-				for (String name : memberName) {
-					int i = Integer.parseInt(name);
-					memberNo.add(gb.getUserNo().get(i));
+				ArrayList<String> resistNo = new ArrayList<String>();
+				for (String name : memberNo) {
+
+					resistNo.add(name);
 				}
 
-				for (int i = 0; i < memberNo.size(); i++) {
+				for (int i = 0; i < resistNo.size(); i++) {
 					StringBuilder sb2 = new StringBuilder();
 					sb2.append("insert ");
 					sb2.append(" into ");
@@ -349,7 +355,7 @@ public class CreatGroup {
 					sb2.append(")");
 					sb2.append(" values ");
 					sb2.append("(" + groupNo);
-					sb2.append("," + memberNo.get(i));
+					sb2.append("," + resistNo.get(i));
 					sb2.append(",0");
 					sb2.append(", sysdate)");
 
@@ -369,8 +375,8 @@ public class CreatGroup {
 					while (rs.next()) {
 
 						/* 行からデータを取得 */
-						gb.setUserNo(rs.getString("user_no"));
-						gb.setUserName(rs.getString("user_name"));
+						mb.setMemberNo(rs.getString("user_no"));
+						mb.setMemberName(rs.getString("user_name"));
 						gb.setErrorMessage("");
 					}
 				}
