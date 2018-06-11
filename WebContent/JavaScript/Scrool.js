@@ -1,3 +1,5 @@
+footerStart();
+
 function footerStart() {
-	this.scrollIntoView(false);
+	window.scrollBy(0,window.parent.screen.height);
 }

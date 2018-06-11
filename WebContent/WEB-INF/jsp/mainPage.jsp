@@ -8,7 +8,6 @@
 	charset="UTF-8">
 
 </script>
-
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
