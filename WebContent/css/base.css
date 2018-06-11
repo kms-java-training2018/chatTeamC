@@ -6,6 +6,7 @@
 
 table {
 	border-collapse: collapse;
+
 }
 
 table th { /*table内のthに対して*/
@@ -25,6 +26,8 @@ table tr { /*table内のthに対して*/
 	text-align: center;
 	border: solid 2px black;
 }
+
+
 
 input.fsize {
 	font-size: 400%;
