@@ -9,24 +9,26 @@ page import="java.util.ArrayList"%>
 <head>
 <script type="text/javascript" src="JavaScript/deleteMessage.js"
 	charset="UTF-8">
-	
+
 </script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-	
+
 </script>
 <script type="text/javascript" src="JavaScript/deleteUserMenber.js"
 	charset="UTF-8">
-	
+
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-	ようこそ ${session.userName}さん<br><input type="button" value="ログアウト" onClick="logout()" />
+	ようこそ ${session.userName}さん
+	<br>
+	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>チャット研修プログラム</h1>
 	<h2>${GroupBean.getGroupName()}</h2>
-	
+
 
 	<c:forEach var="list" items="${GroupBean.getNumber()}"
 		varStatus="status">
@@ -35,9 +37,10 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET">
 			<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}">
-				<div  align="right">${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
-							<input type="button" value="削除"
-					onClick="deleteMessage('${GroupBean.getMessageNo().get(status.index)}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')"></div>
+				<div align="right">${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
+					<input type="button" value="削除"
+						onClick="deleteMessage('${GroupBean.getMessageNo().get(status.index)}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')">
+				</div>
 
 			</c:if>
 			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
@@ -64,7 +67,7 @@ page import="java.util.ArrayList"%>
 			value="メッセージの送信">
 	</form>
 	<c:if test="${GroupBean.getRegistUserNo() != myLoginNo}">
-		<form action="/chat/secessionGroupMessgeModel" method="GET">
+		<form action="/chat/secessionGroupServlet" method="GET">
 			<input type="hidden" name="toGroupNo"
 				value="${GroupBean.getGroupNo()}"> <input type="button"
 				value="グループの脱退"

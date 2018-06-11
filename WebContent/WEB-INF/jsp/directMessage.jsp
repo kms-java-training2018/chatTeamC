@@ -17,6 +17,7 @@ page import="java.util.ArrayList"%>
 <title>個人チャットページ</title>
 </head>
 <body>
+<script type="text/javascript" src="JavaScript/mainPage.js"></script>
 	<p>ようこそ ${session.userName}さん</p>
 	<input type="button" value="ログアウト" onClick="logout()" />
 	<h1>～
@@ -48,6 +49,7 @@ page import="java.util.ArrayList"%>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
+
 		<input type="hidden" name="deleteMessageNo" value="${list.getMessageNo()}">
 		<input type="hidden" name="toUserNo"
 			value="${messageCheckBean.getToUserNo()}"> <input type="text"

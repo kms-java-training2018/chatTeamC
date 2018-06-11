@@ -1,3 +1,3 @@
 function footerStart() {
-	window.scrollBy(0,window.parent.screen.height);
+	window.scrollBy(0,1000);
 }

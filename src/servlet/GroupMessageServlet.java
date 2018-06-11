@@ -28,7 +28,7 @@ public class GroupMessageServlet extends HttpServlet {
 		MessageCheckSendModel Mmodel = new MessageCheckSendModel();
 		GroupMessageBean bean = new GroupMessageBean();
 		GetTalkMessage model = new GetTalkMessage();
-		// セッション情報取得（ログインしているかどうか
+		// セッション情報取得 (ログインしているかどうか)
 		HttpSession session = req.getSession();
 		// ログインできているか確認
 		if (session.getAttribute("session") == null) {

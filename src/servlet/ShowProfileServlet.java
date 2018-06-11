@@ -22,7 +22,8 @@ public class ShowProfileServlet extends HttpServlet {
 		ShowProfileModel model = new ShowProfileModel();
 		ShowProfileBean bean = new ShowProfileBean();
 		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) { // ログインデータ取得
+		if (session.getAttribute("session") != null) {
+			//loginBean取得
 			LoginBean loginBean = (LoginBean) req.getAttribute("loginBean");
 
 			// 認証処理

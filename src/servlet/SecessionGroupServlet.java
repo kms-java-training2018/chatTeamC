@@ -9,25 +9,29 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
-import model.SecessionGroupMessageModel;
+import model.SecessionGroupModel;
 
-public class SecessionGroupMessgeModel extends HttpServlet {
+public class SecessionGroupServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		System.out.println("いったよ");
 		// セッション情報取得
 		HttpSession session = req.getSession();
 		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) {// ログインデータ取得
+		if (session.getAttribute("session") != null) {
+			// ログインデータ取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 
-			SecessionGroupMessageModel secessionGroupMessageModel = new SecessionGroupMessageModel();
-			String groupNo = (String)req.getParameter("toGroupNo");
-			secessionGroupMessageModel.authentication(loginBean,groupNo);
+			SecessionGroupModel secessionGroupModel = new SecessionGroupModel();
+			String groupNo = (String) req.getParameter("toGroupNo");
+			secessionGroupModel.SecessionGroup(loginBean, groupNo);
+			//削除できたかどうかを表示
+			//メッセージ内容はmodel内でセット
+			req.setAttribute("error", loginBean.getErrorMessage());
 
 		} else {
 			// 情報が無かったためエラー画面に移行
-			// TODO とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 		MainPageServlet mainPageServlet = new MainPageServlet();
 		mainPageServlet.doPost(req, res);
