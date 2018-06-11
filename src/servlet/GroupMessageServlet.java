@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import bean.GroupMessageBean;
 import bean.LoginBean;
 import bean.MessageCheckBean;
-import model.GroupMessageModel;
+import model.GetTalkMessage;
 import model.MessageCheckSendModel;
 
 /**
@@ -27,7 +27,7 @@ public class GroupMessageServlet extends HttpServlet {
 		MessageCheckBean Mbean = new MessageCheckBean();
 		MessageCheckSendModel Mmodel = new MessageCheckSendModel();
 		GroupMessageBean bean = new GroupMessageBean();
-		GroupMessageModel model = new GroupMessageModel();
+		GetTalkMessage model = new GetTalkMessage();
 		// セッション情報取得（ログインしているかどうか
 		HttpSession session = req.getSession();
 		// ログインできているか確認
