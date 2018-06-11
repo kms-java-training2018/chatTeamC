@@ -17,17 +17,30 @@ page import="java.util.ArrayList"%>
 </script>
 <script type="text/javascript" src="JavaScript/Scrool.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="css/directMessage.css">
 <title>個人チャットページ</title>
 </head>
 <body onload="footerStart();">
-	<p>ようこそ ${session.userName}さん</p>
-	<input type="button" value="ログアウト" onClick="logout()" />
-	<h1>
-		～ <a
-			href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
-			target=”_blank”>${messageCheckBean.getToUserName()}</a>さんとの会話部屋～
-	</h1>
-	<h2>メッセージ</h2>
+	<div id="Lock">
+		<p>ようこそ ${session.userName}さん</p>
+		<input type="button" value="ログアウト" onClick="logout()" />
+		<h1>
+			～ <a
+				href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
+				target=”_blank”>${messageCheckBean.getToUserName()}</a>さんとの会話部屋～
+		</h1>
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<!--<h2>メッセージ</h2>-->
 	<c:forEach var="list"
 		items="${messageCheckBean.getTalkContentBeanList()}"
 		varStatus="status">

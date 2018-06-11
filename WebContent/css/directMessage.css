@@ -1,40 +1,7 @@
 @charset "UTF-8";
 
-.Link {
-	color: #0000ff;
-	text-decoration: none;
-}
-
-#Direct {
-	color: #0033ee;
-}
-
-#Group {
-	color: #ff80c0;
-}
-
-.name {
-	background-color: #e9eafe;
-}
-
-.message {
-	background-color: #fff4fc;
-}
-
-.backcolor {
-	background-color: #f4ffff;
-}
-
-.menu {
-	margin-left: auto;
-	margin-right: auto;
-	border: "1";
-	width: "80%";
-	height: "60vh";
-	cellspacing: "0";
-	cellpadding: "3";
-}
-
-.back {
+#Lock {
+	padding: .5em .75em;
 	position: fixed;
+	background-color: #f6f6f6;
 }
