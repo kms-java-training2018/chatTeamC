@@ -83,8 +83,8 @@ public class DirectMessageServlet extends HttpServlet {
 		} else {
 			// 会話情報の取得
 			try {
-				req.setAttribute("error", "");
 				model.sendMessage(bean, loginBean);
+				req.setAttribute("error", loginBean.getErrorMessage());
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

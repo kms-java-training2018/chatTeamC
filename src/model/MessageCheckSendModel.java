@@ -197,9 +197,11 @@ public class MessageCheckSendModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(sb.toString());
+			int rs = stmt.executeUpdate(sb.toString());
+
 
 		} catch (SQLException e) {
+			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
@@ -213,7 +215,7 @@ public class MessageCheckSendModel {
 	}
 
 	/**
-	 * sendMessage（メッセージの送信処理）
+	 * sendGroupMessage（グループメッセージの送信処理）
 	 * */
 	public MessageCheckBean sendGroupMessage(MessageCheckBean bean, LoginBean loginBean) {
 		// 初期化
@@ -277,6 +279,7 @@ public class MessageCheckSendModel {
 			stmt.executeUpdate(sb.toString());
 
 		} catch (SQLException e) {
+			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
