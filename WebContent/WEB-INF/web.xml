@@ -81,11 +81,11 @@
     <url-pattern>/deleteGroupMessage</url-pattern>
   </servlet-mapping>
   <servlet>
-    <servlet-name>SecessionGroupMessgeModel</servlet-name>
-    <servlet-class>servlet.SecessionGroupMessgeModel</servlet-class>
+    <servlet-name>SecessionGroupServlet</servlet-name>
+    <servlet-class>servlet.SecessionGroupServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>SecessionGroupMessgeModel</servlet-name>
-    <url-pattern>/secessionGroupMessgeModel</url-pattern>
+    <servlet-name>SecessionGroupServlet</servlet-name>
+    <url-pattern>/secessionGroupServlet</url-pattern>
   </servlet-mapping>
 </web-app>
