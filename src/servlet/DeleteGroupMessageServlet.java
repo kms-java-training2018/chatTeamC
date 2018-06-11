@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import bean.DeleteMessageBean;
 import bean.LoginBean;
 import model.DeleteMessageModel;
 
@@ -23,7 +22,6 @@ public class DeleteGroupMessageServlet extends HttpServlet {
 		}
 
 		// DeleteMessageBeanの初期化
-		DeleteMessageBean bean = new DeleteMessageBean();
 		DeleteMessageModel model = new DeleteMessageModel();
 
 		//自会員番号を取得
@@ -31,7 +29,6 @@ public class DeleteGroupMessageServlet extends HttpServlet {
 		//消したいメッセージの会話情報番号を取得
 		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
 		int deleteMessageNo = (Integer.parseInt(req.getParameter("deleteMessageNo")));
-		System.out.println(bean.getDeleteMessageNo()); //DeleteNoが受け取れているかの確認
 		// 会話情報の取得
 		try {
 			model.deleteMessage(loginBean, deleteMessageNo);
