@@ -15,29 +15,39 @@
 </head>
 <body>
 
-ようこそ ${session.userName}さん<br>
-	<input type="button" value="Logout" onClick="logout()" style="width: 79px; height: 27px"><br><br><br>
+	ようこそ ${session.userName}さん
+	<br>
+	<input type="button" value="Logout" onClick="logout()"
+		style="width: 79px; height: 27px">
+	<br>
+	<br>
+	<br>
 	<div align="center">
 		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1" style="width: 493px; height: 96px">
-			<th><br>
-				<p>My Page</p> <br></th>
+			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1"
+			style="width: 493px; height: 96px">
+			<tr><td>
+				<p>My Page</p> </td></tr>
 		</table>
 
 		<br> <br>
 
 		<form action="/chat/main" method="POST">
 			<p>Name</p>
-			<input type="text" name="myName" value="${name}" style="height: 37px; width: 210px">
+			<input type="text" name="myName" value="${name}"
+				style="height: 37px; width: 210px">
 			<p>${erorr}</p>
-			<p><br>Profile</p>
-			<input type="text" name="myProfile" value="${profile}" style="width: 210px; height: 37px">
+			<p>
+				<br>Profile
+			</p>
+			<input type="text" name="myProfile" value="${profile}"
+				style="width: 210px; height: 37px">
 			<p></p>
-			<br> <input type="submit" value="Update" name="newProfile" style="width: 90px; "><input type="submit" value="Back" style="width: 90px; ">
+			<br> <input type="submit" value="Update" name="newProfile"
+				style="width: 90px;"><input type="submit" value="Back"
+				style="width: 90px;">
 		</form>
-		<form action="/chat/main" method="POST">
-
-		</form>
+		<form action="/chat/main" method="POST"></form>
 	</div>
 
 </body>

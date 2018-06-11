@@ -13,8 +13,6 @@ import bean.LoginBean;
 import bean.SessionBean;
 import model.CreatGroup;
 
-
-
 /**
  * jsoからのリクエストを受け取る<br>
  * グループ作成機能のサーブレットクラス<br>
@@ -34,7 +32,6 @@ public class MakeGroupServlet extends HttpServlet {
 
 		//リンク先directionの定義
 		String direction = "/WEB-INF/jsp/login.jsp";
-
 
 		//セッション設定
 		HttpSession session = req.getSession();
@@ -181,18 +178,18 @@ public class MakeGroupServlet extends HttpServlet {
 				groupBean = creatGroup.getAllUserListAcquisition(autherName);
 
 				//Beanからユーザー一覧取得できたかの成否を取得
-				boolean judge =groupBean.isGetAllUserListJudge();
+				boolean judge = groupBean.isGetAllUserListJudge();
 
 				//出来なかったらエラーページへ
-				if(judge == false) {
+				if (judge == false) {
 					direction = "/WEB-INF/jsp/errorPage.jsp";
-				}else {
+				} else {
 
-				//セッションにセットしてjspに送る
-				session.setAttribute("groupBean", groupBean);
-				session.setAttribute("userName", autherName);
+					//セッションにセットしてjspに送る
+					session.setAttribute("groupBean", groupBean);
+					session.setAttribute("userName", autherName);
 
-				direction = "/WEB-INF/jsp/makeGroup.jsp";
+					direction = "/WEB-INF/jsp/makeGroup.jsp";
 				}
 			}
 
