@@ -15,11 +15,6 @@ import model.MainPageModel;
 
 public class MainPageServlet extends HttpServlet {
 
-	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		System.out.println("ここ変更よてい");
-		doPost(req, res);
-	}
-
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
 		// セッション情報取得
@@ -98,7 +93,7 @@ public class MainPageServlet extends HttpServlet {
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
-
+		// 移動先のアドレスに移動
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }

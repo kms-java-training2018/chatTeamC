@@ -11,7 +11,7 @@ import bean.MyPageBean;
 
 public class MyPageModel {
 	/**
-	 * 自己紹介画面編集画面ビジネスロジック
+	 * プロフィール変更画面のビーン設定
 	 */
 	public MyPageBean myPageBeanSeting(LoginBean loginBean, MyPageBean bean) {
 		// 初期化
@@ -61,6 +61,7 @@ public class MyPageModel {
 			}
 		}
 
+		// 設定したビーンを返す
 		return bean;
 	}
 }
