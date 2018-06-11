@@ -50,7 +50,9 @@ public class MainPageServlet extends HttpServlet {
 					loginBean.setUserName(myName);
 					// セッションのほうにも名前を設定しておく
 					SessionBean sessionBean = new SessionBean();
+					// 名前をセッションビーンに設定する
 					sessionBean.setUserName(myName);
+					// セッションにセッションビーンを設定する
 					session.setAttribute("session", sessionBean);
 					// データベースにプロフィールを設定する。
 					// 設定してこれなかった場合エラーページに飛ぶ
