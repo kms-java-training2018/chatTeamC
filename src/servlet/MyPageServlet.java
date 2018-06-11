@@ -45,6 +45,7 @@ public class MyPageServlet extends HttpServlet {
 			req.setAttribute("profile", bean.getMyProfile());
 		}
 
+		// 移動先のアドレスに移動
 		req.getRequestDispatcher(direction).forward(req, res);
 
 	}
