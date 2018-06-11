@@ -19,7 +19,7 @@ public class MainPageModel {
 	 * 送り値 メインページビーン
 	 * メインページビーンの内容を設定しサーブレットに返す。
 	 */
-	public MainPageBean authentication(MainPageBean bean, LoginBean loginBean) {
+	public MainPageBean mainPageBeanSeting(MainPageBean bean, LoginBean loginBean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -29,6 +29,7 @@ public class MainPageModel {
 		String dbPassword = "C_DEV_TEAM";
 		// JDBCドライバーのロード
 		try {
+			// データベース検索
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
@@ -36,6 +37,7 @@ public class MainPageModel {
 		}
 		// 接続作成
 		try {
+			// データ取得用
 			conn = DriverManager.getConnection(url, user, dbPassword);
 
 			// SQL作成
@@ -204,6 +206,7 @@ public class MainPageModel {
 						text = rs.getString("MESSAGE");
 					}
 				}
+				// テキストデータに追加
 				setListText.add(text);
 			}
 

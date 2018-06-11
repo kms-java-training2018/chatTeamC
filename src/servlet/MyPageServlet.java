@@ -33,7 +33,7 @@ public class MyPageServlet extends HttpServlet {
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 			// 認証処理
 			try {
-				bean = model.authentication(loginBean, bean);
+				bean = model.myPageBeanSeting(loginBean, bean);
 			} catch (Exception e) {
 				// 情報が無かったためエラー画面に移行
 				session.setAttribute("session", null);
