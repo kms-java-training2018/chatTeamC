@@ -4,12 +4,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="chat/JavaScript" src="JavaScript/logout.js"
 	charset="UTF-8">
 </script>
-<link href="css/base.css" rel="stylesheet" type="text/css">
+<link href="css/base.css" rel="stylesheet">
+<link href="css/showProfile.css" rel="stylesheet">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <title>Other Profile</title>
@@ -19,12 +19,11 @@
 	<br>
 	<br>
 	<form action="/chat/showProfile" method="POST">
-		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" bgcolor="#dceaf8" style="width: 494px; height: 102px">
+		<table class="base">
 
 			<!-- 1段目 -->
-			<tr>
-				<th style="width: 384px; ">
+			<tr class="titleBack">
+				<th>
 					<p>Profile</p>
 				</th>
 			</tr>
@@ -32,13 +31,12 @@
 		<br> <br>
 
 		<!-- 2段目 -->
-		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" style="width: 498px; height: 172px">
-			<tr>
-				<td  bgcolor="#f7fafd"><br>
+		<table class="base">
+		 			<tr>
+				<td class="nameBack"><br>
 					<p>${Name}</p> <br></td>
 
-				<td colspan="2" style="width: 158px; "><br>
+				<td colspan="2"><br>
 					<p>${Profile}</p> <br></td>
 
 			</tr>
