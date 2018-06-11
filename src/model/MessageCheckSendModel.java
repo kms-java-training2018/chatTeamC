@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
 
 import bean.LoginBean;
@@ -197,9 +198,9 @@ public class MessageCheckSendModel {
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			int rs = stmt.executeUpdate(sb.toString());
-
-
+			stmt.executeUpdate(sb.toString());
+			}catch(SQLIntegrityConstraintViolationException e){
+				loginBean.setErrorMessage("メッセージを入力してください。");
 		} catch (SQLException e) {
 			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
