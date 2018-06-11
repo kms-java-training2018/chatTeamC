@@ -10,12 +10,12 @@ import java.util.ArrayList;
 
 public class GroupBean {
 
-	/** 会員名 */
+/*	*//** 会員名 *//*
 	private ArrayList<String> userNameList = new ArrayList<String>();
 
-	/** 会員番号 */
+	*//** 会員番号 *//*
 	private ArrayList<String> userNoList = new ArrayList<String>();
-
+*/
 	/** エラーメッセージ */
 	private String errorMessage;
 
@@ -23,8 +23,14 @@ public class GroupBean {
 	private String autherUserName;
 	private String autherUserNo;
 
+	private MemberBean autherBean;
+
 	/** ユーザー一覧	 */
 	private boolean getAllUserListJudge;
+
+	/** メンバーリストのリスト
+	 */
+	private ArrayList<MemberBean> memberBeanList = new ArrayList<MemberBean>();
 
 
 	/**
@@ -32,20 +38,31 @@ public class GroupBean {
 	 *
 	 * @param userName 受け取った作成者のユーザー名
 	 */
-	public void setAuther(String userName) {
-		this.autherUserName = userName;
-		int autherIndex = userNameList.indexOf(autherUserName);
-		//usernameが一応あるかでif
-		if (autherIndex >= 0) {
-
-			//作成者の名前から出したindexから、作成者のNoを全会員Noの値を検索してautherNoリストに設定
-			autherUserNo = userNoList.get(autherIndex);
-
-			//作成者のデータを全会員一覧から削除
-			userNameList.remove(autherIndex);
-			userNoList.remove(autherIndex);
-		}
+	public void setAuther(MemberBean mb) {
+		this.autherUserName = mb.getMemberName();
+		this.autherBean = mb;
 	}
+//		int autherIndex = memberBeanList.indexOf(mb);
+//		//usernameが一応あるかでif
+//		if (autherIndex >= 0) {
+//
+//			//作成者の名前から出したindexから、作成者のNoを全会員Noの値を検索してautherNoリストに設定
+//			setAutherBean(memberBeanList.get(autherIndex));
+//
+//			//作成者のデータを全会員一覧から削除
+//			memberBeanList.remove(autherIndex);
+//		}
+//	}
+
+
+	public void setMemberList(ArrayList<MemberBean> mb) {
+		this.memberBeanList = mb;
+	}
+
+	public ArrayList<MemberBean> getMemberList(){
+		return memberBeanList;
+	}
+
 
 
 	/**
@@ -66,39 +83,39 @@ public class GroupBean {
 	}
 
 
-	/**
-	 * 全ユーザー名のリストを取得<br>
-	 * @return userNameList 全ユーザー名のリスト
-	 */
-	public ArrayList<String> getUserNameList() {
-		return userNameList;
-	}
+//	/**
+//	 * 全ユーザー名のリストを取得<br>
+//	 * @return userNameList 全ユーザー名のリスト
+//	 */
+//	public ArrayList<String> getUserNameList() {
+//		return userNameList;
+//	}
+//
 
-
-	/**
-	 * 全ユーザー名を全ユーザー名リストに追加する<br>
-	 * @param userName 指定のユーザー名
-	 */
-	public void setUserName(String userName) {
-		userNameList.add(userName);
-	}
-
-	/**
-	 * 全会員番号リストの取得<br>
-	 * @return userNoList 全会員番号リスト
-	 */
-	public ArrayList<String> getUserNo() {
-		return userNoList;
-	}
-
-
-	/**
-	 * 全ユーザーの会員番号のリストに追加<br>
-	 * @param userNo 指定の会員番号
-	 */
-	public void setUserNo(String userNo) {
-		userNoList.add(userNo);
-	}
+//	/**
+//	 * 全ユーザー名を全ユーザー名リストに追加する<br>
+//	 * @param userName 指定のユーザー名
+//	 */
+//	public void setUserName(String userName) {
+//		userNameList.add(userName);
+//	}
+//
+//	/**
+//	 * 全会員番号リストの取得<br>
+//	 * @return userNoList 全会員番号リスト
+//	 */
+//	public ArrayList<String> getUserNo() {
+//		return userNoList;
+//	}
+//
+//
+//	/**
+//	 * 全ユーザーの会員番号のリストに追加<br>
+//	 * @param userNo 指定の会員番号
+//	 */
+//	public void setUserNo(String userNo) {
+//		userNoList.add(userNo);
+//	}
 
 	/**
 	 * エラーメッセージを取得<br>
@@ -132,5 +149,20 @@ public class GroupBean {
 	 */
 	public void setGetAllUserListJudge(boolean getAllUserListJudge) {
 		this.getAllUserListJudge = getAllUserListJudge;
+	}
+
+
+
+	/**
+	 * グループ作成者の情報のセッターゲッター
+	 * @return autherBean グループ作者の情報Bean
+	 */
+	public MemberBean getAutherBean() {
+		return autherBean;
+	}
+
+
+	public void setAutherBean(MemberBean autherBean) {
+		this.autherBean = autherBean;
 	}
 }
