@@ -6,7 +6,8 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
+</script>
+<script type="text/javascript" src="JavaScript/Scrool.js">
 </script>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
