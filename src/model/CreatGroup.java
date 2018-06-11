@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import bean.GroupBean;
-import bean.MemberBean;
+//import bean.MemberBean;
 
 /**
  * グループ作成機能model<br>
@@ -22,7 +22,7 @@ public class CreatGroup {
 	GroupBean gb = new GroupBean();
 
 	//MemberBeanの設定
-	MemberBean mb = new MemberBean();;
+	//MemberBean mb = new MemberBean();
 
 	//作成者の名前
 	private String autherName;
@@ -32,7 +32,7 @@ public class CreatGroup {
 	private String groupName;
 
 	//MemberBeanのリスト
-	ArrayList<MemberBean> memberList;
+	//ArrayList<MemberBean> memberList;
 
 	/**
 	 * グループbeanをセットする<br>
@@ -46,9 +46,9 @@ public class CreatGroup {
 	 * MemberBeanをセットする<br>
 	 * @param MemberBean　受け取ったMemberBean
 	 */
-	public void setMemberBean(MemberBean MemberBean) {
-		this.mb = MemberBean;
-	}
+	//public void setMemberBean(MemberBean MemberBean) {
+	//	this.mb = MemberBean;
+	//}
 
 	/**
 	 * グループ名をセットする<br>

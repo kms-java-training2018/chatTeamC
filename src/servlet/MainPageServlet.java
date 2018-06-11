@@ -16,7 +16,7 @@ import model.MainPageModel;
 public class MainPageServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		System.out.println("ここに来たやつ、doPostのほうに移動できるよう変更してくださいお願いします");
+		System.out.println("ここ変更よてい");
 		doPost(req, res);
 	}
 
@@ -65,7 +65,7 @@ public class MainPageServlet extends HttpServlet {
 
 					// 認証処理
 					try {
-						bean = model.authentication(bean, loginBean);
+						bean = model.mainPageBeanSeting(bean, loginBean);
 						req.setAttribute("MainPageBean", bean);
 						//req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 					} catch (Exception e) {
@@ -80,7 +80,7 @@ public class MainPageServlet extends HttpServlet {
 				// 認証処理
 
 				try {
-					bean = model.authentication(bean, loginBean);
+					bean = model.mainPageBeanSeting(bean, loginBean);
 					req.setAttribute("MainPageBean", bean);
 					//req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
 				} catch (Exception e) {

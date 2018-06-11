@@ -13,7 +13,7 @@ public class MyPageModel {
 	/**
 	 * 自己紹介画面編集画面ビジネスロジック
 	 */
-	public MyPageBean authentication(LoginBean loginBean, MyPageBean bean) {
+	public MyPageBean myPageBeanSeting(LoginBean loginBean, MyPageBean bean) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
