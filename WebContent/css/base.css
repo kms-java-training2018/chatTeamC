@@ -26,6 +26,6 @@ table tr { /*table内のthに対して*/
 	border: solid 2px black;
 }
 
-input.hoge {
+input.fsize {
 	font-size: 400%;
 }
