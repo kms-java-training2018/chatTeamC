@@ -40,11 +40,12 @@ public class SecessionGroupModel {
 			sb.append(" AND GROUP_NO = " + groupNo);
 			// SQL実行
 			Statement stmt = conn.createStatement();
-			stmt.executeUpdate(sb.toString());
+			int num = stmt.executeUpdate(sb.toString());
+			System.out.println(num);
 			// 脱退の成否を確認
-//			if (rs == 0) {
-//				bean.setErrorMessage("グループを脱退出来ませんでした");
-//			}
+			if (num == 0) {
+				bean.setErrorMessage("グループを脱退出来ませんでした");
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

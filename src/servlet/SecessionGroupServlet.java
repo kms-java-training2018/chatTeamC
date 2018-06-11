@@ -13,6 +13,7 @@ import model.SecessionGroupModel;
 
 public class SecessionGroupServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		System.out.println("いったよ");
 		// セッション情報取得
 		HttpSession session = req.getSession();
 		// もしもセッションが無ければエラー
@@ -20,9 +21,9 @@ public class SecessionGroupServlet extends HttpServlet {
 			// ログインデータ取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 
-			SecessionGroupModel secessionGroupMessageModel = new SecessionGroupModel();
+			SecessionGroupModel secessionGroupModel = new SecessionGroupModel();
 			String groupNo = (String) req.getParameter("toGroupNo");
-			secessionGroupMessageModel.SecessionGroup(loginBean, groupNo);
+			secessionGroupModel.SecessionGroup(loginBean, groupNo);
 			//削除できたかどうかを表示
 			//メッセージ内容はmodel内でセット
 			req.setAttribute("error", loginBean.getErrorMessage());

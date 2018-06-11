@@ -67,7 +67,7 @@ page import="java.util.ArrayList"%>
 			value="メッセージの送信">
 	</form>
 	<c:if test="${GroupBean.getRegistUserNo() != myLoginNo}">
-		<form action="/secessionGroupServlet" method="GET">
+		<form action="/chat/secessionGroupServlet" method="GET">
 			<input type="hidden" name="toGroupNo"
 				value="${GroupBean.getGroupNo()}"> <input type="button"
 				value="グループの脱退"

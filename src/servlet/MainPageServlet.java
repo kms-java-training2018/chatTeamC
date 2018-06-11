@@ -88,7 +88,8 @@ public class MainPageServlet extends HttpServlet {
 				}
 			}
 
-		} else {;
+		} else {
+			;
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
@@ -99,4 +100,3 @@ public class MainPageServlet extends HttpServlet {
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 }
-
