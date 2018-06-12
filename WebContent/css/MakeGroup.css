@@ -1,29 +1,69 @@
 @charset "UTF-8";
 
 
+table {
+	border-collapse: collapse;
 
-table.typeA{
+}
+
+.bgcolor1 {
+	background: #b4fcad;
+}
+
+table.typeA {
 	border-collapse : collapse;
 	border-style:double;
 	background-color:#deffb5;
 	align-items: center;
 	align-content: center;
+	text-align
+	width: 300px;
+}
+
+table.typeA td{
+	border-collapse : collapse;
+	border-style:double;
+	background-color:#deffb5;
+	align-items: center;
+	align-content: center;
+	text-align
 	width: 300px;
 }
 
 
-table.typeB{
+table.typeB {
 	border-collapse : collapse;
 	border-style:double;
+	background-color:#f0fbff;
 	align-items: left;
 	align-content: left;
+	text-align:left;
+	width: 100%;
 
 }
 
+table.typeB td{
+	border-collapse : collapse;
+	border-style:double;
+	background-color:#f0fbff;
+	align-items: left;
+	align-content: left;
+	text-align:left;
+	width: 100%;
+}
 
+/* タイトル背景色*/
+table.typeA th.title{
+	background-color: :#adf8d8
+}
+/*名前背景色*/
+.name{
+	background-color: :#fedaf8
+}
 
-
-
+input.fontSize {
+	font-size: 400%;
+}
 
 
 
