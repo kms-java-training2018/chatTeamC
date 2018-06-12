@@ -32,23 +32,23 @@
 			<!-- 1段目 -->
 			<tr>
 				<th colspan="3">
-					<p>Main menu</p>
+					<p>メインメニュー</p>
 				</th>
 				<th class="userTitle">
 					<p>ようこそ ${session.userName}さん</p> <input type="button"
-					value="Logout" onClick="logout()" />
+					value="ログアウト" onClick="logout()" />
 				</th>
 			</tr>
 			<!-- 2段目 -->
 			<tr align="center">
 				<td colspan="2" class="userTitle">
 					<form action="/chat/makeGroup" method="POST">
-						<input type="submit" value="Group creation">
+						<input type="submit" value="グループ作成">
 					</form>
 				</td>
 				<td colspan="2">
 					<form action="/chat/myPage" method="POST">
-						<input type="submit" value="Profile">
+						<input type="submit" value="プロフィール">
 					</form>
 				</td>
 			</tr>
@@ -66,13 +66,13 @@
 		<table class="menu">
 			<!-- 3段目 -->
 			<tr align="center">
-				<th colspan="4" id="Direct">Personal chat</th>
+				<th colspan="4" id="Direct">ダイレクトメッセージ</th>
 			</tr>
 		</table>
 		<table class="menu" id="personalMessage">
 			<tr align="center">
-				<td class="name">Name</td>
-				<td colspan="3" class="message">Message</td>
+				<td class="name">名前</td>
+				<td colspan="3" class="message">最新メッセージ</td>
 			</tr>
 			<c:forEach var="list"
 				items="${MainPageBean.getLatestMenberMessageBeanList()}"
@@ -87,17 +87,19 @@
 	</div>
 	<br>
 	<br>
+	<br>
+	<br>
 
 	<table class="menu">
 		<!-- 4段目 -->
 		<tr align="center">
-			<th colspan="4" id="Group">Group chat</th>
+			<th colspan="4" id="Group">グループチャット</th>
 		</tr>
 	</table>
 	<table class="menu" id="groupMessage">
 		<tr align="center">
-			<td class="name">Name</td>
-			<td colspan="3" class="message">Message</td>
+			<td class="name">グループ名</td>
+			<td colspan="3" class="message">最新メッセージ</td>
 		</tr>
 		<c:forEach var="list"
 			items="${MainPageBean.getLatestGroupMessageBeanList()}"
