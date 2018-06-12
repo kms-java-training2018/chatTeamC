@@ -31,8 +31,8 @@
 			</th>
 			<th>
 
-				<p>ようこそ ${session.userName } さん</p> <input type="button"
-				value="ログアウト" onClick="logout()" />
+				<p>ようこそ ${session.userName } さん　　　　　　 <input type="button"
+				value="ログアウト" align="right" onClick="logout()" />
 
 			</th>
 		</tr>
@@ -55,16 +55,16 @@
 				<table class="typeA">
 
 					<tr>
-						<th>全ユーザーリスト</th>
+						<th>メンバーを選択</th>
 					</tr>
 
 					<tr>
 
 						<c:forEach var="obj" items="${groupBean.getMemberList()}"
 							varStatus="status">
-							<tr class="typeA" align="center">
+							<tr class="typeB">
 
-								<td><input type="checkbox" name="userNo"
+								<td class="typeB"><input type="checkbox" name="userNo"
 									value="${obj.getMemberNo()}"> <c:out
 										value="${obj.getMemberName()}" /></td>
 
@@ -75,12 +75,14 @@
 			<td>
 
 
-				<button type='submit' name="action" value="creat">選択したユーザーでグループを作成する</button>
+				<button type='submit' name="action" value="creat"
+					style="width: 200px; height: 40px;">グループを作成する</button>
 
 			</td>
 		</tr>
 		<tr>
-			<td><button type='submit' name="backMain" value="main">メインメニューに戻る</button></td>
+			<td><button type='submit' name="backMain" value="main"
+					style="width: 200px; height: 40px;">メインメニューに戻る</button></td>
 		</tr>
 	</table>
 </form>
