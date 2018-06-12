@@ -23,7 +23,7 @@
 			<h2>Member ID</h2>
 			<input type="text" name="userId" value="${loginBean.userId}">
 			<h2>Password</h2>
-			<input type="text" name="password" value="${loginBean.password}">
+			<input type="password" name="password" value="${loginBean.password}">
 			<br>
 			<p>${loginError.errorMessage}</p>
 
