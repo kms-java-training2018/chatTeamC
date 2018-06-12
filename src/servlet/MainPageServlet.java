@@ -57,6 +57,7 @@ public class MainPageServlet extends HttpServlet {
 					// データベースにプロフィールを設定する。
 					// 設定してこれなかった場合エラーページに飛ぶ
 					if (!(model.newProfile(myName, myProfile, loginBean))) {
+						req.setAttribute("erorr", "プロフィールを更新できませんでした");
 						direction = "/WEB-INF/jsp/errorPage.jsp";
 					}
 
@@ -68,6 +69,7 @@ public class MainPageServlet extends HttpServlet {
 					} catch (Exception e) {
 						session.setAttribute("session", null);
 						// 情報が無かったためエラー画面に移行
+						req.setAttribute("erorr", "情報が存在していません");
 						direction = "/WEB-INF/jsp/errorPage.jsp";
 						//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					}
@@ -84,15 +86,16 @@ public class MainPageServlet extends HttpServlet {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
 					direction = "/WEB-INF/jsp/errorPage.jsp";
+					req.setAttribute("erorr", "ログインしてください");
 					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
 			}
 
 		} else {
-			;
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
+			req.setAttribute("erorr", "ログインしてください");
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}

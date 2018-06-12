@@ -31,6 +31,7 @@
 	background-color: #f4ffff;
 }
 
+
 /*メニューのレイアウト*/
 .menu {
 	margin-left: auto;
@@ -42,9 +43,10 @@
 	cellpadding: "3";
 }
 
-/*ボタンホバー時色を変更*/
-.hiddenBox label:hover {
+/*ボタンホバー時リンクの色を変更*/
+.Link:hover {
     background: #efefef;
+	color: #dd00ff;
 }
 
 

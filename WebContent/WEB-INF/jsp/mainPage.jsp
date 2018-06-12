@@ -6,10 +6,10 @@
 <head>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
-
 </script>
 <script type="text/javascript" src="JavaScript/Scrool.js">
-
+</script>
+<script type="text/javascript" src="JavaScript/mainPage.js">
 </script>
 <link rel="stylesheet" href="css/base.css">
 <link rel="stylesheet" href="css/mainPage.css">
@@ -53,37 +53,38 @@
 	<br>
 	<br>
 	<br>
-
+	<div>
 	<table class="menu">
 		<!-- 3段目 -->
-		<tr align="center"> <!-- class="hiddenBox" -->
+		<tr align="center">
 			<th colspan="4" id="Direct">Personal chat</th>
 		</tr>
 		<tr align="center">
 			<td class="name">Name</td>
-			<td colspan="3" class="message">Massage</td>
+			<td colspan="3" class="message">Message</td>
 		</tr>
 		<c:forEach var="list"
 			items="${MainPageBean.getLatestMenberMessageBeanList()}"
 			varStatus="status">
-			<tr align="center">
+			<tr align="center" class="personalChatMessage">
 				<td><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
 					class="Link">${list.getUserName()}</a></td>
 				<td colspan="3">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
 	</table>
+	</div>
 	<br>
 	<br>
 
 	<table class="menu">
 		<!-- 4段目 -->
-		<tr align="center"><!-- class="hiddenBox" -->
+		<tr align="center">
 			<th colspan="4" id="Group">Group chat</th>
 		</tr>
 		<tr align="center">
 			<td class="name">Name</td>
-			<td colspan="3" class="message">Massage</td>
+			<td colspan="3" class="message">Message</td>
 		</tr>
 		<c:forEach var="list"
 			items="${MainPageBean.getLatestGroupMessageBeanList()}"
