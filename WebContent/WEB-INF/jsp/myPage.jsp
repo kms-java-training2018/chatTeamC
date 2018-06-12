@@ -5,17 +5,52 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<script type="text/javascript" src="JavaScript/logout.js"
+	charset="UTF-8">
+
+</script>
+
+<link rel="stylesheet" href="css/Title.css">
+
+<title>My Page</title>
+
 </head>
 <body>
-	<h1>チャット研修プログラム</h1>
-	<h2>マイページ</h2>
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="プロフィールを更新">
-	</form>
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="メインメニューに戻る">
-	</form>
+	<div align="center" id="Lock">
+		<h2>ようこそ ${session.userName}さん</h2>
+		<input type="button"
+			value="Logout" onClick="logout()" style="width: 79px; height: 27px">
+		<br>
+		<br>
+		<table border="1" align="center" width="80%" height="60vh"
+			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1"
+			style="width: 493px; height: 96px">
+			<tr>
+				<td>
+					<p align="center">My Page</p>
+				</td>
+			</tr>
+		</table>
+
+		<br> <br>
+
+		<form action="/chat/main" method="POST">
+			<p>Name</p>
+			<input type="text" name="myName" value="${name}"
+				style="height: 37px; width: 210px">
+			<p>${erorr}</p>
+			<p>
+				<br>Profile
+			</p>
+			<input type="text" name="myProfile" value="${profile}"
+				style="width: 210px; height: 37px">
+			<p></p>
+			<br> <input type="submit" value="Update" name="newProfile"
+				style="width: 90px;"><input type="submit" value="Back"
+				style="width: 90px;">
+		</form>
+		<form action="/chat/main" method="POST"></form>
+	</div>
 
 </body>
 </html>

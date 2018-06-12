@@ -1,0 +1,19 @@
+@charset "UTF-8";
+
+//
+フォント可変白
+		p {
+	size: 200%;
+	weight: bold;
+	color: #dcdcdc;
+}
+
+p.toptext {
+	font-family: "Itaric", sans-serif;
+	color: #dcdcdc;
+}
+
+p.txt1 {
+	font-family: "ＭＳ Ｐゴシック", "ＭＳ ゴシック", sans-serif;
+	color: #696969;
+}

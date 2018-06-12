@@ -46,7 +46,13 @@ public class LoginServlet extends HttpServlet {
 
 		// 認証処理
 		try {
-			bean = model.authentication(bean);
+			if (!halfSizeCheck(password)) {
+				bean.setErrorMessage("半角で入力してください");
+			} else if (!stringLengthCheck(password, 20)) {
+				bean.setErrorMessage("20文字は受け付けません");
+			} else {
+				bean = model.authentication(bean);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -57,10 +63,35 @@ public class LoginServlet extends HttpServlet {
 			sessionBean.setUserNo(bean.getUserNo());
 			HttpSession session = req.getSession();
 			session.setAttribute("session", sessionBean);
-
+			session.setAttribute("loginBean", bean);
 			// 行き先を次の画面に
 			direction = "/main";
 		}
+		req.setAttribute("loginError", bean);
 		req.getRequestDispatcher(direction).forward(req, res);
+	}
+
+	// 入力値のチェック
+	public boolean stringLengthCheck(String input, int max) {
+		// 何バイト分の長さであるかを取得
+		int length = input.getBytes().length;
+		if ((int) length > max) { // 最大文字数よりも多かった場合
+			return false;
+		}
+		return true; // 許容内であった場合
+	}
+
+	// 半角チェック
+	public boolean halfSizeCheck(String input) {
+		boolean result = false;
+
+		if (!(input == null) || !(input.length() == 0)) {
+			int len = input.length();
+			byte[] bytes = input.getBytes();
+			if (len == bytes.length) {
+				result = true;
+			}
+		}
+		return result;
 	}
 }
