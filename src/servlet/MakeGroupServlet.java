@@ -13,7 +13,7 @@ import bean.LoginBean;
 import model.CreatGroup;
 
 /**
- * jsoからのリクエストを受け取る<br>
+ * jspからのリクエストを受け取る<br>
  * グループ作成機能のサーブレットクラス<br>
  *
  * @version 1.0
@@ -23,7 +23,7 @@ import model.CreatGroup;
 public class MakeGroupServlet extends HttpServlet {
 
 	/**
-	 * このdoGetメソッドは、直接リンクを受け取る<br>
+	 * このdoGetメソッドは、直接URL入力でのアクセスを受け取る<br>
 	 * セッションに値があれば、/mainpageへ遷移<br>
 	 * 無ければエラーページへ送信する<br>
 	 */
@@ -35,27 +35,24 @@ public class MakeGroupServlet extends HttpServlet {
 		//セッション設定
 		HttpSession session = req.getSession();
 
+		//エラーメッセージ用のString
+		String message;
 
-		//セッションに値があれば、loginBeanのセット
-		if (session.getAttribute("session") != null) {
-			req.getRequestDispatcher("/WEB-INF/jsp/makeGroup.jsp").forward(req, res);
-			LoginBean bean = new LoginBean();
-			bean.setErrorMessage("");
-			bean.setUserId("");
-			bean.setPassword("");
 
-			//mainページに戻るからのGETかどうか
-			if (req.getParameter("main") != null) {
-				direction = "/WEB-INF/jsp/mainPage.jsp";
-
-			}
-			req.setAttribute("loginBean", bean);
-			req.getRequestDispatcher(direction).forward(req, res);
-
-		} else {
+		//セッションに値があるかのif
+		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにunllセットしてエラーページへ
 			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
+
+
+		} else {
+			//あればmakeGroupへ
+			direction = "/WEB-INF/jsp/makeGroup.jsp";
+
+
 		}
 		try {
 			req.getRequestDispatcher(direction).forward(req, res);
@@ -93,8 +90,8 @@ public class MakeGroupServlet extends HttpServlet {
 			//グループ作成画面から来たかどうかの判断if
 			if (req.getParameter("action") != null) {
 
-				//groupCreateにsessionのbean引き継がせる
-				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
+//				//groupCreateにsessionのbean引き継がせる
+//				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
 				//ログイン中のユーザー名表示のためのLoginBeanを抜き出してまたreqにのっける
 				req.setAttribute("LoginBean", session.getAttribute("LoginBean"));
 
@@ -124,11 +121,13 @@ public class MakeGroupServlet extends HttpServlet {
 						//testチェック用
 						//					System.out.println("受け取ったグループ名" + name);
 
+						groupBean = (GroupBean)session.getAttribute("groupBean");
+
 						//モデルにセット
-						creatGroup.setGroupName(name);
+						groupBean.setGroupName(name);
 
 						//グループへ登録
-						boolean creat = creatGroup.resistGroup();
+						boolean creat = creatGroup.resistGroup(groupBean);
 
 						System.out.println("creat" + creat);
 
@@ -137,16 +136,12 @@ public class MakeGroupServlet extends HttpServlet {
 							//選択されたユーザーをreqからもらう
 
 							String SelectNo[];
-
 							SelectNo = req.getParameterValues("userNo");
+							groupBean.setSelectMemberList(SelectNo);
 
-							//					test選択されたユーザーNoの表示
-							//					for (String n1 : SelectNo) {
-							//						System.out.print("送られてきたユーザーName：" + n1 + ",");
-							//					}
 
 							//抜き取った配列をGroupBeanへ送ってグループ作成
-							boolean resist = creatGroup.resistGroupMember(SelectNo);
+							boolean resist = creatGroup.resistGroupMember(groupBean);
 
 							System.out.println(resist);
 
@@ -156,6 +151,7 @@ public class MakeGroupServlet extends HttpServlet {
 								MainPageServlet main = new MainPageServlet();
 								main.doPost(req, res);
 							} else {
+								message = "";
 								direction = "/WEB-INF/jsp/errorPage.jsp";
 							}
 
@@ -172,10 +168,10 @@ public class MakeGroupServlet extends HttpServlet {
 				LoginBean lb = (LoginBean) session.getAttribute("loginBean");
 
 				String autherName = lb.getUserName();
+				groupBean.setLoginBean(lb);
 
-				System.out.println(autherName);
 				//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-				groupBean = creatGroup.getAllUserListAcquisition(lb);
+				groupBean = creatGroup.getAllUserListAcquisition(groupBean);
 
 				//Beanからユーザー一覧取得できたかの成否を取得
 				boolean judge = groupBean.isGetAllUserListJudge();
