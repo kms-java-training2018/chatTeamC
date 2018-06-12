@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/* タイトル */
 @import url(https://fonts.googleapis.com/css?family=Amatic+SC);
 
 h1 {
@@ -11,9 +12,14 @@ h1 {
 	padding: 0 10px
 }
 
+/* id・password */
 @import url(https://fonts.googleapis.com/css?family=Amatic+SC);
 
 h2 {
 	font-family: 'Amatic SC', cursive;
 	font-size: 25px;
 }
+
+
+/* パスワード確認、表示 */
+form{margin:25px;}
