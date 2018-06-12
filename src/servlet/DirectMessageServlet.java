@@ -31,6 +31,7 @@ public class DirectMessageServlet extends HttpServlet {
 		} else {
 			//自会員番号を取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			loginBean.setErrorMessage("");
 			String myLogin = loginBean.getUserNo();
 			//相手の会員番号を取得
 			bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
@@ -39,12 +40,16 @@ public class DirectMessageServlet extends HttpServlet {
 			try {
 				bean = model.getTalkContent(bean, loginBean);
 			} catch (Exception e) {
+				loginBean.setErrorMessage("相手の会話情報が入手できませんでした。");
 				e.printStackTrace();
 			}
 			// もしも相手の番号が無い場合はエラーを表示
 			if (toUserNo == 0) {
+				loginBean.setErrorMessage("相手の番号が不明です。");
+				;
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
+				req.setAttribute("error", loginBean.getErrorMessage());
 				req.setAttribute("messageCheckBean", bean);
 				req.setAttribute("myLoginNo", myLogin);
 				session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
@@ -78,7 +83,7 @@ public class DirectMessageServlet extends HttpServlet {
 		int bytecheck = 0;
 		bytecheck = model.stringLengthCheck(sendMessage);
 		if (bytecheck == 1) {
-			req.setAttribute("error", "文字数オーバーです");
+			req.setAttribute("error", "文字のデータサイズオーバーです。");
 			doGet(req, res);
 		} else {
 			// 会話情報の取得
