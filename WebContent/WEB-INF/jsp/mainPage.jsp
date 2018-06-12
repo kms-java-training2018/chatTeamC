@@ -25,14 +25,14 @@
 				<th colspan="3">
 					<p>Main menu</p>
 				</th>
-				<th class="backcolor">
+				<th class="userTitle">
 					<p>ようこそ ${session.userName}さん</p> <input type="button"
 					value="Logout" onClick="logout()" />
 				</th>
 			</tr>
 			<!-- 2段目 -->
 			<tr align="center">
-				<td colspan="2" class="backcolor">
+				<td colspan="2" class="userTitle">
 					<form action="/chat/makeGroup" method="POST">
 						<input type="submit" value="Group creation">
 					</form>
@@ -56,7 +56,7 @@
 
 	<table class="menu">
 		<!-- 3段目 -->
-		<tr align="center">
+		<tr align="center"> <!-- class="hiddenBox" -->
 			<th colspan="4" id="Direct">Personal chat</th>
 		</tr>
 		<tr align="center">
@@ -78,7 +78,7 @@
 
 	<table class="menu">
 		<!-- 4段目 -->
-		<tr align="center">
+		<tr align="center"><!-- class="hiddenBox" -->
 			<th colspan="4" id="Group">Group chat</th>
 		</tr>
 		<tr align="center">
