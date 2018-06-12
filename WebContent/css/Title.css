@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+/*タイトルの固定用*/
 #Lock {
 	padding: .5em .75em;
 	position: fixed;

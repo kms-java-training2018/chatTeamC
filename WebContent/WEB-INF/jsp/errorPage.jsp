@@ -12,6 +12,9 @@ page import="java.util.ArrayList"%>
 </head>
 <body>
 		<p>エラーページ</p>
+		<div style="color: red;">
+		<p>原因：${error}</p>
+		</div>
 		<a href="/chat/login">トップに戻る</a>
 </body>
 </html>

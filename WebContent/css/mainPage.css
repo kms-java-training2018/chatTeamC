@@ -1,30 +1,37 @@
 @charset "UTF-8";
 
+/*話す対象相手の色を設定*/
 .Link {
 	color: #0000ff;
 	text-decoration: none;
 }
 
+/*ダイレクトメッセージタイトルカラー*/
 #Direct {
 	color: #0033ee;
 }
 
+/*グループメッセージタイトルカラー*/
 #Group {
 	color: #ff80c0;
 }
 
+/*名前タグの色*/
 .name {
 	background-color: #e9eafe;
 }
 
+/*メッセージタグの色*/
 .message {
 	background-color: #fff4fc;
 }
 
-.backcolor {
+/*タイトルのマス目の色*/
+.userTitle {
 	background-color: #f4ffff;
 }
 
+/*メニューのレイアウト*/
 .menu {
 	margin-left: auto;
 	margin-right: auto;
@@ -35,6 +42,9 @@
 	cellpadding: "3";
 }
 
-.back {
-	position: fixed;
+/*ボタンホバー時色を変更*/
+.hiddenBox label:hover {
+    background: #efefef;
 }
+
+
