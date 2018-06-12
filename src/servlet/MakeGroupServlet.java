@@ -102,7 +102,7 @@ public class MakeGroupServlet extends HttpServlet {
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
 				//入力チェックメッセージの設定
 				String message;
-				if (req.getParameter(name) == "") {
+				if (name.equals("")) {
 					message = "グループ名を入力してください";
 
 					req.setAttribute("error", message);

@@ -21,8 +21,11 @@ public class ShowProfileServlet extends HttpServlet {
 		// 初期化
 		ShowProfileModel model = new ShowProfileModel();
 		ShowProfileBean bean = new ShowProfileBean();
-		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) {
+
+		//nullの場合エラー
+		if (session.getAttribute("session") == null) {
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+		} else {
 			//loginBean取得
 			LoginBean loginBean = (LoginBean) req.getAttribute("loginBean");
 
@@ -42,19 +45,12 @@ public class ShowProfileServlet extends HttpServlet {
 			req.setAttribute("Profile", bean.getProfile());
 			req.setAttribute("Unacquired", bean);
 
-
 			if (bean.getUnacquired() == 0) {
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
 				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
 			}
-
-		} else {
-			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
-
-
-
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {

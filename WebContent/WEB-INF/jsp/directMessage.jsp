@@ -49,9 +49,10 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/deleteDirectMessage" method="GET">
 			<c:if test="${list.getUserNo() == myLoginNo}">
-					${list.getUserName()}：${list.getMessage()}
-				<input type="button" value="削除"
-					onClick="deleteMessage('${list.getMessageNo()}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
+				<div align="right">${list.getUserName()}：${list.getMessage()}
+					<input type="button" value="削除"
+						onClick="deleteMessage('${list.getMessageNo()}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
+				</div>
 			</c:if>
 			<c:if test="${list.getUserNo() != myLoginNo}">
 				<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
