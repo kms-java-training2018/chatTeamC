@@ -8,7 +8,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import bean.GroupBean;
-import bean.LoginBean;
 import bean.MemberBean;
 
 /**
@@ -19,47 +18,45 @@ import bean.MemberBean;
  */
 public class CreatGroup {
 
-	//groupBeanの設定
-	GroupBean gb = new GroupBean();
+//	//groupBeanの設定
+//	GroupBean gb = new GroupBean();
+//
+//	//MemberBeanの設定
+//	MemberBean mb = new MemberBean();
 
-	//MemberBeanの設定
-	MemberBean mb = new MemberBean();
-
-	//作成者の名前
-	private String autherName;
-	//作成者の番号
-	private String autherNo;
-	//グループの名前
-	private String groupName;
+//	//作成者の名前
+//	private String autherName;
+//	//作成者の番号
+//	private String autherNo;
+//	//グループの名前
+//	private String groupName;
 
 	//MemberBeanのリスト
-	ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
 
-	/**
-	 * グループbeanをセットする<br>
-	 * @param groupBean 受け取ったgroupBean
-	 */
-	public void setGroupBean(GroupBean groupBean) {
-		this.gb = groupBean;
-	}
+//
+//	/**
+//	 * グループbeanをセットする<br>
+//	 * @param groupBean 受け取ったgroupBean
+//	 */
+//	public void setGroupBean(GroupBean groupBean) {
+//		this.gb = groupBean;
+//	}
 
+//	/**
+//	 * グループ名をセットする<br>
+//	 * @param name 受け取ったグループ名
+//	 */
+//	public void setGroupName(String name) {
+//		this.groupName = name;
+//	}
 
-
-	/**
-	 * グループ名をセットする<br>
-	 * @param name 受け取ったグループ名
-	 */
-	public void setGroupName(String name) {
-		this.groupName = name;
-	}
-
-	/**
-	 * グループ作成者の会員番号をセットする<br>
-	 * @param No 受け取った番号
-	 */
-	public void setAutherNo(String No) {
-		this.autherNo = No;
-	}
+//	/**
+//	 * グループ作成者の会員番号をセットする<br>
+//	 * @param No 受け取った番号
+//	 */
+//	public void setAutherNo(String No) {
+//		this.autherNo = No;
+//	}
 
 	/**
 	 * 受け取った入力文字のバイト数をチェックし、true/falseで返す<br>
@@ -90,7 +87,7 @@ public class CreatGroup {
 	 * @param name 受け取ったグループ作成者名
 	 * @return gb 処理したデータを詰めたGroupBean
 	 */
-	public GroupBean getAllUserListAcquisition(LoginBean lb) {
+	public GroupBean getAllUserListAcquisition(GroupBean gb) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -101,6 +98,12 @@ public class CreatGroup {
 		String url = "jdbc:oracle:thin:@192.168.51.67";
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
+
+		//memberBeanのセット
+		MemberBean mb = new MemberBean();
+
+		//memberBeanListのセット
+		ArrayList<MemberBean> memberList = new ArrayList<MemberBean>();
 
 		// JDBCドライバーのロード
 		try {
@@ -121,7 +124,7 @@ public class CreatGroup {
 			sb.append("FROM ");
 			sb.append(" m_user ");
 			sb.append(" WHERE ");
-			sb.append(" user_name != '" + lb.getUserName() + "' ");
+			sb.append(" user_name != '" + gb.getLoginBean().getUserName() + "' ");
 			sb.append(" ORDER BY USER_NO");
 
 			// SQL実行してrsにセット
@@ -135,10 +138,7 @@ public class CreatGroup {
 				mb.setMemberNo(rs.getString("user_no"));
 				memberList.add(mb);
 
-				/* 行からデータを取得 */
-				//				gb.setUserNo(rs.getString("user_no"));
-				//				gb.setUserName(rs.getString("user_name"));
-				//				gb.setErrorMessage("");
+
 			}
 
 		} catch (SQLException e) {
@@ -159,10 +159,11 @@ public class CreatGroup {
 		//MemberBeanListをセット
 		gb.setMemberList(memberList);
 
+
 		//受け取った作成者userNameをBeanに渡して処理
 		mb = new MemberBean();
-		mb.setMemberName(lb.getUserName());
-		mb.setMemberNo(lb.getUserNo());
+		mb.setMemberName(gb.getLoginBean().getUserName());
+		mb.setMemberNo(gb.getLoginBean().getUserNo());
 		gb.setAuther(mb);
 
 		//成否判定をBeanに設定
@@ -178,7 +179,7 @@ public class CreatGroup {
 	 * グループ登録を行うメソッド<br>
 	 * @return creatJudge メンバー登録成否
 	 */
-	public boolean resistGroup() {
+	public boolean resistGroup(GroupBean gb) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -186,7 +187,10 @@ public class CreatGroup {
 		boolean creatJudge;
 
 		//gbからautherNoを
-		String autherNo = gb.getAutherBean().getMemberNo();
+		String autherNo = gb.getLoginBean().getUserNo();
+
+		//gbからGroupNameを
+		String groupName = gb.getGroupName();
 
 		//		//test
 		//		System.out.println("登録者のNo" + autherNo);
@@ -254,7 +258,7 @@ public class CreatGroup {
 	 * @param list 選択したユーザー
 	 * @return resistJudge メンバー登録成否
 	 */
-	public boolean resistGroupMember(String[] list) {
+	public boolean resistGroupMember(GroupBean gb) {
 		// 初期化
 		StringBuilder sb = new StringBuilder();
 
@@ -262,7 +266,12 @@ public class CreatGroup {
 		boolean resistJudge;
 
 		//作成者番号を入手
-		this.autherNo = gb.getAutherBean().getMemberNo();
+		String autherNo = gb.getAutherBean().getMemberNo();
+		//グループ名を入手
+		String groupName = gb.getGroupName();
+
+		//memberBeanのセット
+		MemberBean mb = new MemberBean();
 
 		//DB接続
 		Connection conn = null;
@@ -305,7 +314,6 @@ public class CreatGroup {
 			String groupNo = "0";
 			while (rs.next()) {
 				groupNo = rs.getString("MAX(group_no)");
-				System.out.println(groupNo);
 			}
 
 			//作成者のメンバー登録を行う文
@@ -332,7 +340,7 @@ public class CreatGroup {
 			// 会員登録を行うfor文
 
 			//受け取ったStringリストからを登録者Listに設定
-			String[] memberNo = list;
+			String[] memberNo = gb.getSelectMemberList();
 			if (memberNo == null) {
 				resistJudge = false;
 			} else {
@@ -361,16 +369,9 @@ public class CreatGroup {
 
 					Statement stmt2 = conn.createStatement();
 					int memberResistRs = stmt2.executeUpdate(sb2.toString());
-					System.out.println(memberResistRs);
-
-					//				if (memberResistRs == 1) {
-					//					message = i + "回目Resist OK";
-					////					System.out.println(message);
-					//
-					//				} else {
-					//
-					//				}
-					//
+					if(memberResistRs == 1) {
+						resistJudge = true;
+					}
 
 					while (rs.next()) {
 
