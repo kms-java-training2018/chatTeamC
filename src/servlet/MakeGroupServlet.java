@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.GroupBean;
 import bean.LoginBean;
+import model.CheckCharacter;
 import model.CreatGroup;
 
 /**
@@ -83,6 +84,8 @@ public class MakeGroupServlet extends HttpServlet {
 		GroupBean groupBean = new GroupBean();
 		//今から処理させるモデル
 		CreatGroup creatGroup = new CreatGroup();
+		//文字入力チェック用モデル
+		CheckCharacter checkChara = new CheckCharacter();
 
 		//		セッションに値があるかどうかでif
 		if (session.getAttribute("session") != null) {
@@ -109,7 +112,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 					//入力チェックの返答
 					boolean byteCheck;
-					byteCheck = creatGroup.stringLengthCheck(name);
+					byteCheck = checkChara.stringLengthCheck(name,90);
 					if (byteCheck == false) {
 						message = "文字数オーバーです";
 
