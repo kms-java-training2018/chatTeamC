@@ -70,37 +70,50 @@ public class DirectMessageServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-		}
-		// 現在のセッションに入っているmessageCheckBean情報を受け取る
-		MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");
-		MessageCheckSendModel model = new MessageCheckSendModel();
-		//現在のセッションに入っているloginBean情報を受け取る
-		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-		//メッセージ内容を取得
-		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
-		//
-		if (sendMessage.equals("")) {
-			req.setAttribute("error", "文字を入力してください。");
-			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
-		}
-		bean.setSendMessage(sendMessage);
-		//入力チェックの返答
-		int bytecheck = 0;
-		bytecheck = model.stringLengthCheck(sendMessage);
-		if (bytecheck == 1) {
-			req.setAttribute("error", "文字のデータサイズオーバーです。");
-			doGet(req, res);
 		} else {
-			// 会話情報の取得
-			try {
-				model.sendMessage(bean, loginBean);
-				req.setAttribute("error", loginBean.getErrorMessage());
-				loginBean.setErrorMessage("");
-			} catch (Exception e) {
-				e.printStackTrace();
+			// 現在のセッションに入っているmessageCheckBean情報を受け取る
+			MessageCheckBean bean = (MessageCheckBean) session.getAttribute("messageCheckBean");
+			MessageCheckSendModel model = new MessageCheckSendModel();
+			//現在のセッションに入っているloginBean情報を受け取る
+			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			//メッセージ内容を取得
+			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+
+			// から文字かどうか判定用
+			String sendMessageTest = sendMessage.replaceAll(" ", "");
+			sendMessageTest = sendMessageTest.replaceAll("　", "");
+
+			if (sendMessageTest.isEmpty()) {
+				req.setAttribute("error", "文字を入力してください。");
+				//doGet(req, res);
+			} else {
+
+				//
+				//		if (sendMessage.equals("")) {
+				//			req.setAttribute("error", "文字を入力してください。");
+				//			doGet(req, res);
+				//		}
+				bean.setSendMessage(sendMessage);
+				//入力チェックの返答
+				int bytecheck = 0;
+				bytecheck = model.stringLengthCheck(sendMessage);
+				if (bytecheck == 1) {
+					req.setAttribute("error", "文字のデータサイズオーバーです。");
+					//doGet(req, res);
+				} else {
+					// 会話情報の取得
+					try {
+						model.sendMessage(bean, loginBean);
+						req.setAttribute("error", loginBean.getErrorMessage());
+						loginBean.setErrorMessage("");
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					//メッセージ送信処理終了後、doGetに移し、更新させる。
+					//doGet(req, res);
+				}
 			}
-			//メッセージ送信処理終了後、doGetに移し、更新させる。
-			doGet(req, res);
 		}
+		doGet(req, res);
 	}
 }
