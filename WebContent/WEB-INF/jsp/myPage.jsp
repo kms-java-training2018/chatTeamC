@@ -11,6 +11,7 @@
 </script>
 
 <link rel="stylesheet" href="css/Title.css">
+<link rel="stylesheet" href="css/myPage.css">
 
 <title>My Page</title>
 
@@ -18,39 +19,39 @@
 <body>
 	<div align="center" id="Lock">
 		<h2>ようこそ ${session.userName}さん</h2>
-		<input type="button"
-			value="Logout" onClick="logout()" style="width: 79px; height: 27px">
-		<br>
-		<br>
-		<table border="1" align="center" width="80%" height="60vh"
-			cellspacing="0" cellpadding="3" bgcolor="	#b8f1f1"
-			style="width: 493px; height: 96px">
-			<tr>
-				<td>
-					<p align="center">My Page</p>
-				</td>
-			</tr>
-		</table>
+		<input  type="button" value="Logout" onClick="logout()">
+	</div>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<table id="myPageTitle">
+		<tr>
+			<td>
+				<p id="myPageName">MyProfile</p>
+			</td>
+		</tr>
+	</table>
 
-		<br> <br>
-
+	<br>
+	<br>
+	<div class="textGroup">
 		<form action="/chat/main" method="POST">
 			<p>Name</p>
-			<input type="text" name="myName" value="${name}"
-				style="height: 37px; width: 210px">
+			<input type="text" name="myName" value="${name}" class="text">
 			<p>${erorr}</p>
 			<p>
 				<br>Profile
 			</p>
-			<input type="text" name="myProfile" value="${profile}"
-				style="width: 210px; height: 37px">
+			<input type="text" name="myProfile" value="${profile}" class="text">
 			<p></p>
 			<br> <input type="submit" value="Update" name="newProfile"
-				style="width: 90px;"><input type="submit" value="Back"
-				style="width: 90px;">
+				class="button"><input type="submit" value="Back"
+				class="button">
 		</form>
-		<form action="/chat/main" method="POST"></form>
 	</div>
-
 </body>
 </html>
