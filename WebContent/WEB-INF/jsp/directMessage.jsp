@@ -27,11 +27,13 @@ page import="java.util.ArrayList"%>
 		<p>ようこそ ${session.userName}さん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
 		<h2>
-			～ <a
+			 <a
 				href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
-				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a>さんとの会話部屋～
+				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a>さんとの会話部屋
 		</h2>
 	</div>
+	<br>
+	<br>
 	<br>
 	<br>
 	<br>

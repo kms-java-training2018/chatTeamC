@@ -2,6 +2,7 @@
 
 /*タイトルの固定用*/
 #Lock {
+	padding: 5px 20px;
 	position: fixed;
 	background-color: #f6f6f6;
 	border:5px double #bebebe;

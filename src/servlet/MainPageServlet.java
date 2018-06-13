@@ -66,9 +66,15 @@ public class MainPageServlet extends HttpServlet {
 				String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
 				String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
 
+				// 空文字かどうか判定用
+	            String myNameTest = myName.replaceAll(" ", "");
+	            myNameTest = myNameTest.replaceAll("　", "");
+	            System.out.println(myProfile.length());
+	            System.out.println(myName.length());
+
 				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
-				if (myName.equals("")) {
-					req.setAttribute("erorr", "無効な名前です");
+				if (myNameTest.equals("")|| myProfile.length() > 300 ||  myName.length() > 90) {
+					req.setAttribute("erorr", "無効な数値です");
 					//マイページに戻る
 					req.setAttribute("name", myName);
 					req.setAttribute("profile", myProfile);
