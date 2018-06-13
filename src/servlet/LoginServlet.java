@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import bean.SessionBean;
+import model.CheckCharacter;
 import model.LoginModel;
 
 /**
@@ -36,26 +37,33 @@ public class LoginServlet extends HttpServlet {
 		LoginBean bean = new LoginBean();
 		LoginModel model = new LoginModel();
 		String direction = "/WEB-INF/jsp/login.jsp";
+		CheckCharacter checkChara = new CheckCharacter();
 
 		// パラメータの取得
 		String userId = (String) req.getParameter("userId");
 		String password = (String) req.getParameter("password");
 
-		bean.setUserId(userId);
-		bean.setPassword(password);
+		boolean result = checkChara.halfSizeCheck(password);
+		boolean judgeByte = checkChara.stringLengthCheck(password, 20);
 
-		// 認証処理
 		try {
-			if (!halfSizeCheck(password)) {
+			if (result == false) {
 				bean.setErrorMessage("半角で入力してください");
-			} else if (!stringLengthCheck(password, 20)) {
+			} else if (judgeByte == false) {
 				bean.setErrorMessage("20文字は受け付けません");
+
 			} else {
+				bean.setUserId(userId);
+				bean.setPassword(password);
+
+				// 認証処理
 				bean = model.authentication(bean);
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+
 		// 取得に成功した場合セッション情報をセット
 		if ("".equals(bean.getErrorMessage())) {
 			SessionBean sessionBean = new SessionBean();
@@ -71,27 +79,4 @@ public class LoginServlet extends HttpServlet {
 		req.getRequestDispatcher(direction).forward(req, res);
 	}
 
-	// 入力値のチェック
-	public boolean stringLengthCheck(String input, int max) {
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		if ((int) length > max) { // 最大文字数よりも多かった場合
-			return false;
-		}
-		return true; // 許容内であった場合
-	}
-
-	// 半角チェック
-	public boolean halfSizeCheck(String input) {
-		boolean result = false;
-
-		if (!(input == null) || !(input.length() == 0)) {
-			int len = input.length();
-			byte[] bytes = input.getBytes();
-			if (len == bytes.length) {
-				result = true;
-			}
-		}
-		return result;
-	}
 }
