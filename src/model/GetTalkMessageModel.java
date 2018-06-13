@@ -8,11 +8,12 @@ import java.sql.Statement;
 
 import bean.GroupMessageBean;
 import bean.LoginBean;
+import bean.TalkContentBean;
 
 /**
  * グループメッセージ画面ビジネスロジック
  */
-public class GetTalkMessage {
+public class GetTalkMessageModel {
 
 	public GroupMessageBean authentication(GroupMessageBean bean, LoginBean loginBean, String GroupNo) {
 
@@ -65,15 +66,17 @@ public class GetTalkMessage {
 			rs = stmt.executeQuery(sb.toString());
 
 			while (rs.next()) {
+				TalkContentBean talkContentBean = new TalkContentBean();
 				// Beanに追加
 				if (rs.getString("OUT_FLAG").equals("1")) {
-					bean.setName("送信者不明");
+					talkContentBean.setUserName("送信者不明");
 				} else {
-					bean.setName(rs.getString("USER_NAME"));
+					talkContentBean.setUserName(rs.getString("USER_NAME"));
 				}
-				bean.setText(rs.getString("message"));
-				bean.setNumber(rs.getString("USER_NO"));
-				bean.setMessageNo(rs.getString("message_no"));
+				talkContentBean.setMessage(rs.getString("message"));
+				talkContentBean.setUserNo(rs.getString("USER_NO"));
+				talkContentBean.setMessageNo(rs.getString("message_no"));
+				bean.setTalkContentBeanList(talkContentBean);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

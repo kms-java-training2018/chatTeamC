@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 import bean.GroupMessageBean;
 import bean.LoginBean;
 import bean.MessageCheckBean;
-import model.GetTalkMessage;
+import model.GetTalkMessageModel;
 import model.MessageCheckSendModel;
 
 /**
@@ -24,10 +24,10 @@ public class GroupMessageServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// 初期化
-		MessageCheckBean Mbean = new MessageCheckBean();
-		MessageCheckSendModel Mmodel = new MessageCheckSendModel();
+		//		MessageCheckBean MCBean = new MessageCheckBean();
+		//		MessageCheckSendModel MCSModel = new MessageCheckSendModel();
 		GroupMessageBean bean = new GroupMessageBean();
-		GetTalkMessage model = new GetTalkMessage();
+		GetTalkMessageModel model = new GetTalkMessageModel();
 		// セッション情報取得 (ログインしているかどうか)
 		HttpSession session = req.getSession();
 		// ログインできているか確認
@@ -36,22 +36,23 @@ public class GroupMessageServlet extends HttpServlet {
 		} else {
 			// 自会員番号を取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			loginBean.setErrorMessage("");
 			// 相手の会員番号の取得
 			bean.setGroupNo((req.getParameter("toGroupNo")));
-			Mbean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
+			//			MCBean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
 			//String toGroupNo = (bean.getGroupNo());
 			// 会話情報の取得
 			try {
 				bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
-				Mbean = Mmodel.getTalkContent(Mbean, loginBean);
+				//				MCBean = MCSModel.getTalkContent(MCBean, loginBean);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 
 			// もしも相手の番号が無い場合はエラーを表示
-			req.setAttribute("GroupBean", bean);
+			req.setAttribute("GroupMessageBean", bean);
 			req.setAttribute("myLoginNo", loginBean.getUserNo());
-			session.setAttribute("GroupBean", Mbean); //セッション内へ自分と相手の情報を保存
+			session.setAttribute("GroupMessageBean", bean); //セッション内へ自分と相手の情報を保存
 			req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 		}
 	}
@@ -81,7 +82,7 @@ public class GroupMessageServlet extends HttpServlet {
 			int bytecheck = 0;
 			bytecheck = model.stringLengthCheck(sendMessage);
 			if (bytecheck == 1) {
-				req.setAttribute("error", "文字数オーバーです");
+				req.setAttribute("error", "文字のデータサイズオーバーです");
 				doGet(req, res);
 			} else {
 				// 会話情報の取得

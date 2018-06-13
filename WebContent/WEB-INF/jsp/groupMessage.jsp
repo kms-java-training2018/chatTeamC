@@ -33,29 +33,29 @@ page import="java.util.ArrayList"%>
 	<h2>${GroupBean.getGroupName()}</h2>
 
 
-	<c:forEach var="list" items="${GroupBean.getNumber()}"
+	<c:forEach var="list"
+		items="${GroupMessageBean.getTalkContentBeanList()}"
 		varStatus="status">
 		<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET">
-			<c:if test="${GroupBean.getNumber().get(status.index) == myLoginNo}">
-				<div align="right">${GroupBean.getName().get(status.index)}：${GroupBean.getText().get(status.index)}
+			<c:if test="${list.getUserNo() == myLoginNo}">
+				<div align="right">${list.getUserName()}：${list.getMessage()}
 					<input type="button" value="削除"
-						onClick="deleteMessage('${GroupBean.getMessageNo().get(status.index)}','toGroupNo=${GroupBean.getGroupNo()}','deleteGroupMessage')">
+						onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
 				</div>
 
+				<!-- 会話ログ表示 -->
 			</c:if>
-			<c:if test="${GroupBean.getNumber().get(status.index) != myLoginNo}">
-
-				<c:if test="${GroupBean.getName().get(status.index) != '送信者不明'}">
-					<a
-						href="/chat/showProfile?toUserNo=${GroupBean.getNumber().get(status.index)}"
-						target=”_blank”> ${GroupBean.getName().get(status.index)}</a>
+			<c:if test="${list.getUserNo() != myLoginNo}">
+				<c:if test="${list.getUserName() != '送信者不明'}">
+					<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+						target=”_blank”> ${list.getUserName()}</a>
 				</c:if>
-				<c:if test="${GroupBean.getName().get(status.index) == '送信者不明'}">
-							${GroupBean.getName().get(status.index)}
-						</c:if> ：${GroupBean.getText().get(status.index)}
+				<c:if test="${list.getUserName() == '送信者不明'}">
+							${list.getUserName()}
+						</c:if> ：${list.getMessage()}
 			</c:if>
 		</form>
 	</c:forEach>
@@ -64,17 +64,16 @@ page import="java.util.ArrayList"%>
 	</p>
 	<form action="/chat/groupMessage" method="POST">
 		<input type="hidden" name="deleteMessageNo"
-			value="${GroupBean.getMessageNo()}"> <input type="hidden"
-			name="toGroupNo" value="${GroupBean.getGroupNo()}"> <input
-			type="text" name="sendMessage" value=""> <input type="submit"
-			value="メッセージの送信">
+			value="${list.getMessageNo()}"> <input type="hidden"
+			name="toGroupNo" value="${GroupMessageBean.getGroupNo()}"> <input
+			type="text" name="sendMessage" size="50" maxlength="100"> <input
+			type="submit" value="メッセージの送信">
 	</form>
-	<c:if test="${GroupBean.getRegistUserNo() != myLoginNo}">
+	<c:if test="${list.getUserNo() != myLoginNo}">
 		<form action="/chat/secessionGroupServlet" method="GET">
-			<input type="hidden" name="toGroupNo"
-				value="${GroupBean.getGroupNo()}"> <input type="button"
-				value="グループの脱退"
-				onclick="deleteUserMenber('${GroupBean.getGroupNo()}')">
+			<input type="hidden" name="toGroupNo" value="${list.getUserNo()}">
+			<input type="button" value="グループの脱退"
+				onclick="deleteUserMenber('${list.getUserNo()}')">
 		</form>
 	</c:if>
 	<form action="/chat/main" method="POST">

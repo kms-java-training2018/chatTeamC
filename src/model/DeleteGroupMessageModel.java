@@ -44,10 +44,6 @@ public class DeleteGroupMessageModel {
 
 			if (!rs.next()) {
 				bean.setErrorMessage("メッセージを削除できませんでした。");
-			} else {
-				bean.setUserNo(rs.getString("user_no"));
-				bean.setUserName(rs.getString("user_name"));
-				bean.setErrorMessage("");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

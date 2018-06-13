@@ -32,23 +32,23 @@
 			<!-- 1段目 -->
 			<tr>
 				<th colspan="3">
-					<p>メインメニュー</p>
+					<p>Main menu</p>
 				</th>
 				<th class="userTitle">
 					<p>ようこそ ${session.userName}さん</p> <input type="button"
-					value="ログアウト" onClick="logout()" />
+					value="Logout" onClick="logout()" />
 				</th>
 			</tr>
 			<!-- 2段目 -->
 			<tr align="center">
 				<td colspan="2" class="userTitle">
 					<form action="/chat/makeGroup" method="POST">
-						<input type="submit" value="グループ作成">
+						<input type="submit" value="Group creation">
 					</form>
 				</td>
 				<td colspan="2">
 					<form action="/chat/myPage" method="POST">
-						<input type="submit" value="プロフィール">
+						<input type="submit" value="Profile">
 					</form>
 				</td>
 			</tr>
@@ -66,52 +66,49 @@
 		<table class="menu">
 			<!-- 3段目 -->
 			<tr align="center">
-				<th colspan="4" id="Direct">ダイレクトメッセージ</th>
+				<th id="Direct">Personal chat</th>
 			</tr>
 		</table>
 		<table class="menu" id="personalMessage">
 			<tr align="center">
-				<td class="name">名前</td>
-				<td colspan="3" class="message">最新メッセージ</td>
+				<td class="nameTitle">Name</td>
+				<td class="messageTitle">Message</td>
 			</tr>
 			<c:forEach var="list"
 				items="${MainPageBean.getLatestMenberMessageBeanList()}"
 				varStatus="status">
 				<tr align="center" class="personalChatMessage">
-					<td><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
+					<td class="name"><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
 						class="Link">${list.getUserName()}</a></td>
-					<td colspan="3">${list.getLatestMessage()}</td>
+					<td class="message">${list.getLatestMessage()}</td>
 				</tr>
 			</c:forEach>
 		</table>
 	</div>
 	<br>
 	<br>
-	<br>
-	<br>
 
 	<table class="menu">
 		<!-- 4段目 -->
 		<tr align="center">
-			<th colspan="4" id="Group">グループチャット</th>
+			<th id="Group">Group chat</th>
 		</tr>
 	</table>
 	<table class="menu" id="groupMessage">
 		<tr align="center">
-			<td class="name">グループ名</td>
-			<td colspan="3" class="message">最新メッセージ</td>
+			<td class="nameTitle">Name</td>
+			<td class="messageTitle">Message</td>
 		</tr>
 		<c:forEach var="list"
 			items="${MainPageBean.getLatestGroupMessageBeanList()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/groupMessage?toGroupNo=${list.getGroupNo()}"
+				<td class="name"><a href="/chat/groupMessage?toGroupNo=${list.getGroupNo()}"
 					class="Link">${list.getGroupName()}</a></td>
-				<td colspan="3">${list.getLatestMessage()}</td>
+				<td class="message">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
-	</table>
 
-	<embed src="showProfile.jsp"></embed>
+	</table>
 </body>
 </html>
