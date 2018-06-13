@@ -23,8 +23,14 @@ public class MyPageServlet extends HttpServlet {
 		// 移動先のアドレス(マイページ)
 		String direction = "/WEB-INF/jsp/myPage.jsp";
 
+		//エラーメッセージ用のString
+		String message;
+
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") == null) {
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			// エラー画面に推移
 			direction = "/WEB-INF/jsp/errorPage.jsp";
