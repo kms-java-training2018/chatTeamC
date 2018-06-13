@@ -42,11 +42,11 @@ public class DirectMessageServlet extends HttpServlet {
 			} catch (Exception e) {
 				loginBean.setErrorMessage("相手の会話情報が入手できませんでした。");
 				e.printStackTrace();
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 			// もしも相手の番号が無い場合はエラーを表示
 			if (toUserNo == 0) {
 				loginBean.setErrorMessage("相手の番号が不明です。");
-				;
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
 				req.setAttribute("error", loginBean.getErrorMessage());
@@ -77,8 +77,12 @@ public class DirectMessageServlet extends HttpServlet {
 		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 		//メッセージ内容を取得
 		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+		//
+		if(sendMessage.equals("")) {
+			req.setAttribute("error", "文字を入力してください。");
+			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+		}
 		bean.setSendMessage(sendMessage);
-
 		//入力チェックの返答
 		int bytecheck = 0;
 		bytecheck = model.stringLengthCheck(sendMessage);
