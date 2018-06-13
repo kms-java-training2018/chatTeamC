@@ -66,21 +66,21 @@
 		<table class="menu">
 			<!-- 3段目 -->
 			<tr align="center">
-				<th colspan="4" id="Direct">Personal chat</th>
+				<th id="Direct">Personal chat</th>
 			</tr>
 		</table>
 		<table class="menu" id="personalMessage">
 			<tr align="center">
-				<td class="name">Name</td>
-				<td colspan="3" class="message">Message</td>
+				<td class="nameTitle">Name</td>
+				<td class="messageTitle">Message</td>
 			</tr>
 			<c:forEach var="list"
 				items="${MainPageBean.getLatestMenberMessageBeanList()}"
 				varStatus="status">
 				<tr align="center" class="personalChatMessage">
-					<td><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
+					<td class="name"><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
 						class="Link">${list.getUserName()}</a></td>
-					<td colspan="3">${list.getLatestMessage()}</td>
+					<td class="message">${list.getLatestMessage()}</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -91,21 +91,21 @@
 	<table class="menu">
 		<!-- 4段目 -->
 		<tr align="center">
-			<th colspan="4" id="Group">Group chat</th>
+			<th id="Group">Group chat</th>
 		</tr>
 	</table>
 	<table class="menu" id="groupMessage">
 		<tr align="center">
-			<td class="name">Name</td>
-			<td colspan="3" class="message">Message</td>
+			<td class="nameTitle">Name</td>
+			<td class="messageTitle">Message</td>
 		</tr>
 		<c:forEach var="list"
 			items="${MainPageBean.getLatestGroupMessageBeanList()}"
 			varStatus="status">
 			<tr align="center">
-				<td><a href="/chat/groupMessage?toGroupNo=${list.getGroupNo()}"
+				<td class="name"><a href="/chat/groupMessage?toGroupNo=${list.getGroupNo()}"
 					class="Link">${list.getGroupName()}</a></td>
-				<td colspan="3">${list.getLatestMessage()}</td>
+				<td class="message">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
 

@@ -31,6 +31,7 @@ public class DirectMessageServlet extends HttpServlet {
 		} else {
 			//自会員番号を取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			// メインからきたとき初期化
 			loginBean.setErrorMessage("");
 			String myLogin = loginBean.getUserNo();
 			//相手の会員番号を取得
@@ -49,7 +50,7 @@ public class DirectMessageServlet extends HttpServlet {
 				loginBean.setErrorMessage("相手の番号が不明です。");
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
-				req.setAttribute("error", loginBean.getErrorMessage());
+				//req.setAttribute("error", loginBean.getErrorMessage());
 				req.setAttribute("messageCheckBean", bean);
 				req.setAttribute("myLoginNo", myLogin);
 				session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
@@ -78,7 +79,7 @@ public class DirectMessageServlet extends HttpServlet {
 		//メッセージ内容を取得
 		String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
 		//
-		if(sendMessage.equals("")) {
+		if (sendMessage.equals("")) {
 			req.setAttribute("error", "文字を入力してください。");
 			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 		}
@@ -94,6 +95,7 @@ public class DirectMessageServlet extends HttpServlet {
 			try {
 				model.sendMessage(bean, loginBean);
 				req.setAttribute("error", loginBean.getErrorMessage());
+				loginBean.setErrorMessage("");
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
