@@ -110,7 +110,8 @@
 				<td colspan="3">${list.getLatestMessage()}</td>
 			</tr>
 		</c:forEach>
-
 	</table>
+
+	<embed src="showProfile.jsp"></embed>
 </body>
 </html>
