@@ -69,7 +69,10 @@ public class GroupMessageServlet extends HttpServlet {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 現在のセッションに入っているmessageCheckBean情報を受け取る
-			MessageCheckBean bean = (MessageCheckBean) session.getAttribute("GroupBean");
+			MessageCheckBean bean = new MessageCheckBean(); //= (MessageCheckBean) session.getAttribute("GroupBean");
+			String groupNoStr = ((GroupMessageBean)session.getAttribute("GroupMessageBean")).getGroupNo();
+			int groupNo = Integer.parseInt(groupNoStr);
+			bean.setToUserNo(groupNo);
 			MessageCheckSendModel model = new MessageCheckSendModel();
 			//現在のセッションに入っているloginBean情報を受け取る
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
