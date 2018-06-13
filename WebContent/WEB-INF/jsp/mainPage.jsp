@@ -26,12 +26,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Main menu</title>
 </head>
-<body>
+<body id="background">
 	<div id="Lock">
 		<table class="titleMenu">
 			<!-- 1段目 -->
 			<tr>
-				<th colspan="3">
+				<th colspan="3" class="tableColor">
 					<p>Main menu</p>
 				</th>
 				<th class="userTitle">
@@ -46,7 +46,7 @@
 						<input type="submit" value="Group creation">
 					</form>
 				</td>
-				<td colspan="2">
+				<td colspan="2" class="tableColor">
 					<form action="/chat/myPage" method="POST">
 						<input type="submit" value="Profile">
 					</form>

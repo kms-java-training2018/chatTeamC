@@ -16,10 +16,10 @@
 <title>My Page</title>
 
 </head>
-<body>
+<body id="background">
 	<div align="center" id="Lock">
 		<h2>ようこそ ${session.userName}さん</h2>
-		<input  type="button" value="Logout" onClick="logout()">
+		<input type="button" value="Logout" onClick="logout()">
 	</div>
 	<br>
 	<br>
@@ -38,20 +38,18 @@
 
 	<br>
 	<br>
-	<div class="textGroup">
-		<form action="/chat/main" method="POST">
-			<p>Name</p>
-			<input type="text" name="myName" value="${name}" class="text">
-			<p>${erorr}</p>
-			<p>
-				<br>Profile
-			</p>
-			<input type="text" name="myProfile" value="${profile}" class="text">
-			<p></p>
-			<br> <input type="submit" value="Update" name="newProfile"
-				class="button"><input type="submit" value="Back"
-				class="button">
-		</form>
-	</div>
+	<form action="/chat/main" method="POST">
+		<p class="textTitle">Name</p>
+		<input type="text" name="myName" value="${name}" class="text">
+		<p>${erorr}</p>
+		<p class="textTitle">
+			<br>Profile
+		</p>
+		<input type="text" name="myProfile" value="${profile}" class="text" maxlength="100">
+		<p></p>
+		<br> <input type="submit" value="Update" name="newProfile"
+			class="button"><input type="submit" value="Back"
+			class="button">
+	</form>
 </body>
 </html>

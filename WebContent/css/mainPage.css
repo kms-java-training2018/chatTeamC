@@ -9,25 +9,27 @@
 /*ダイレクトメッセージタイトルカラー*/
 #Direct {
 	color: #0033ee;
+	background-color: #ffffff;
 	colspan: "6"
 }
 
 /*グループメッセージタイトルカラー*/
 #Group {
 	color: #ff80c0;
+	background-color: #ffffff;
 	colspan: "6"
 }
 
 /*名前タグの色*/
 .nameTitle {
 	background-color: #e9eafe;
-	colspan:"2";
+	colspan: "2";
 }
 
 /*メッセージタグの色*/
 .messageTitle {
 	background-color: #fff4fc;
-	colspan:"4";
+	colspan: "4";
 }
 
 /*タイトルのマス目の色*/
@@ -59,30 +61,48 @@
 
 /*ボタンホバー時リンクの色を変更*/
 .Link:hover {
-    background: #efefef;
+	background: #efefef;
 	color: #dd00ff;
 }
 
 /*ダイレクトメッセージホバー時色を変更*/
-#Direct:hover{
-    background: #0033ee;
+#Direct:hover {
+	background: #0033ee;
 	color: #dddddd;
 }
 
 /*グループメッセージホバー時色を変更*/
-#Group:hover{
-    background: #ff80c0;
+#Group:hover {
+	background: #ff80c0;
 	color: #dddddd;
 }
 
 /*名前タグの色*/
 .name {
-	colspan:"2";
+	colspan: "2";
 }
 
 /*メッセージタグの色*/
 .message {
-	colspan:"4";
+	colspan: "4";
 }
 
+/*内部の色*/
+.tableColor{
+	background-color: #ffffff;
+}
+#personalMessage{
+	background-color: #ffffff;
+}
+#groupMessage{
+	background-color: #ffffff;
+}
 
+/*背景*/
+#background {
+	margin-right: auto;
+	text-align: center;
+	cellpadding: "3";
+	background-color: #fff7fe;
+	border: 5px double #ffecfc;
+}
