@@ -20,29 +20,17 @@
 
 		<form action="/chat/login" method="POST" class="login" action="foo">
 			<h2>Member ID</h2>
-			<input id="username" type="text" name="userId" value="${loginBean.userId}">
+			<input id="username" type="text" name="userId"
+				value="${loginBean.userId}">
 			<h2>Password</h2>
-			<input id="password" type="password" name="password" value="${loginBean.password}">
-			<br> <input id="show-ps" type="checkbox" onclick="connecttext(this.checked);" /><label for="show-ps">Show
-				password</label> <br>
+			<input id="password" type="password" name="password"
+				value="${loginBean.password}"> <br> <input id="show-ps"
+				type="checkbox" onclick="connecttext(this.checked);" /><label
+				for="show-ps">Show password</label> <br>
 			<p>${loginError.errorMessage}</p>
 
 			<input type="submit" value="Login">
 		</form>
 	</div>
-      <!--  <form class="login" action="foo">
-        <input id="username" type="text" place="ユーザー名" />
-        <input id="password" type="password"  place="パスワード"/>
-        <input id="submit" type="submit" value="ログイン" />
-        <br />
-        <input id="show-ps" type="checkbox" /><label for="show-ps">パスワードを表示</label>
-    </form>-->
-
-   <!-- <input type="password" id="pswd" name="pswd" />
-<input type="text" id="pswd-text" name="pswd-text" style="display:none;" />
-<input type="checkbox" id="pswd-toggle" name="pswd-toggle" data-for="pswd" />
-<label for="pswd-toggle">パスワードを表示する</label>
- -->
-
 </body>
 </html>
