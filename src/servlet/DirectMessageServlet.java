@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import bean.MessageCheckBean;
+import model.CheckCharacter;
 import model.MessageCheckSendModel;
 
 public class DirectMessageServlet extends HttpServlet {
@@ -25,29 +26,40 @@ public class DirectMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
+
+		//エラーメッセージ用のString
+		String message;
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
+			//ない場合、セッションにnullセットしてエラーページへ
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
-			//自会員番号を取得
+			// 自会員番号を取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-			// メインからきたとき初期化
-			loginBean.setErrorMessage("");
 			String myLogin = loginBean.getUserNo();
-			//相手の会員番号を取得
+			// エラーメッセージの初期化
+			loginBean.setErrorMessage("");
+			// 相手の会員番号を取得
 			bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 			Integer toUserNo = (bean.getToUserNo());
 			// 会話情報の取得
 			try {
 				bean = model.getTalkContent(bean, loginBean);
 			} catch (Exception e) {
-				loginBean.setErrorMessage("相手の会話情報が入手できませんでした。");
+				session.setAttribute("session", null);
+				message = "相手の会話情報が入手できませんでした。";
+				req.setAttribute("error", message);
 				e.printStackTrace();
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 			// もしも相手の番号が無い場合はエラーを表示
 			if (toUserNo == 0) {
-				loginBean.setErrorMessage("相手の番号が不明です。");
+				session.setAttribute("session", null);
+				message = "相手の番号が不明です。";
+				req.setAttribute("error", message);
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
 				//req.setAttribute("error", loginBean.getErrorMessage());
@@ -60,15 +72,23 @@ public class DirectMessageServlet extends HttpServlet {
 	}
 
 	/**
-	 * メッセージ送信
+	 * ○メッセージ送信処理
+	 *
 	 * */
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		/*
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
+
+		//エラーメッセージ用のString
+		String message;
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
+			//ない場合、セッションにunllセットしてエラーページへ
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 現在のセッションに入っているmessageCheckBean情報を受け取る
@@ -76,30 +96,28 @@ public class DirectMessageServlet extends HttpServlet {
 			MessageCheckSendModel model = new MessageCheckSendModel();
 			//現在のセッションに入っているloginBean情報を受け取る
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			//バイト数チェック用モデルを用意
+			CheckCharacter checkCharacter = new CheckCharacter();
 			//メッセージ内容を取得
 			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
-
-			// から文字かどうか判定用
+			/*
+			 * ○メッセージが空文字（またはスペースのみ）かどうかの判定
+			 * "replaceAll"で半角・全角スペースを空文字に置き換え、
+			 * 文字が残っている場合メッセージを送信用のモデルに送る。
+			 * 文字が残っていない場合、空文字として判断して
+			 * エラーメッセージを表示させる。
+			 * */
 			String sendMessageTest = sendMessage.replaceAll(" ", "");
 			sendMessageTest = sendMessageTest.replaceAll("　", "");
 
 			if (sendMessageTest.isEmpty()) {
 				req.setAttribute("error", "文字を入力してください。");
-				//doGet(req, res);
 			} else {
-
-				//
-				//		if (sendMessage.equals("")) {
-				//			req.setAttribute("error", "文字を入力してください。");
-				//			doGet(req, res);
-				//		}
 				bean.setSendMessage(sendMessage);
 				//入力チェックの返答
-				int bytecheck = 0;
-				bytecheck = model.stringLengthCheck(sendMessage);
-				if (bytecheck == 1) {
+				boolean bytecheck = checkCharacter.stringLengthCheck(sendMessage, 300);
+				if (bytecheck == false) {
 					req.setAttribute("error", "文字のデータサイズオーバーです。");
-					//doGet(req, res);
 				} else {
 					// 会話情報の取得
 					try {
@@ -109,8 +127,6 @@ public class DirectMessageServlet extends HttpServlet {
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
-					//メッセージ送信処理終了後、doGetに移し、更新させる。
-					//doGet(req, res);
 				}
 			}
 		}

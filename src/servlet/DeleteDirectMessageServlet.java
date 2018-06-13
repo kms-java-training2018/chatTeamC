@@ -14,6 +14,7 @@ import model.DeleteMessageModel;
 
 /**
  * 個別メッセージの削除処理用サーブレット
+ *
  * */
 public class DeleteDirectMessageServlet extends HttpServlet {
 
@@ -43,11 +44,9 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		//メッセージ内容はmodel内でセット
 		req.setAttribute("error", loginBean.getErrorMessage());
 		loginBean.setErrorMessage("");
-//		//削除処理終了後、directMessageServletに移し、更新させる。（エラーメッセージの初期化処理を通ってしまう）
+//		//削除処理終了後、directMessageServletに移し、更新させる。
 		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
 		directMessageServlet.doGet(req, res);
-//		//直接個人ページに飛ばすパターン。servlet内のexceptionに飛ぶため、表示に一部
-//		req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
