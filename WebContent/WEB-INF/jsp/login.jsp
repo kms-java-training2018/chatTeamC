@@ -23,7 +23,7 @@
 			<input id="username" type="text" name="userId" value="${loginBean.userId}">
 			<h2>Password</h2>
 			<input id="password" type="password" name="password" value="${loginBean.password}">
-			<br> <input id="show-ps" type="checkbox" /><label for="show-ps">Show
+			<br> <input id="show-ps" type="checkbox" onclick="connecttext(this.checked);" /><label for="show-ps">Show
 				password</label> <br>
 			<p>${loginError.errorMessage}</p>
 
