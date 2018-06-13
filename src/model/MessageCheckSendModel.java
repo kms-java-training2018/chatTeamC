@@ -280,9 +280,7 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
-			//Exceptionに飛ばされずに正常に登録できたとき、エラーメッセージを初期化させる。
 			loginBean.setErrorMessage("");
-			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
 		} catch (SQLIntegrityConstraintViolationException e) {
 			loginBean.setErrorMessage("メッセージを入力してください。");
 			e.printStackTrace();
