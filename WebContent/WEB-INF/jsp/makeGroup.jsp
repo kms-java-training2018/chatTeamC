@@ -18,6 +18,10 @@
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/button.js"
+	charset="UTF-8">
+
+</script>
 
 <link rel="stylesheet" href="css/MakeGroup.css">
 <!-- <link rel="stylesheet" href="css/base.css"> -->
@@ -27,19 +31,18 @@
 <body>
 <body id="bgcolor"></body>
 <form action="/chat/makeGroup" method="POST">
-	<table border="1" align="center" width="80%" height="60vh"
-		cellspacing="0" cellpadding="3" class="typeA">
+	<table class="main" align="center">
 
 		<!-- 1段目 -->
 		<tr>
-			<th class="title" colspan="2" >
+			<th class="title" colspan="2">
 				<p>Creat Group Page</p>
 			</th>
 			<th class="name">
 
 				<p>
-					Welcome! ${session.userName } さん <input type="button" value="Log Out"
-						align="right" onClick="logout()" />
+					Welcome! ${session.userName } さん <input type="button"
+						value="Log Out" align="right" onClick="logout()" />
 			</th>
 		</tr>
 
@@ -47,8 +50,8 @@
 		<tr>
 			<td colspan="3" align="center">
 
-				<p>Group Name</p> <input type="text" name="groupName" class="fontSize"
-				value=''>
+				<p>Group Name</p> <input type="text" name="groupName"
+				class="fontSize" value='' maxlength="30">
 				<p>
 					<font size="5" color="red">${error}</font>
 				</p>
@@ -64,8 +67,8 @@
 						<th>Select Member</th>
 					</tr>
 					<tr>
-						<th><input type="checkbox" id="member_all" name="member_all">Select all
-						</th>
+						<th><input type="checkbox" id="member_all" name="member_all">Select
+							all</th>
 					</tr>
 
 					<tr>
@@ -74,30 +77,25 @@
 							varStatus="status">
 							<tr>
 
-								<td class="typeB"><input type="checkbox"
-									name="userNo" class="member" value="${obj.getMemberNo()}">
-									<c:out value="${obj.getMemberName()}" /></td>
+								<td><input type="checkbox" name="userNo"
+									class="member" value="${obj.getMemberNo()}"> <c:out
+										value="${obj.getMemberName()}" /></td>
 
 							</tr>
 						</c:forEach>
-
-
-
-
-
 					</tr>
 				</table>
-			<td align="center">
+			<td>
 
-
-				<button type='submit' name="action" value="creat"
-					style="width: 200px; height: 40px;">Create group</button>
+				<button type="submit" id="click" name="action" value="creat" class="temp1"
+					>Create group</button>
 
 			</td>
 		</tr>
 		<tr>
-			<td align="center"><button type='submit' name="backMain" value="main"
-					style="width: 200px; height: 40px;">Return to Main Page</button></td>
+			<td><button type="submit" name="backMain" value="main"
+					class="temp1">Return to Main
+					Page</button></td>
 		</tr>
 	</table>
 </form>

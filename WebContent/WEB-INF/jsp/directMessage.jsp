@@ -16,6 +16,7 @@ page import="java.util.ArrayList"%>
 
 </script>
 <script type="text/javascript" src="JavaScript/Scrool.js"></script>
+<script type="text/javascript" src="JavaScript/button.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="css/Title.css">
 <link rel="stylesheet" href="css/Message.css">
@@ -79,7 +80,7 @@ page import="java.util.ArrayList"%>
 			value="${list.getMessageNo()}"> <input type="hidden"
 			name="toUserNo" value="${messageCheckBean.getToUserNo()}"> <input
 			type="text" name="sendMessage" size="50" maxlength="100"
-			align="right"> <input type="submit" value="メッセージの送信">
+			align="right"> <input type="submit" class="click"  value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューへ戻る">
