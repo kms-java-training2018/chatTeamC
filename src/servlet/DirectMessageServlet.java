@@ -102,15 +102,13 @@ public class DirectMessageServlet extends HttpServlet {
 			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
 			/*
 			 * ○メッセージが空文字（またはスペースのみ）かどうかの判定
-			 * "replaceAll"で半角・全角スペースを空文字に置き換え、
-			 * 文字が残っている場合メッセージを送信用のモデルに送る。
-			 * 文字が残っていない場合、空文字として判断して
-			 * エラーメッセージを表示させる。
+			 * checkCharacterのspaceCheckにて、スペースを除いて
+			 * 文字が残っている場合trueを返し、elseを通って
+			 * メッセージを送信用のモデルに送る。
+			 * 文字が残っていない場合、falseを返し、if文を通って
+			 * 空文字として判断してエラーメッセージを表示させる。
 			 * */
-			String sendMessageTest = sendMessage.replaceAll(" ", "");
-			sendMessageTest = sendMessageTest.replaceAll("　", "");
-
-			if (sendMessageTest.isEmpty()) {
+			if (checkCharacter.spaceCheck(sendMessage) == false) {
 				req.setAttribute("error", "文字を入力してください。");
 			} else {
 				bean.setSendMessage(sendMessage);
