@@ -6,8 +6,9 @@
 <head>
 
 <link rel="stylesheet" href="css/login.css" type="text/css" media="all">
-<script type="chat/JavaScript" src="JavaScript/login.js" charset="UTF-8"></script>
-<script type="text/javascript" src="./jQuery/jquery-3.3.1.min.js"></script>
+<script type="text/javascript" src="JQuery/jquery-3.3.1.min.js"></script>
+<script type="text/JavaScript" src="JavaScript/login.js" charset="UTF-8"></script>
+
 
 
 <title>Login Page</title>
@@ -29,6 +30,19 @@
 			<input type="submit" value="Login">
 		</form>
 	</div>
+      <!--  <form class="login" action="foo">
+        <input id="username" type="text" place="ユーザー名" />
+        <input id="password" type="password"  place="パスワード"/>
+        <input id="submit" type="submit" value="ログイン" />
+        <br />
+        <input id="show-ps" type="checkbox" /><label for="show-ps">パスワードを表示</label>
+    </form>-->
+
+   <!-- <input type="password" id="pswd" name="pswd" />
+<input type="text" id="pswd-text" name="pswd-text" style="display:none;" />
+<input type="checkbox" id="pswd-toggle" name="pswd-toggle" data-for="pswd" />
+<label for="pswd-toggle">パスワードを表示する</label>
+ -->
 
 </body>
 </html>
