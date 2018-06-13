@@ -20,10 +20,13 @@ public class ShowProfileServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		// 初期化
 		ShowProfileModel model = new ShowProfileModel();
-		ShowProfileBean bean = new ShowProfileBean();
+		ShowProfileBean bean = new ShowProfileBean();//エラーメッセージ用のString
+		String message;
 
 		//nullの場合エラー
 		if (session.getAttribute("session") == null) {
+			message = "不正なアクセスです。ログインしてください";
+			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			//loginBean取得
