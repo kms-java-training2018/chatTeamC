@@ -33,30 +33,30 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 			message = "不正なアクセスです。ログインしてくださーい";
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-			DeleteMessageModel model = new DeleteMessageModel();
-			//現在のセッションに入っているloginBean情報を受け取る
-			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-			MessageCheckBean messageCheckBean = (MessageCheckBean) session.getAttribute("messageCheckBean");
-			messageCheckBean.getToUserNo();
-			//消したいメッセージの会話情報番号を取得
-			//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
-			int deleteMessageNo = (Integer.parseInt(req.getParameter("deleteMessageNo")));
-			try {
-				model.deleteMessage(loginBean, deleteMessageNo);
-			} catch (Exception e) {
-				session.setAttribute("session", null);
-				message = "処理中にエラーが発生しました。";
-				req.setAttribute("error", message);
-				e.printStackTrace();
-			}
-			//削除できたかどうかを表示。
-			//メッセージ内容はmodel内でセット
-			req.setAttribute("error", loginBean.getErrorMessage());
-			loginBean.setErrorMessage("");
-			//		//削除処理終了後、directMessageServletに移し、更新させる。
-			DirectMessageServlet directMessageServlet = new DirectMessageServlet();
-			directMessageServlet.doGet(req, res);
 		}
+		DeleteMessageModel model = new DeleteMessageModel();
+		//現在のセッションに入っているloginBean情報を受け取る
+		LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+		MessageCheckBean messageCheckBean = (MessageCheckBean) session.getAttribute("messageCheckBean");
+		messageCheckBean.getToUserNo();
+		//消したいメッセージの会話情報番号を取得
+		//※メインページにて、消したいメッセージの会話情報番号を送る"deleteMessageNo"タグをつける必要有り
+		int deleteMessageNo = (Integer.parseInt(req.getParameter("deleteMessageNo")));
+		try {
+			model.deleteMessage(loginBean, deleteMessageNo);
+		} catch (Exception e) {
+			session.setAttribute("session", null);
+			message = "処理中にエラーが発生しました。";
+			req.setAttribute("error", message);
+			e.printStackTrace();
+		}
+		//削除できたかどうかを表示。
+		//メッセージ内容はmodel内でセット
+		req.setAttribute("error", loginBean.getErrorMessage());
+		loginBean.setErrorMessage("");
+		//		//削除処理終了後、directMessageServletに移し、更新させる。
+		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
+		directMessageServlet.doGet(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
