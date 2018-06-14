@@ -39,7 +39,7 @@ public class MyPageModel {
 			sb.append("FROM ");
 			sb.append(" M_USER ");
 			sb.append("WHERE");
-			sb.append(" USER_NO = '" + loginBean.getUserId() + "' ");
+			sb.append(" USER_NO = '" + loginBean.getUserNo() + "' ");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
