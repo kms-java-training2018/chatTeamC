@@ -48,7 +48,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			getDataJudge = false;
 		}
 		// 接続作成
@@ -80,7 +80,7 @@ public class CreatGroup {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			getDataJudge = false;
 			// sqlの接続は絶対に切断
 		} finally {
@@ -89,7 +89,7 @@ public class CreatGroup {
 				getDataJudge = true;
 				gb.setGetAllUserListJudge(getDataJudge);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				getDataJudge = false;
 			}
 		}
@@ -145,7 +145,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			creatJudge = false;
 		}
 		// 接続作成
@@ -174,7 +174,7 @@ public class CreatGroup {
 			creatJudge = (rs == 1);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			//test
 			creatJudge = false;
 
@@ -183,7 +183,7 @@ public class CreatGroup {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				creatJudge = false;
 			}
 		}
@@ -222,7 +222,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			resistJudge = false;
 		}
 		// 接続作成
@@ -322,7 +322,7 @@ public class CreatGroup {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			resistJudge = false;
 
 			// sqlの接続は絶対に切断
@@ -330,7 +330,8 @@ public class CreatGroup {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				resistJudge = false;
 			}
 		}
 		return resistJudge;

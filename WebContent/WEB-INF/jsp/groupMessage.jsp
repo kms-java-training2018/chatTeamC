@@ -23,13 +23,13 @@ page import="java.util.ArrayList"%>
 
 </script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>グループチャット画面</title>
 </head>
 <body onload="footerStart();">
 	ようこそ ${session.userName}さん
 	<br>
 	<input type="button" value="ログアウト" onClick="logout()" />
-	<h1>チャット研修プログラム</h1>
+
 	<h2>${GroupBean.getGroupName()}</h2>
 
 
