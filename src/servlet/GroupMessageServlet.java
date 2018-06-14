@@ -100,7 +100,7 @@ public class GroupMessageServlet extends HttpServlet {
 				req.setAttribute("error", "メッセージを入力してください");
 				doGet(req, res);
 			}
-
+			//文字規格処理
 			boolean bytecheck = checkChara.stringLengthCheck(sendMessage, 300);
 			if (bytecheck == false) {
 				req.setAttribute("error", "文字のデータサイズオーバーです");

@@ -2,8 +2,6 @@ package model;
 
 public class CheckCharacter {
 
-
-
 	/**
 	 * 文字数チェック
 	 * @param input 文字数チェックにかける文字列
@@ -45,7 +43,6 @@ public class CheckCharacter {
 		return result;
 	}
 
-
 	/**
 	 * 空白チェック
 	 * @param input チェックにかける文字
@@ -55,16 +52,11 @@ public class CheckCharacter {
 		boolean result;
 
 		String str = input.replaceAll(" ", "");
-        str = str.replaceAll("　", "");
+		str = str.replaceAll("　", "");
 
-        result = !(str.isEmpty());
+		result = !(str.isEmpty());
 
 		return result;
 
 	}
-
-
-
 }
-
-
