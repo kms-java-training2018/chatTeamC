@@ -41,7 +41,7 @@
 	<form action="/chat/main" method="POST">
 		<p class="textTitle">Name</p>
 		<input type="text" name="myName" value="${name}" class="text" maxlength="30">
-		<p>${erorr}</p>
+		<p id="erorr">${erorr}</p>
 		<p class="textTitle">
 			<br>Profile
 		</p>
