@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import bean.LoginBean;
 import bean.MainPageBean;
 import bean.SessionBean;
+import model.CheckCharacter;
 import model.MainPageModel;
 
 public class MainPageServlet extends HttpServlet {
@@ -65,15 +66,12 @@ public class MainPageServlet extends HttpServlet {
 				// 名前の設定
 				String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
 				String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
-
-				// 空文字かどうか判定用
-	            String myNameTest = myName.replaceAll(" ", "");
-	            myNameTest = myNameTest.replaceAll("　", "");
-	            System.out.println(myProfile.length());
-	            System.out.println(myName.length());
+				// 判定用の関数
+				CheckCharacter checkCharacter = new CheckCharacter();
 
 				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
-				if (myNameTest.equals("")|| myProfile.length() > 300 ||  myName.length() > 90) {
+				if (!(checkCharacter.spaceCheck(myName) && checkCharacter.stringLengthCheck(myName, 90)
+						&& checkCharacter.stringLengthCheck(myProfile, 300))) {
 					req.setAttribute("erorr", "無効な数値です");
 					//マイページに戻る
 					req.setAttribute("name", myName);

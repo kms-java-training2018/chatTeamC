@@ -85,7 +85,7 @@ public class DirectMessageServlet extends HttpServlet {
 		String message;
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
-			//ない場合、セッションにunllセットしてエラーページへ
+			//ない場合、セッションにnullセットしてエラーページへ
 			session.setAttribute("session", null);
 			message = "不正なアクセスです。ログインしてくださーい";
 			req.setAttribute("error", message);
@@ -102,19 +102,21 @@ public class DirectMessageServlet extends HttpServlet {
 			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
 			/*
 			 * ○メッセージが空文字（またはスペースのみ）かどうかの判定
-			 * "replaceAll"で半角・全角スペースを空文字に置き換え、
-			 * 文字が残っている場合メッセージを送信用のモデルに送る。
-			 * 文字が残っていない場合、空文字として判断して
-			 * エラーメッセージを表示させる。
+			 * checkCharacterのspaceCheckにて、スペースを除いて
+			 * 文字が残っている場合trueを返し、elseを通って
+			 * メッセージを送信用のモデルに送る。
+			 * 文字が残っていない場合、falseを返し、if文を通って
+			 * 空文字として判断してエラーメッセージを表示させる。
 			 * */
-			String sendMessageTest = sendMessage.replaceAll(" ", "");
-			sendMessageTest = sendMessageTest.replaceAll("　", "");
-
-			if (sendMessageTest.isEmpty()) {
+			if (checkCharacter.spaceCheck(sendMessage) == false) {
 				req.setAttribute("error", "文字を入力してください。");
 			} else {
 				bean.setSendMessage(sendMessage);
-				//入力チェックの返答
+				/*
+				 * ○入力されたメッセージのサイズをチェック
+				 * サイズの大きい文字が用いられ、100文字分のサイズを超えた場合、
+				 * エラーメッセージを表示させる。
+				 * */
 				boolean bytecheck = checkCharacter.stringLengthCheck(sendMessage, 300);
 				if (bytecheck == false) {
 					req.setAttribute("error", "文字のデータサイズオーバーです。");

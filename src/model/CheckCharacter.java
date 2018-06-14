@@ -49,7 +49,7 @@ public class CheckCharacter {
 	/**
 	 * 空白チェック
 	 * @param input チェックにかける文字
-	 * @return result 正否
+	 * @return result falseの場合、strが空白のみ。trueの場合、値がある。
 	 */
 	public boolean spaceCheck(String input) {
 		boolean result;
