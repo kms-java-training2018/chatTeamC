@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import bean.GroupMessageBean;
 import bean.LoginBean;
 import bean.MessageCheckBean;
+import model.CheckCharacter;
 import model.GetTalkMessageModel;
 import model.MessageCheckSendModel;
 
@@ -29,9 +30,14 @@ public class GroupMessageServlet extends HttpServlet {
 		GroupMessageBean bean = new GroupMessageBean();
 		GetTalkMessageModel model = new GetTalkMessageModel();
 		// セッション情報取得 (ログインしているかどうか)
+		String message;
 		HttpSession session = req.getSession();
 		// ログインできているか確認
 		if (session.getAttribute("session") == null) {
+			//ない場合、セッションにunllセットしてエラーページへ
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 自会員番号を取得
@@ -46,7 +52,11 @@ public class GroupMessageServlet extends HttpServlet {
 				bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
 				//				MCBean = MCSModel.getTalkContent(MCBean, loginBean);
 			} catch (Exception e) {
+				session.setAttribute("session", null);
+				message = "相手の会話情報が入手できませんでした。";
+				req.setAttribute("error", message);
 				e.printStackTrace();
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
 			// もしも相手の番号が無い場合はエラーを表示
@@ -64,13 +74,16 @@ public class GroupMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
+
+		//入力チェックモデル
+		CheckCharacter checkChara = new CheckCharacter();
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 現在のセッションに入っているmessageCheckBean情報を受け取る
 			MessageCheckBean bean = new MessageCheckBean(); //= (MessageCheckBean) session.getAttribute("GroupBean");
-			String groupNoStr = ((GroupMessageBean)session.getAttribute("GroupMessageBean")).getGroupNo();
+			String groupNoStr = ((GroupMessageBean) session.getAttribute("GroupMessageBean")).getGroupNo();
 			int groupNo = Integer.parseInt(groupNoStr);
 			bean.setToUserNo(groupNo);
 			MessageCheckSendModel model = new MessageCheckSendModel();
@@ -82,9 +95,14 @@ public class GroupMessageServlet extends HttpServlet {
 			//String sendMessage = bean.getSendMessage();
 
 			//入力チェックの返答
-			int bytecheck = 0;
-			bytecheck = model.stringLengthCheck(sendMessage);
-			if (bytecheck == 1) {
+			//空白処理
+			if (checkChara.spaceCheck(sendMessage) == false) {
+				req.setAttribute("error", "メッセージを入力してください");
+				doGet(req, res);
+			}
+
+			boolean bytecheck = checkChara.stringLengthCheck(sendMessage, 300);
+			if (bytecheck == false) {
 				req.setAttribute("error", "文字のデータサイズオーバーです");
 				doGet(req, res);
 			} else {
