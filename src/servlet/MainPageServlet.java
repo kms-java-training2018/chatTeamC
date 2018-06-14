@@ -56,6 +56,8 @@ public class MainPageServlet extends HttpServlet {
 		MainPageBean bean = new MainPageBean();
 		//String myName = "";
 		//String myProfile = "";
+		//エラーメッセージ用のString
+		String message;
 
 		// もしもセッションが無ければエラー
 		if (session.getAttribute("session") != null) {// ログインデータ取得
@@ -102,7 +104,8 @@ public class MainPageServlet extends HttpServlet {
 					} catch (Exception e) {
 						session.setAttribute("session", null);
 						// 情報が無かったためエラー画面に移行
-						req.setAttribute("erorr", "情報が存在していません");
+						message = "情報が存在していません";
+						req.setAttribute("error", message);
 						direction = "/WEB-INF/jsp/errorPage.jsp";
 						//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					}
@@ -119,7 +122,8 @@ public class MainPageServlet extends HttpServlet {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
 					direction = "/WEB-INF/jsp/errorPage.jsp";
-					req.setAttribute("erorr", "ログインしてください");
+					message = "不正なアクセスです。ログインしてくださーい";
+					req.setAttribute("error", message);
 					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
 			}
@@ -128,7 +132,8 @@ public class MainPageServlet extends HttpServlet {
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			req.setAttribute("erorr", "ログインしてください");
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
