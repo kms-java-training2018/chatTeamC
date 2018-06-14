@@ -18,7 +18,7 @@ public class MessageCheckBean {
 	private String toUserName;
 
 	// 会話情報取得
-//	private ArrayList<ArrayList<String>> talkContent = new ArrayList<ArrayList<String>>();
+	//	private ArrayList<ArrayList<String>> talkContent = new ArrayList<ArrayList<String>>();
 	private ArrayList<TalkContentBean> talkContentBeanList = new ArrayList<TalkContentBean>();
 
 	// 送信メッセージ情報
@@ -43,21 +43,20 @@ public class MessageCheckBean {
 		this.toUserName = toUserName;
 	}
 
-
-//	/**
-//	 * @return
-//	 */
-//	public ArrayList<ArrayList<String>> getTalkContent() {
-//		return talkContent;
-//	}
-//
-//
-//	/**
-//	 * @param TalkContent
-//	 */
-//	public void setTalkContent(ArrayList<String> TalkContent) {
-//		talkContent.add(TalkContent);
-//	}
+	//	/**
+	//	 * @return
+	//	 */
+	//	public ArrayList<ArrayList<String>> getTalkContent() {
+	//		return talkContent;
+	//	}
+	//
+	//
+	//	/**
+	//	 * @param TalkContent
+	//	 */
+	//	public void setTalkContent(ArrayList<String> TalkContent) {
+	//		talkContent.add(TalkContent);
+	//	}
 
 	/**
 	 * トークの内容を返す
@@ -72,8 +71,6 @@ public class MessageCheckBean {
 	public void setTalkContentBeanList(TalkContentBean talkContentList) {
 		this.talkContentBeanList.add(talkContentList);
 	}
-
-
 
 	public String getSendMessage() {
 		return sendMessage;
@@ -92,5 +89,4 @@ public class MessageCheckBean {
 	public void setDeleteMessageNo(int deleteMessageNo) {
 		this.deleteMessageNo = deleteMessageNo;
 	}
-
 }

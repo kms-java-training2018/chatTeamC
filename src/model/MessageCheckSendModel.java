@@ -228,7 +228,7 @@ public class MessageCheckSendModel {
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
 		Integer userNo = Integer.parseInt(loginBean.getUserNo());
-		Integer toUserNo = bean.getToUserNo();
+		Integer toGroupNo = bean.getToUserNo();
 		String sendMessage = bean.getSendMessage();
 		// JDBCドライバーのロード
 		try {
@@ -273,7 +273,7 @@ public class MessageCheckSendModel {
 			sb.append(" MESSAGE_SEQ.NEXTVAL ");
 			sb.append(" ," + userNo);
 			sb.append(" ,'" + sendMessage + "' ");
-			sb.append(" ," + toUserNo);
+			sb.append(" ," + toGroupNo);
 			sb.append(" ,0 ");
 			sb.append(" , sysdate)  ");
 
