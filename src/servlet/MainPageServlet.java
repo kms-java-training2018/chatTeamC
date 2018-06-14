@@ -17,7 +17,7 @@ import model.MainPageModel;
 public class MainPageServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		//リンク先directionの定義
-		String direction = "/WEB-INF/jsp/login.jsp";
+		String direction = "/WEB-INF/jsp/errorPage.jsp";
 
 		//セッション設定
 		HttpSession session = req.getSession();
@@ -26,22 +26,11 @@ public class MainPageServlet extends HttpServlet {
 		String message;
 
 		//セッションに値があるかのif
-		if (session.getAttribute("session") == null) {
-			//ない場合、セッションにunllセットしてエラーページへ
-			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
-			req.setAttribute("error", message);
-			direction = "/WEB-INF/jsp/errorPage.jsp";
-
-		} else {
-			//合ったのならばセッション情報を初期化の後エラーページへ
-			session.setAttribute("session", null);
-			direction = "/WEB-INF/jsp/errorPage.jsp";
-		}
-		try {
-			req.getRequestDispatcher(direction).forward(req, res);
-		} catch (Exception e) {
-		}
+		//ない場合、セッションにunllセットしてエラーページへ
+		session.setAttribute("session", null);
+		message = "不正なアクセスです。ログインしてくださーい";
+		req.setAttribute("error", message);
+		req.getRequestDispatcher(direction).forward(req, res);
 
 	}
 
@@ -60,8 +49,8 @@ public class MainPageServlet extends HttpServlet {
 		String message;
 
 		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) {// ログインデータ取得
-
+		if (session.getAttribute("session") != null) {
+			// ログインデータ取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 			if ((String) req.getParameter("newProfile") != null) {
 
