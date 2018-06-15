@@ -69,11 +69,11 @@ page import="java.util.ArrayList"%>
 			type="text" name="sendMessage" size="50" maxlength="100"> <input
 			type="submit" value="メッセージの送信">
 	</form>
-	<c:if test="${list.getUserNo() != myLoginNo}">
+	<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">
 		<form action="/chat/secessionGroupServlet" method="GET">
-			<input type="hidden" name="toGroupNo" value="${list.getUserNo()}">
+			<input type="hidden" name="toGroupNo" value="${myLoginNo}">
 			<input type="button" value="グループの脱退"
-				onclick="deleteUserMenber('${list.getUserNo()}')">
+				onclick="deleteUserMenber('${myLoginNo}')">
 		</form>
 	</c:if>
 	<form action="/chat/main" method="POST">
