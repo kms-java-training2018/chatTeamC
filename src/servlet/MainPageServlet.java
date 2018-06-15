@@ -11,9 +11,28 @@ import javax.servlet.http.HttpSession;
 import bean.LoginBean;
 import bean.MainPageBean;
 import bean.SessionBean;
+import model.CheckCharacter;
 import model.MainPageModel;
 
 public class MainPageServlet extends HttpServlet {
+	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		//リンク先directionの定義
+		String direction = "/WEB-INF/jsp/errorPage.jsp";
+
+		//セッション設定
+		HttpSession session = req.getSession();
+
+		//エラーメッセージ用のString
+		String message;
+
+		//セッションに値があるかのif
+		//ない場合、セッションにunllセットしてエラーページへ
+		session.setAttribute("session", null);
+		message = "不正なアクセスです。ログインしてくださーい";
+		req.setAttribute("error", message);
+		req.getRequestDispatcher(direction).forward(req, res);
+
+	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 
@@ -26,20 +45,25 @@ public class MainPageServlet extends HttpServlet {
 		MainPageBean bean = new MainPageBean();
 		//String myName = "";
 		//String myProfile = "";
+		//エラーメッセージ用のString
+		String message;
 
 		// もしもセッションが無ければエラー
-		if (session.getAttribute("session") != null) {// ログインデータ取得
-
+		if (session.getAttribute("session") != null) {
+			// ログインデータ取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 			if ((String) req.getParameter("newProfile") != null) {
 
 				// 名前の設定
 				String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
 				String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
+				// 判定用の関数
+				CheckCharacter checkCharacter = new CheckCharacter();
 
 				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
-				if (myName.equals("")) {
-					req.setAttribute("erorr", "無効な名前です");
+				if (!(checkCharacter.spaceCheck(myName) && checkCharacter.stringLengthCheck(myName, 90)
+						&& checkCharacter.stringLengthCheck(myProfile, 300))) {
+					req.setAttribute("erorr", "無効な数値です");
 					//マイページに戻る
 					req.setAttribute("name", myName);
 					req.setAttribute("profile", myProfile);
@@ -57,6 +81,7 @@ public class MainPageServlet extends HttpServlet {
 					// データベースにプロフィールを設定する。
 					// 設定してこれなかった場合エラーページに飛ぶ
 					if (!(model.newProfile(myName, myProfile, loginBean))) {
+						req.setAttribute("erorr", "プロフィールを更新できませんでした");
 						direction = "/WEB-INF/jsp/errorPage.jsp";
 					}
 
@@ -68,6 +93,8 @@ public class MainPageServlet extends HttpServlet {
 					} catch (Exception e) {
 						session.setAttribute("session", null);
 						// 情報が無かったためエラー画面に移行
+						message = "情報が存在していません";
+						req.setAttribute("error", message);
 						direction = "/WEB-INF/jsp/errorPage.jsp";
 						//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					}
@@ -84,15 +111,18 @@ public class MainPageServlet extends HttpServlet {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
 					direction = "/WEB-INF/jsp/errorPage.jsp";
+					message = "不正なアクセスです。ログインしてくださーい";
+					req.setAttribute("error", message);
 					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
 			}
 
 		} else {
-			;
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}

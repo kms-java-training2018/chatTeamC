@@ -5,11 +5,10 @@
 <html>
 <head>
 
-<script type="chat/JavaScript" src="JavaScript/logout.js"
-	charset="UTF-8">
-</script>
-
 <link rel="stylesheet" href="css/login.css" type="text/css" media="all">
+<script type="text/javascript" src="JQuery/jquery-3.3.1.min.js"></script>
+<script type="text/JavaScript" src="JavaScript/login.js" charset="UTF-8"></script>
+
 
 
 <title>Login Page</title>
@@ -19,12 +18,15 @@
 
 		<h1>Login Page</h1>
 
-		<form action="/chat/login" method="POST">
+		<form action="/chat/login" method="POST" class="login" action="foo">
 			<h2>Member ID</h2>
-			<input type="text" name="userId" value="${loginBean.userId}">
+			<input id="username" type="text" name="userId"
+				value="${loginBean.userId}">
 			<h2>Password</h2>
-			<input type="password" name="password" value="${loginBean.password}">
-			<br>
+			<input id="password" type="password" name="password"
+				value="${loginBean.password}"> <br> <input id="show-ps"
+				type="checkbox" onclick="connecttext(this.checked);" /><label
+				for="show-ps">Show password</label> <br>
 			<p>${loginError.errorMessage}</p>
 
 			<input type="submit" value="Login">

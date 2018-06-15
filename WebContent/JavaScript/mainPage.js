@@ -1,12 +1,24 @@
-dispCopyright();
-scrool();
+//トップ画面のスクリプト
+//shu = 趣味の内容
+//stitle1 = 趣味の種類
 
-function dispCopyright(){
-	document.write( window.parent.screen.height);
-}
+$(function() {
+	$('#personalMessage').hide();
+	$('#groupMessage').hide();
 
-function scrool(){
-	document.write("呼び出されてるよー");
-	window.scrollBy(0,window.parent.screen.height);
-	document.write("ちゃんと呼ばれてるよー");
-}
+	$('#Direct').on('click', function() {
+		if ($('#personalMessage').is(':hidden')) {
+			$('#personalMessage').show();
+		} else {
+			$('#personalMessage').hide();
+		}
+	});
+
+	$('#Group').on('click', function() {
+		if ($('#groupMessage').is(':hidden')) {
+			$('#groupMessage').show();
+		} else {
+			$('#groupMessage').hide();
+		}
+	});
+});

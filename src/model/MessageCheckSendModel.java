@@ -203,8 +203,6 @@ public class MessageCheckSendModel {
 		} catch (SQLIntegrityConstraintViolationException e) {
 			loginBean.setErrorMessage("メッセージを入力してください。");
 			e.printStackTrace();
-			//現在、サイズ101～299バイトのときこのExceptionに投げられる。
-			//DB内のMESSAGEが100バイトまでの制限となっているらしい……
 		} catch (SQLException e) {
 			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
@@ -230,7 +228,7 @@ public class MessageCheckSendModel {
 		String user = "DEV_TEAM_C";
 		String dbPassword = "C_DEV_TEAM";
 		Integer userNo = Integer.parseInt(loginBean.getUserNo());
-		Integer toUserNo = bean.getToUserNo();
+		Integer toGroupNo = bean.getToUserNo();
 		String sendMessage = bean.getSendMessage();
 		// JDBCドライバーのロード
 		try {
@@ -275,19 +273,17 @@ public class MessageCheckSendModel {
 			sb.append(" MESSAGE_SEQ.NEXTVAL ");
 			sb.append(" ," + userNo);
 			sb.append(" ,'" + sendMessage + "' ");
-			sb.append(" ," + toUserNo);
+			sb.append(" ," + toGroupNo);
 			sb.append(" ,0 ");
 			sb.append(" , sysdate)  ");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
-			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
+			loginBean.setErrorMessage("");
 		} catch (SQLIntegrityConstraintViolationException e) {
 			loginBean.setErrorMessage("メッセージを入力してください。");
 			e.printStackTrace();
-			//現在、サイズ101～299バイトのときこのExceptionに投げられる。
-			//DB内のMESSAGEが100バイトまでの制限となっているらしい……
 		} catch (SQLException e) {
 			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
@@ -304,8 +300,9 @@ public class MessageCheckSendModel {
 
 	/**
 	 * ○stringLengthCheck
-	 * メッセージを受け取り、そのサイズが200バイトを
+	 * メッセージを受け取り、そのサイズが300バイトを
 	 * 超えるかどうかを判断する。
+	 * （文字数はテキストボックスの最大文字数の設定で100字以内に設定）
 	 * @param input　メッセージを取得
 	 * @return　指定バイト数以内の場合0、
 	 * 指定バイト数を超えたら1を返す。
@@ -318,9 +315,9 @@ public class MessageCheckSendModel {
 		int length = input.getBytes().length;
 		System.out.println(length);
 		// 最大バイト数の設定
-		int max = 200;
+		int max = 300;
 
-		if ((int) length > max) { // 最大文字数よりも多かった場合
+		if ((int) length > max) { // 最大バイト数よりも多かった場合（
 			judgeByte = 1;
 			return judgeByte;
 		}

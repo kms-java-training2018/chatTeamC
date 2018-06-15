@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.GroupBean;
 import bean.LoginBean;
+import model.CheckCharacter;
 import model.CreatGroup;
 
 /**
@@ -38,7 +39,6 @@ public class MakeGroupServlet extends HttpServlet {
 		//エラーメッセージ用のString
 		String message;
 
-
 		//セッションに値があるかのif
 		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにunllセットしてエラーページへ
@@ -47,11 +47,9 @@ public class MakeGroupServlet extends HttpServlet {
 			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 
-
 		} else {
 			//あればmakeGroupへ
 			direction = "/WEB-INF/jsp/makeGroup.jsp";
-
 
 		}
 		try {
@@ -77,12 +75,14 @@ public class MakeGroupServlet extends HttpServlet {
 
 		//セッション設定
 		HttpSession session = req.getSession();
-//		SessionBean sessionBean = new SessionBean();
+		//		SessionBean sessionBean = new SessionBean();
 
 		//グループビーンの設定(jspに送る用の空ビーン)
 		GroupBean groupBean = new GroupBean();
 		//今から処理させるモデル
 		CreatGroup creatGroup = new CreatGroup();
+		//文字入力チェック用モデル
+		CheckCharacter checkChara = new CheckCharacter();
 
 		//		セッションに値があるかどうかでif
 		if (session.getAttribute("session") != null) {
@@ -90,8 +90,8 @@ public class MakeGroupServlet extends HttpServlet {
 			//グループ作成画面から来たかどうかの判断if
 			if (req.getParameter("action") != null) {
 
-//				//groupCreateにsessionのbean引き継がせる
-//				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
+				//				//groupCreateにsessionのbean引き継がせる
+				//				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
 				//ログイン中のユーザー名表示のためのLoginBeanを抜き出してまたreqにのっける
 				req.setAttribute("LoginBean", session.getAttribute("LoginBean"));
 
@@ -99,7 +99,7 @@ public class MakeGroupServlet extends HttpServlet {
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
 				//入力チェックメッセージの設定
 				String message;
-				if (name.equals("")) {
+				if (checkChara.spaceCheck(name) == false) {
 					message = "グループ名を入力してください";
 
 					req.setAttribute("error", message);
@@ -109,7 +109,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 					//入力チェックの返答
 					boolean byteCheck;
-					byteCheck = creatGroup.stringLengthCheck(name);
+					byteCheck = checkChara.stringLengthCheck(name, 90);
 					if (byteCheck == false) {
 						message = "文字数オーバーです";
 
@@ -121,14 +121,21 @@ public class MakeGroupServlet extends HttpServlet {
 						//testチェック用
 						//					System.out.println("受け取ったグループ名" + name);
 
-						groupBean = (GroupBean)session.getAttribute("groupBean");
+						groupBean = (GroupBean) session.getAttribute("groupBean");
 
 						//モデルにセット
 						groupBean.setGroupName(name);
 
 						//グループへ登録
-						boolean creat = creatGroup.resistGroup(groupBean);
-
+						//結果変数の設定
+						boolean creat = false;
+						try {
+							creat = creatGroup.resistGroup(groupBean);
+						} catch (Exception e) {
+							message = "グループを作成できませんでした。";
+							req.setAttribute("error", message);
+							direction = "/WEB-INF/jsp/errorPage.jsp";
+						}
 						System.out.println("creat" + creat);
 
 						if (creat == true) {
@@ -139,19 +146,28 @@ public class MakeGroupServlet extends HttpServlet {
 							SelectNo = req.getParameterValues("userNo");
 							groupBean.setSelectMemberList(SelectNo);
 
-
 							//抜き取った配列をGroupBeanへ送ってグループ作成
-							boolean resist = creatGroup.resistGroupMember(groupBean);
+							//結果変数の設定
+							boolean resist = false;
+
+							try {
+								resist = creatGroup.resistGroupMember(groupBean);
+							} catch (Exception e) {
+
+								message = "データベースに接続できませんでした。";
+								direction = "/WEB-INF/jsp/errorPage.jsp";
+							}
 
 							System.out.println(resist);
 
 							if (resist == true) {
 
-//														direction = "/WEB-INF/jsp/mainPage.jsp";
+								//														direction = "/WEB-INF/jsp/mainPage.jsp";
 								MainPageServlet main = new MainPageServlet();
 								main.doPost(req, res);
 							} else {
-								message = "";
+								message = "グループのメンバーを登録できませんでした。";
+								req.setAttribute("error", message);
 								direction = "/WEB-INF/jsp/errorPage.jsp";
 							}
 
@@ -160,6 +176,7 @@ public class MakeGroupServlet extends HttpServlet {
 						}
 
 					}
+
 				}
 
 			} else {
@@ -188,14 +205,14 @@ public class MakeGroupServlet extends HttpServlet {
 					direction = "/WEB-INF/jsp/makeGroup.jsp";
 				}
 
-				if(req.getParameter("backMain") == null) {
+				if (req.getParameter("backMain") == null) {
 
-				}else {
-				MainPageServlet main = new MainPageServlet();
-				main.doPost(req, res);
+				} else {
+					MainPageServlet main = new MainPageServlet();
+					main.doPost(req, res);
 				}
-			}
 
+			}
 		} else {
 			session.setAttribute("session", null);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
@@ -203,7 +220,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 		try {
 			req.getRequestDispatcher(direction).forward(req, res);
-		}catch( Exception e){
+		} catch (Exception e) {
 
 		}
 

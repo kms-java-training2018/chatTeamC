@@ -11,7 +11,8 @@ import javax.servlet.http.HttpSession;
 import bean.GroupMessageBean;
 import bean.LoginBean;
 import bean.MessageCheckBean;
-import model.GetTalkMessage;
+import model.CheckCharacter;
+import model.GetTalkMessageModel;
 import model.MessageCheckSendModel;
 
 /**
@@ -24,34 +25,44 @@ public class GroupMessageServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// 初期化
-		MessageCheckBean Mbean = new MessageCheckBean();
-		MessageCheckSendModel Mmodel = new MessageCheckSendModel();
+		//		MessageCheckBean MCBean = new MessageCheckBean();
+		//		MessageCheckSendModel MCSModel = new MessageCheckSendModel();
 		GroupMessageBean bean = new GroupMessageBean();
-		GetTalkMessage model = new GetTalkMessage();
+		GetTalkMessageModel model = new GetTalkMessageModel();
 		// セッション情報取得 (ログインしているかどうか)
+		String message;
 		HttpSession session = req.getSession();
 		// ログインできているか確認
 		if (session.getAttribute("session") == null) {
+			//ない場合、セッションにunllセットしてエラーページへ
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 自会員番号を取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			loginBean.setErrorMessage("");
 			// 相手の会員番号の取得
 			bean.setGroupNo((req.getParameter("toGroupNo")));
-			Mbean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
+			//			MCBean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
 			//String toGroupNo = (bean.getGroupNo());
 			// 会話情報の取得
 			try {
 				bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
-				Mbean = Mmodel.getTalkContent(Mbean, loginBean);
+				//				MCBean = MCSModel.getTalkContent(MCBean, loginBean);
 			} catch (Exception e) {
+				session.setAttribute("session", null);
+				message = "相手の会話情報が入手できませんでした。";
+				req.setAttribute("error", message);
 				e.printStackTrace();
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
 			// もしも相手の番号が無い場合はエラーを表示
-			req.setAttribute("GroupBean", bean);
+			req.setAttribute("GroupMessageBean", bean);
 			req.setAttribute("myLoginNo", loginBean.getUserNo());
-			session.setAttribute("GroupBean", Mbean); //セッション内へ自分と相手の情報を保存
+			session.setAttribute("GroupMessageBean", bean); //セッション内へ自分と相手の情報を保存
 			req.getRequestDispatcher("/WEB-INF/jsp/groupMessage.jsp").forward(req, res);
 		}
 	}
@@ -63,12 +74,18 @@ public class GroupMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
+
+		//入力チェックモデル
+		CheckCharacter checkChara = new CheckCharacter();
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
 			// 現在のセッションに入っているmessageCheckBean情報を受け取る
-			MessageCheckBean bean = (MessageCheckBean) session.getAttribute("GroupBean");
+			MessageCheckBean bean = new MessageCheckBean(); //= (MessageCheckBean) session.getAttribute("GroupBean");
+			String groupNoStr = ((GroupMessageBean) session.getAttribute("GroupMessageBean")).getGroupNo();
+			int groupNo = Integer.parseInt(groupNoStr);
+			bean.setToUserNo(groupNo);
 			MessageCheckSendModel model = new MessageCheckSendModel();
 			//現在のセッションに入っているloginBean情報を受け取る
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
@@ -78,10 +95,15 @@ public class GroupMessageServlet extends HttpServlet {
 			//String sendMessage = bean.getSendMessage();
 
 			//入力チェックの返答
-			int bytecheck = 0;
-			bytecheck = model.stringLengthCheck(sendMessage);
-			if (bytecheck == 1) {
-				req.setAttribute("error", "文字数オーバーです");
+			//空白処理
+			if (checkChara.spaceCheck(sendMessage) == false) {
+				req.setAttribute("error", "メッセージを入力してください");
+				doGet(req, res);
+			}
+			//文字規格処理
+			boolean bytecheck = checkChara.stringLengthCheck(sendMessage, 300);
+			if (bytecheck == false) {
+				req.setAttribute("error", "文字のデータサイズオーバーです");
 				doGet(req, res);
 			} else {
 				// 会話情報の取得

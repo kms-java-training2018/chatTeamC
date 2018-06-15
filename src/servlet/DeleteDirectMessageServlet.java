@@ -14,6 +14,7 @@ import model.DeleteMessageModel;
 
 /**
  * 個別メッセージの削除処理用サーブレット
+ *
  * */
 public class DeleteDirectMessageServlet extends HttpServlet {
 
@@ -22,9 +23,16 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
+
+		//エラーメッセージ用のString
+		String message;
 		HttpSession session = req.getSession();
 		if (session.getAttribute("session") == null) {
-			req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+			//ない場合、セッションにnullセットしてエラーページへ
+			session.setAttribute("session", null);
+			message = "不正なアクセスです。ログインしてくださーい";
+			req.setAttribute("error", message);
+			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}
 		DeleteMessageModel model = new DeleteMessageModel();
 		//現在のセッションに入っているloginBean情報を受け取る
@@ -37,12 +45,16 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		try {
 			model.deleteMessage(loginBean, deleteMessageNo);
 		} catch (Exception e) {
+			session.setAttribute("session", null);
+			message = "処理中にエラーが発生しました。";
+			req.setAttribute("error", message);
 			e.printStackTrace();
 		}
 		//削除できたかどうかを表示。
 		//メッセージ内容はmodel内でセット
 		req.setAttribute("error", loginBean.getErrorMessage());
-		//削除処理終了後、directMessageServletに移し、更新させる。
+		loginBean.setErrorMessage("");
+		//		//削除処理終了後、directMessageServletに移し、更新させる。
 		DirectMessageServlet directMessageServlet = new DirectMessageServlet();
 		directMessageServlet.doGet(req, res);
 	}

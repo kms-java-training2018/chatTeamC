@@ -18,68 +18,6 @@ import bean.MemberBean;
  */
 public class CreatGroup {
 
-//	//groupBeanの設定
-//	GroupBean gb = new GroupBean();
-//
-//	//MemberBeanの設定
-//	MemberBean mb = new MemberBean();
-
-//	//作成者の名前
-//	private String autherName;
-//	//作成者の番号
-//	private String autherNo;
-//	//グループの名前
-//	private String groupName;
-
-	//MemberBeanのリスト
-
-//
-//	/**
-//	 * グループbeanをセットする<br>
-//	 * @param groupBean 受け取ったgroupBean
-//	 */
-//	public void setGroupBean(GroupBean groupBean) {
-//		this.gb = groupBean;
-//	}
-
-//	/**
-//	 * グループ名をセットする<br>
-//	 * @param name 受け取ったグループ名
-//	 */
-//	public void setGroupName(String name) {
-//		this.groupName = name;
-//	}
-
-//	/**
-//	 * グループ作成者の会員番号をセットする<br>
-//	 * @param No 受け取った番号
-//	 */
-//	public void setAutherNo(String No) {
-//		this.autherNo = No;
-//	}
-
-	/**
-	 * 受け取った入力文字のバイト数をチェックし、true/falseで返す<br>
-	 * 30バイト以内 true<br>
-	 * 30バイト異常 false<br>
-	 *
-	 * @param input 受け取った入力文字
-	 * @return judgeByte trueはバイト数OK、falseはバイト数NG
-	 */
-	public boolean stringLengthCheck(String input) {
-		//成否判定
-		boolean judgeByte;
-
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		// 最大バイト数の設定
-		int max = 30;
-
-		judgeByte = (length <= max);
-
-		return judgeByte;
-
-	}
 
 	/**
 	 * 全ユーザー一覧を出すメソッド<br>
@@ -110,7 +48,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			getDataJudge = false;
 		}
 		// 接続作成
@@ -142,7 +80,7 @@ public class CreatGroup {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			getDataJudge = false;
 			// sqlの接続は絶対に切断
 		} finally {
@@ -151,7 +89,7 @@ public class CreatGroup {
 				getDataJudge = true;
 				gb.setGetAllUserListJudge(getDataJudge);
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				getDataJudge = false;
 			}
 		}
@@ -207,7 +145,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			creatJudge = false;
 		}
 		// 接続作成
@@ -236,7 +174,7 @@ public class CreatGroup {
 			creatJudge = (rs == 1);
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			//test
 			creatJudge = false;
 
@@ -245,7 +183,7 @@ public class CreatGroup {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 				creatJudge = false;
 			}
 		}
@@ -284,7 +222,7 @@ public class CreatGroup {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			e.printStackTrace();
+			//e.printStackTrace();
 			resistJudge = false;
 		}
 		// 接続作成
@@ -384,7 +322,7 @@ public class CreatGroup {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			//e.printStackTrace();
 			resistJudge = false;
 
 			// sqlの接続は絶対に切断
@@ -392,7 +330,8 @@ public class CreatGroup {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				//e.printStackTrace();
+				resistJudge = false;
 			}
 		}
 		return resistJudge;

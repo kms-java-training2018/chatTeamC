@@ -8,41 +8,50 @@
 <!DOCTYPE html PUBLIC dh"-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<script type="text/javascript" src="JQuery/jquery-3.3.1.min.js"></script>
+
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/makeGroup.js"
+	charset="UTF-8">
 
-<link rel="stylesheet" href="css/base.css">
+</script>
+<script type="text/javascript" src="JavaScript/button.js"
+	charset="UTF-8">
+
+</script>
+
 <link rel="stylesheet" href="css/MakeGroup.css">
+<!-- <link rel="stylesheet" href="css/base.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 <body id="bgcolor"></body>
 <form action="/chat/makeGroup" method="POST">
-	<table border="1" align="center" width="80%" height="60vh"
-		cellspacing="0" cellpadding="3">
+	<table class="main" align="center">
 
 		<!-- 1段目 -->
 		<tr>
-			<th colspan="2">
-				<p>グループ作成</p>
+			<th class="title" colspan="2">
+				<p>Creat Group Page</p>
 			</th>
-			<th>
+			<th class="name">
 
-				<p>ようこそ ${session.userName } さん</p> <input type="button"
-				value="ログアウト" onClick="logout()" />
-
+				<p>
+					Welcome! ${session.userName } さん <input type="button"
+						value="Log Out" align="right" onClick="logout()" />
 			</th>
 		</tr>
 
 		<!-- 2段目 -->
 		<tr>
-			<td colspan="3">
+			<td colspan="3" align="center">
 
-				<p>グループの名前</p> <input type="text" name="groupName" class="fsize"
-				value=''>
+				<p>Group Name</p> <input type="text" name="groupName"
+				class="fontSize" value='' maxlength="30">
 				<p>
 					<font size="5" color="red">${error}</font>
 				</p>
@@ -52,20 +61,24 @@
 		<!-- 3段目 -->
 		<tr>
 			<td colspan="2" rowspan="2">
-				<table class="typeA">
+				<table class="typeB">
 
 					<tr>
-						<th>全ユーザーリスト</th>
+						<th>Select Member</th>
+					</tr>
+					<tr>
+						<th><input type="checkbox" id="member_all" name="member_all">Select
+							all</th>
 					</tr>
 
 					<tr>
 
 						<c:forEach var="obj" items="${groupBean.getMemberList()}"
 							varStatus="status">
-							<tr class="typeA" align="center">
+							<tr>
 
 								<td><input type="checkbox" name="userNo"
-									value="${obj.getMemberNo()}"> <c:out
+									class="member" value="${obj.getMemberNo()}"> <c:out
 										value="${obj.getMemberName()}" /></td>
 
 							</tr>
@@ -74,13 +87,15 @@
 				</table>
 			<td>
 
-
-				<button type='submit' name="action" value="creat">選択したユーザーでグループを作成する</button>
+				<button type="submit" id="click" name="action" value="creat" class="temp1"
+					>Create group</button>
 
 			</td>
 		</tr>
 		<tr>
-			<td><button type='submit' name="backMain" value="main">メインメニューに戻る</button></td>
+			<td><button type="submit" name="backMain" value="main"
+					class="temp1">Return to Main
+					Page</button></td>
 		</tr>
 	</table>
 </form>

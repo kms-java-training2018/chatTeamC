@@ -1,26 +1,133 @@
 @charset "UTF-8";
 
-
-
-table.typeA{
-	border-collapse : collapse;
-	border-style:double;
-	background-color:#deffb5;
-	align-items: center;
-	width: 80%;
+table {
+	border-collapse: collapse;
 }
 
+.bgcolor1 {
+	background: #b4fcad;
+}
 
+table.main {
+	border: 1;
+	background-color: #ffd7fc;
+	border-collapse: collapse;
+	border-style: double;
+	align-content: center;
+	align-items: center;
+	width: 80%;
+	height: 60vh;
+	text-align: center;
+}
 
+table.main td {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	border-collapse: collapse;
+	border-style: double;
+}
 
+table.main th {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+	border-collapse: collapse;
+	border-style: double;
+}
 
+table.typeA {
+	border-collapse: collapse;
+	border-style: double;
+	background-color: #deffb5;
+	align-items: center;
+	align-content: center;
+	text-align width: 300px;
+}
 
+table.typeA td {
+	border-collapse: collapse;
+	border-style: double;
+	background-color: #deffb5;
+	align-items: center;
+	align-content: center;
+	text-align width: 300px;
+}
 
+table.typeB {
+	border-collapse: collapse;
+	border-style: double;
+	background-color: #f0fbff;
+	align-items: left;
+	align-content: left;
+	text-align: left;
+	width: 100%;
+}
 
+table.typeB td {
+	border-collapse: collapse;
+	border-style: double;
+	background-color: #f0fbff;
+	align-items: left;
+	align-content: left;
+	text-align: left;
+	width: 100%;
+}
 
+table.typeB tr {
+	border-collapse: collapse;
+	background-color: #f0fbff;
+	align-items: left;
+	align-content: left;
+	text-align: left;
+	width: 100%;
+}
 
+/* タイトル背景色*/
+table.typeA th.title {
+	background-color: :#adf8d8
+}
+/*名前背景色*/
+.name {
+	background-color: :#fedaf8
+}
 
+input.fontSize {
+	font-size: 400%;
+}
 
+button.temp1 {
+	width: 75%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #e1d7ff;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #000000;
+	cursor: pointer;
+}
 
+button.temp1:hover {
+	width: 90%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #ffebdc;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #000000;
+	cursor: pointer;
+}
 
-
+button.temp1:disabled {
+	width: 75%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #fefbba;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #d7fffd;
+	cursor: default;
+}
