@@ -11,6 +11,10 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/Message.js"
+	charset="UTF-8">
+
+</script>
 <script type="text/javascript" src="JavaScript/logout.js"
 	charset="UTF-8">
 
@@ -87,5 +91,6 @@ page import="java.util.ArrayList"%>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューへ戻る">
 	</form>
+
 </body>
 </html>
