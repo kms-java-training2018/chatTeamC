@@ -40,12 +40,12 @@
 	<br>
 	<form action="/chat/main" method="POST">
 		<p class="textTitle">Name</p>
-		<input type="text" name="myName" value="${name}" class="text" maxlength="30">
+		<input type="text" name="myName" value="${name}" class="text">
 		<p id="erorr">${erorr}</p>
 		<p class="textTitle">
 			<br>Profile
 		</p>
-		<input type="text" name="myProfile" value="${profile}" class="text" maxlength="100">
+		<input type="text" name="myProfile" value="${profile}" class="text">
 		<p></p>
 		<br> <input type="submit" value="Update" name="newProfile"
 			class="button"><input type="submit" value="Back"
