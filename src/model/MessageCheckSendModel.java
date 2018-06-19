@@ -159,6 +159,7 @@ public class MessageCheckSendModel {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
+			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
 			e.printStackTrace();
 		}
 		// 接続作成

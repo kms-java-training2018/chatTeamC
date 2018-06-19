@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 			if (result == false) {
 				bean.setErrorMessage("半角で入力してください");
 			} else if (judgeByte == false) {
-				bean.setErrorMessage("20文字は受け付けません");
+				bean.setErrorMessage("21文字以上は受け付けません");
 
 			} else {
 				bean.setUserId(userId);

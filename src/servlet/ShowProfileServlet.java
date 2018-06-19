@@ -39,6 +39,8 @@ public class ShowProfileServlet extends HttpServlet {
 				e.printStackTrace();
 				// エラーページに移動
 				session.setAttribute("session", null);
+				message = "相手の情報を取得できませんでした。";
+				req.setAttribute("error", message);
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 

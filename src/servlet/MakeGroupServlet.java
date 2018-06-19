@@ -77,6 +77,9 @@ public class MakeGroupServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		//		SessionBean sessionBean = new SessionBean();
 
+		//errorメッセージの設定
+		String message;
+
 		//グループビーンの設定(jspに送る用の空ビーン)
 		GroupBean groupBean = new GroupBean();
 		//今から処理させるモデル
@@ -97,8 +100,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
-				//入力チェックメッセージの設定
-				String message;
+
 				if (checkChara.spaceCheck(name) == false) {
 					message = "グループ名を入力してください";
 
@@ -214,6 +216,8 @@ public class MakeGroupServlet extends HttpServlet {
 
 			}
 		} else {
+			message = "ログインしてください";
+			req.setAttribute("error", message);
 			session.setAttribute("session", null);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}
