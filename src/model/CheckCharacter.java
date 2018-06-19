@@ -41,7 +41,8 @@ public class CheckCharacter {
 		int max;
 
 		// 文字数の長さを取得
-		int length = input.length();
+		int length = input.toCharArray().length;
+		System.out.println(length);
 		// 最大文字数の設定
 		max = i;
 
