@@ -280,7 +280,7 @@ public class CreatGroup {
 			//受け取ったStringリストからを登録者Listに設定
 			String[] memberNo = gb.getSelectMemberList();
 			if (memberNo == null) {
-				resistJudge = false;
+
 			} else {
 
 				ArrayList<String> resistNo = new ArrayList<String>();
