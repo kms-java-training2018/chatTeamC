@@ -51,7 +51,7 @@
 			<td colspan="3" align="center">
 
 				<p>Group Name</p> <input type="text" name="groupName"
-				class="fontSize" value='' maxlength="30">
+				class="fontSize" value=''>
 				<p>
 					<font size="5" color="red">${error}</font>
 				</p>
