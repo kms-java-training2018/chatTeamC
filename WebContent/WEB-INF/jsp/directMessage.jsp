@@ -85,7 +85,7 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="deleteMessageNo"
 			value="${list.getMessageNo()}"> <input type="hidden"
 			name="toUserNo" value="${messageCheckBean.getToUserNo()}"> <input
-			type="text" name="sendMessage" size="50" maxlength="100"
+			type="text" name="sendMessage" size="50"
 			align="right"> <input type="submit" class="click"  value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST">

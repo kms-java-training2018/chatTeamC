@@ -26,23 +26,23 @@
 
 /*トークの周り*/
 .myTork {
-	line-height: 230%;
-	padding: .5em .75em;
-	background-color: #ddffff;
+	line-height: 270%;
+	padding: .5em .150em;
+	background-color: #79edf0;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #43fefe;
+	border-color: #004080;
 }
 
 
 /*相手のトークの周り*/
 .opponentTork {
-	line-height: 230%;
-	padding: .5em .75em;
-	background-color: #ffdeff;
+	line-height: 270%;
+	padding: .5em .150em;
+	background-color: #f89f3f;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #fe43fe;
+	border-color: #f94b42;
 }
 
 

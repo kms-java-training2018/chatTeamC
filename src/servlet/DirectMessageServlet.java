@@ -33,7 +33,7 @@ public class DirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにnullセットしてエラーページへ
 			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
+			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
@@ -117,9 +117,9 @@ public class DirectMessageServlet extends HttpServlet {
 				 * サイズの大きい文字が用いられ、100文字分のサイズを超えた場合、
 				 * エラーメッセージを表示させる。
 				 * */
-				boolean bytecheck = checkCharacter.stringLengthCheck(sendMessage, 300);
+				boolean bytecheck = checkCharacter.stringSizeCheck(sendMessage, 100);
 				if (bytecheck == false) {
-					req.setAttribute("error", "文字のデータサイズオーバーです。");
+					req.setAttribute("error", "文字数オーバー");
 				} else {
 					// 会話情報の取得
 					try {
