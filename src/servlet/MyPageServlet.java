@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import bean.LoginBean;
 import bean.MyPageBean;
-import model.CheckCharacter;
 import model.MyPageModel;
 
 public class MyPageServlet extends HttpServlet {
@@ -34,7 +33,7 @@ public class MyPageServlet extends HttpServlet {
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		// 判断用Model
-		CheckCharacter checkCharacter = new CheckCharacter();
+		//CheckCharacter checkCharacter = new CheckCharacter();
 		// セッション情報取得
 		HttpSession session = req.getSession();
 		// 初期化
@@ -60,18 +59,18 @@ public class MyPageServlet extends HttpServlet {
 				LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 				// 認証処理
 				bean = model.myPageBeanSeting(loginBean, bean);
-				if (checkCharacter.spaceCheck(bean.getName())) {
+//				if (checkCharacter.spaceCheck(bean.getName())) {
 					// 名前とプロフィールを設定しておく
 					req.setAttribute("name", bean.getName());
 					req.setAttribute("profile", bean.getMyProfile());
-				} else {
-					// 名前が無かったためエラーページに遷移
-					session.setAttribute("session", null);
-					message = "名前が存在しませんでした";
-					req.setAttribute("error", message);
-					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-					direction = "/WEB-INF/jsp/errorPage.jsp";
-				}
+//				} else {
+//					// 名前が無かったためエラーページに遷移
+//					session.setAttribute("session", null);
+//					message = "名前が存在しませんでした";
+//					req.setAttribute("error", message);
+//					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+//					direction = "/WEB-INF/jsp/errorPage.jsp";
+//				}
 
 			}
 		} catch (Exception e) {
