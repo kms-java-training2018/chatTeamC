@@ -35,6 +35,18 @@ public class ShowProfileServlet extends HttpServlet {
 			// 認証処理
 			try {
 				bean = model.showProfileSearch(bean, loginBean, req.getParameter("toUserNo"));
+
+				// 表示画面に表示する用のBean
+
+				req.setAttribute("Name", bean.getName());
+				req.setAttribute("Profile", bean.getProfile());
+				req.setAttribute("Unacquired", bean);
+
+				if (bean.getUnacquired() == 0) {
+					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+				} else {
+					req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				// エラーページに移動
@@ -44,17 +56,6 @@ public class ShowProfileServlet extends HttpServlet {
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 
-			// 表示画面に表示する用のBean
-
-			req.setAttribute("Name", bean.getName());
-			req.setAttribute("Profile", bean.getProfile());
-			req.setAttribute("Unacquired", bean);
-
-			if (bean.getUnacquired() == 0) {
-				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-			} else {
-				req.getRequestDispatcher("/WEB-INF/jsp/showProfile.jsp").forward(req, res);
-			}
 		}
 	}
 

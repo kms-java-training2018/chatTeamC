@@ -62,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			bean.setErrorMessage("情報を取得できませんでした。");
 		}
 
 		// 取得に成功した場合セッション情報をセット
