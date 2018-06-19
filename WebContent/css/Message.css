@@ -26,7 +26,8 @@
 
 /*トークの周り*/
 .myTork {
-	padding: .30em .75em;
+	line-height: 230%;
+	padding: .5em .75em;
 	background-color: #ddffff;
 	border-style: solid;
 	border-width: 1px;
@@ -36,7 +37,8 @@
 
 /*相手のトークの周り*/
 .opponentTork {
-	padding: .15em .75em;
+	line-height: 230%;
+	padding: .5em .75em;
 	background-color: #ffdeff;
 	border-style: solid;
 	border-width: 1px;
