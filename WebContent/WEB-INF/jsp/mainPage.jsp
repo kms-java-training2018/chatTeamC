@@ -75,11 +75,11 @@
 				<td class="messageTitle">Message</td>
 			</tr>
 			<c:forEach var="list"
-				items="${MainPageBean.getLatestMenberMessageBeanList()}"
+				items="${MainPageBean.getLatestGroupMessageBeanList()}"
 				varStatus="status">
 				<tr align="center" class="personalChatMessage">
-					<td class="name"><a href="/chat/directMessage?toUserNo=${list.getUserNo()}"
-						class="Link">${list.getUserName()}</a></td>
+					<td class="name"><a href="/chat/directMessage?toUserNo=${list.getGroupNo()}"
+						class="Link">${list.getGroupName()}</a></td>
 					<td class="message">${list.getLatestMessage()}</td>
 				</tr>
 			</c:forEach>
