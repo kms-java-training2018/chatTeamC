@@ -91,4 +91,52 @@ public class GetTalkMessageModel {
 		}
 		return bean;
 	}
+
+	public boolean CheckGroupMenber(LoginBean loginBean, String GroupNo) {
+		// 判定用変数
+		boolean checkGroupMenber = false;
+
+		Connection conn = null;
+		String url = "jdbc:oracle:thin:@192.168.51.67";
+		String user = "DEV_TEAM_C";
+		String dbPassword = "C_DEV_TEAM";
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+		} catch (ClassNotFoundException e) {
+			// 入れなかった場合
+			e.printStackTrace();
+		}
+		//SELECT * FROM T_GROUP_INFO WHERE USER_NO = 41 AND GROUP_NO = 224 AND OUT_FLAG = 0
+		try {
+
+			conn = DriverManager.getConnection(url, user, dbPassword);
+			// 初期化
+			StringBuilder sb = new StringBuilder();
+			System.out.println(loginBean.getUserNo());
+			System.out.println(GroupNo);
+			//SQL作成
+			sb.append("SELECT * FROM T_GROUP_INFO WHERE USER_NO = "+ loginBean.getUserNo() +" AND GROUP_NO = "+ GroupNo +" AND OUT_FLAG = 0");
+
+			// SQL実行
+			Statement stmt = conn.createStatement();
+			ResultSet rs = stmt.executeQuery(sb.toString());
+			while (rs.next()) {
+				checkGroupMenber = true;
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("ここにきてるよ");
+			// sqlの接続は絶対に切断
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return checkGroupMenber;
+	}
 }
