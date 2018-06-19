@@ -27,6 +27,30 @@ public class CheckCharacter {
 	}
 
 	/**
+	 * 文字数チェック
+	 * @param input 文字数チェックにかける文字列
+	 * @param i 指定文字サイズ(文字数)
+	 * @return judgeSize 正否
+	 */
+	public boolean stringSizeCheck(String input, int i) {
+
+		//結果変数
+		boolean judgeSize;
+
+		//指定文字数
+		int max;
+
+		// 文字数の長さを取得
+		int length = input.length();
+		// 最大文字数の設定
+		max = i;
+
+		judgeSize = (length <= max);
+
+		return judgeSize;
+	}
+
+	/**
 	 * 半角チェック
 	 * @param input チェックにかける文字列
 	 * @return result 正否

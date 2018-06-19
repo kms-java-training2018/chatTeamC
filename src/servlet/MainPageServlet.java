@@ -61,8 +61,8 @@ public class MainPageServlet extends HttpServlet {
 				CheckCharacter checkCharacter = new CheckCharacter();
 
 				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
-				if (!(checkCharacter.spaceCheck(myName) && checkCharacter.spaceCheck(myProfile) && checkCharacter.stringLengthCheck(myName, 90)
-						&& checkCharacter.stringLengthCheck(myProfile, 300))) {
+				if (!(checkCharacter.spaceCheck(myName) && checkCharacter.spaceCheck(myProfile) && checkCharacter.stringSizeCheck(myName, 30)
+						&& checkCharacter.stringSizeCheck(myProfile, 100))) {
 					req.setAttribute("erorr", "正しくない入力がされました");
 					//マイページに戻る
 					req.setAttribute("name", myName);
