@@ -190,22 +190,29 @@ public class MakeGroupServlet extends HttpServlet {
 					String autherName = lb.getUserName();
 					groupBean.setLoginBean(lb);
 
-					//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-					groupBean = creatGroup.getAllUserListAcquisition(groupBean);
+					try {
+						//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
+						groupBean = creatGroup.getAllUserListAcquisition(groupBean);
 
-					//Beanからユーザー一覧取得できたかの成否を取得
-					boolean judge = groupBean.isGetAllUserListJudge();
+						//Beanからユーザー一覧取得できたかの成否を取得
+						boolean judge = groupBean.isGetAllUserListJudge();
 
-					//出来なかったらエラーページへ
-					if (judge == false) {
+						//出来なかったらエラーページへ
+						if (judge == false) {
+							direction = "/WEB-INF/jsp/errorPage.jsp";
+						} else {
+
+							//セッションにセットしてjspに送る
+							session.setAttribute("groupBean", groupBean);
+							session.setAttribute("userName", autherName);
+
+							direction = "/WEB-INF/jsp/makeGroup.jsp";
+						}
+					} catch (Exception e) {
+						message = "データベースに接続できませんでした。";
+						req.setAttribute("error", message);
 						direction = "/WEB-INF/jsp/errorPage.jsp";
-					} else {
 
-						//セッションにセットしてjspに送る
-						session.setAttribute("groupBean", groupBean);
-						session.setAttribute("userName", autherName);
-
-						direction = "/WEB-INF/jsp/makeGroup.jsp";
 					}
 
 				} else {
