@@ -111,9 +111,11 @@ public class MakeGroupServlet extends HttpServlet {
 
 					//入力チェックの返答
 					boolean byteCheck;
+					boolean lengthCheck;
 					byteCheck = checkChara.stringLengthCheck(name, 90);
-					if (byteCheck == false) {
-						message = "文字数オーバーです";
+					lengthCheck = checkChara.stringLengthCheck(name, 30);
+					if (byteCheck == false || lengthCheck == false) {
+						message = "文字数オーバーです。30文字以内でお願いします。";
 
 						req.setAttribute("error", message);
 						direction = "/WEB-INF/jsp/makeGroup.jsp";
