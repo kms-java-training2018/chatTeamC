@@ -28,7 +28,7 @@ public class MainPageServlet extends HttpServlet {
 		//セッションに値があるかのif
 		//ない場合、セッションにunllセットしてエラーページへ
 		session.setAttribute("session", null);
-		message = "不正なアクセスです。ログインしてくださーい";
+		message = "不正なアクセスです。ログインしてください";
 		req.setAttribute("error", message);
 		req.getRequestDispatcher(direction).forward(req, res);
 
@@ -111,7 +111,7 @@ public class MainPageServlet extends HttpServlet {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
 					direction = "/WEB-INF/jsp/errorPage.jsp";
-					message = "不正なアクセスです。ログインしてくださーい";
+					message = "情報を取得できませんでした、最ログインをお願いします。";
 					req.setAttribute("error", message);
 					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
@@ -121,7 +121,7 @@ public class MainPageServlet extends HttpServlet {
 			// 情報が無かったためエラー画面に移行
 			// とりあえず今はログイン画面に戻るように設定
 			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
+			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
