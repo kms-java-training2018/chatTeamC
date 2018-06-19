@@ -183,31 +183,30 @@ public class MakeGroupServlet extends HttpServlet {
 
 			} else {
 
-				// ログインデータ取得
-				LoginBean lb = (LoginBean) session.getAttribute("loginBean");
-
-				String autherName = lb.getUserName();
-				groupBean.setLoginBean(lb);
-
-				//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-				groupBean = creatGroup.getAllUserListAcquisition(groupBean);
-
-				//Beanからユーザー一覧取得できたかの成否を取得
-				boolean judge = groupBean.isGetAllUserListJudge();
-
-				//出来なかったらエラーページへ
-				if (judge == false) {
-					direction = "/WEB-INF/jsp/errorPage.jsp";
-				} else {
-
-					//セッションにセットしてjspに送る
-					session.setAttribute("groupBean", groupBean);
-					session.setAttribute("userName", autherName);
-
-					direction = "/WEB-INF/jsp/makeGroup.jsp";
-				}
-
 				if (req.getParameter("backMain") == null) {
+					// ログインデータ取得
+					LoginBean lb = (LoginBean) session.getAttribute("loginBean");
+
+					String autherName = lb.getUserName();
+					groupBean.setLoginBean(lb);
+
+					//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
+					groupBean = creatGroup.getAllUserListAcquisition(groupBean);
+
+					//Beanからユーザー一覧取得できたかの成否を取得
+					boolean judge = groupBean.isGetAllUserListJudge();
+
+					//出来なかったらエラーページへ
+					if (judge == false) {
+						direction = "/WEB-INF/jsp/errorPage.jsp";
+					} else {
+
+						//セッションにセットしてjspに送る
+						session.setAttribute("groupBean", groupBean);
+						session.setAttribute("userName", autherName);
+
+						direction = "/WEB-INF/jsp/makeGroup.jsp";
+					}
 
 				} else {
 					MainPageServlet main = new MainPageServlet();
