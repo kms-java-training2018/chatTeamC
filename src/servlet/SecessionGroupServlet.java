@@ -23,6 +23,7 @@ public class SecessionGroupServlet extends HttpServlet {
 
 			SecessionGroupModel secessionGroupModel = new SecessionGroupModel();
 			String groupNo = (String) req.getParameter("toGroupNo");
+			System.out.println(groupNo);
 			secessionGroupModel.SecessionGroup(loginBean, groupNo);
 			//削除できたかどうかを表示
 			//メッセージ内容はmodel内でセット

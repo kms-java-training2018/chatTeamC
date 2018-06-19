@@ -73,7 +73,7 @@ page import="java.util.ArrayList"%>
 		<form action="/chat/secessionGroupServlet" method="GET">
 			<input type="hidden" name="toGroupNo" value="${myLoginNo}">
 			<input type="button" value="グループの脱退"
-				onclick="deleteUserMenber('${myLoginNo}')">
+				onclick="deleteUserMenber('${GroupMessageBean.getGroupNo()}')">
 		</form>
 	</c:if>
 	<form action="/chat/main" method="POST">
