@@ -47,6 +47,7 @@
 	height: "60vh";
 	cellpadding: "3";
 	table-layout: fixed;
+	word-break: break-all;
 }
 
 /*タイトルのレイアウト*/
@@ -91,12 +92,15 @@
 /*内部の色*/
 .tableColor{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 #personalMessage{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 #groupMessage{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 
 /*背景*/

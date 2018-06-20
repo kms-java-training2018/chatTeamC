@@ -52,52 +52,54 @@ public class MainPageServlet extends HttpServlet {
 		if (session.getAttribute("session") != null) {
 			// ログインデータ取得
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+
 			if ((String) req.getParameter("newProfile") != null) {
+				try {
 
-				// 名前の設定
-				String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
-				String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
-				// 判定用の関数
-				CheckCharacter checkCharacter = new CheckCharacter();
+					// 名前の設定
+					String myName = new String(req.getParameter("myName").getBytes("ISO-8859-1"));
+					String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
+					// 判定用の関数
+					CheckCharacter checkCharacter = new CheckCharacter();
 
-				// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
-				if (!(checkCharacter.spaceCheck(myName) && checkCharacter.spaceCheck(myProfile) && checkCharacter.stringSizeCheck(myName, 30)
-						&& checkCharacter.stringSizeCheck(myProfile, 100))) {
-					req.setAttribute("erorr", "正しくない入力がされました");
-					//マイページに戻る
-					req.setAttribute("name", myName);
-					req.setAttribute("profile", myProfile);
-					//req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
-					direction = "/WEB-INF/jsp/myPage.jsp";
-				} else {
-					// 名前をログインビーンに設定する
-					loginBean.setUserName(myName);
-					// セッションのほうにも名前を設定しておく
-					SessionBean sessionBean = new SessionBean();
-					// 名前をセッションビーンに設定する
-					sessionBean.setUserName(myName);
-					// セッションにセッションビーンを設定する
-					session.setAttribute("session", sessionBean);
-					// データベースにプロフィールを設定する。
-					// 設定してこれなかった場合エラーページに飛ぶ
-					if (!(model.newProfile(myName, myProfile, loginBean))) {
-						req.setAttribute("erorr", "プロフィールを更新できませんでした");
-						direction = "/WEB-INF/jsp/errorPage.jsp";
-					}
+					// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
+					if (!(checkCharacter.spaceCheck(myName) && checkCharacter.spaceCheck(myProfile)
+							&& checkCharacter.stringSizeCheck(myName, 30)
+							&& checkCharacter.stringSizeCheck(myProfile, 100))) {
+						req.setAttribute("erorr", "正しくない入力がされました");
+						//マイページに戻る
+						req.setAttribute("name", myName);
+						req.setAttribute("profile", myProfile);
+						//req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
+						direction = "/WEB-INF/jsp/myPage.jsp";
+					} else {
+						// 名前をログインビーンに設定する
+						loginBean.setUserName(myName);
+						// セッションのほうにも名前を設定しておく
+						SessionBean sessionBean = new SessionBean();
+						// 名前をセッションビーンに設定する
+						sessionBean.setUserName(myName);
+						// セッションにセッションビーンを設定する
+						session.setAttribute("session", sessionBean);
+						// データベースにプロフィールを設定する。
+						// 設定してこれなかった場合エラーページに飛ぶ
+						if (!(model.newProfile(myName, myProfile, loginBean))) {
+							req.setAttribute("erorr", "プロフィールを更新できませんでした");
+							direction = "/WEB-INF/jsp/errorPage.jsp";
+						}
 
-					// 認証処理
-					try {
+						// 認証処理
 						bean = model.mainPageBeanSeting(bean, loginBean);
 						req.setAttribute("MainPageBean", bean);
 						//req.getRequestDispatcher("/WEB-INF/jsp/mainPage.jsp").forward(req, res);
-					} catch (Exception e) {
-						session.setAttribute("session", null);
-						// 情報が無かったためエラー画面に移行
-						message = "情報が存在していません";
-						req.setAttribute("error", message);
-						direction = "/WEB-INF/jsp/errorPage.jsp";
-						//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					}
+				} catch (Exception e) {
+					session.setAttribute("session", null);
+					// 情報が無かったためエラー画面に移行
+					message = "情報が存在していません";
+					req.setAttribute("error", message);
+					direction = "/WEB-INF/jsp/errorPage.jsp";
+					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
 			} else {
 
