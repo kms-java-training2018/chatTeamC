@@ -111,23 +111,26 @@ public class GroupMessageServlet extends HttpServlet {
 			if (checkChara.spaceCheck(sendMessage) == false) {
 				req.setAttribute("error", "メッセージを入力してください");
 				doGet(req, res);
-			}
-			//文字規格処理
-			boolean bytecheck = checkChara.stringLengthCheck(sendMessage, 300);
-			if (bytecheck == false) {
-				req.setAttribute("error", "文字のデータサイズオーバーです");
-				doGet(req, res);
 			} else {
-				// 会話情報の取得
-				try {
-					model.sendGroupMessage(bean, loginBean);
-					req.setAttribute("error", loginBean.getErrorMessage());
-				} catch (Exception e) {
-					System.out.println("ここにとんでる");
-					e.printStackTrace();
+				//文字規格処理
+				boolean bytecheck = checkChara.stringSizeCheck(sendMessage, 100);
+				if (bytecheck == false) {
+					req.setAttribute("error", "文字のデータサイズオーバーです");
+					doGet(req, res);
+				} else {
+					// 会話情報の取得
+					try {
+						model.sendGroupMessage(bean, loginBean);
+						req.setAttribute("error", loginBean.getErrorMessage());
+						// 初期化
+						loginBean.setErrorMessage("");
+					} catch (Exception e) {
+						System.out.println("ここにとんでる");
+						e.printStackTrace();
+					}
+					doGet(req, res);
+					//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 				}
-				doGet(req, res);
-				//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 			}
 		}
 	}
