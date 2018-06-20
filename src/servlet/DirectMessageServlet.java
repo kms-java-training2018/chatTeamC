@@ -15,6 +15,8 @@ import model.MessageCheckSendModel;
 
 public class DirectMessageServlet extends HttpServlet {
 
+	// 移動するページ用変数
+
 	/**
 	 * 会話情報の表示の部分
 	 * */
@@ -37,36 +39,37 @@ public class DirectMessageServlet extends HttpServlet {
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
-			// 自会員番号を取得
-			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-			String myLogin = loginBean.getUserNo();
-			// エラーメッセージの初期化
-			loginBean.setErrorMessage("");
-			// 相手の会員番号を取得
-			bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
-			Integer toUserNo = (bean.getToUserNo());
-			// 会話情報の取得
+
 			try {
+				// 自会員番号を取得
+				LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+				String myLogin = loginBean.getUserNo();
+				// エラーメッセージの初期化
+				loginBean.setErrorMessage("");
+				// 相手の会員番号を取得
+				bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
+				Integer toUserNo = (bean.getToUserNo());
+				// 会話情報の取得
 				bean = model.getTalkContent(bean, loginBean);
+				// もしも相手の番号が無い場合はエラーを表示
+				if (toUserNo == 0) {
+					session.setAttribute("session", null);
+					message = "相手の番号が不明です。";
+					req.setAttribute("error", message);
+					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+				} else {
+					//req.setAttribute("error", loginBean.getErrorMessage());
+					req.setAttribute("messageCheckBean", bean);
+					req.setAttribute("myLoginNo", myLogin);
+					session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
+					req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+				}
 			} catch (Exception e) {
 				session.setAttribute("session", null);
 				message = "相手の会話情報が入手できませんでした。";
 				req.setAttribute("error", message);
 				e.printStackTrace();
 				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-			}
-			// もしも相手の番号が無い場合はエラーを表示
-			if (toUserNo == 0) {
-				session.setAttribute("session", null);
-				message = "相手の番号が不明です。";
-				req.setAttribute("error", message);
-				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-			} else {
-				//req.setAttribute("error", loginBean.getErrorMessage());
-				req.setAttribute("messageCheckBean", bean);
-				req.setAttribute("myLoginNo", myLogin);
-				session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
-				req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 			}
 		}
 	}
@@ -108,30 +111,35 @@ public class DirectMessageServlet extends HttpServlet {
 			 * 文字が残っていない場合、falseを返し、if文を通って
 			 * 空文字として判断してエラーメッセージを表示させる。
 			 * */
-			if (checkCharacter.spaceCheck(sendMessage) == false) {
-				req.setAttribute("error", "文字を入力してください。");
-			} else {
-				bean.setSendMessage(sendMessage);
-				/*
-				 * ○入力されたメッセージのサイズをチェック
-				 * サイズの大きい文字が用いられ、100文字分のサイズを超えた場合、
-				 * エラーメッセージを表示させる。
-				 * */
-				boolean bytecheck = checkCharacter.stringSizeCheck(sendMessage, 100);
-				if (bytecheck == false) {
-					req.setAttribute("error", "文字数オーバー");
+
+			try {
+				if (checkCharacter.spaceCheck(sendMessage) == false) {
+					req.setAttribute("error", "文字を入力してください。");
 				} else {
-					// 会話情報の取得
-					try {
+					bean.setSendMessage(sendMessage);
+					/*
+					 * ○入力されたメッセージのサイズをチェック
+					 * サイズの大きい文字が用いられ、100文字分のサイズを超えた場合、
+					 * エラーメッセージを表示させる。
+					 * */
+					boolean bytecheck = checkCharacter.stringSizeCheck(sendMessage, 100);
+					if (bytecheck == false) {
+						req.setAttribute("error", "文字数オーバー");
+					} else {
+						// 会話情報の取得
 						model.sendMessage(bean, loginBean);
 						req.setAttribute("error", loginBean.getErrorMessage());
 						loginBean.setErrorMessage("");
-					} catch (Exception e) {
-						e.printStackTrace();
 					}
 				}
+				doGet(req, res);
+			} catch (Exception e) {
+				e.printStackTrace();
+				session.setAttribute("session", null);
+				message = "データの送信に失敗しました";
+				req.setAttribute("error", message);
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			}
 		}
-		doGet(req, res);
 	}
 }
