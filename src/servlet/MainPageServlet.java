@@ -111,7 +111,7 @@ public class MainPageServlet extends HttpServlet {
 					session.setAttribute("session", null);
 					// 情報が無かったためエラー画面に移行
 					direction = "/WEB-INF/jsp/errorPage.jsp";
-					message = "情報を取得できませんでした、最ログインをお願いします。";
+					message = "情報を取得できませんでした、再ログインをお願いします。";
 					req.setAttribute("error", message);
 					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				}
