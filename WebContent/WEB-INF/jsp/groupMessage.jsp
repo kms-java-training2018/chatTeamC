@@ -66,7 +66,7 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="deleteMessageNo"
 			value="${list.getMessageNo()}"> <input type="hidden"
 			name="toGroupNo" value="${GroupMessageBean.getGroupNo()}"> <input
-			type="text" name="sendMessage" size="50" maxlength="100"> <input
+			type="text" name="sendMessage" size="50"> <input
 			type="submit" value="メッセージの送信">
 	</form>
 	<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">

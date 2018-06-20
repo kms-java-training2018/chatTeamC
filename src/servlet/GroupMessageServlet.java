@@ -115,7 +115,7 @@ public class GroupMessageServlet extends HttpServlet {
 				//文字規格処理
 				boolean bytecheck = checkChara.stringSizeCheck(sendMessage, 100);
 				if (bytecheck == false) {
-					req.setAttribute("error", "文字のデータサイズオーバーです");
+					req.setAttribute("error", "文字数オーバーです");
 					doGet(req, res);
 				} else {
 					// 会話情報の取得
