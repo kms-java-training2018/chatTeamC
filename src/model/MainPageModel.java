@@ -158,7 +158,6 @@ public class MainPageModel {
 			// 項目の追加
 			while (rs.next()) {
 				// Listの初期化
-				System.out.println("入ってるよー");
 				// Listに追加
 				name.add(rs.getString("GROUP_NAME"));
 				number.add(rs.getString("GROUP_NO"));
