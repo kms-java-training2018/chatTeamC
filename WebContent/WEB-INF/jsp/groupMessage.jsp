@@ -30,7 +30,7 @@ page import="java.util.ArrayList"%>
 	<br>
 	<input type="button" value="ログアウト" onClick="logout()" />
 
-	<h2>${GroupBean.getGroupName()}</h2>
+	<h2>${GroupMessageBean.getGroupName()}</h2>
 
 
 	<c:forEach var="list"

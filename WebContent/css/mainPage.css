@@ -35,6 +35,7 @@
 /*タイトルのマス目の色*/
 .userTitle {
 	background-color: #f4ffff;
+	white-space: nowrap;
 }
 
 /*メニューのレイアウト*/
