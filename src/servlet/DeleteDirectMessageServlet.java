@@ -30,7 +30,7 @@ public class DeleteDirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにnullセットしてエラーページへ
 			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
+			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		}

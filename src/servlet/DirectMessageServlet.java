@@ -107,6 +107,15 @@ public class DirectMessageServlet extends HttpServlet {
 			MessageCheckSendModel model = new MessageCheckSendModel();
 			//現在のセッションに入っているloginBean情報を受け取る
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+			Integer userNo = Integer.parseInt(loginBean.getUserNo());
+			Integer toUserNo = bean.getToUserNo();
+			//会員番号が一致した場合エラーページへ遷移
+			if(userNo == toUserNo) {
+				session.setAttribute("session", null);
+				message = "不正なアクセスです。";
+				req.setAttribute("error", message);
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+			}
 			//バイト数チェック用モデルを用意
 			CheckCharacter checkCharacter = new CheckCharacter();
 			//メッセージ内容を取得
