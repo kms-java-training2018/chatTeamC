@@ -26,7 +26,7 @@
 <link rel="stylesheet" href="css/MakeGroup.css">
 <!-- <link rel="stylesheet" href="css/base.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Create Group</title>
 </head>
 <body>
 <body id="bgcolor"></body>
@@ -36,7 +36,7 @@
 		<!-- 1段目 -->
 		<tr>
 			<th class="title" colspan="2">
-				<p>Creat Group Page</p>
+				<p>Create Group Page</p>
 			</th>
 			<th class="name">
 

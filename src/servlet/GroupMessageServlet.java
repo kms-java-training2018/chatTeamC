@@ -102,6 +102,12 @@ public class GroupMessageServlet extends HttpServlet {
 			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 			//メッセージ内容を取得
 			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+			/*
+			 * ○シングルクォーテーション表示用処理
+			 * シングルクォーテーションを表示させる為に、
+			 * 「'」⇒「''」に置換する。
+			 * */
+			sendMessage = checkChara.singleQuotation(sendMessage);
 			bean.setSendMessage(sendMessage);
 			//String sendMessage = bean.getSendMessage();
 
