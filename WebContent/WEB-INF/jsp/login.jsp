@@ -29,7 +29,11 @@
 				for="show-ps">Show password</label> <br>
 			<p>${loginError.errorMessage}</p>
 
-			<input type="submit" value="Login">
+			<input type="submit" value="Login"> <br>
+			<br>
+			<br> <a href="/chat/createAccountServlet"><img
+				src="img/create a new account link.png"
+				style="width: 370px; height: 74px"></a>
 		</form>
 	</div>
 </body>
