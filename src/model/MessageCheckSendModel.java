@@ -200,6 +200,7 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
+			bean.setSendMessage("");
 			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
 		} catch (SQLIntegrityConstraintViolationException e) {
 			loginBean.setErrorMessage("メッセージを入力してください");
