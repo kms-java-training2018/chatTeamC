@@ -1,3 +1,5 @@
 function footerStart() {
-	window.scrollBy(0,window.parent.screen.height);
+	var maxY = document.documentElement.scrollHeight;
+	alert(maxY);
+	window.scroll(0,maxY);
 }
