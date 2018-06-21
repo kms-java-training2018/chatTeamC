@@ -159,7 +159,7 @@ public class MessageCheckSendModel {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
-			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 		}
 		// 接続作成
@@ -283,10 +283,10 @@ public class MessageCheckSendModel {
 			stmt.executeUpdate(sb.toString());
 			loginBean.setErrorMessage("");
 		} catch (SQLIntegrityConstraintViolationException e) {
-			loginBean.setErrorMessage("メッセージを入力してください。");
+			loginBean.setErrorMessage("メッセージを入力してください");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
