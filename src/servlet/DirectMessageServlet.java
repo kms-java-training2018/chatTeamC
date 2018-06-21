@@ -118,8 +118,14 @@ public class DirectMessageServlet extends HttpServlet {
 			}
 			//バイト数チェック用モデルを用意
 			CheckCharacter checkCharacter = new CheckCharacter();
-			//メッセージ内容を取得
+			//●メッセージ内容を取得
 			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+			/*
+			 * ○シングルクォーテーション表示用処理
+			 * シングルクォーテーションを表示させる為に、
+			 * 「'」⇒「''」に置換する。
+			 * */
+			sendMessage = checkCharacter.singleQuotation(sendMessage);
 			/*
 			 * ○メッセージが空文字（またはスペースのみ）かどうかの判定
 			 * checkCharacterのspaceCheckにて、スペースを除いて

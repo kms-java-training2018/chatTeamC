@@ -3,6 +3,17 @@ package model;
 public class CheckCharacter {
 
 	/**
+	 * ○シングルクォーテーション表示
+	 * 文字列中のシングルクォーテーションを表示させる為に
+	 * 文字列中のシングルクォーテーションを2つに置換する。
+	 * @param input 置換元の文字列
+	 * @return result 置換後の文字列
+	 */
+	public String singleQuotation(String input) {
+		String result = input.replaceAll("'", "''");
+		return result;
+	}
+	/**
 	 * 文字数チェック
 	 * @param input 文字数チェックにかける文字列
 	 * @param i 指定文字サイズ(byte)
