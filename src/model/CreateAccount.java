@@ -58,7 +58,7 @@ public class CreateAccount {
 		}
 
 		//全ての結果からbooleanをセット
-		if ("".equals(newRb.getErrorMessage()) || "".equals(newRb.getProfileErrorMessage())) {
+		if (newRb.getErrorMessage() != null || newRb.getProfileErrorMessage()  != null) {
 			newRb.setCheckJudge(checkJudge);
 		} else {
 			checkJudge = true;
