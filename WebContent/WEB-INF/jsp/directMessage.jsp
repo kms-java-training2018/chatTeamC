@@ -79,6 +79,7 @@ page import="java.util.ArrayList"%>
 	</c:forEach>
 	<form action="/chat/directMessage" method="POST" onSubmit="return nidoosi()">
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
+		<p id = "endMsg"></p>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
@@ -86,7 +87,7 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="deleteMessageNo"
 			value="${list.getMessageNo()}"> <input type="hidden"
 			name="toUserNo" value="${messageCheckBean.getToUserNo()}"> <input
-			type="text" name="sendMessage" size="50"
+			type="text" name="sendMessage" size="50" oninput="inputText()" id = "inText"
 			align="right"> <input type="submit" class="click"  value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
