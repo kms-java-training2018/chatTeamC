@@ -88,4 +88,15 @@
     <servlet-name>SecessionGroupServlet</servlet-name>
     <url-pattern>/secessionGroupServlet</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>CreateAccountServlet</servlet-name>
+    <servlet-class>servlet.CreateAccountServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CreateAccountServlet</servlet-name>
+    <url-pattern>/createAccountServlet</url-pattern>
+  </servlet-mapping>
+
+
 </web-app>
