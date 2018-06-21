@@ -86,7 +86,6 @@ public class GroupMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
-
 		//入力チェックモデル
 		CheckCharacter checkChara = new CheckCharacter();
 		HttpSession session = req.getSession();

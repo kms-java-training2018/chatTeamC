@@ -19,6 +19,10 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
+<script type="text/javascript" src="JavaScript/button.js"
+	charset="UTF-8">
+
+</script>
 <script type="text/javascript" src="JavaScript/Scrool.js">
 
 </script>
@@ -62,7 +66,7 @@ page import="java.util.ArrayList"%>
 	<p>
 		<font size="5" color="red">${error}</font>
 	</p>
-	<form action="/chat/groupMessage" method="POST">
+	<form action="/chat/groupMessage" method="post" onSubmit="return nidoosi()">
 		<input type="hidden" name="deleteMessageNo"
 			value="${list.getMessageNo()}"> <input type="hidden"
 			name="toGroupNo" value="${GroupMessageBean.getGroupNo()}"> <input
