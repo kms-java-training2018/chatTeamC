@@ -80,7 +80,6 @@ public class GetTalkMessageModel {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("だめでした");
 			// sqlの接続は絶対に切断
 		} finally {
 			try {
@@ -113,8 +112,6 @@ public class GetTalkMessageModel {
 			conn = DriverManager.getConnection(url, user, dbPassword);
 			// 初期化
 			StringBuilder sb = new StringBuilder();
-			System.out.println(loginBean.getUserNo());
-			System.out.println(GroupNo);
 			//SQL作成
 			sb.append("SELECT * FROM T_GROUP_INFO WHERE USER_NO = "+ loginBean.getUserNo() +" AND GROUP_NO = "+ GroupNo +" AND OUT_FLAG = 0");
 
@@ -127,7 +124,6 @@ public class GetTalkMessageModel {
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("ここにきてるよ");
 			// sqlの接続は絶対に切断
 		} finally {
 			try {
