@@ -33,7 +33,7 @@
 			<br>
 			<br> <a href="/chat/createAccountServlet"><img
 				src="img/create a new account link.png"
-				style="width: 370px; height: 74px"></a>
+				style="width: 379px; height: 57px"></a>
 		</form>
 	</div>
 </body>
