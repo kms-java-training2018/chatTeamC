@@ -202,10 +202,10 @@ public class MessageCheckSendModel {
 			stmt.executeUpdate(sb.toString());
 			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
 		} catch (SQLIntegrityConstraintViolationException e) {
-			loginBean.setErrorMessage("メッセージを入力してください。");
+			loginBean.setErrorMessage("メッセージを入力してください");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
@@ -297,31 +297,5 @@ public class MessageCheckSendModel {
 			}
 		}
 		return bean;
-	}
-
-	/**
-	 * ○stringLengthCheck
-	 * メッセージを受け取り、そのサイズが300バイトを
-	 * 超えるかどうかを判断する。
-	 * （文字数はテキストボックスの最大文字数の設定で100字以内に設定）
-	 * @param input　メッセージを取得
-	 * @return　指定バイト数以内の場合0、
-	 * 指定バイト数を超えたら1を返す。
-	 */
-	public int stringLengthCheck(String input) {
-		//返すメッセージを設定
-		int judgeByte = 0;
-
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		System.out.println(length);
-		// 最大バイト数の設定
-		int max = 300;
-
-		if ((int) length > max) { // 最大バイト数よりも多かった場合（
-			judgeByte = 1;
-			return judgeByte;
-		}
-		return judgeByte; // 許容内であった場合
 	}
 }
