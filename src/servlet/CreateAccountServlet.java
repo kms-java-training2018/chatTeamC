@@ -30,10 +30,10 @@ public class CreateAccountServlet extends HttpServlet {
 		String direction = "/WEB-INF/jsp/login.jsp";
 
 		// パラメータの取得
-		bean.setUserId((String) req.getParameter("userId"));
-		bean.setPassword((String) req.getParameter("password"));
-		bean.setUserName((String) req.getParameter("userName"));
-		bean.setProfile((String) req.getParameter("profile"));
+		bean.setUserId(new String(req.getParameter("userId").getBytes("ISO-8859-1")));
+		bean.setPassword(new String(req.getParameter("password").getBytes("ISO-8859-1")));
+		bean.setUserName(new String(req.getParameter("userName").getBytes("ISO-8859-1")));
+		bean.setProfile(new String(req.getParameter("profile").getBytes("ISO-8859-1")));
 
 		//文字入力チェック
 		bean = model.checkData(bean);
