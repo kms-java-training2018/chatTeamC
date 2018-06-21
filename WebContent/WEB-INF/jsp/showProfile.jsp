@@ -45,7 +45,7 @@
 		<!-- 3段目 -->
 		<div align="center">
 			<br><br><br><p>
-				<a href="#" onClick="window.close();"><input type="submit"
+				<a href="#" onClick=" window.close();"><input type="submit"
 					value="Close"></a>
 			</p>
 		</div>

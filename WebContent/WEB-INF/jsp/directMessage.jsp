@@ -19,6 +19,7 @@ page import="java.util.ArrayList"%>
 	charset="UTF-8">
 
 </script>
+
 <script type="text/javascript" src="JavaScript/Scrool.js"></script>
 <script type="text/javascript" src="JavaScript/button.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,7 +51,7 @@ page import="java.util.ArrayList"%>
 	<c:forEach var="list"
 		items="${messageCheckBean.getTalkContentBeanList()}"
 		varStatus="status">
-		<form action="/chat/deleteDirectMessage" method="GET">
+		<form action="/chat/deleteDirectMessage" method="GET" onSubmit="return nidoosi()">
 			<table class="torkRange " style="width: 700px; position: relative;">
 				<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
@@ -76,7 +77,7 @@ page import="java.util.ArrayList"%>
 			<br>
 		</form>
 	</c:forEach>
-	<form action="/chat/directMessage" method="POST">
+	<form action="/chat/directMessage" method="POST" onSubmit="return nidoosi()">
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
 		<p>
 			<font size="5" color="red">${error}</font>
@@ -88,7 +89,7 @@ page import="java.util.ArrayList"%>
 			type="text" name="sendMessage" size="50"
 			align="right"> <input type="submit" class="click"  value="メッセージの送信">
 	</form>
-	<form action="/chat/main" method="POST">
+	<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
 		<input type="submit" value="メインメニューへ戻る">
 	</form>
 
