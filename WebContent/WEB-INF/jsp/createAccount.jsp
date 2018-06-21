@@ -18,15 +18,15 @@
 
 		<h1>Create Account</h1>
 
-		<form action="/chat/creatAccountServlet" method="POST" class="login"
+		<form action="/chat/createAccountServlet" method="POST" class="login"
 			action="foo">
-			<h2>Member ID</h2>
+			<h2>Member ID(20)</h2>
 			<input id="username" type="text" name="userId"
 				value="${loginBean.userId}">
-			<h2>Password</h2>
+			<h2>Password(20)</h2>
 			<input id="username" type="text" name="password"
 				value="${loginBean.userId}">
-			<h2>Username</h2>
+			<h2>Username(30)</h2>
 			<input id="username" type="text" name="userName"
 				value="${loginBean.userId}">
 			<h2>Profile(100)</h2>
@@ -38,7 +38,7 @@
 			<p>${loginError.profileErrorMessage}</p>
 			<p>${loginError.sqlErrorMessage}</p>
 
-			<input type="submit" value="Login">
+			<input type="submit" value="Create">
 		</form>
 	</div>
 </body>

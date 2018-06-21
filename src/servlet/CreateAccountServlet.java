@@ -47,11 +47,13 @@ public class CreateAccountServlet extends HttpServlet {
 			} catch (Exception e) {
 				direction = "/WEB-INF/jsp/createAccount.jsp";
 				bean.setErrorMessage("登録できませんでした。");
+				req.setAttribute("loginError", bean);
 			}
 
 			// 取得に成功した場合セッション情報をセット
-			if ("".equals(bean.getErrorMessage())) {
+			if (bean.getErrorMessage() == null) {
 				bean.setErrorMessage("会員登録出来ました。");
+				req.setAttribute("loginError", bean);
 
 			}
 		} else {

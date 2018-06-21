@@ -122,7 +122,6 @@ public class CreateAccount {
 			sb.append(",'" + password + "'");
 			sb.append(",'" + userName + "'");
 			sb.append(",'" + profile + "'");
-			sb.append(",'" + userId + "'");
 			sb.append(", sysdate)");
 
 			// SQL実行してrsにセット
