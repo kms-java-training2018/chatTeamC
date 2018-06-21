@@ -39,16 +39,24 @@ public class DirectMessageServlet extends HttpServlet {
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {
-
 			try {
 				// 自会員番号を取得
 				LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
 				String myLogin = loginBean.getUserNo();
+				//同一会員番号かのチェック用変数"userNo"定義
+				Integer userNo = Integer.parseInt(myLogin);
 				// エラーメッセージの初期化
 				loginBean.setErrorMessage("");
 				// 相手の会員番号を取得
 				bean.setToUserNo(Integer.parseInt(req.getParameter("toUserNo")));
 				Integer toUserNo = (bean.getToUserNo());
+				//会員番号が一致した場合エラーページへ遷移
+				if(userNo == toUserNo) {
+					session.setAttribute("session", null);
+					message = "不正なアクセスです。";
+					req.setAttribute("error", message);
+					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+				}
 				// 会話情報の取得
 				bean = model.getTalkContent(bean, loginBean);
 				// もしも相手の番号が無い場合はエラーを表示
@@ -90,7 +98,7 @@ public class DirectMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにnullセットしてエラーページへ
 			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
+			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 		} else {

@@ -38,7 +38,7 @@ public class GroupMessageServlet extends HttpServlet {
 		if (session.getAttribute("session") == null) {
 			//ない場合、セッションにunllセットしてエラーページへ
 			session.setAttribute("session", null);
-			message = "不正なアクセスです。ログインしてくださーい";
+			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 			// req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
@@ -125,7 +125,6 @@ public class GroupMessageServlet extends HttpServlet {
 						// 初期化
 						loginBean.setErrorMessage("");
 					} catch (Exception e) {
-						System.out.println("ここにとんでる");
 						e.printStackTrace();
 					}
 					doGet(req, res);
