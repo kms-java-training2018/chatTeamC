@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import bean.LoginBean;
 import bean.ResistAccountBean;
 import model.CreateAccount;
 
@@ -20,14 +19,8 @@ public class CreateAccountServlet extends HttpServlet {
 	 * 初期表示
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		// Beanの初期化
-		LoginBean bean = new LoginBean();
-		bean.setErrorMessage("");
-		bean.setUserId("");
-		bean.setPassword("");
 
-		req.setAttribute("loginBean", bean);
-		req.getRequestDispatcher("/WEB-INF/jsp/login.jsp").forward(req, res);
+		req.getRequestDispatcher("/WEB-INF/jsp/createAccount.jsp").forward(req, res);
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
