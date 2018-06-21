@@ -3,10 +3,10 @@
  */
 
 $(function(){
-	$('.click').click(function(){
+	$('button').click(function(){
 
-		$(this).prop('disabled',true);//ボタンを無効化する
-		$(this).closest('form').submit();//フォームを送信する
+		$('#click').prop('disabled',true);//ボタンを無効化する
+		$('#click').closest('form').submit();//フォームを送信する
 
 	});
 });
