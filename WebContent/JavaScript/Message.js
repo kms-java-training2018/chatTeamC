@@ -5,6 +5,8 @@ var one = false;
 
 function firstscript() {
 	document.getElementById('inText').focus();
+	var len = document.getElementById('inText').value.length;
+	setSelectionRange(len,len)
 }
 
 function inputText() {
