@@ -4,7 +4,9 @@ var one = false;
 
 
 function firstscript() {
-	document.getElementById('inText').focus();
+	var textFocus = document.getElementById('inText');
+	textFocus.focus();
+	textFocus.value=textFocus.value;
 }
 
 function inputText() {
