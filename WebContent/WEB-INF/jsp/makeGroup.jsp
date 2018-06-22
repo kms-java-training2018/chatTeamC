@@ -28,8 +28,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Create Group</title>
 </head>
-<body>
-<body id="bgcolor"></body>
+<body class="bgcolor1">
 <form action="/chat/makeGroup" method="POST" onSubmit="return nidoosi()">
 	<table class="main" align="center">
 
@@ -94,7 +93,7 @@
 		</tr>
 		<tr>
 			<td><button type="submit" name="backMain" value="main"
-					class="temp1">Return to Main
+					class="temp2">Return to Main
 					Page</button></td>
 		</tr>
 	</table>

@@ -5,12 +5,12 @@ table {
 }
 
 .bgcolor1 {
-	background: #b4fcad;
+	background: #fcffc8;
 }
 
 table.main {
 	border: 1;
-	background-color: #ffd7fc;
+	background-color: #ddffff;
 	border-collapse: collapse;
 	border-style: double;
 	align-content: center;
@@ -97,11 +97,11 @@ input.fontSize {
 }
 
 button.temp1 {
-	width: 75%;
+	width: 70%;
 	margin: 30px;
 	padding: 10px;
 	border: groove;
-	background-color: #e1d7ff;
+	background-color: #fec9bc;
 	font-family: meiryo;
 	font-size: 120%;
 	color: #000000;
@@ -109,11 +109,11 @@ button.temp1 {
 }
 
 button.temp1:hover {
-	width: 90%;
+	width: 80%;
 	margin: 30px;
 	padding: 10px;
 	border: groove;
-	background-color: #ffebdc;
+	background-color: #faff8e;
 	font-family: meiryo;
 	font-size: 120%;
 	color: #000000;
@@ -126,6 +126,41 @@ button.temp1:disabled {
 	padding: 10px;
 	border: groove;
 	background-color: #fefbba;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #d7fffd;
+	cursor: default;
+}
+button.temp2 {
+	width: 70%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #aa9cfa;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #000000;
+	cursor: pointer;
+}
+
+button.temp2:hover {
+	width: 80%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #e6e6e6;
+	font-family: meiryo;
+	font-size: 120%;
+	color: #000000;
+	cursor: pointer;
+}
+
+button.temp2:disabled {
+	width: 75%;
+	margin: 30px;
+	padding: 10px;
+	border: groove;
+	background-color: #9d9d9d;
 	font-family: meiryo;
 	font-size: 120%;
 	color: #d7fffd;
