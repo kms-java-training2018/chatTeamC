@@ -21,7 +21,7 @@ p {
 }
 
 p.error {
-	font-family: 'Amatic SC', cursive;
+	font-family: "ＭＳ Ｐゴシック", "ＭＳ ゴシック", sans-serif;
 	font-size: 15px;
 	color: #ff0000;
 }
