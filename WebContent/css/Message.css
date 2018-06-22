@@ -2,8 +2,8 @@
 
 /*背景色 */
 #background {
-	background-color: #bbffc4;
-	color: #8080ff;
+	background-color: #c1ffbf;
+	color: #5947fe;
 	border: 5px double #c8f9c1;
 }
 
@@ -36,20 +36,20 @@
 .myTork {
 	line-height: 270%;
 	padding: .5em .150em;
-	background-color: #79edf0;
+	background-color: #bdfbf3;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #004080;
+	border-color: #00ffff;
 }
 
 /*相手のトークの周り*/
 .opponentTork {
 	line-height: 270%;
 	padding: .5em .150em;
-	background-color: #f89f3f;
+	background-color: #fbca82;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #f94b42;
+	border-color: #ff8000;
 }
 
 
