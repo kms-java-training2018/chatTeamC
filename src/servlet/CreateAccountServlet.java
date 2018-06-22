@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import bean.ResistAccountBean;
 import model.CreateAccount;
+import model.CreateCheck;
 
 /**
  * グループ作成用サーブレット
@@ -27,6 +28,7 @@ public class CreateAccountServlet extends HttpServlet {
 		// 初期化
 		ResistAccountBean bean = new ResistAccountBean();
 		CreateAccount model = new CreateAccount();
+		CreateCheck cc = new CreateCheck();
 		String direction = "/WEB-INF/jsp/login.jsp";
 
 		// パラメータの取得
@@ -35,13 +37,17 @@ public class CreateAccountServlet extends HttpServlet {
 		bean.setUserName(new String(req.getParameter("userName").getBytes("ISO-8859-1")));
 		bean.setProfile(new String(req.getParameter("profile").getBytes("ISO-8859-1")));
 
+		//id被りチェック
+		bean = cc.checkId(bean);
 		//文字入力チェック
 		bean = model.checkData(bean);
+
 		//OKだったら登録、Noだったらエラー
+
 		if (bean.isCheckJudge() == true) {
 
 			try {
-				// 認証処理
+				// 登録処理
 				bean = model.resistUser(bean);
 
 			} catch (Exception e) {

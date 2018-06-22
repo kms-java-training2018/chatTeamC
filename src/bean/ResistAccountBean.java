@@ -16,6 +16,10 @@ public class ResistAccountBean {
 	/** sqlエラーメッセージ */
 	private String sqlErrorMessage;
 
+	/** id被りエラーメッセージ */
+	private String idErrorMessage;
+
+
 	/** check判定*/
 	private boolean checkJudge;
 
@@ -87,6 +91,14 @@ public class ResistAccountBean {
 
 	public void setCheckJudge(boolean checkJudge) {
 		this.checkJudge = checkJudge;
+	}
+
+	public String getIdErrorMessage() {
+		return idErrorMessage;
+	}
+
+	public void setIdErrorMessage(String idErrorMessage) {
+		this.idErrorMessage = idErrorMessage;
 	}
 
 }
