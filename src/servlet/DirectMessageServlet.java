@@ -90,8 +90,10 @@ public class DirectMessageServlet extends HttpServlet {
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
 		 * */
-;
 		if (req.getParameter("setMessage") != null && req.getParameter("Transmission") == null) {
+
+			String scroll = req.getParameter("scroll");
+			req.setAttribute("scroll", scroll);
 			// 入力中文字設定
 			String setMessage = new String(req.getParameter("setMessage").getBytes("ISO-8859-1"));
 			System.out.println(setMessage);
