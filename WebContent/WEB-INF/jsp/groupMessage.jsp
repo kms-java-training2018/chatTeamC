@@ -67,15 +67,15 @@ page import="java.util.ArrayList"%>
 					<!-- 会話ログ表示 -->
 				</c:if>
 				<c:if test="${list.getUserNo() != myLoginNo}">
-					<c:if test="${list.getUserName() != '送信者不明'}">
-						<span class="opponentTork"> <a
-							href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-							target=”_blank”> ${list.getUserName()}</a>
-						</span>
-					</c:if>
-					<c:if test="${list.getUserName() == '送信者不明'}">
+					<span class="opponentTork"> <c:if
+							test="${list.getUserName() != '送信者不明'}">
+							<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+								target=”_blank”> ${list.getUserName()}</a>
+
+						</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
 						</c:if> ：${list.getMessage()}
+					</span>
 				</c:if>
 			</table>
 		</form>
