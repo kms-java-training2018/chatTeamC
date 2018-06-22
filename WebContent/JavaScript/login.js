@@ -6,7 +6,7 @@ function changeInputType(inputId, type) {
 	var input = $("#" + inputId);
 	$(input).replaceWith(
 			$("<input />").val(input.val()).attr("place", input.attr("place"))
-					.attr("id", inputId).attr("type", type).attr("name","password"));
+					.attr("id", inputId).attr("type", type).attr("name","password").attr("class","fontSize"));
 }
 function connecttext(ischecked) {
 	if (ischecked == true) {
