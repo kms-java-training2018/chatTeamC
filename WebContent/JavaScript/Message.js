@@ -36,6 +36,7 @@ function inputEnd() {
 	// 入力完了後のメッセージ入れ替え
 	// var wObj = document.getElementById("endMsg");
 	document.getElementById("setMes").value = document.getElementById("inText").value;
+	document.getElementById("scroll").innerHTML = "100";
 	// wObj.innerHTML = document.getElementById("inText").value;
 	// wObj.className = 'defStyle endStyle';
 

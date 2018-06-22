@@ -30,7 +30,7 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>グループチャットページ</title>
 </head>
-<body onload="footerStart();firstscript();">
+<body onload="footerStart();firstscript(${scroll});">
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<br> <input type="button" value="ログアウト" onClick="logout()" />
@@ -93,7 +93,8 @@ page import="java.util.ArrayList"%>
 		onSubmit="return nidoosi()" name="textForm">
 		<input type="hidden" id="URL" value="/chat/groupMessage"> <input
 			type="hidden" name="toGroupNo"
-			value="${GroupMessageBean.getGroupNo()}"> <input type="text"
+			value="${GroupMessageBean.getGroupNo()}"><input type="hidden" name="scroll" id="scroll"
+			value=""> <input type="text"
 			name="sendMessage" oninput="inputText()" id="inText"
 			value="${setText}" size="50"> <input type="submit"
 			value="メッセージの送信">
