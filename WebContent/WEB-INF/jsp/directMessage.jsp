@@ -27,7 +27,7 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>個人チャットページ</title>
 </head>
-<body onload="footerStart();">
+<body onload="footerStart();" id="background">
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
