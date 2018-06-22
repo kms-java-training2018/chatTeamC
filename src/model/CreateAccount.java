@@ -58,7 +58,7 @@ public class CreateAccount {
 		}
 
 		//全ての結果からbooleanをセット
-		if ("".equals(newRb.getErrorMessage()) || "".equals(newRb.getProfileErrorMessage())) {
+		if (newRb.getErrorMessage() != null || newRb.getProfileErrorMessage() != null) {
 			newRb.setCheckJudge(checkJudge);
 		} else {
 			checkJudge = true;
@@ -122,7 +122,6 @@ public class CreateAccount {
 			sb.append(",'" + password + "'");
 			sb.append(",'" + userName + "'");
 			sb.append(",'" + profile + "'");
-			sb.append(",'" + userId + "'");
 			sb.append(", sysdate)");
 
 			// SQL実行してrsにセット

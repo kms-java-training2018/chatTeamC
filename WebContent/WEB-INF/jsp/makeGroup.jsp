@@ -30,7 +30,7 @@
 </head>
 <body>
 <body id="bgcolor"></body>
-<form action="/chat/makeGroup" method="POST">
+<form action="/chat/makeGroup" method="POST" onSubmit="return nidoosi()">
 	<table class="main" align="center">
 
 		<!-- 1段目 -->
@@ -87,7 +87,7 @@
 				</table>
 			<td>
 
-				<button type="submit" id="click" name="action" value="creat" class="temp1"
+				<button type="submit" name="action" value="creat" class="temp1"
 					>Create group</button>
 
 			</td>

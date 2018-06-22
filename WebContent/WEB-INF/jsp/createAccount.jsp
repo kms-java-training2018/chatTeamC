@@ -11,32 +11,39 @@
 
 
 
-<title>Login Page</title>
+<title>Create Account</title>
 </head>
 <body>
 	<div align="center">
 
 		<h1>Create Account</h1>
 
-		<form action="/chat/login" method="POST" class="login" action="foo">
-			<h2>Member ID</h2>
+		<form action="/chat/createAccountServlet" onSubmit="return nidoosi()" method="POST" class="login"
+			action="foo">
+			<h2>Member ID(20)</h2>
 			<input id="username" type="text" name="userId"
 				value="${loginBean.userId}">
-			<h2>Password</h2>
+			<h2>Password(20)</h2>
 			<input id="username" type="text" name="password"
 				value="${loginBean.userId}">
-				<h2>Username</h2>
+			<h2>Username(30)</h2>
 			<input id="username" type="text" name="userName"
 				value="${loginBean.userId}">
-				<h2>Profile(100)</h2>
+			<h2>Profile(100)</h2>
 			<input id="username" type="text" name="profile"
 				value="${loginBean.userId}">
 
 
 			<p>${loginError.errorMessage}</p>
+			<p>${loginError.profileErrorMessage}</p>
+			<p>${loginError.sqlErrorMessage}</p>
+			<p>${loginError.idErrorMessage}</p>
 
-			<input type="submit" value="Login">
+
+
+			 <input type="submit" value="Create" style="height: 27px; ">     <button type="button" onClick="location.href='./login';" style="height: 27px; ">Back</button>
 		</form>
+
 	</div>
 </body>
 </html>

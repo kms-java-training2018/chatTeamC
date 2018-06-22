@@ -130,10 +130,6 @@ public class CreatGroup {
 		//gbからGroupNameを
 		String groupName = gb.getGroupName();
 
-		//		//test
-		//		System.out.println("登録者のNo" + autherNo);
-		//		System.out.println("グループネーム" + groupName);
-
 		//DB接続
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
