@@ -18,7 +18,7 @@
 
 		<h1>Create Account</h1>
 
-		<form action="/chat/createAccountServlet" method="POST" class="login"
+		<form action="/chat/createAccountServlet" onSubmit="return nidoosi()" method="POST" class="login"
 			action="foo">
 			<h2>Member ID(20)</h2>
 			<input id="username" type="text" name="userId"
@@ -38,8 +38,10 @@
 			<p>${loginError.profileErrorMessage}</p>
 			<p>${loginError.sqlErrorMessage}</p>
 
-			<input type="submit" value="Create">
+
+			<button type="button" onclick="history.back()">戻る</button> <input type="submit" value="Create">
 		</form>
+
 	</div>
 </body>
 </html>
