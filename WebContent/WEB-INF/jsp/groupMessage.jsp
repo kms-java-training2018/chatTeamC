@@ -30,7 +30,7 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>グループチャットページ</title>
 </head>
-<body onload="footerStart();firstscript(${scroll});">
+<body onload="firstscript(${scroll});">
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<br> <input type="button" value="ログアウト" onClick="logout()" />
@@ -91,6 +91,8 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="toGroupNo"
 			value="${GroupMessageBean.getGroupNo()}"> <input
 			type="hidden" name="setMessage" id="setMes">
+			<input type="hidden" id="scroll" name="scroll"
+			value= "0">
 	</form>
 	<form action="/chat/groupMessage" method="post"
 		onSubmit="return nidoosi()" name="textForm">
