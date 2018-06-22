@@ -23,19 +23,19 @@ page import="java.util.ArrayList"%>
 <script type="text/javascript" src="JavaScript/Scrool.js"></script>
 <script type="text/javascript" src="JavaScript/button.js"></script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="css/Title.css">
+<link rel="stylesheet" href="css/MessageTitle.css">
 <link rel="stylesheet" href="css/Message.css">
 <title>個人チャットページ</title>
 </head>
-<body onload="firstscript(${scroll});" id="background">
+<body onload="footerStart();firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ ${session.userName}さん</p>
+		<p>ようこそ ${session.userName}aさん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
-		<h2>
+		<p>
 			<a
 				href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
 				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a>さんとの会話部屋
-		</h2>
+		</p>
 	</div>
 	<br>
 	<br>
@@ -92,12 +92,11 @@ page import="java.util.ArrayList"%>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
-		<input type="hidden" id="URL"
-			value="/chat/directMessage">
-			<input type="hidden" name="toUserNo"
+		<input type="hidden" id="URL" value="/chat/directMessage"> <input
+			type="hidden" name="toUserNo"
 			value="${messageCheckBean.getToUserNo()}"><input type="text"
 			name="sendMessage" size="50" oninput="inputText()" id="inText"
-			align="right" value="${setText}" > <input type="submit"
+			align="right" value="${setText}"> <input type="submit"
 			class="click" value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
