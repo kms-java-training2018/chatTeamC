@@ -90,8 +90,10 @@ page import="java.util.ArrayList"%>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
-		<input type="hidden" name="toUserNo"
-			value="${messageCheckBean.getToUserNo()}"> <input type="text"
+		<input type="hidden" id="URL"
+			value="/chat/directMessage">
+			<input type="hidden" name="toUserNo"
+			value="${messageCheckBean.getToUserNo()}"><input type="text"
 			name="sendMessage" size="50" oninput="inputText()" id="inText"
 			align="right" value="${setText}" > <input type="submit"
 			class="click" value="メッセージの送信">
