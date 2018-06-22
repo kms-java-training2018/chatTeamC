@@ -1,0 +1,147 @@
+@charset "UTF-8";
+
+/* タイトル */
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+
+h1 {
+	font-family: 'Amatic SC', cursive;
+	font-size: 50px;
+	background: url(http://webcreatorbox.com/sample/images/check.png)
+		repeat-x 0 25px;
+	display: inline-block;
+	padding: 0 10px
+}
+
+/* id・password */
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+
+p {
+	font-family: 'Amatic SC', cursive;
+	font-size: 30px;
+}
+
+p.error {
+	font-family: 'Amatic SC', cursive;
+	font-size: 15px;
+	color: #ff0000;
+}
+
+/* パスワード確認、表示 */
+form {
+	margin: 25px;
+}
+
+/* リンクの画像にカーソルを合わせると透過 */
+a:hover img {
+	opacity: 0.7;
+	filter: alpha(opacity = 80);
+}
+
+input.fontSize {
+	font-size: 150%;
+}
+
+button.temp1 {
+	width: 45%;
+	margin: 30px;
+	padding: 10px;
+	border: 2px dashed #F7F9CC;
+	background-color: #fec9bc;
+	font-family: 'Amatic SC', cursive;
+	font-size: 200%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #fec9bc;
+	cursor: pointer;
+}
+
+button.temp1:hover {
+	width: 65%;
+	margin: 30px;
+	padding: 10px;
+	border: 2px dashed #f8aba3;
+	background-color: #faff8e;
+	font-family: 'Amatic SC', cursive;
+	font-size: 250%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #faff8e;
+	cursor: pointer;
+}
+
+button.temp1:disabled {
+	width: 35%;
+	margin: 30px;
+	padding: 10px;
+	border: 2px dashed #F7F9CC;
+	background-color: #fec9bc;
+	font-family: 'Amatic SC', cursive;
+	font-size: 170%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #fec9bc;
+	cursor: pointer;
+}
+
+button.temp2 {
+	width: 35%;
+	margin: 23px;
+	padding: 10px;
+	border: 2px dashed #9d9d9d;
+	background-color: #c5fedd;
+	font-family: 'Amatic SC', cursive;
+	font-size: 180%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #c5fedd;
+	cursor: pointer;
+}
+
+button.temp2:hover {
+	width: 45%;
+	margin: 23px;
+	padding: 10px;
+	border: 2px dashed #a5fecb;
+	background-color: #aa9cfa;
+	font-family: 'Amatic SC', cursive;
+	font-size: 210%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #aa9cfa;
+	cursor: pointer;
+}
+
+button.temp2:disabled {
+	width: 35%;
+	margin: 23px;
+	padding: 10px;
+	border: 2px dashed #9d9d9d;
+	background-color: #c5fedd;
+	font-family: 'Amatic SC', cursive;
+	font-size: 170%;
+	font-weight:bold;
+	border-radius: 10px;
+	box-shadow: 0 0 0 7px #c5fedd;
+	cursor: pointer;
+}
+
+table.main {
+	border: 0;
+	align-content: center;
+	align-items: center;
+	width: 100%;
+	height: 60vh;
+	text-align: center;
+}
+
+table.main td {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+}
+
+table.main th {
+	text-align: center;
+	align-items: center;
+	align-content: center;
+}
