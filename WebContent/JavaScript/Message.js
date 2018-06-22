@@ -2,7 +2,6 @@ var gTimer = setTimeout(inputEnd, 10000);
 
 var one = false;
 
-
 function firstscript() {
 	var textFocus = document.getElementById('inText');
 	textFocus.focus();
