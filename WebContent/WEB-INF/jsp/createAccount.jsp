@@ -37,9 +37,11 @@
 			<p>${loginError.errorMessage}</p>
 			<p>${loginError.profileErrorMessage}</p>
 			<p>${loginError.sqlErrorMessage}</p>
+			<p>${loginError.idErrorMessage}</p>
 
 
-			<button type="button" onclick="history.back()">戻る</button> <input type="submit" value="Create">
+
+			 <input type="submit" value="Create" style="height: 27px; ">     <button type="button" onClick="location.href='./login';" style="height: 27px; ">Back</button>
 		</form>
 
 	</div>
