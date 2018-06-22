@@ -27,12 +27,12 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>個人チャットページ</title>
 </head>
-<body onload="footerStart();">
+<body onload="footerStart();firstscript();">
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
 		<h2>
-			 <a
+			<a
 				href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
 				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a>さんとの会話部屋
 		</h2>
@@ -51,7 +51,8 @@ page import="java.util.ArrayList"%>
 	<c:forEach var="list"
 		items="${messageCheckBean.getTalkContentBeanList()}"
 		varStatus="status">
-		<form action="/chat/deleteDirectMessage" method="GET" onSubmit="return nidoosi()">
+		<form action="/chat/deleteDirectMessage" method="GET"
+			onSubmit="return nidoosi()">
 			<table class="torkRange " style="width: 700px; position: relative;">
 				<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
@@ -77,22 +78,29 @@ page import="java.util.ArrayList"%>
 			<br>
 		</form>
 	</c:forEach>
-	<form action="/chat/directMessage" method="POST" onSubmit="return nidoosi()">
+	<form action="/chat/directMessage" method="POST"
+		onSubmit="return nidoosi()" name="myForm">
+		<input type="hidden" name="toUserNo"
+			value="${messageCheckBean.getToUserNo()}"> <input type="hidden"
+			name="setMessage" id="setMes">
+	</form>
+	<form action="/chat/directMessage" method="POST"
+		onSubmit="return nidoosi()" name="textForm">
 		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
-		<p id = "endMsg"></p>
 		<p>
 			<font size="5" color="red">${error}</font>
 		</p>
-
-		<input type="hidden" name="deleteMessageNo"
-			value="${list.getMessageNo()}"> <input type="hidden"
-			name="toUserNo" value="${messageCheckBean.getToUserNo()}"> <input
-			type="text" name="sendMessage" size="50" oninput="inputText()" id = "inText"
-			align="right"> <input type="submit" class="click"  value="メッセージの送信">
+		<input type="hidden" name="toUserNo"
+			value="${messageCheckBean.getToUserNo()}"> <input type="text"
+			name="sendMessage" size="50" oninput="inputText()" id="inText"
+			align="right" value="${setText}" > <input type="submit"
+			class="click" value="メッセージの送信">
 	</form>
 	<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
 		<input type="submit" value="メインメニューへ戻る">
 	</form>
+
+	<!--<p id="endMsg"></p>-->
 
 </body>
 </html>
