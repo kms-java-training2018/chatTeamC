@@ -87,53 +87,61 @@ public class GroupMessageServlet extends HttpServlet {
 		 * もしもセッションが無ければエラー
 		 * */
 		//入力チェックモデル
-		CheckCharacter checkChara = new CheckCharacter();
-		HttpSession session = req.getSession();
-		if (session.getAttribute("session") == null) {
-			req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+		if (req.getParameter("setMessage") != null && req.getParameter("Transmission") == null) {
+			// 入力中文字設定
+			String setMessage = new String(req.getParameter("setMessage").getBytes("ISO-8859-1"));
+			System.out.println(setMessage);
+			req.setAttribute("setText", setMessage);
+			doGet(req, res);
 		} else {
-			// 現在のセッションに入っているmessageCheckBean情報を受け取る
-			MessageCheckBean bean = new MessageCheckBean(); //= (MessageCheckBean) session.getAttribute("GroupBean");
-			String groupNoStr = ((GroupMessageBean) session.getAttribute("GroupMessageBean")).getGroupNo();
-			int groupNo = Integer.parseInt(groupNoStr);
-			bean.setToUserNo(groupNo);
-			MessageCheckSendModel model = new MessageCheckSendModel();
-			//現在のセッションに入っているloginBean情報を受け取る
-			LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
-			//メッセージ内容を取得
-			String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
-			/*
-			 * ○シングルクォーテーション表示用処理
-			 * シングルクォーテーションを表示させる為に、
-			 * 「'」⇒「''」に置換する。
-			 * */
-			sendMessage = checkChara.singleQuotation(sendMessage);
-			bean.setSendMessage(sendMessage);
-			//String sendMessage = bean.getSendMessage();
-
-			//入力チェックの返答
-			//空白処理
-			if (checkChara.spaceCheck(sendMessage) == false) {
-				req.setAttribute("error", "メッセージを入力してください");
-				doGet(req, res);
+			CheckCharacter checkChara = new CheckCharacter();
+			HttpSession session = req.getSession();
+			if (session.getAttribute("session") == null) {
+				req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 			} else {
-				//文字規格処理
-				boolean bytecheck = checkChara.stringSizeCheck(sendMessage, 100);
-				if (bytecheck == false) {
-					req.setAttribute("error", "文字数オーバーです");
+				// 現在のセッションに入っているmessageCheckBean情報を受け取る
+				MessageCheckBean bean = new MessageCheckBean(); //= (MessageCheckBean) session.getAttribute("GroupBean");
+				String groupNoStr = ((GroupMessageBean) session.getAttribute("GroupMessageBean")).getGroupNo();
+				int groupNo = Integer.parseInt(groupNoStr);
+				bean.setToUserNo(groupNo);
+				MessageCheckSendModel model = new MessageCheckSendModel();
+				//現在のセッションに入っているloginBean情報を受け取る
+				LoginBean loginBean = (LoginBean) session.getAttribute("loginBean");
+				//メッセージ内容を取得
+				String sendMessage = new String(req.getParameter("sendMessage").getBytes("ISO-8859-1"));
+				/*
+				 * ○シングルクォーテーション表示用処理
+				 * シングルクォーテーションを表示させる為に、
+				 * 「'」⇒「''」に置換する。
+				 * */
+				sendMessage = checkChara.singleQuotation(sendMessage);
+				bean.setSendMessage(sendMessage);
+				//String sendMessage = bean.getSendMessage();
+
+				//入力チェックの返答
+				//空白処理
+				if (checkChara.spaceCheck(sendMessage) == false) {
+					req.setAttribute("error", "メッセージを入力してください");
 					doGet(req, res);
 				} else {
-					// 会話情報の取得
-					try {
-						model.sendGroupMessage(bean, loginBean);
-						req.setAttribute("error", loginBean.getErrorMessage());
-						// 初期化
-						loginBean.setErrorMessage("");
-					} catch (Exception e) {
-						e.printStackTrace();
+					//文字規格処理
+					boolean bytecheck = checkChara.stringSizeCheck(sendMessage, 100);
+					if (bytecheck == false) {
+						req.setAttribute("error", "文字数オーバーです");
+						doGet(req, res);
+					} else {
+						// 会話情報の取得
+						try {
+							model.sendGroupMessage(bean, loginBean);
+							req.setAttribute("error", loginBean.getErrorMessage());
+							// 初期化
+							loginBean.setErrorMessage("");
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+						doGet(req, res);
+						//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 					}
-					doGet(req, res);
-					//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
 				}
 			}
 		}

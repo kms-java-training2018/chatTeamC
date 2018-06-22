@@ -43,7 +43,7 @@ function inputEnd() {
 	var f = document.forms["myForm"];
 
 	f.method = "POST"; // method(GET or POST)を設定する
-	f.action = "/chat/directMessage"; // action(遷移先URL)を設定する
+	f.action = document.getElementById("URL").value; // action(遷移先URL)を設定する
 	f.submit(); // submit する
 	return true;
 }
