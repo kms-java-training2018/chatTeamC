@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+/*タイトルの固定用*/
+#Lock {
+	padding: 5px 20px;
+	position: fixed;
+	background-color: #f6f6f6;
+	border:5px double #bebebe;
+	table-layout: fixed;
+	top: 0;
+    left: 0;;
+	margin-right: auto;
+	transform: translate(0%, 0%);
+	z-index: 1;
+}

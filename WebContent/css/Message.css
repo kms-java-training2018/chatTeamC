@@ -2,9 +2,9 @@
 
 /*背景色 */
 #background {
-	background-color: #c1ffbf;
+	background-color: #ebffdd;
 	color: #5947fe;
-	border: 5px double #c8f9c1;
+	border: 5px double #ebffdd;
 }
 
 /*話す対象相手の色を設定*/
@@ -24,7 +24,7 @@
 	margin-left: auto;
 	margin-right: auto;
 	border: "1";
-	width: "80%";
+	width: "80vh";
 	height: "60vh";
 	cellspacing: "0";
 	cellpadding: "3";
