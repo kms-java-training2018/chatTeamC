@@ -2,10 +2,32 @@ var gTimer = setTimeout(inputEnd, 10000);
 
 var one = false;
 
-function firstscript() {
-	var textFocus = document.getElementById('inText');
-	textFocus.focus();
-	textFocus.value=textFocus.value;
+function firstscript(setHeight) {
+
+	if (setHeight >= document.documentElement.scrollHeight - 606) {
+		var textFocus = document.getElementById('inText');
+		textFocus.focus();
+		textFocus.value = textFocus.value;
+	}
+	if (setHeight == null) {
+		var maxY = document.documentElement.scrollHeight;
+	} else {
+		var maxY = setHeight;
+	}
+	window.scroll(0, maxY);
+	//
+	// var textFocus = document.getElementById('inText');
+	// textFocus.focus();
+	// textFocus.value = textFocus.value;
+	// var maxY
+	// if (setHeight == null) {
+	// maxY = document.documentElement.scrollHeight;
+	// } else {
+	// maxY = setHeight;
+	// }
+	// window.scroll(0, maxY);
+
+	return true;
 }
 
 function inputText() {
@@ -36,7 +58,7 @@ function inputEnd() {
 	// 入力完了後のメッセージ入れ替え
 	// var wObj = document.getElementById("endMsg");
 	document.getElementById("setMes").value = document.getElementById("inText").value;
-	document.getElementById("scroll").innerHTML = "100";
+	document.getElementById("scroll").value = document.documentElement.scrollTop;
 	// wObj.innerHTML = document.getElementById("inText").value;
 	// wObj.className = 'defStyle endStyle';
 

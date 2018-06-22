@@ -1,8 +1,11 @@
 function footerStart(setHeight) {
-	if (setHeight != null) {
-		var maxY = document.documentElement.scrollHeight;
+
+	var maxY
+	if (setHeight == null) {
+		maxY = document.documentElement.scrollHeight;
 	} else {
-		var maxY = setHeight;
+		maxY = setHeight;
 	}
 	window.scroll(0, maxY);
+	return true;
 }

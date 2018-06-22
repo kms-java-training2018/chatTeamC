@@ -27,7 +27,7 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>個人チャットページ</title>
 </head>
-<body onload="footerStart();firstscript(${scroll});" id="background">
+<body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
@@ -83,6 +83,8 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="toUserNo"
 			value="${messageCheckBean.getToUserNo()}"> <input type="hidden"
 			name="setMessage" id="setMes">
+			<input type="hidden" id="scroll" name="scroll"
+			value= "0">
 	</form>
 	<form action="/chat/directMessage" method="POST"
 		onSubmit="return nidoosi()" name="textForm">
@@ -93,9 +95,7 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" id="URL"
 			value="/chat/directMessage">
 			<input type="hidden" name="toUserNo"
-			value="${messageCheckBean.getToUserNo()}">
-			<input type="hidden" id="scroll" name="scroll"
-			value="0"><input type="text"
+			value="${messageCheckBean.getToUserNo()}"><input type="text"
 			name="sendMessage" size="50" oninput="inputText()" id="inText"
 			align="right" value="${setText}" > <input type="submit"
 			class="click" value="メッセージの送信">
