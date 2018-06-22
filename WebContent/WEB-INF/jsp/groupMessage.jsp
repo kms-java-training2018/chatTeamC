@@ -32,11 +32,10 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="footerStart();">
 	<div id="Lock">
-	<p>ようこそ ${session.userName}さん</p>
-	<br>
-	<input type="button" value="ログアウト" onClick="logout()" />
+		<p>ようこそ ${session.userName}さん</p>
+		<br> <input type="button" value="ログアウト" onClick="logout()" />
 
-	<h2>${GroupMessageBean.getGroupName()}</h2>
+		<h2>${GroupMessageBean.getGroupName()}</h2>
 	</div>
 	<br>
 	<br>
@@ -57,24 +56,27 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET">
 			<table class="torkRange " style="width: 700px; position: relative;">
-			<c:if test="${list.getUserNo() == myLoginNo}">
-				<div align="right"><span class="myTork">${list.getUserName()}：${list.getMessage()}
-					<input type="button" value="削除"
-						onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
-				</span></div>
+				<c:if test="${list.getUserNo() == myLoginNo}">
+					<div align="right">
+						<span class="myTork">${list.getUserName()}：${list.getMessage()}
+							<input type="button" value="削除"
+							onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
+						</span>
+					</div>
 
-				<!-- 会話ログ表示 -->
-			</c:if>
-			<c:if test="${list.getUserNo() != myLoginNo}">
-				<c:if test="${list.getUserName() != '送信者不明'}">
-					<span class="opponentTork">
-					<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-						target=”_blank”> ${list.getUserName()}</a>
-					</span>
+					<!-- 会話ログ表示 -->
 				</c:if>
-				<c:if test="${list.getUserName() == '送信者不明'}">
+				<c:if test="${list.getUserNo() != myLoginNo}">
+					<span class="opponentTork"> <c:if
+							test="${list.getUserName() != '送信者不明'}">
+
+							<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+								target=”_blank”> ${list.getUserName()}</a>
+
+						</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
 						</c:if> ：${list.getMessage()}
+					</span>
 				</c:if>
 			</table>
 		</form>
