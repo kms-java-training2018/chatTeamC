@@ -91,6 +91,8 @@ page import="java.util.ArrayList"%>
 		<input type="hidden" name="toGroupNo"
 			value="${GroupMessageBean.getGroupNo()}"> <input
 			type="hidden" name="setMessage" id="setMes">
+			<input type="hidden" id="scroll" name="scroll"
+			value= "0">
 	</form>
 	<form action="/chat/groupMessage" method="post"
 		onSubmit="return nidoosi()" name="textForm">

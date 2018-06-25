@@ -89,6 +89,9 @@ public class GroupMessageServlet extends HttpServlet {
 		//入力チェックモデル
 		if (req.getParameter("setMessage") != null && req.getParameter("Transmission") == null) {
 			// 入力中文字設定
+			String scroll = req.getParameter("scroll");
+			req.setAttribute("scroll", scroll);
+			// 入力中文字設定
 			String setMessage = new String(req.getParameter("setMessage").getBytes("ISO-8859-1"));
 			System.out.println(setMessage);
 			req.setAttribute("setText", setMessage);
