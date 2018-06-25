@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import bean.GroupMessageBean;
 import bean.LoginBean;
@@ -16,6 +17,9 @@ import bean.TalkContentBean;
 public class GetTalkMessageModel {
 
 	public GroupMessageBean authentication(GroupMessageBean bean, LoginBean loginBean, String GroupNo) {
+
+		//Arraylist
+
 
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
@@ -47,6 +51,23 @@ public class GetTalkMessageModel {
 				bean.setGroupName(rs.getString("GROUP_NAME"));
 				bean.setRegistUserNo(rs.getString("REGIST_USER_NO"));
 			}
+			// 初期化
+			sb = new StringBuilder();
+			sb.append(" SELECT M_USER.USER_NAME ");
+			sb.append(" FROM T_GROUP_INFO inner join M_USER on T_GROUP_INFO.USER_NO = M_USER.USER_NO ");
+			sb.append(" WHERE T_GROUP_INFO.GROUP_NO = " + GroupNo);
+			sb.append(" AND T_GROUP_INFO.OUT_FLAG = 0 ");
+			sb.append(" AND T_GROUP_INFO.USER_NO != " + loginBean.getUserNo());
+
+			// SQL実行
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sb.toString());
+			ArrayList<String> setMenber = new ArrayList<String>();
+			while (rs.next()) {
+				setMenber.add(rs.getString("USER_NAME"));
+			}
+			// Beanに追加
+			bean.setMemberList(setMenber);
 
 			// 初期化
 			sb = new StringBuilder();
@@ -113,7 +134,8 @@ public class GetTalkMessageModel {
 			// 初期化
 			StringBuilder sb = new StringBuilder();
 			//SQL作成
-			sb.append("SELECT * FROM T_GROUP_INFO WHERE USER_NO = "+ loginBean.getUserNo() +" AND GROUP_NO = "+ GroupNo +" AND OUT_FLAG = 0");
+			sb.append("SELECT * FROM T_GROUP_INFO WHERE USER_NO = " + loginBean.getUserNo() + " AND GROUP_NO = "
+					+ GroupNo + " AND OUT_FLAG = 0");
 
 			// SQL実行
 			Statement stmt = conn.createStatement();

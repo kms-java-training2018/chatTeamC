@@ -23,7 +23,7 @@ public class GroupMessageBean {
 	private String sendMessage;
 
 	// メンバー一覧リスト
-	private ArrayList<String> memberList;
+	private ArrayList<String> memberList = new ArrayList<String>();
 
 
 	public String getRegistUserNo() {

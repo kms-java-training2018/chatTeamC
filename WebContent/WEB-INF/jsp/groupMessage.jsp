@@ -30,13 +30,19 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>グループチャットページ</title>
 </head>
-<body onload="firstscript(${scroll});" id ="background" >
+<body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ
-		<br>${session.userName}さん</p>
+		<p>
+			ようこそ <br>${session.userName}さん</p>
 		<input type="button" class='temp2' value="log Out" onClick="logout()" />
 
 		<h2>${GroupMessageBean.getGroupName()}</h2>
+		<p>メンバー一覧</p>
+		<c:forEach var="memberName"
+			items="${GroupMessageBean.getMemberList()}" varStatus="status">
+			${memberName}<br>
+
+		</c:forEach>
 	</div>
 	<br>
 	<br>
@@ -91,16 +97,15 @@ page import="java.util.ArrayList"%>
 		onSubmit="return nidoosi()" name="myForm">
 		<input type="hidden" name="toGroupNo"
 			value="${GroupMessageBean.getGroupNo()}"> <input
-			type="hidden" name="setMessage" id="setMes">
-			<input type="hidden" id="scroll" name="scroll"
-			value= "0">
+			type="hidden" name="setMessage" id="setMes"> <input
+			type="hidden" id="scroll" name="scroll" value="0">
 	</form>
 	<form action="/chat/groupMessage" method="post"
 		onSubmit="return nidoosi()" name="textForm">
 		<input type="hidden" id="URL" value="/chat/groupMessage"> <input
 			type="hidden" name="toGroupNo"
-			value="${GroupMessageBean.getGroupNo()}"><input type="hidden" name="scroll" id="scroll"
-			value=""> <input type="text"
+			value="${GroupMessageBean.getGroupNo()}"><input type="hidden"
+			name="scroll" id="scroll" value=""> <input type="text"
 			name="sendMessage" oninput="inputText()" id="inText"
 			value="${setText}" size="50"> <input type="submit"
 			value="メッセージの送信">
