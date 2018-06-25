@@ -24,13 +24,13 @@
 .torkRange {
 	margin-left: auto;
 	border: "1";
-	width: "80vh";
 	height: "60vh";
 	cellspacing: "0";
 	cellpadding: "3";
 	text-align: justify;
 	align-items: right;
-
+	width: 700px;
+	position: relative;
 }
 
 /*トークの周り*/

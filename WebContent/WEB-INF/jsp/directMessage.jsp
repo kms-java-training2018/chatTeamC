@@ -55,7 +55,7 @@ page import="java.util.ArrayList"%>
 		varStatus="status">
 		<form action="/chat/deleteDirectMessage" method="GET"
 			onSubmit="return nidoosi()">
-			<table class="torkRange " style="width: 700px; position: relative;">
+			<table class="torkRange ">
 				<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
