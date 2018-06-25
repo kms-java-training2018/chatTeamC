@@ -39,16 +39,6 @@ page import="java.util.ArrayList"%>
 			<br>との会話部屋
 		</p>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<!--<h2>メッセージ</h2>-->
 	<c:forEach var="list"
 		items="${messageCheckBean.getTalkContentBeanList()}"
@@ -86,22 +76,31 @@ page import="java.util.ArrayList"%>
 			type="hidden" name="setMessage" id="setMes"> <input
 			type="hidden" id="scroll" name="scroll" value="0">
 	</form>
-	<form action="/chat/directMessage" method="POST"
-		onSubmit="return nidoosi()" name="textForm">
-		<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
-		<p>
-			<font size="5" color="red">${error}</font>
-		</p>
-		<input type="hidden" id="URL" value="/chat/directMessage"> <input
-			type="hidden" name="toUserNo"
-			value="${messageCheckBean.getToUserNo()}"><input type="text"
-			name="sendMessage" size="50" oninput="inputText()" id="inText"
-			align="right" value="${setText}"> <input type="submit"
-			class="click" value="メッセージの送信">
-	</form>
-	<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
-		<input type="submit" value="メインメニューへ戻る">
-	</form>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="TalkSet">
+		<form action="/chat/directMessage" method="POST"
+			onSubmit="return nidoosi()" name="textForm">
+			<p>送りたいメッセージを書くのです！（｀・ω・´）</p>
+			<p>
+				<font size="5" color="red">${error}</font>
+			</p>
+			<input type="hidden" id="URL" value="/chat/directMessage"> <input
+				type="hidden" name="toUserNo"
+				value="${messageCheckBean.getToUserNo()}"><input type="text"
+				name="sendMessage" size="50" oninput="inputText()" id="inText"
+				align="right" value="${setText}"> <input type="submit"
+				class="click" value="メッセージの送信">
+		</form>
+		<form action="/chat/main" method="POST" onSubmit="return nidoosi()">
+			<input type="submit" value="メインメニューへ戻る">
+		</form>
+	</div>
 
 	<!--<p id="endMsg"></p>-->
 
