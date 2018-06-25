@@ -1,4 +1,5 @@
 @charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
 
 /*背景色 */
 #background {
@@ -22,7 +23,6 @@
 /*トーク範囲*/
 .torkRange {
 	margin-left: auto;
-	margin-right: auto;
 	border: "1";
 	width: "80vh";
 	height: "60vh";
@@ -37,7 +37,7 @@
 .myTork {
 	line-height: 270%;
 	padding: .5em .150em;
-	background-color: #bdfbf3;
+	background-color: #d2ffff;
 	border-style: solid;
 	border-width: 1px;
 	border-color: #00ffff;
@@ -47,10 +47,37 @@
 .opponentTork {
 	line-height: 270%;
 	padding: .5em .150em;
-	background-color: #fbca82;
+	background-color: #faff8e;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #ff8000;
+	border-color: #feba54;
 }
 
 
+input.temp2 {
+	width: 34%;
+	margin: 5px;
+	padding: 2px;
+	border: 2px dashed #9d9d9d;
+	background-color: #c5fedd;
+	font-family: 'Amatic SC', cursive;
+	font-size: 130%;
+	font-weight:bold;
+	border-radius: 2px;
+	box-shadow: 0 0 0 3px #c5fedd;
+	cursor: pointer;
+}
+
+input.temp2:hover {
+	width: 37%;
+	margin: 5px;
+	padding: 2px;
+	border: 2px dashed #a5fecb;
+	background-color: #aa9cfa;
+	font-family: 'Amatic SC', cursive;
+	font-size: 130%;
+	font-weight:bold;
+	border-radius: 2px;
+	box-shadow: 0 0 0 3px #aa9cfa;
+	cursor: pointer;
+}

@@ -2,10 +2,10 @@
 
 /*タイトルの固定用*/
 #Lock {
-	padding: 5px 20px;
+	padding: 1px 5px;
 	position: fixed;
-	background-color: #f6f6f6;
-	border:5px double #bebebe;
+	background-color: #fedaf8;
+	border:5px double #fe9cf7;
 	table-layout: fixed;
 	top: 0;
     left: 0;;
