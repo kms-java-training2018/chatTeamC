@@ -9,7 +9,10 @@
 	media="all">
 <script type="text/javascript" src="JQuery/jquery-3.3.1.min.js"></script>
 <script type="text/JavaScript" src="JavaScript/login.js" charset="UTF-8"></script>
+<script type="text/javascript" src="JavaScript/button.js"
+	charset="UTF-8">
 
+</script>
 
 
 <title>Create Account</title>
