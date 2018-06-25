@@ -77,7 +77,7 @@ page import="java.util.ArrayList"%>
 					</tr>
 				</c:if>
 			</table>
-			<br>
+			<br style="background-color: #000000;">
 		</form>
 	</c:forEach>
 	<form action="/chat/directMessage" method="POST"
