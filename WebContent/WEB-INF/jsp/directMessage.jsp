@@ -29,12 +29,14 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ ${session.userName}さん</p>
-		<input type="button" value="ログアウト" onClick="logout()" />
 		<p>
-			<a
+			ようこそ <br>${session.userName}さん</p>
+		<input type="button" class='temp2' value="log Out" onClick="logout()" />
+		<p>
+			<b> <a
 				href="/chat/showProfile?toUserNo=${messageCheckBean.getToUserNo()}"
-				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a>さんとの会話部屋
+				target=”_blank” class="Link">${messageCheckBean.getToUserName()}</a></b>さん
+			<br>との会話部屋
 		</p>
 	</div>
 	<br>
@@ -81,10 +83,9 @@ page import="java.util.ArrayList"%>
 	<form action="/chat/directMessage" method="POST"
 		onSubmit="return nidoosi()" name="myForm">
 		<input type="hidden" name="toUserNo"
-			value="${messageCheckBean.getToUserNo()}"> <input type="hidden"
-			name="setMessage" id="setMes">
-			<input type="hidden" id="scroll" name="scroll"
-			value= "0">
+			value="${messageCheckBean.getToUserNo()}"> <input
+			type="hidden" name="setMessage" id="setMes"> <input
+			type="hidden" id="scroll" name="scroll" value="0">
 	</form>
 	<form action="/chat/directMessage" method="POST"
 		onSubmit="return nidoosi()" name="textForm">
