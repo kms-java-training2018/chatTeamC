@@ -32,7 +32,9 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ</p><br>${session.userName}<br><p class='right'>さん</p>
+		<p>ようこそ</p>
+		<br>${session.userName}<br>
+		<p class='right'>さん</p>
 		<input type="button" class='temp2' value="log Out" onClick="logout()" />
 
 		<h2>${GroupMessageBean.getGroupName()}</h2>
@@ -43,16 +45,6 @@ page import="java.util.ArrayList"%>
 
 		</c:forEach>
 	</div>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
 	<!--<h2>メッセージ</h2>-->
 	<c:forEach var="list"
 		items="${GroupMessageBean.getTalkContentBeanList()}"
@@ -105,29 +97,29 @@ page import="java.util.ArrayList"%>
 	<br>
 	<br>
 	<div id="TalkSet">
-	<p>
-		<font size="5" color="red">${error}</font>
-	</p>
-	<form action="/chat/groupMessage" method="post"
-		onSubmit="return nidoosi()" name="textForm">
-		<input type="hidden" id="URL" value="/chat/groupMessage"> <input
-			type="hidden" name="toGroupNo"
-			value="${GroupMessageBean.getGroupNo()}"><input type="hidden"
-			name="scroll" id="scroll" value=""> <input type="text"
-			name="sendMessage" oninput="inputText()" id="inText"
-			value="${setText}" size="50"> <input type="submit"
-			value="メッセージの送信">
-	</form>
-	<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">
-		<form action="/chat/secessionGroupServlet" method="GET">
-			<input type="hidden" name="toGroupNo" value="${myLoginNo}"> <input
-				type="button" value="グループの脱退"
-				onclick="deleteUserMenber('${GroupMessageBean.getGroupNo()}')">
+		<p>
+			<font size="5" color="red">${error}</font>
+		</p>
+		<form action="/chat/groupMessage" method="post"
+			onSubmit="return nidoosi()" name="textForm">
+			<input type="hidden" id="URL" value="/chat/groupMessage"> <input
+				type="hidden" name="toGroupNo"
+				value="${GroupMessageBean.getGroupNo()}"><input
+				type="hidden" name="scroll" id="scroll" value=""> <input
+				type="text" name="sendMessage" oninput="inputText()" id="inText"
+				value="${setText}" size="50"> <input type="submit"
+				value="メッセージの送信">
 		</form>
-	</c:if>
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="メインメニューに戻る">
-	</form>
+		<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">
+			<form action="/chat/secessionGroupServlet" method="GET">
+				<input type="hidden" name="toGroupNo" value="${myLoginNo}">
+				<input type="button" value="グループの脱退"
+					onclick="deleteUserMenber('${GroupMessageBean.getGroupNo()}')">
+			</form>
+		</c:if>
+		<form action="/chat/main" method="POST">
+			<input type="submit" value="メインメニューに戻る">
+		</form>
 	</div>
 </body>
 </html>
