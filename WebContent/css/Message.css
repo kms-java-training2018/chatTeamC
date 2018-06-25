@@ -37,13 +37,15 @@ p.temp {
 	cellpadding: "3";
 	text-align: justify;
 	align-items: right;
-	border-color: #00ffff;
+	border-color: #ffffff;
+	background-color: #95a7f0;
 	border-style: solid;
 	border-width: 1px;
 	width: 800px;
 	position: relative;
 	word-break: break-all;
 }
+/*相手のトーク範囲*/
 .opponentTorkRange {
 	margin-left: auto;
 	border: "1";
@@ -52,7 +54,8 @@ p.temp {
 	cellpadding: "3";
 	text-align: justify;
 	align-items: right;
-	border-color: #fcc023;
+	border-color: #ffffff;
+	background-color: #fcd883;
 	border-style: solid;
 	border-width: 1px;
 	width: 800px;

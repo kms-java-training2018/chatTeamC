@@ -54,31 +54,34 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET"
 			onSubmit="return nidoosi()">
-			<table class="torkRange" style="width: 700px; position: relative;">
-				<c:if test="${list.getUserNo() == myLoginNo}">
+			<c:if test="${list.getUserNo() == myLoginNo}">
+				<table class="torkRange">
 					<tr align="right">
-						<td align="right"><span class="myTork">${list.getUserName()}：${list.getMessage()}
+						<td align="right" class="myTork">${list.getUserName()}：${list.getMessage()}
 								<input type="button" value="削除"
 								onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
-						</span></td>
+						</td>
 					</tr>
 
-					<!-- 会話ログ表示 -->
-				</c:if>
-				<c:if test="${list.getUserNo() != myLoginNo}">
+				</table>
+				<!-- 会話ログ表示 -->
+			</c:if>
+			<c:if test="${list.getUserNo() != myLoginNo}">
+
+				<table class="opponentTorkRange">
 					<tr>
-						<td><span class="opponentTork"> <c:if
-									test="${list.getUserName() != '送信者不明'}">
-									<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-										target=”_blank”> ${list.getUserName()}</a>
+						<td class="opponentTork"><c:if
+								test="${list.getUserName() != '送信者不明'}">
+								<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+									target=”_blank”> ${list.getUserName()}</a>
 
-								</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
+							</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
-						</c:if> ：${list.getMessage()}
-						</span></td>
+						</c:if> ：${list.getMessage()}</td>
 					</tr>
-				</c:if>
-			</table>
+
+				</table>
+			</c:if>
 		</form>
 	</c:forEach>
 
