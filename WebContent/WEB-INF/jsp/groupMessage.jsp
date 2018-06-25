@@ -32,7 +32,9 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ</p><br>${session.userName}<br><p class='right'>さん</p>
+		<p>ようこそ</p>
+		<br>${session.userName}<br>
+		<p class='right'>さん</p>
 		<input type="button" class='temp2' value="log Out" onClick="logout()" />
 
 		<h2>${GroupMessageBean.getGroupName()}</h2>
@@ -62,31 +64,34 @@ page import="java.util.ArrayList"%>
 					というように結果が出力  -->
 		<form action="/chat/groupMessage" method="GET"
 			onSubmit="return nidoosi()">
-			<table class="torkRange" style="width: 700px; position: relative;">
-				<c:if test="${list.getUserNo() == myLoginNo}">
+			<c:if test="${list.getUserNo() == myLoginNo}">
+				<table class="torkRange">
 					<tr align="right">
-						<td align="right"><span class="myTork">${list.getUserName()}：${list.getMessage()}
+						<td align="right" class="myTork">${list.getUserName()}：${list.getMessage()}
 								<input type="button" value="削除"
 								onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
-						</span></td>
+						</td>
 					</tr>
 
-					<!-- 会話ログ表示 -->
-				</c:if>
-				<c:if test="${list.getUserNo() != myLoginNo}">
+				</table>
+				<!-- 会話ログ表示 -->
+			</c:if>
+			<c:if test="${list.getUserNo() != myLoginNo}">
+
+				<table class="opponentTorkRange">
 					<tr>
-						<td><span class="opponentTork"> <c:if
-									test="${list.getUserName() != '送信者不明'}">
-									<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-										target=”_blank”> ${list.getUserName()}</a>
+						<td class="opponentTork"><c:if
+								test="${list.getUserName() != '送信者不明'}">
+								<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+									target=”_blank”> ${list.getUserName()}</a>
 
-								</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
+							</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
-						</c:if> ：${list.getMessage()}
-						</span></td>
+						</c:if> ：${list.getMessage()}</td>
 					</tr>
-				</c:if>
-			</table>
+
+				</table>
+			</c:if>
 		</form>
 	</c:forEach>
 
@@ -105,29 +110,29 @@ page import="java.util.ArrayList"%>
 	<br>
 	<br>
 	<div id="TalkSet">
-	<p>
-		<font size="5" color="red">${error}</font>
-	</p>
-	<form action="/chat/groupMessage" method="post"
-		onSubmit="return nidoosi()" name="textForm">
-		<input type="hidden" id="URL" value="/chat/groupMessage"> <input
-			type="hidden" name="toGroupNo"
-			value="${GroupMessageBean.getGroupNo()}"><input type="hidden"
-			name="scroll" id="scroll" value=""> <input type="text"
-			name="sendMessage" oninput="inputText()" id="inText"
-			value="${setText}" size="50"> <input type="submit"
-			value="メッセージの送信">
-	</form>
-	<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">
-		<form action="/chat/secessionGroupServlet" method="GET">
-			<input type="hidden" name="toGroupNo" value="${myLoginNo}"> <input
-				type="button" value="グループの脱退"
-				onclick="deleteUserMenber('${GroupMessageBean.getGroupNo()}')">
+		<p>
+			<font size="5" color="red">${error}</font>
+		</p>
+		<form action="/chat/groupMessage" method="post"
+			onSubmit="return nidoosi()" name="textForm">
+			<input type="hidden" id="URL" value="/chat/groupMessage"> <input
+				type="hidden" name="toGroupNo"
+				value="${GroupMessageBean.getGroupNo()}"><input
+				type="hidden" name="scroll" id="scroll" value=""> <input
+				type="text" name="sendMessage" oninput="inputText()" id="inText"
+				value="${setText}" size="50"> <input type="submit"
+				value="メッセージの送信">
 		</form>
-	</c:if>
-	<form action="/chat/main" method="POST">
-		<input type="submit" value="メインメニューに戻る">
-	</form>
+		<c:if test="${GroupMessageBean.getRegistUserNo() != myLoginNo}">
+			<form action="/chat/secessionGroupServlet" method="GET">
+				<input type="hidden" name="toGroupNo" value="${myLoginNo}">
+				<input type="button" value="グループの脱退"
+					onclick="deleteUserMenber('${GroupMessageBean.getGroupNo()}')">
+			</form>
+		</c:if>
+		<form action="/chat/main" method="POST">
+			<input type="submit" value="メインメニューに戻る">
+		</form>
 	</div>
 </body>
 </html>
