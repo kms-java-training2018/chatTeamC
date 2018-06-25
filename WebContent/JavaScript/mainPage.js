@@ -22,3 +22,15 @@ $(function() {
 		}
 	});
 });
+
+//var timeoutId = 500;
+//
+//window.addEventListener( "scroll", function () {
+//
+//	// スクロールを停止して500ms後に終了とする
+//	clearTimeout( timeoutId ) ;
+//
+//	timeoutId = setTimeout( function () {
+//		alert("とまるな");
+//	}, 500 ) ;
+//} ) ;
