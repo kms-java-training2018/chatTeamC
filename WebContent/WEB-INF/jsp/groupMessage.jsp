@@ -30,7 +30,7 @@ page import="java.util.ArrayList"%>
 <link rel="stylesheet" href="css/Message.css">
 <title>グループチャットページ</title>
 </head>
-<body onload="footerStart();firstscript(${scroll});">
+<body onload="firstscript(${scroll});" id ="background" >
 	<div id="Lock">
 		<p>ようこそ ${session.userName}さん</p>
 		<br> <input type="button" value="ログアウト" onClick="logout()" />
