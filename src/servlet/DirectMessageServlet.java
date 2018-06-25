@@ -59,14 +59,16 @@ public class DirectMessageServlet extends HttpServlet {
 				} else {
 					// 会話情報の取得
 					bean = model.getTalkContent(bean, loginBean);
-					// もしも相手の番号が無い場合はエラーを表示
-					if (toUserNo == 0) {
+					/*
+					 * 相手会員番号がDB内に存在するか確認
+					 * 存在しない場合0となり、エラー画面に遷移
+					 * */
+					if (bean.getCheckToUserNo() == 0) {
 						session.setAttribute("session", null);
 						message = "相手の番号が不明です。";
 						req.setAttribute("error", message);
 						req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 					} else {
-						//req.setAttribute("error", loginBean.getErrorMessage());
 						req.setAttribute("messageCheckBean", bean);
 						req.setAttribute("myLoginNo", myLogin);
 						session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存

@@ -113,7 +113,25 @@ public class MessageCheckSendModel {
 				bean.setTalkContentBeanList(talkContentBean);
 			}
 
-			//名前取得用
+			/*
+			 * ○相手会員番号存在チェック
+			 * 存在する場合は相手の会員番号を、
+			 * 存在しない場合は0を返す。
+			 * */
+			sb = new StringBuilder();
+			sb.append(" SELECT USER_NO ");
+			sb.append(" FROM M_USER ");
+			sb.append(" WHERE USER_NO = " + toUserNo);
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sb.toString());
+			while (rs.next()) {
+				bean.setCheckToUserNo(Integer.parseInt(rs.getString("USER_NO")));
+			}
+
+			/*
+			 * ○名前取得用
+			 * */
 			sb = new StringBuilder();
 			sb.append(" SELECT ");
 			sb.append(" MU.USER_NAME ");
