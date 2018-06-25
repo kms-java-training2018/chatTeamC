@@ -40,7 +40,7 @@
 			<th class="name">
 
 				<p>
-					Welcome! ${session.userName } さん <input type="button"
+					Welcome! ${session.userName } さん　　<input type="button" class='logout'
 						value="Log Out" align="right" onClick="logout()" />
 			</th>
 		</tr>

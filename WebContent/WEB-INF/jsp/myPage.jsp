@@ -18,7 +18,7 @@
 </head>
 <body id="background">
 	<div align="center" id="Lock">
-		<h2>ようこそ ${session.userName}さん</h2>
+		<h3>ようこそ<br> ${session.userName}さん</h3>
 		<input type="button" value="Logout" onClick="logout()">
 	</div>
 	<br>

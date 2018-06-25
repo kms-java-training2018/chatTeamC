@@ -104,6 +104,7 @@ button.temp1 {
 	background-color: #fec9bc;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #000000;
 	cursor: pointer;
 }
@@ -116,6 +117,7 @@ button.temp1:hover {
 	background-color: #faff8e;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #000000;
 	cursor: pointer;
 }
@@ -128,9 +130,11 @@ button.temp1:disabled {
 	background-color: #fefbba;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #d7fffd;
 	cursor: default;
 }
+
 button.temp2 {
 	width: 70%;
 	margin: 30px;
@@ -139,6 +143,7 @@ button.temp2 {
 	background-color: #aa9cfa;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #000000;
 	cursor: pointer;
 }
@@ -151,6 +156,7 @@ button.temp2:hover {
 	background-color: #e6e6e6;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #000000;
 	cursor: pointer;
 }
@@ -163,6 +169,33 @@ button.temp2:disabled {
 	background-color: #9d9d9d;
 	font-family: meiryo;
 	font-size: 120%;
+	border-radius: 5px;
 	color: #d7fffd;
 	cursor: default;
+}
+
+input.logout {
+	width: 25%;
+	margin: 1px;
+	padding: 1px;
+	border: double;
+	background-color: #e5ccff;
+	font-family: meiryo;
+	font-size: 80%;
+	border-radius: 5px;
+	color: #000000;
+	cursor: pointer;
+}
+
+input.logout:hover {
+	width: 25%;
+	margin: 1px;
+	padding: 1px;
+	border: double;
+	background-color: #c184ff;
+	font-family: meiryo;
+	font-size: 80%;
+	border-radius: 5px;
+	color: #000000;
+	cursor: pointer;
 }
