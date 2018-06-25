@@ -90,9 +90,7 @@ page import="java.util.ArrayList"%>
 			</table>
 		</form>
 	</c:forEach>
-	<p>
-		<font size="5" color="red">${error}</font>
-	</p>
+
 	<form action="/chat/groupMessage" method="POST"
 		onSubmit="return nidoosi()" name="myForm">
 		<input type="hidden" name="toGroupNo"
@@ -100,6 +98,17 @@ page import="java.util.ArrayList"%>
 			type="hidden" name="setMessage" id="setMes"> <input
 			type="hidden" id="scroll" name="scroll" value="0">
 	</form>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<div id="TalkSet">
+	<p>
+		<font size="5" color="red">${error}</font>
+	</p>
 	<form action="/chat/groupMessage" method="post"
 		onSubmit="return nidoosi()" name="textForm">
 		<input type="hidden" id="URL" value="/chat/groupMessage"> <input
@@ -120,5 +129,6 @@ page import="java.util.ArrayList"%>
 	<form action="/chat/main" method="POST">
 		<input type="submit" value="メインメニューに戻る">
 	</form>
+	</div>
 </body>
 </html>
