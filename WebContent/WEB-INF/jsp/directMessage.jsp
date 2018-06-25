@@ -29,7 +29,7 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>ようこそ ${session.userName}aさん</p>
+		<p>ようこそ ${session.userName}さん</p>
 		<input type="button" value="ログアウト" onClick="logout()" />
 		<p>
 			<a
