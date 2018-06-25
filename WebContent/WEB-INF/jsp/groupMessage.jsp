@@ -32,8 +32,7 @@ page import="java.util.ArrayList"%>
 </head>
 <body onload="firstscript(${scroll});" id="background">
 	<div id="Lock">
-		<p>
-			ようこそ <br>${session.userName}さん</p>
+		<p>ようこそ</p><br>${session.userName}<br><p class='right'>さん</p>
 		<input type="button" class='temp2' value="log Out" onClick="logout()" />
 
 		<h2>${GroupMessageBean.getGroupName()}</h2>
