@@ -56,21 +56,22 @@ public class DirectMessageServlet extends HttpServlet {
 					message = "不正なアクセスです。";
 					req.setAttribute("error", message);
 					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
-				}
-				// 会話情報の取得
-				bean = model.getTalkContent(bean, loginBean);
-				// もしも相手の番号が無い場合はエラーを表示
-				if (toUserNo == 0) {
-					session.setAttribute("session", null);
-					message = "相手の番号が不明です。";
-					req.setAttribute("error", message);
-					req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
 				} else {
-					//req.setAttribute("error", loginBean.getErrorMessage());
-					req.setAttribute("messageCheckBean", bean);
-					req.setAttribute("myLoginNo", myLogin);
-					session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
-					req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+					// 会話情報の取得
+					bean = model.getTalkContent(bean, loginBean);
+					// もしも相手の番号が無い場合はエラーを表示
+					if (toUserNo == 0) {
+						session.setAttribute("session", null);
+						message = "相手の番号が不明です。";
+						req.setAttribute("error", message);
+						req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+					} else {
+						//req.setAttribute("error", loginBean.getErrorMessage());
+						req.setAttribute("messageCheckBean", bean);
+						req.setAttribute("myLoginNo", myLogin);
+						session.setAttribute("messageCheckBean", bean); //セッション内へ自分と相手の情報を保存
+						req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+					}
 				}
 			} catch (Exception e) {
 				session.setAttribute("session", null);
@@ -81,6 +82,7 @@ public class DirectMessageServlet extends HttpServlet {
 			}
 		}
 	}
+
 	/**
 	 * ○メッセージ送信処理
 	 *
