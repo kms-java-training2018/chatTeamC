@@ -46,28 +46,31 @@ page import="java.util.ArrayList"%>
 		varStatus="status">
 		<form action="/chat/deleteDirectMessage" method="GET"
 			onSubmit="return nidoosi()">
-			<table class="torkRange ">
-				<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
+			<!-- 名前にその人のプロフィールに飛ぶリンクを付ける
 					名前（リンク：会員No）：会話情報
 					というように結果が出力  -->
-				<c:if test="${list.getUserNo() == myLoginNo}">
+			<c:if test="${list.getUserNo() == myLoginNo}">
+				<table class="torkRange ">
 					<tr align="right">
-						<td align="right"><span class="myTork">${list.getUserName()}：${list.getMessage()}<input
-								type="button" value="削除"
-								onClick="deleteMessage('${list.getMessageNo()}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
-						</span></td>
+						<td align="right" class="myTork">${list.getUserName()}：${list.getMessage()}<input
+							type="button" value="削除"
+							onClick="deleteMessage('${list.getMessageNo()}','toUserNo=${messageCheckBean.getToUserNo()}','deleteDirectMessage')" />
+						</td>
 					</tr>
-				</c:if>
-				<c:if test="${list.getUserNo() != myLoginNo}">
+				</table>
+			</c:if>
+			<c:if test="${list.getUserNo() != myLoginNo}">
+
+				<table class="opponentTorkRange ">
 					<tr>
-						<td><span class="opponentTork"> <a
-								href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-								target=”_blank” class="Link">${list.getUserName()} </a>
-								：${list.getMessage()}
-						</span></td>
+						<td class="opponentTork"><a
+							href="/chat/showProfile?toUserNo=${list.getUserNo()}"
+							target=”_blank” class="Link">${list.getUserName()} </a>
+							：${list.getMessage()}</td>
 					</tr>
-				</c:if>
-			</table>
+
+				</table>
+			</c:if>
 		</form>
 	</c:forEach>
 	<form action="/chat/directMessage" method="POST"

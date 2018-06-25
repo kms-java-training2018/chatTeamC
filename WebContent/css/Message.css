@@ -37,7 +37,22 @@ p.temp {
 	cellpadding: "3";
 	text-align: justify;
 	align-items: right;
-	border-color: #b2b2b2;
+	border-color: #00ffff;
+	border-style: solid;
+	border-width: 1px;
+	width: 800px;
+	position: relative;
+	word-break: break-all;
+}
+.opponentTorkRange {
+	margin-left: auto;
+	border: "1";
+	height: "60vh";
+	cellspacing: "0";
+	cellpadding: "3";
+	text-align: justify;
+	align-items: right;
+	border-color: #fcc023;
 	border-style: solid;
 	border-width: 1px;
 	width: 800px;
