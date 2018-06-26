@@ -32,6 +32,7 @@ public class DeleteGroupMessageServlet extends HttpServlet {
 		// 会話情報の取得
 		try {
 			model.deleteMessage(loginBean, deleteMessageNo);
+			req.setAttribute("error", "メッセージを削除しました");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

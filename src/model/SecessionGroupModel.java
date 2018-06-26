@@ -27,8 +27,8 @@ public class SecessionGroupModel {
 		try {
 			conn = DriverManager.getConnection(url, user, dbPassword);
 
-			System.out.println(bean.getUserNo());
-			System.out.println(groupNo);
+			System.out.println("ユーザーナンバー:" + bean.getUserNo());
+			System.out.println("グループナンバー:" + groupNo);
 
 			// SQL作成
 			sb.append(" UPDATE ");
@@ -41,7 +41,7 @@ public class SecessionGroupModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			int num = stmt.executeUpdate(sb.toString());
-			System.out.println(num);
+			System.out.println("更新数:" + num);
 			// 脱退の成否を確認
 			if (num == 0) {
 				bean.setErrorMessage("グループを脱退出来ませんでした");

@@ -1,9 +1,28 @@
 @charset "UTF-8";
+@font-face {
+  font-family: Amatic SC;
+  src: url('../font/AmaticSC-Regular.ttf') format("truetype");
+}
+
+/*背景色 */
+#background {
+	background-color: #ebffdd;
+	color: #5947fe;
+	border: 5px double #ebffdd;
+}
 
 /*話す対象相手の色を設定*/
 .Link {
 	text-decoration: none;
 	color: #0000ff;
+}
+
+/* 右寄 */
+p.right {
+	text-align: right;
+}
+p.temp {
+	color: black;
 }
 
 /*ボタンホバー時リンクの色を変更*/
@@ -15,31 +34,83 @@
 /*トーク範囲*/
 .torkRange {
 	margin-left: auto;
-	margin-right: auto;
 	border: "1";
-	width: "80%";
 	height: "60vh";
 	cellspacing: "0";
 	cellpadding: "3";
 	text-align: justify;
+	align-items: right;
+	border-color: #ffffff;
+	background-color: #95a7f0;
+	border-style: solid;
+	border-width: 1px;
+	width: 800px;
+	position: relative;
+	word-break: break-all;
+}
+/*相手のトーク範囲*/
+.opponentTorkRange {
+	margin-left: auto;
+	border: "1";
+	height: "60vh";
+	cellspacing: "0";
+	cellpadding: "3";
+	text-align: justify;
+	align-items: right;
+	border-color: #ffffff;
+	background-color: #fcd883;
+	border-style: solid;
+	border-width: 1px;
+	width: 800px;
+	position: relative;
+	word-break: break-all;
 }
 
 /*トークの周り*/
 .myTork {
-	padding: .5em .75em;
-	background-color: #ddffff;
+	line-height: 270%;
+	padding: .5em .150em;
+	background-color: #d2ffff;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #43fefe;
+	border-color: #00ffff;
 }
 
-
+/*相手のトークの周り*/
 .opponentTork {
-	padding: .5em .75em;
-	background-color: #ffdeff;
+	line-height: 270%;
+	padding: .5em .150em;
+	background-color: #fefbc2;
 	border-style: solid;
 	border-width: 1px;
-	border-color: #fe43fe;
+	border-color: #fcd883;
 }
 
 
+input.temp2 {
+	width: 80px;
+	margin: 5px;
+	padding: 2px;
+	border: 2px dashed #9d9d9d;
+	background-color: #c5fedd;
+	font-family: 'Amatic SC', cursive;
+	font-size: 130%;
+	font-weight:bold;
+	border-radius: 2px;
+	box-shadow: 0 0 0 3px #c5fedd;
+	cursor: pointer;
+}
+
+input.temp2:hover {
+	width: 90px;
+	margin: 5px;
+	padding: 2px;
+	border: 2px dashed #a5fecb;
+	background-color: #aa9cfa;
+	font-family: 'Amatic SC', cursive;
+	font-size: 130%;
+	font-weight:bold;
+	border-radius: 2px;
+	box-shadow: 0 0 0 3px #aa9cfa;
+	cursor: pointer;
+}

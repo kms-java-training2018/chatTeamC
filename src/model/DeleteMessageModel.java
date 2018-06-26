@@ -41,7 +41,7 @@ public class DeleteMessageModel {
 			int rs = stmt.executeUpdate(sb.toString());
 			//メッセージ削除の結果の出力内容を設定。
 			if (rs == 0) {
-				bean.setErrorMessage("メッセージを削除できませんでした…");
+				bean.setErrorMessage("メッセージを削除できませんでした");
 			} else {
 				bean.setErrorMessage("メッセージを削除しました");
 			}

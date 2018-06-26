@@ -22,6 +22,17 @@ public class MessageCheckBean {
 	// 消したい会話情報番号
 	private int deleteMessageNo;
 
+	// 相手会員番号存在チェック
+	private int checkToUserNo;
+
+	public int getCheckToUserNo() {
+		return checkToUserNo;
+	}
+
+	public void setCheckToUserNo(int checkToUserNo) {
+		this.checkToUserNo = checkToUserNo;
+	}
+
 	/**
 	 * 現在セットされている相手の会員番号を返す
 	 */

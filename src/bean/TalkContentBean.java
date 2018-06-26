@@ -5,6 +5,15 @@ public class TalkContentBean {
 	String message;
 	String userNo;
 	String messageNo;
+	String indicateMember;
+
+	public String getIndicateMember() {
+		return indicateMember;
+	}
+
+	public void setIndicateMember(String indicateMember) {
+		this.indicateMember = indicateMember;
+	}
 
 	/**
 	 * @return

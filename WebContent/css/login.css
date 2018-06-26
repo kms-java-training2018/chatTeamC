@@ -1,25 +1,72 @@
 @charset "UTF-8";
 
 /* タイトル */
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+@font-face {
+  font-family: Amatic SC;
+  src: url('../font/AmaticSC-Regular.ttf') format("truetype");
+}
 
 h1 {
 	font-family: 'Amatic SC', cursive;
-	font-size: 50px;
-	background: url(http://webcreatorbox.com/sample/images/check.png)
-		repeat-x 0 25px;
+	font-size: 60px;
+	background-image: url("../img/check.png");
+	background-repeat:repeat-x;
+	background-position: 0 25px;
 	display: inline-block;
 	padding: 0 10px
 }
 
 /* id・password */
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+@font-face {
+  font-family: Amatic SC;
+  src: url('../font/AmaticSC-Regular.ttf') format("truetype");
+}
 
 h2 {
 	font-family: 'Amatic SC', cursive;
-	font-size: 25px;
+	font-size: 35px;
 }
 
-
 /* パスワード確認、表示 */
-form{margin:25px;}
+form {
+	margin: 35px;
+}
+
+input.fontSize {
+	font-size: 150%;
+}
+
+/* リンクの画像にカーソルを合わせると透過 */
+a:hover img {
+	opacity: 0.7;
+	filter: alpha(opacity = 80);
+}
+
+input.temp1 {
+	width: 23%;
+	margin: 10px;
+	padding: 0.3em 1em;
+	border: solid 2px #FFE267;
+	background-color: #FFE267;
+	font-family: 'Amatic SC', cursive;
+	font-size: 150%;
+	color: black;
+	font-weight: bold; border-radius : 2px;
+	cursor: pointer;
+	display: inline-block;
+	border-radius: 2px;
+}
+
+input.temp1:hover {
+	display: inline-block;
+	width: 30%;
+	margin: 10px;
+	padding: 0.3em 1em;
+	border: solid 2px #FFE267;
+	background-color: #ffffb7;
+	font-family: 'Amatic SC', cursive;
+	font-size: 170%;
+	font-weight: bold;
+	border-radius: 2px;
+	cursor: pointer;
+}

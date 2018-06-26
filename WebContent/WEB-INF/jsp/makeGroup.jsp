@@ -26,22 +26,21 @@
 <link rel="stylesheet" href="css/MakeGroup.css">
 <!-- <link rel="stylesheet" href="css/base.css"> -->
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Create Group</title>
 </head>
-<body>
-<body id="bgcolor"></body>
-<form action="/chat/makeGroup" method="POST">
+<body class="bgcolor1">
+<form action="/chat/makeGroup" method="POST" onSubmit="return nidoosi()">
 	<table class="main" align="center">
 
 		<!-- 1段目 -->
 		<tr>
 			<th class="title" colspan="2">
-				<p>Creat Group Page</p>
+				<p>Create Group Page</p>
 			</th>
 			<th class="name">
 
 				<p>
-					Welcome! ${session.userName } さん <input type="button"
+					Welcome! ${session.userName } さん　　<input type="button" class='logout'
 						value="Log Out" align="right" onClick="logout()" />
 			</th>
 		</tr>
@@ -51,7 +50,7 @@
 			<td colspan="3" align="center">
 
 				<p>Group Name</p> <input type="text" name="groupName"
-				class="fontSize" value='' maxlength="30">
+				class="fontSize" value=''>
 				<p>
 					<font size="5" color="red">${error}</font>
 				</p>
@@ -87,14 +86,14 @@
 				</table>
 			<td>
 
-				<button type="submit" id="click" name="action" value="creat" class="temp1"
+				<button type="submit" name="action" value="creat" class="temp1"
 					>Create group</button>
 
 			</td>
 		</tr>
 		<tr>
 			<td><button type="submit" name="backMain" value="main"
-					class="temp1">Return to Main
+					class="temp2">Return to Main
 					Page</button></td>
 		</tr>
 	</table>

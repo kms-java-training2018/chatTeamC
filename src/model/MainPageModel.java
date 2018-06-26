@@ -145,7 +145,6 @@ public class MainPageModel {
 			sb.append(" FROM ");
 			sb.append(" T_GROUP_INFO TG ");
 			sb.append(" , M_GROUP MG ");
-			sb.append(" , T_MESSAGE_INFO TM ");
 			sb.append(" WHERE ");
 			sb.append(" TG.GROUP_NO = MG.GROUP_NO ");
 			sb.append(" AND TG.USER_NO = " + loginBean.getUserNo());
@@ -159,7 +158,6 @@ public class MainPageModel {
 			// 項目の追加
 			while (rs.next()) {
 				// Listの初期化
-
 				// Listに追加
 				name.add(rs.getString("GROUP_NAME"));
 				number.add(rs.getString("GROUP_NO"));

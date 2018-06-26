@@ -9,6 +9,8 @@
 	width: 380px;
 	cellspacing: "0";
 	cellpadding: "3";
+	table-layout: fixed;
+	word-break: break-all;
 }
 
 .titleBack{
@@ -16,5 +18,6 @@
 }
 
 .nameBack{
-	background-color:#f7fafd
+	cellpadding: "1";
+	background-color:#f7fafd;
 }

@@ -71,28 +71,4 @@ public class LoginModel {
 
 		return bean;
 	}
-
-	//	// 入力値のチェック
-	//	public boolean stringLengthCheck(String input, int max) {
-	//		// 何バイト分の長さであるかを取得
-	//		int length = input.getBytes().length;
-	//		if ((int) length > max) { // 最大文字数よりも多かった場合
-	//			return false;
-	//		}
-	//		return true; // 許容内であった場合
-	//	}
-	//
-	//	// 半角チェック
-	//	public boolean halfSizeCheck(String input) {
-	//		boolean result =  true;
-	//
-	//	    if ( !(input == null) || !(input.length() == 0) ) {
-	//		    int len = input.length();
-	//		    byte[] bytes = input.getBytes();
-	//		    if ( len == bytes.length ) {
-	//		    	result = false;
-	//		    }
-	//	    }
-	//	    return result;
-	//	}
 }

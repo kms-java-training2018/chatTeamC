@@ -43,14 +43,19 @@ public class LoginServlet extends HttpServlet {
 		String userId = (String) req.getParameter("userId");
 		String password = (String) req.getParameter("password");
 
-		boolean result = checkChara.halfSizeCheck(password);
-		boolean judgeByte = checkChara.stringLengthCheck(password, 20);
+
+		//文字入力チェック
+		boolean passResult = checkChara.halfSizeCheck(password);
+		boolean passJudgeByte = checkChara.stringSizeCheck(password, 20);
+
+		boolean idResult = checkChara.halfSizeCheck(userId);
+		boolean idJudgeByte = checkChara.stringSizeCheck(userId, 20);
 
 		try {
-			if (result == false) {
+			if (passResult == false || idResult == false) {
 				bean.setErrorMessage("半角で入力してください");
-			} else if (judgeByte == false) {
-				bean.setErrorMessage("20文字は受け付けません");
+			} else if (passJudgeByte == false || idJudgeByte == false) {
+				bean.setErrorMessage("21文字以上は受け付けません");
 
 			} else {
 				bean.setUserId(userId);
@@ -62,6 +67,7 @@ public class LoginServlet extends HttpServlet {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+			bean.setErrorMessage("情報を取得できませんでした。");
 		}
 
 		// 取得に成功した場合セッション情報をセット

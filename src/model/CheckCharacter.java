@@ -3,12 +3,24 @@ package model;
 public class CheckCharacter {
 
 	/**
-	 * 文字数チェック
+	 * ○シングルクォーテーション表示
+	 * 文字列中のシングルクォーテーションを表示させる為に
+	 * 文字列中のシングルクォーテーションを2つに置換する。
+	 * @param input 置換元の文字列
+	 * @return result 置換後の文字列
+	 */
+	public String singleQuotation(String input) {
+		String result = input.replaceAll("'", "''");
+		return result;
+	}
+
+	/**
+	 * ○サイズチェック
 	 * @param input 文字数チェックにかける文字列
 	 * @param i 指定文字サイズ(byte)
-	 * @return judgeByte 正否
+	 * @return judgeByte 正否falseの場合、サイズオーバー。trueの場合、規定値内。
 	 */
-	public boolean stringLengthCheck(String input, int i) {
+	public boolean stringSizeCheck(String input, int i) {
 
 		//結果変数
 		boolean judgeByte;
@@ -27,9 +39,33 @@ public class CheckCharacter {
 	}
 
 	/**
-	 * 半角チェック
+	 * ○文字数チェック
+	 * @param input 文字数チェックにかける文字列
+	 * @param i 指定文字サイズ(文字数)
+	 * @return judgeSize 正否falseの場合、文字数オーバー。trueの場合、規定値内。
+	 */
+	public boolean stringLengthCheck(String input, int i) {
+
+		//結果変数
+		boolean judgeSize;
+
+		//指定文字数
+		int max;
+
+		// 文字数の長さを取得
+		int length = input.toCharArray().length;
+		// 最大文字数の設定
+		max = i;
+
+		judgeSize = (length <= max);
+
+		return judgeSize;
+	}
+
+	/**
+	 * ○半角チェック
 	 * @param input チェックにかける文字列
-	 * @return result 正否
+	 * @return result 正否falseの場合、全角あり。trueの場合、半角のみ。
 	 */
 	public boolean halfSizeCheck(String input) {
 		//結果変数
@@ -44,7 +80,7 @@ public class CheckCharacter {
 	}
 
 	/**
-	 * 空白チェック
+	 * ○空白チェック
 	 * @param input チェックにかける文字
 	 * @return result falseの場合、strが空白のみ。trueの場合、値がある。
 	 */

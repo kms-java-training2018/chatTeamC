@@ -130,10 +130,6 @@ public class CreatGroup {
 		//gbからGroupNameを
 		String groupName = gb.getGroupName();
 
-		//		//test
-		//		System.out.println("登録者のNo" + autherNo);
-		//		System.out.println("グループネーム" + groupName);
-
 		//DB接続
 		Connection conn = null;
 		String url = "jdbc:oracle:thin:@192.168.51.67";
@@ -280,7 +276,7 @@ public class CreatGroup {
 			//受け取ったStringリストからを登録者Listに設定
 			String[] memberNo = gb.getSelectMemberList();
 			if (memberNo == null) {
-				resistJudge = false;
+
 			} else {
 
 				ArrayList<String> resistNo = new ArrayList<String>();

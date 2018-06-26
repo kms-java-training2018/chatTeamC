@@ -35,6 +35,7 @@
 /*タイトルのマス目の色*/
 .userTitle {
 	background-color: #f4ffff;
+	white-space: nowrap;
 }
 
 /*メニューのレイアウト*/
@@ -46,6 +47,7 @@
 	height: "60vh";
 	cellpadding: "3";
 	table-layout: fixed;
+	word-break: break-all;
 }
 
 /*タイトルのレイアウト*/
@@ -90,12 +92,15 @@
 /*内部の色*/
 .tableColor{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 #personalMessage{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 #groupMessage{
 	background-color: #ffffff;
+	word-break:break-all;
 }
 
 /*背景*/
@@ -103,6 +108,6 @@
 	margin-right: auto;
 	text-align: center;
 	cellpadding: "3";
-	background-color: #fff7fe;
-	border: 5px double #ffecfc;
+	background-color: #fffedf;
+	border: 5px double #dbfcb6;
 }

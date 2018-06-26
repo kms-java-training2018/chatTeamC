@@ -20,16 +20,20 @@
 
 		<form action="/chat/login" method="POST" class="login" action="foo">
 			<h2>Member ID</h2>
-			<input id="username" type="text" name="userId"
+			<input id="username" type="text" name="userId" class='fontSize'
 				value="${loginBean.userId}">
 			<h2>Password</h2>
-			<input id="password" type="password" name="password"
+			<input id="password" type="password" name="password" class='fontSize'
 				value="${loginBean.password}"> <br> <input id="show-ps"
 				type="checkbox" onclick="connecttext(this.checked);" /><label
 				for="show-ps">Show password</label> <br>
 			<p>${loginError.errorMessage}</p>
 
-			<input type="submit" value="Login">
+			<input type="submit" value="Login" class='temp1'> <br>
+			<br>
+			<br> <a href="/chat/createAccountServlet"><img
+				src="img/create a new account link.png"
+				style="width: 379px; height: 57px"></a>
 		</form>
 	</div>
 </body>

@@ -21,7 +21,7 @@ import bean.TalkContentBean;
  * ○sendMessage
  * 　入力した内容をデータベースに追加する。
  *
- * ○stringLengthCheck
+ * ○stringSizeCheck
  * メッセージを受け取り、そのサイズが200バイトを
  * 超えるかどうかを判断する。
  * */
@@ -113,7 +113,25 @@ public class MessageCheckSendModel {
 				bean.setTalkContentBeanList(talkContentBean);
 			}
 
-			//名前取得用
+			/*
+			 * ○相手会員番号存在チェック
+			 * 存在する場合は相手の会員番号を、
+			 * 存在しない場合は0を返す。
+			 * */
+			sb = new StringBuilder();
+			sb.append(" SELECT USER_NO ");
+			sb.append(" FROM M_USER ");
+			sb.append(" WHERE USER_NO = " + toUserNo);
+
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sb.toString());
+			while (rs.next()) {
+				bean.setCheckToUserNo(Integer.parseInt(rs.getString("USER_NO")));
+			}
+
+			/*
+			 * ○名前取得用
+			 * */
 			sb = new StringBuilder();
 			sb.append(" SELECT ");
 			sb.append(" MU.USER_NAME ");
@@ -159,6 +177,7 @@ public class MessageCheckSendModel {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 		} catch (ClassNotFoundException e) {
 			// 入れなかった場合
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 		}
 		// 接続作成
@@ -199,12 +218,13 @@ public class MessageCheckSendModel {
 			// SQL実行
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate(sb.toString());
+			bean.setSendMessage("");
 			//メッセージ内容がNULL(0)のとき、このExceptionに投げる。
 		} catch (SQLIntegrityConstraintViolationException e) {
-			loginBean.setErrorMessage("メッセージを入力してください。");
+			loginBean.setErrorMessage("メッセージを入力してください");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
@@ -282,10 +302,10 @@ public class MessageCheckSendModel {
 			stmt.executeUpdate(sb.toString());
 			loginBean.setErrorMessage("");
 		} catch (SQLIntegrityConstraintViolationException e) {
-			loginBean.setErrorMessage("メッセージを入力してください。");
+			loginBean.setErrorMessage("メッセージを入力してください");
 			e.printStackTrace();
 		} catch (SQLException e) {
-			loginBean.setErrorMessage("メッセージを送信できませんでした……。");
+			loginBean.setErrorMessage("メッセージを送信できませんでした");
 			e.printStackTrace();
 			// sqlの接続は絶対に切断
 		} finally {
@@ -296,31 +316,5 @@ public class MessageCheckSendModel {
 			}
 		}
 		return bean;
-	}
-
-	/**
-	 * ○stringLengthCheck
-	 * メッセージを受け取り、そのサイズが300バイトを
-	 * 超えるかどうかを判断する。
-	 * （文字数はテキストボックスの最大文字数の設定で100字以内に設定）
-	 * @param input　メッセージを取得
-	 * @return　指定バイト数以内の場合0、
-	 * 指定バイト数を超えたら1を返す。
-	 */
-	public int stringLengthCheck(String input) {
-		//返すメッセージを設定
-		int judgeByte = 0;
-
-		// 何バイト分の長さであるかを取得
-		int length = input.getBytes().length;
-		System.out.println(length);
-		// 最大バイト数の設定
-		int max = 300;
-
-		if ((int) length > max) { // 最大バイト数よりも多かった場合（
-			judgeByte = 1;
-			return judgeByte;
-		}
-		return judgeByte; // 許容内であった場合
 	}
 }

@@ -77,6 +77,9 @@ public class MakeGroupServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		//		SessionBean sessionBean = new SessionBean();
 
+		//errorメッセージの設定
+		String message;
+
 		//グループビーンの設定(jspに送る用の空ビーン)
 		GroupBean groupBean = new GroupBean();
 		//今から処理させるモデル
@@ -90,15 +93,13 @@ public class MakeGroupServlet extends HttpServlet {
 			//グループ作成画面から来たかどうかの判断if
 			if (req.getParameter("action") != null) {
 
-				//				//groupCreateにsessionのbean引き継がせる
-				//				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
+
 				//ログイン中のユーザー名表示のためのLoginBeanを抜き出してまたreqにのっける
 				req.setAttribute("LoginBean", session.getAttribute("LoginBean"));
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
-				//入力チェックメッセージの設定
-				String message;
+
 				if (checkChara.spaceCheck(name) == false) {
 					message = "グループ名を入力してください";
 
@@ -109,17 +110,18 @@ public class MakeGroupServlet extends HttpServlet {
 
 					//入力チェックの返答
 					boolean byteCheck;
-					byteCheck = checkChara.stringLengthCheck(name, 90);
-					if (byteCheck == false) {
-						message = "文字数オーバーです";
+					boolean lengthCheck;
+					byteCheck = checkChara.stringSizeCheck(name, 90);
+					lengthCheck = checkChara.stringLengthCheck(name, 30);
+					if (byteCheck == false || lengthCheck == false) {
+						message = "文字数オーバーです。30文字以内でお願いします。";
+						System.out.println(message);
 
 						req.setAttribute("error", message);
 						direction = "/WEB-INF/jsp/makeGroup.jsp";
 
 					} else {
 
-						//testチェック用
-						//					System.out.println("受け取ったグループ名" + name);
 
 						groupBean = (GroupBean) session.getAttribute("groupBean");
 
@@ -162,7 +164,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 							if (resist == true) {
 
-								//														direction = "/WEB-INF/jsp/mainPage.jsp";
+
 								MainPageServlet main = new MainPageServlet();
 								main.doPost(req, res);
 							} else {
@@ -181,31 +183,37 @@ public class MakeGroupServlet extends HttpServlet {
 
 			} else {
 
-				// ログインデータ取得
-				LoginBean lb = (LoginBean) session.getAttribute("loginBean");
-
-				String autherName = lb.getUserName();
-				groupBean.setLoginBean(lb);
-
-				//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
-				groupBean = creatGroup.getAllUserListAcquisition(groupBean);
-
-				//Beanからユーザー一覧取得できたかの成否を取得
-				boolean judge = groupBean.isGetAllUserListJudge();
-
-				//出来なかったらエラーページへ
-				if (judge == false) {
-					direction = "/WEB-INF/jsp/errorPage.jsp";
-				} else {
-
-					//セッションにセットしてjspに送る
-					session.setAttribute("groupBean", groupBean);
-					session.setAttribute("userName", autherName);
-
-					direction = "/WEB-INF/jsp/makeGroup.jsp";
-				}
-
 				if (req.getParameter("backMain") == null) {
+					// ログインデータ取得
+					LoginBean lb = (LoginBean) session.getAttribute("loginBean");
+
+					String autherName = lb.getUserName();
+					groupBean.setLoginBean(lb);
+
+					try {
+						//GroupModelの中のGroupBeanを、こちらのGroupBeanに入れる
+						groupBean = creatGroup.getAllUserListAcquisition(groupBean);
+
+						//Beanからユーザー一覧取得できたかの成否を取得
+						boolean judge = groupBean.isGetAllUserListJudge();
+
+						//出来なかったらエラーページへ
+						if (judge == false) {
+							direction = "/WEB-INF/jsp/errorPage.jsp";
+						} else {
+
+							//セッションにセットしてjspに送る
+							session.setAttribute("groupBean", groupBean);
+							session.setAttribute("userName", autherName);
+
+							direction = "/WEB-INF/jsp/makeGroup.jsp";
+						}
+					} catch (Exception e) {
+						message = "データベースに接続できませんでした。";
+						req.setAttribute("error", message);
+						direction = "/WEB-INF/jsp/errorPage.jsp";
+
+					}
 
 				} else {
 					MainPageServlet main = new MainPageServlet();
@@ -214,6 +222,8 @@ public class MakeGroupServlet extends HttpServlet {
 
 			}
 		} else {
+			message = "ログインしてください";
+			req.setAttribute("error", message);
 			session.setAttribute("session", null);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
 		}

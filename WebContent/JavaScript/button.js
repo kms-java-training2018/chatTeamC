@@ -2,11 +2,12 @@
  *  buttonのdisable化
  */
 
-$(function(){
-	$('.click').click(function(){
-
-		$(this).prop('disabled',true);//ボタンを無効化する
-		$(this).closest('form').submit();//フォームを送信する
-
-	});
-});
+var set = false;
+function nidoosi() {
+	if (!set) {
+		set = true;
+	} else {
+		alert("二度押しはいけません。\nそのままお待ちください。");
+		return false;
+	}
+}
