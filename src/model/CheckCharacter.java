@@ -11,6 +11,8 @@ public class CheckCharacter {
 	 */
 	public String singleQuotation(String input) {
 		String result = input.replaceAll("'", "''");
+		result = result.replaceAll("<", "&lt;");
+		//&lt;
 		return result;
 	}
 
