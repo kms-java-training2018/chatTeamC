@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bean.ResistAccountBean;
+import model.CheckCharacter;
 import model.CreateAccount;
 import model.CreateCheck;
 
@@ -30,12 +31,18 @@ public class CreateAccountServlet extends HttpServlet {
 		CreateAccount model = new CreateAccount();
 		CreateCheck cc = new CreateCheck();
 		String direction = "/WEB-INF/jsp/login.jsp";
+		CheckCharacter checkCharacter = new CheckCharacter();
 
 		// パラメータの取得
 		bean.setUserId(new String(req.getParameter("userId").getBytes("ISO-8859-1")));
 		bean.setPassword(new String(req.getParameter("password").getBytes("ISO-8859-1")));
 		bean.setUserName(new String(req.getParameter("userName").getBytes("ISO-8859-1")));
 		bean.setProfile(new String(req.getParameter("profile").getBytes("ISO-8859-1")));
+
+		bean.setUserId(checkCharacter.singleQuotation(bean.getUserId()));
+		bean.setPassword(checkCharacter.singleQuotation(bean.getPassword()));
+		bean.setUserName(checkCharacter.singleQuotation(bean.getUserName()));
+		bean.setProfile(checkCharacter.singleQuotation(bean.getProfile()));
 
 		//id被りチェック
 		bean = cc.checkId(bean);
