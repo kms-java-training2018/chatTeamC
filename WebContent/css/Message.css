@@ -1,5 +1,8 @@
 @charset "UTF-8";
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+@font-face {
+  font-family: Amatic SC;
+  src: url('../font/AmaticSC-Regular.ttf') format("truetype");
+}
 
 /*背景色 */
 #background {

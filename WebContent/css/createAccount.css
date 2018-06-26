@@ -1,7 +1,10 @@
 @charset "UTF-8";
 
 /* タイトル */
-@import url(https://fonts.googleapis.com/css?family=Amatic+SC);
+@font-face {
+  font-family: Amatic SC;
+  src: url('../font/AmaticSC-Regular.ttf') format("truetype");
+}
 
 h1 {
 	font-family: 'Amatic SC', cursive;
