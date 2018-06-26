@@ -93,8 +93,7 @@ public class MakeGroupServlet extends HttpServlet {
 			//グループ作成画面から来たかどうかの判断if
 			if (req.getParameter("action") != null) {
 
-				//				//groupCreateにsessionのbean引き継がせる
-				//				creatGroup.setGroupBean((GroupBean) session.getAttribute("groupBean"));
+
 				//ログイン中のユーザー名表示のためのLoginBeanを抜き出してまたreqにのっける
 				req.setAttribute("LoginBean", session.getAttribute("LoginBean"));
 
@@ -123,8 +122,6 @@ public class MakeGroupServlet extends HttpServlet {
 
 					} else {
 
-						//testチェック用
-						//					System.out.println("受け取ったグループ名" + name);
 
 						groupBean = (GroupBean) session.getAttribute("groupBean");
 
@@ -167,7 +164,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 							if (resist == true) {
 
-								//														direction = "/WEB-INF/jsp/mainPage.jsp";
+
 								MainPageServlet main = new MainPageServlet();
 								main.doPost(req, res);
 							} else {
