@@ -5,9 +5,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import bean.GroupMessageBean;
+import bean.GroupProfileBean;
 import bean.LoginBean;
 import bean.TalkContentBean;
 
@@ -53,7 +53,7 @@ public class GetTalkMessageModel {
 			}
 			// 初期化
 			sb = new StringBuilder();
-			sb.append(" SELECT M_USER.USER_NAME ");
+			sb.append(" SELECT M_USER.USER_NAME,M_USER.USER_NO");
 			sb.append(" FROM T_GROUP_INFO inner join M_USER on T_GROUP_INFO.USER_NO = M_USER.USER_NO ");
 			sb.append(" WHERE T_GROUP_INFO.GROUP_NO = " + GroupNo);
 			sb.append(" AND T_GROUP_INFO.OUT_FLAG = 0 ");
@@ -62,12 +62,13 @@ public class GetTalkMessageModel {
 			// SQL実行
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sb.toString());
-			ArrayList<String> setMenber = new ArrayList<String>();
+			GroupProfileBean setMenber;
 			while (rs.next()) {
-				setMenber.add(rs.getString("USER_NAME"));
+				setMenber = new GroupProfileBean();
+				setMenber.setMemberList(rs.getString("USER_NAME"));
+				setMenber.setMemberListNumber(rs.getString("USER_NO"));
+				bean.setGroupProfileList(setMenber);
 			}
-			// Beanに追加
-			bean.setMemberList(setMenber);
 
 			// 初期化
 			sb = new StringBuilder();

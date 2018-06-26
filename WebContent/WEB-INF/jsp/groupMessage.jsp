@@ -40,8 +40,9 @@ page import="java.util.ArrayList"%>
 		<h2>${GroupMessageBean.getGroupName()}</h2>
 		<p>メンバー一覧</p>
 		<c:forEach var="memberName"
-			items="${GroupMessageBean.getMemberList()}" varStatus="status">
-			${memberName}<br>
+			items="${GroupMessageBean.getGroupProfileList()}" varStatus="status">
+			<a href="/chat/showProfile?toUserNo=${memberName.getMemberListNumber()}"
+									target=”_blank”>${memberName.getMemberList()} </a><br>
 
 		</c:forEach>
 	</div>

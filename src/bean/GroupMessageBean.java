@@ -23,8 +23,17 @@ public class GroupMessageBean {
 	private String sendMessage;
 
 	// メンバー一覧リスト
-	private ArrayList<String> memberList = new ArrayList<String>();
+	//private ArrayList<String> memberList = new ArrayList<String>();
+	private ArrayList<GroupProfileBean> groupProfileList = new ArrayList<GroupProfileBean>();
 
+
+	public ArrayList<GroupProfileBean> getGroupProfileList() {
+		return groupProfileList;
+	}
+
+	public void setGroupProfileList(GroupProfileBean groupProfileList) {
+		this.groupProfileList.add(groupProfileList);
+	}
 
 	public String getRegistUserNo() {
 		return registUserNo;
@@ -78,11 +87,11 @@ public class GroupMessageBean {
 		this.talkContentBeanList.add(talkContentBeanList);
 	}
 
-	public ArrayList<String> getMemberList() {
-		return memberList;
-	}
-
-	public void setMemberList(ArrayList<String> memberList) {
-		this.memberList = memberList;
-	}
+//	public ArrayList<String> getMemberList() {
+//		return memberList;
+//	}
+//
+//	public void setMemberList(ArrayList<String> memberList) {
+//		this.memberList = memberList;
+//	}
 }
