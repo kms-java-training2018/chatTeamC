@@ -68,6 +68,7 @@ public class MainPageServlet extends HttpServlet {
 							&& checkCharacter.stringLengthCheck(myProfile, 100))) {
 						req.setAttribute("erorr", "正しくない入力がされました");
 						//マイページに戻る
+						myProfile = checkCharacter.singleQuotation(myProfile);
 						req.setAttribute("name", myName);
 						req.setAttribute("profile", myProfile);
 						//req.getRequestDispatcher("/WEB-INF/jsp/myPage.jsp").forward(req, res);
