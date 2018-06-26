@@ -42,7 +42,7 @@ page import="java.util.ArrayList"%>
 		<c:forEach var="memberName"
 			items="${GroupMessageBean.getGroupProfileList()}" varStatus="status">
 			<a href="/chat/showProfile?toUserNo=${memberName.getMemberListNumber()}"
-									target=”_blank”>${memberName.getMemberList()} </a><br>
+									target=”_blank” class="Link">${memberName.getMemberList()} </a><br>
 
 		</c:forEach>
 	</div>
@@ -74,7 +74,7 @@ page import="java.util.ArrayList"%>
 						<td class="opponentTork"><c:if
 								test="${list.getUserName() != '送信者不明'}">
 								<a href="/chat/showProfile?toUserNo=${list.getUserNo()}"
-									target=”_blank”> ${list.getUserName()}</a>
+									target=”_blank” class="Link"> ${list.getUserName()}</a>
 
 							</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
