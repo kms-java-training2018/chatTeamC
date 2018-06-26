@@ -158,7 +158,7 @@ public class DirectMessageServlet extends HttpServlet {
 						 * サイズの大きい文字が用いられ、100文字分のサイズを超えた場合、
 						 * エラーメッセージを表示させる。
 						 * */
-						boolean bytecheck = checkCharacter.stringSizeCheck(sendMessage, 100);
+						boolean bytecheck = checkCharacter.stringLengthCheck(sendMessage, 100);
 						if (bytecheck == false) {
 							req.setAttribute("error", "文字数オーバー");
 						} else {

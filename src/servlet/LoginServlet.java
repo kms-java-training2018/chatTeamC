@@ -46,10 +46,10 @@ public class LoginServlet extends HttpServlet {
 
 		//文字入力チェック
 		boolean passResult = checkChara.halfSizeCheck(password);
-		boolean passJudgeByte = checkChara.stringLengthCheck(password, 20);
+		boolean passJudgeByte = checkChara.stringSizeCheck(password, 20);
 
 		boolean idResult = checkChara.halfSizeCheck(userId);
-		boolean idJudgeByte = checkChara.stringLengthCheck(userId, 20);
+		boolean idJudgeByte = checkChara.stringSizeCheck(userId, 20);
 
 		try {
 			if (passResult == false || idResult == false) {

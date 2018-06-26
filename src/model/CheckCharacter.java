@@ -20,7 +20,7 @@ public class CheckCharacter {
 	 * @param i 指定文字サイズ(byte)
 	 * @return judgeByte 正否falseの場合、サイズオーバー。trueの場合、規定値内。
 	 */
-	public boolean stringLengthCheck(String input, int i) {
+	public boolean stringSizeCheck(String input, int i) {
 
 		//結果変数
 		boolean judgeByte;
@@ -44,7 +44,7 @@ public class CheckCharacter {
 	 * @param i 指定文字サイズ(文字数)
 	 * @return judgeSize 正否falseの場合、文字数オーバー。trueの場合、規定値内。
 	 */
-	public boolean stringSizeCheck(String input, int i) {
+	public boolean stringLengthCheck(String input, int i) {
 
 		//結果変数
 		boolean judgeSize;

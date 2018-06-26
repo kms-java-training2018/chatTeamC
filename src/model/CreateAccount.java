@@ -28,17 +28,17 @@ public class CreateAccount {
 
 		//全てチェックに通す
 		boolean passResult = checkChara.halfSizeCheck(password);
-		boolean passJudgeByte = checkChara.stringLengthCheck(password, 20);
+		boolean passJudgeByte = checkChara.stringSizeCheck(password, 20);
 		boolean passExsist = checkChara.spaceCheck(password);
 
 		boolean idResult = checkChara.halfSizeCheck(userId);
-		boolean idJudgeByte = checkChara.stringLengthCheck(userId, 20);
+		boolean idJudgeByte = checkChara.stringSizeCheck(userId, 20);
 		boolean idExsist = checkChara.spaceCheck(userId);
 
-		boolean nameJudgeByte = checkChara.stringLengthCheck(userName, 30);
+		boolean nameJudgeByte = checkChara.stringSizeCheck(userName, 30);
 		boolean nameExsist = checkChara.spaceCheck(userName);
 
-		boolean profileJudgeByte = checkChara.stringLengthCheck(profile, 100);
+		boolean profileJudgeByte = checkChara.stringSizeCheck(profile, 100);
 		boolean profileExsist = checkChara.spaceCheck(profile);
 
 		//結果によってエラーメッセージをセット(id,pass)

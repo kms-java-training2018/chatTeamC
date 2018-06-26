@@ -21,7 +21,7 @@ import bean.TalkContentBean;
  * ○sendMessage
  * 　入力した内容をデータベースに追加する。
  *
- * ○stringLengthCheck
+ * ○stringSizeCheck
  * メッセージを受け取り、そのサイズが200バイトを
  * 超えるかどうかを判断する。
  * */
