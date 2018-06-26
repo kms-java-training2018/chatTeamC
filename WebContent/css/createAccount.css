@@ -23,6 +23,11 @@ p {
 	font-size: 30px;
 }
 
+p.info{
+	font-family:Meiryo,sans-serif;
+	font-size: 15px;
+}
+
 p.error {
 	font-family: "ＭＳ Ｐゴシック", "ＭＳ ゴシック", sans-serif;
 	font-size: 15px;
