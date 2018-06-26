@@ -13,11 +13,12 @@ public class CheckCharacter {
 		String result = input.replaceAll("'", "''");
 		return result;
 	}
+
 	/**
-	 * 文字数チェック
+	 * ○サイズチェック
 	 * @param input 文字数チェックにかける文字列
 	 * @param i 指定文字サイズ(byte)
-	 * @return judgeByte 正否
+	 * @return judgeByte 正否falseの場合、サイズオーバー。trueの場合、規定値内。
 	 */
 	public boolean stringLengthCheck(String input, int i) {
 
@@ -38,10 +39,10 @@ public class CheckCharacter {
 	}
 
 	/**
-	 * 文字数チェック
+	 * ○文字数チェック
 	 * @param input 文字数チェックにかける文字列
 	 * @param i 指定文字サイズ(文字数)
-	 * @return judgeSize 正否
+	 * @return judgeSize 正否falseの場合、文字数オーバー。trueの場合、規定値内。
 	 */
 	public boolean stringSizeCheck(String input, int i) {
 
@@ -62,9 +63,9 @@ public class CheckCharacter {
 	}
 
 	/**
-	 * 半角チェック
+	 * ○半角チェック
 	 * @param input チェックにかける文字列
-	 * @return result 正否
+	 * @return result 正否falseの場合、全角あり。trueの場合、半角のみ。
 	 */
 	public boolean halfSizeCheck(String input) {
 		//結果変数
@@ -79,7 +80,7 @@ public class CheckCharacter {
 	}
 
 	/**
-	 * 空白チェック
+	 * ○空白チェック
 	 * @param input チェックにかける文字
 	 * @return result falseの場合、strが空白のみ。trueの場合、値がある。
 	 */
