@@ -22,7 +22,7 @@
 
 		<h1>Create Account</h1>
 
-
+		<p class="info">()内の数字は最大文字数です</p>
 		<form action="/chat/createAccountServlet" onSubmit="return nidoosi()"
 			method="POST" class="login" action="foo">
 			<table class='main'>
