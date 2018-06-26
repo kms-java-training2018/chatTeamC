@@ -113,7 +113,7 @@ public class MakeGroupServlet extends HttpServlet {
 					boolean byteCheck;
 					boolean lengthCheck;
 					byteCheck = checkChara.stringSizeCheck(name, 90);
-					lengthCheck = checkChara.stringSizeCheck(name, 30);
+					lengthCheck = checkChara.stringLengthCheck(name, 30);
 					if (byteCheck == false || lengthCheck == false) {
 						message = "文字数オーバーです。30文字以内でお願いします。";
 						System.out.println(message);

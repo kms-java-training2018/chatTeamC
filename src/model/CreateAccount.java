@@ -35,10 +35,10 @@ public class CreateAccount {
 		boolean idJudgeByte = checkChara.stringSizeCheck(userId, 20);
 		boolean idExsist = checkChara.spaceCheck(userId);
 
-		boolean nameJudgeByte = checkChara.stringSizeCheck(userName, 30);
+		boolean nameJudgeByte = checkChara.stringLengthCheck(userName, 30);
 		boolean nameExsist = checkChara.spaceCheck(userName);
 
-		boolean profileJudgeByte = checkChara.stringSizeCheck(profile, 100);
+		boolean profileJudgeByte = checkChara.stringLengthCheck(profile, 100);
 		boolean profileExsist = checkChara.spaceCheck(profile);
 
 		//結果によってエラーメッセージをセット(id,pass)
