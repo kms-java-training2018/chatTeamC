@@ -61,6 +61,7 @@ public class MainPageServlet extends HttpServlet {
 					String myProfile = new String(req.getParameter("myProfile").getBytes("ISO-8859-1"));
 					// 判定用の関数
 					CheckCharacter checkCharacter = new CheckCharacter();
+					myProfile = checkCharacter.singleQuotation(myProfile);
 
 					// 名前が何も入っていなかった場合無効な名前としてマイページに戻す
 					if (!(checkCharacter.spaceCheck(myName) && checkCharacter.spaceCheck(myProfile)

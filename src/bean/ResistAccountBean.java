@@ -20,6 +20,9 @@ public class ResistAccountBean {
 	private String idErrorMessage;
 
 
+	/** idチェック */
+	private boolean idCheckJudge;
+
 	/** check判定*/
 	private boolean checkJudge;
 
@@ -99,6 +102,14 @@ public class ResistAccountBean {
 
 	public void setIdErrorMessage(String idErrorMessage) {
 		this.idErrorMessage = idErrorMessage;
+	}
+
+	public boolean isIdCheckJudge() {
+		return idCheckJudge;
+	}
+
+	public void setIdCheckJudge(boolean idCheckJudge) {
+		this.idCheckJudge = idCheckJudge;
 	}
 
 }

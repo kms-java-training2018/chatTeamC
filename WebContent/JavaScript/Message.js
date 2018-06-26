@@ -5,12 +5,6 @@ var gTimer = setTimeout(inputEnd, 10000);
  * フォーカスをそろえた後、スクロールを整える。
  */
 function firstscript(setHeight) {
-
-	// フォーカスをあわせる
-	var textFocus = document.getElementById('inText');
-	textFocus.focus();
-	textFocus.value = textFocus.value;
-	// }
 	// スクロールをあわせる
 	if (setHeight == null) {
 		// 一番下にあわせる
@@ -20,6 +14,12 @@ function firstscript(setHeight) {
 		var maxY = setHeight;
 	}
 	window.scroll(0, maxY);
+
+	// フォーカスをあわせる
+	var textFocus = document.getElementById('inText');
+	textFocus.focus();
+	textFocus.value = textFocus.value;
+	// }
 
 	return true;
 }

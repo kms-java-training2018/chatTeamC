@@ -87,6 +87,7 @@ public class MakeGroupServlet extends HttpServlet {
 		//文字入力チェック用モデル
 		CheckCharacter checkChara = new CheckCharacter();
 
+
 		//		セッションに値があるかどうかでif
 		if (session.getAttribute("session") != null) {
 
@@ -99,6 +100,7 @@ public class MakeGroupServlet extends HttpServlet {
 
 				//指定されたグループ名をもらう
 				String name = new String(req.getParameter("groupName").getBytes("ISO-8859-1"));
+				name = checkChara.singleQuotation(name);
 
 				if (checkChara.spaceCheck(name) == false) {
 					message = "グループ名を入力してください";

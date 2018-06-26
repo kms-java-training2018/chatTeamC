@@ -39,13 +39,12 @@ page import="java.util.ArrayList"%>
 
 		<h2>${GroupMessageBean.getGroupName()}</h2>
 		<p>メンバー一覧</p>
-		<b> <c:forEach var="memberName"
-				items="${GroupMessageBean.getGroupProfileList()}" varStatus="status">
-				<a
-					href="/chat/showProfile?toUserNo=${memberName.getMemberListNumber()}"
-					target=”_blank” class="Link">${memberName.getMemberList()} </a>
-				<br>
-			</c:forEach></b>
+		<c:forEach var="memberName"
+			items="${GroupMessageBean.getGroupProfileList()}" varStatus="status">
+			<a href="/chat/showProfile?toUserNo=${memberName.getMemberListNumber()}"
+									target=”_blank” class="Link">${memberName.getMemberList()} </a><br>
+
+		</c:forEach>
 	</div>
 	<!--<h2>メッセージ</h2>-->
 	<c:forEach var="list"
@@ -60,8 +59,8 @@ page import="java.util.ArrayList"%>
 				<table class="torkRange">
 					<tr align="right">
 						<td align="right" class="myTork">${list.getUserName()}：${list.getMessage()}
-							<input type="button" value="削除"
-							onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
+								<input type="button" value="削除"
+								onClick="deleteMessage('${list.getMessageNo()}','toGroupNo=${GroupMessageBean.getGroupNo()}','deleteGroupMessage')" />
 						</td>
 					</tr>
 
