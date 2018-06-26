@@ -44,7 +44,7 @@ public class CreateAccountServlet extends HttpServlet {
 
 		//OKだったら登録、Noだったらエラー
 
-		if (bean.isCheckJudge() == true) {
+		if (bean.isCheckJudge() == true || bean.isIdCheckJudge() == true) {
 
 			try {
 				// 登録処理

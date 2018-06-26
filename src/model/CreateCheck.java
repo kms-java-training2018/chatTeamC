@@ -16,7 +16,7 @@ public class CreateCheck {
 		StringBuilder sb = new StringBuilder();
 
 		//判定
-		boolean result = false;
+		boolean result = true;
 
 		//データをもらう
 		ResistAccountBean bean = rb;
@@ -77,7 +77,7 @@ public class CreateCheck {
 						rb.setSqlErrorMessage("データベースにアクセスできませんでした");
 					}
 				}
-				rb.setCheckJudge(result);
+				rb.setIdCheckJudge(result);
 
 
 
