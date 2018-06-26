@@ -25,8 +25,6 @@ public class GroupMessageServlet extends HttpServlet {
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		// 初期化
-		//		MessageCheckBean MCBean = new MessageCheckBean();
-		//		MessageCheckSendModel MCSModel = new MessageCheckSendModel();
 		// 移動先のアドレス(グループメッセージ)
 		String direction = "/WEB-INF/jsp/groupMessage.jsp";
 		GroupMessageBean bean = new GroupMessageBean();
@@ -41,7 +39,7 @@ public class GroupMessageServlet extends HttpServlet {
 			message = "不正なアクセスです。ログインしてください";
 			req.setAttribute("error", message);
 			direction = "/WEB-INF/jsp/errorPage.jsp";
-			// req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+
 		} else {
 
 			// 自会員番号を取得
@@ -49,14 +47,13 @@ public class GroupMessageServlet extends HttpServlet {
 			loginBean.setErrorMessage("");
 			// 相手の会員番号の取得
 			bean.setGroupNo((req.getParameter("toGroupNo")));
-			//			MCBean.setToUserNo(Integer.parseInt((req.getParameter("toGroupNo"))));
-			//String toGroupNo = (bean.getGroupNo());
+
 			// 会話情報の取得
 			try {
 				if (!(model.CheckGroupMenber(loginBean, req.getParameter("toGroupNo")))) {
 					message = "メンバーではありません";
 					req.setAttribute("error", message);
-					//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+
 					direction = "/WEB-INF/jsp/errorPage.jsp";
 				} else {
 					bean = model.authentication(bean, loginBean, req.getParameter("toGroupNo"));
@@ -65,14 +62,14 @@ public class GroupMessageServlet extends HttpServlet {
 					req.setAttribute("GroupMessageBean", bean);
 					req.setAttribute("myLoginNo", loginBean.getUserNo());
 					session.setAttribute("GroupMessageBean", bean); //セッション内へ自分と相手の情報を保存
-					//				MCBean = MCSModel.getTalkContent(MCBean, loginBean);
+
 				}
 			} catch (Exception e) {
 				session.setAttribute("session", null);
 				message = "相手の会話情報が入手できませんでした。";
 				req.setAttribute("error", message);
 				e.printStackTrace();
-				//req.getRequestDispatcher("/WEB-INF/jsp/errorPage.jsp").forward(req, res);
+
 				direction = "/WEB-INF/jsp/errorPage.jsp";
 			}
 		}
@@ -80,8 +77,7 @@ public class GroupMessageServlet extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		//String direction = "/WEB-INF/jsp/groupMessage.jsp";
-		//req.getRequestDispatcher(direction).forward(req, res);
+
 		/*
 		 * セッション情報取得
 		 * もしもセッションが無ければエラー
@@ -119,7 +115,7 @@ public class GroupMessageServlet extends HttpServlet {
 				 * */
 				sendMessage = checkChara.singleQuotation(sendMessage);
 				bean.setSendMessage(sendMessage);
-				//String sendMessage = bean.getSendMessage();
+
 
 				//入力チェックの返答
 				//空白処理
@@ -143,7 +139,7 @@ public class GroupMessageServlet extends HttpServlet {
 							e.printStackTrace();
 						}
 						doGet(req, res);
-						//			req.getRequestDispatcher("/WEB-INF/jsp/directMessage.jsp").forward(req, res);
+
 					}
 				}
 			}
