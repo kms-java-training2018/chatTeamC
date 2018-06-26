@@ -6,8 +6,9 @@
 h1 {
 	font-family: 'Amatic SC', cursive;
 	font-size: 60px;
-	background: url(http://webcreatorbox.com/sample/images/check.png)
-		repeat-x 0 25px;
+	background-image: url("../img/check.png");
+	background-repeat:repeat-x;
+	background-position: 0 25px;
 	display: inline-block;
 	padding: 0 10px
 }
