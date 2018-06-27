@@ -78,7 +78,8 @@ page import="java.util.ArrayList"%>
 
 							</c:if> <c:if test="${list.getUserName() == '送信者不明'}">
 							${list.getUserName()}
-						</c:if> ：${list.getMessage()}</td>
+						</c:if> ：${list.getMessage()}
+						</td>
 					</tr>
 
 				</table>

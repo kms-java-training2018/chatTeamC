@@ -13,7 +13,6 @@ public class CheckCharacter {
 		String result = input.replaceAll("'", "''");
 		result = result.replaceAll("<", "&lt;");
 		result = result.replaceAll("¥", "&yen;");
-		result = result.replaceAll("&", "&amp;");
 		return result;
 	}
 
